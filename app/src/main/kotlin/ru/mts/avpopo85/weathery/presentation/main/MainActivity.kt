@@ -5,7 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.presentation.weather.yandex.YandexWeatherActivity
+import ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.currentWeather.YandexCurrentWeatherActivity
+import ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast.YandexForecastActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +25,12 @@ class MainActivity : AppCompatActivity() {
             startActivity<OpenWeatherActivity>()
         }*/
 
-        yandexWeatherBtn.setOnClickListener {
-            startActivity<YandexWeatherActivity>()
+        currentWeatherBtn.setOnClickListener {
+            startActivity<YandexCurrentWeatherActivity>()
+        }
+
+        forecastBtn.setOnClickListener {
+            startActivity<YandexForecastActivity>()
         }
 
         /*settingsBtn.setOnClickListener {

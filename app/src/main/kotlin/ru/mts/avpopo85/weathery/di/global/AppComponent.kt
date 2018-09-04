@@ -1,8 +1,8 @@
 package ru.mts.avpopo85.weathery.di.global
 
 import dagger.Component
-import ru.mts.avpopo85.weathery.di.weather.YandexWeatherModule
-import ru.mts.avpopo85.weathery.di.weather.YandexWeatherSubcomponent
+import ru.mts.avpopo85.weathery.di.weather.yandexWeather.YandexWeatherModule
+import ru.mts.avpopo85.weathery.di.weather.yandexWeather.YandexWeatherSubcomponent
 import ru.mts.avpopo85.weathery.domain.global.repositories.YandexWeatherRepository
 import javax.inject.Singleton
 

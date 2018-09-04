@@ -3,6 +3,7 @@ package ru.mts.avpopo85.weathery.di.global
 import dagger.Module
 import dagger.Provides
 import io.reactivex.CompletableTransformer
+import io.reactivex.MaybeTransformer
 import io.reactivex.ObservableTransformer
 import io.reactivex.SingleTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,6 +23,12 @@ class SchedulerManagerModule {
 
     fun <T> singleTransformer(): SingleTransformer<T, T> = SingleTransformer { single ->
         (single)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun <T> maybeTransformer(): MaybeTransformer<T, T> = MaybeTransformer { maybe ->
+        (maybe)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

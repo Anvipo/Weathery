@@ -33,31 +33,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/weatherBtnsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locateButton">
 
         <Button
-            android:id="@+id/openWeatherBtn"
+            android:id="@+id/forecastBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Open Weather API"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="455dp" />
+            android:text="Прогноз на 7 дней"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/weatherBtnsLayout"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/yandexWeatherBtn"
+            android:id="@+id/currentWeatherBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Яндекс.Погода API"
+            android:text="Текущая погода"
             tools:layout_editor_absoluteX="228dp"
             tools:layout_editor_absoluteY="455dp" />
     </LinearLayout>

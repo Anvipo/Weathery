@@ -21,9 +21,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.main.MainActivity" />
-        <activity android:name=".presentation.weather.yandex.YandexWeatherActivity" />
-        <activity android:name=".presentation.weather.openweather.OpenWeatherActivity" />
         <activity android:name=".presentation.settings.SettingsActivity" />
+        <activity android:name=".presentation.weather.yandexWeather.currentWeather.YandexCurrentWeatherActivity" />
+        <activity android:name=".presentation.weather.yandexWeather.forecast.YandexForecastActivity" />
     </application>
 
 </manifest>
