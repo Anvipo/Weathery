@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import kotlinx.android.synthetic.main.activity_yandex_forecast.*
 import org.jetbrains.anko.longToast
-import ru.mts.avpopo85.weathery.App
+import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.di.weather.yandexWeather.YandexWeatherModule
 import ru.mts.avpopo85.weathery.presentation.weather.WeatherContract
@@ -37,13 +37,13 @@ class YandexForecastActivity : AppCompatActivity(), WeatherContract.WeatherView 
         viewManager = LinearLayoutManager(this)
         viewAdapter = YandexWeatherAdapter()
 
-        recyclerView = yandex_forecast_recycler_view.apply {
+        /*recyclerView = yandex_forecast_recycler_view.apply {
             setHasFixedSize(true)
 
             layoutManager = viewManager
 
             adapter = viewAdapter
-        }
+        }*/
     }
 
     override fun onDestroy() {
@@ -60,12 +60,15 @@ class YandexForecastActivity : AppCompatActivity(), WeatherContract.WeatherView 
     }
 
     override fun showWeatherResponse(weatherResponse: String) {
-        val c = 1
-//        viewAdapter.
+        forecastTV.text = weatherResponse
     }
 
     override fun showError(throwable: Throwable) {
         val str = throwable.message ?: ""
         longToast(str)
+    }
+
+    override fun showError(message: String) {
+        longToast(message)
     }
 }

@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_yandex_current_weather.*
 import org.jetbrains.anko.longToast
-import ru.mts.avpopo85.weathery.App
+import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.di.weather.yandexWeather.YandexWeatherModule
 import ru.mts.avpopo85.weathery.presentation.weather.WeatherContract
@@ -45,5 +45,9 @@ class YandexCurrentWeatherActivity : AppCompatActivity(), WeatherContract.Weathe
     override fun showError(throwable: Throwable) {
         val str = throwable.message ?: ""
         longToast(str)
+    }
+
+    override fun showError(message: String) {
+        longToast(message)
     }
 }

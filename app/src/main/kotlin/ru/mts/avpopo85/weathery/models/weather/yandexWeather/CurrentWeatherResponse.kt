@@ -7,18 +7,18 @@ data class CurrentWeatherResponse(
         //temperature (°С)
         @SerializedName("temp")
         @Expose
-        val temperature: Int,
+        val temperature: Double,
 
         //what the temperature feels like (°С)
         @SerializedName("feels_like")
         @Expose
-        val feelsLikeTemperature: Int,
+        val feelsLikeTemperature: Double,
 
         //the water temperature (°С)
         //this parameter is returned for localities where this information is relevant
         @SerializedName("temp_water")
         @Expose
-        val waterTemperature: Int,
+        val waterTemperature: Double,
 
         //the code of the weather icon
         //the icon is available at https://yastatic/weather/i/icons/blueye/color/svg/
@@ -35,12 +35,12 @@ data class CurrentWeatherResponse(
         //wind speed (meters per second)
         @SerializedName("wind_speed")
         @Expose
-        val windSpeed: Int,
+        val windSpeed: Double,
 
         //speed of wind gusts (meters per second)
         @SerializedName("wind_gust")
         @Expose
-        val windGust: Int,
+        val windGust: Double,
 
         //wind direction
         @SerializedName("wind_dir")
@@ -50,17 +50,17 @@ data class CurrentWeatherResponse(
         //atmospheric pressure (mm Hg)
         @SerializedName("pressure_mm")
         @Expose
-        val pressureInMmHg: Int,
+        val pressureInMmHg: Double,
 
         //atmospheric pressure (hPa)
         @SerializedName("pressure_pa")
         @Expose
-        val pressureInhHpa: Int,
+        val pressureInhHpa: Double,
 
         //humidity (percent)
         @SerializedName("humidity")
         @Expose
-        val humidityInPercents: Int,
+        val humidityInPercents: Double,
 
         //light or dark time of the day
         @SerializedName("daytime")

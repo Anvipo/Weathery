@@ -1,9 +1,19 @@
 package ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast
 
+import com.google.gson.Gson
 import io.reactivex.disposables.Disposable
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherInteractor
 import ru.mts.avpopo85.weathery.presentation.weather.WeatherContract
+import com.google.gson.JsonElement
+import com.google.gson.JsonParser
+import com.google.gson.GsonBuilder
+
+
+
 
 class YandexForecastPresenter(
         private val yandexWeatherInteractor: YandexWeatherInteractor,
@@ -24,10 +34,11 @@ class YandexForecastPresenter(
                 }
                 .subscribe(
                         {
-                            val c = 1
-//                            view?.showWeatherResponse(it)
+                            view?.showWeatherResponse(it.joinToString("\n"))
                         },
-                        { view?.showError(it) }
+                        {
+                            view?.showError(it)
+                        }
                 )
     }
 

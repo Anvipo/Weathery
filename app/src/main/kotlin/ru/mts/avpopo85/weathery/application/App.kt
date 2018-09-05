@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery
+package ru.mts.avpopo85.weathery.application
 
 import android.app.Application
 import ru.mts.avpopo85.weathery.data.network.YandexWeatherApiService.Companion.BASE_URL

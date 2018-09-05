@@ -10,4 +10,6 @@ sealed class MyParsingException(cause: String) : Throwable() {
     class CloudnessParsingException(cause: String) : MyParsingException(cause)
     class WeatherDescriptionParsingException(cause: String) : MyParsingException(cause)
     class WindDirectionParsingException(cause: String) : MyParsingException(cause)
+    class MoonCodeParsingException(cause: String) : MyParsingException(cause)
+    class MoonTextParsingException(cause: String) : MyParsingException(cause)
 }

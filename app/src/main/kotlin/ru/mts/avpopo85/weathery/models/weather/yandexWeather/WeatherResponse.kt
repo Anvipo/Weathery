@@ -19,11 +19,6 @@ data class WeatherResponse(
         @Expose
         val cityInfo: CityInfo,
 
-        //locality description object
-        @SerializedName("geo_object")
-        @Expose
-        val geoObject: GeoObject,
-
         //current weather information object
         @SerializedName("fact")
         @Expose
@@ -32,5 +27,5 @@ data class WeatherResponse(
         //weather forecast object
         @SerializedName("forecasts")
         @Expose
-        val forecasts: List<Forecasts>
+        val forecasts: List<ForecastResponse>
 )

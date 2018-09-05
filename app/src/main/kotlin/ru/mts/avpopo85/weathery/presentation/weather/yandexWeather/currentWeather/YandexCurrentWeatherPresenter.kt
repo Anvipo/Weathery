@@ -26,7 +26,9 @@ class YandexCurrentWeatherPresenter(
                         {
                             view?.showWeatherResponse(it.joinToString("\n"))
                         },
-                        { view?.showError(it) }
+                        {
+                            view?.showError(it)
+                        }
                 )
     }
 

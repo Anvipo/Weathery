@@ -1,9 +1,9 @@
 package ru.mts.avpopo85.weathery.models.weather.yandexWeather
 
 data class CurrentWeather(
-        val temperature: Int,
+        val temperature: Double,
 
-        val feelsLikeTemperature: Int,
+        val feelsLikeTemperature: Double,
 
         val waterTemperature: String,
 
@@ -11,17 +11,17 @@ data class CurrentWeather(
 
         val weatherDescription: String,
 
-        val windSpeed: Int,
+        val windSpeed: Double,
 
-        val windGust: Int,
+        val windGust: Double,
 
         val windDirection: String,
 
-        val pressureInMmHg: Int,
+        val pressureInMmHg: Double,
 
-        val pressureInhHpa: Int,
+        val pressureInhHpa: Double,
 
-        val humidityInPercents: Int,
+        val humidityInPercents: Double,
 
         val daytime: String,
 

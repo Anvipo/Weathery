@@ -24,6 +24,4 @@ class YandexWeatherRepositoryImpl(private val yandexWeatherApiService: YandexWea
                     0,
                     false,
                     false)
-
-//    override fun getWeatherForecast(): Single<WeatherResponse> = yandexWeatherApiService.forecast()
 }

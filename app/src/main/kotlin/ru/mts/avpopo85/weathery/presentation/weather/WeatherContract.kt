@@ -9,6 +9,7 @@ interface WeatherContract : BaseContract {
         fun hideLoadingProgress()
         fun showWeatherResponse(weatherResponse: String)
         fun showError(throwable: Throwable)
+        fun showError(message: String)
     }
 
     interface WeatherPresenter : BaseContract.Presenter<WeatherView> {

@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.Forecasts
+import ru.mts.avpopo85.weathery.models.weather.yandexWeather.ForecastResponse
 
 class YandexWeatherAdapter :
         RecyclerView.Adapter<YandexWeatherAdapter.MyViewHolder>() {
-    private val items = mutableListOf<Forecasts>()
+    private val items = mutableListOf<ForecastResponse>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val textView = LayoutInflater

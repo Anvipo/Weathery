@@ -14,25 +14,10 @@ data class CityInfo(
         @Expose
         val longitude: Double,
 
-        //id of locality
-        @SerializedName("geoid")
-        @Expose
-        val localityId: Double,
-
-        //url path on https://yandex.tld/pagoda
-        @SerializedName("slug")
-        @Expose
-        val urlPath: String,
-
         //information about the time zone
         @SerializedName("tzinfo")
         @Expose
         val timeZoneInfo: TimeZoneInfo,
-
-        //daylight saving time
-        @SerializedName("dst")
-        @Expose
-        val daylightSavingTime: Boolean,
 
         //the normal pressure for the given coordinates (mm Hg)
         @SerializedName("def_pressure_mm")
