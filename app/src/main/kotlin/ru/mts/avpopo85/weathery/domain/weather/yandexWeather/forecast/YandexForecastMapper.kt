@@ -28,8 +28,8 @@ object YandexForecastMapper {
         }
     }
 
-    private fun mapHoursResponse(hoursResponse: List<HoursResponse>): List<Hours> {
-        return hoursResponse.map {
+    private fun mapHoursResponse(hoursResponse: List<HoursResponse>?): List<Hours>? {
+        return hoursResponse?.map {
             Hours(
                 hourInLocalTime = it.hourInLocalTime,
                 hourInUnixTime = it.hourInUnixTime.toDate(),
@@ -111,7 +111,7 @@ object YandexForecastMapper {
         }
     }
 
-    fun getForecastInfoList(mappedInfoList: List<Forecast>): List<String> {
+    /*fun getForecastInfoList(mappedInfoList: List<Forecast>): List<String> {
         return mappedInfoList.map {
             val dailyForecastString = getPartsString(it.parts).joinToString("\n")
             listOf(
@@ -122,10 +122,13 @@ object YandexForecastMapper {
                 "Время заката Солнца: ${it.sunsetInLocalTime}",
                 "Порядковый номер недели: ${it.weekSerialNumber}",
                 "\n\nПрогнозы по времени суток и 12-часовые прогнозы:\n$dailyForecastString",
-                "\n\nПочасовой прогноз погоды:\n\n${getHoursString(it.hours).joinToString("\n")}"
+                if (it.hours != null)
+                    "\n\nПочасовой прогноз погоды:\n\n${getHoursString(it.hours).joinToString("\n")}"
+                else
+                    ""
             ).joinToString("\n", postfix = "\n\n\n\n")
         }
-    }
+    }*/
 
     private fun getHoursString(hours: List<Hours>): List<String> {
         return hours.map {

@@ -5,9 +5,19 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
+import ru.mts.avpopo85.weathery.models.weather.yandexWeather.CurrentWeatherResponse
+import ru.mts.avpopo85.weathery.models.weather.yandexWeather.ForecastResponse
 import ru.mts.avpopo85.weathery.models.weather.yandexWeather.WeatherResponse
 
 interface YandexWeatherApiService {
+    @Headers("X-Yandex-API-Key: $API_KEY")
+    @GET("forecast")
+    fun currentWeather(
+        @Query("lat") latitude: Double,
+        @Query("lon") longitude: Double,
+        @Query("lang") language: String
+    ): Single<WeatherResponse>
+
     @Headers("X-Yandex-API-Key: $API_KEY")
     @GET("forecast")
     fun forecast(

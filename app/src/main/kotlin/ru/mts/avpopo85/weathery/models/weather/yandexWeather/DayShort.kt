@@ -1,6 +1,8 @@
 package ru.mts.avpopo85.weathery.models.weather.yandexWeather
 
 data class DayShort(
+    val title: String,
+
     val temperature: Double,
 
     val feelsLikeTemperature: Double,
@@ -17,7 +19,7 @@ data class DayShort(
 
     val pressureInMM: Double,
 
-    val pressureInPa: String,
+    val pressureInPa: Double,
 
     val humidityInPercents: Double,
 

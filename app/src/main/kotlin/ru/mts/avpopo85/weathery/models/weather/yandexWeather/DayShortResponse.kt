@@ -49,7 +49,7 @@ data class DayShortResponse(
         //давление (в гектопаскалях)
         @SerializedName("pressure_pa")
         @Expose
-        val pressureInPa: String,
+        val pressureInPa: Double,
 
         //влажность воздуха (в процентах)
         @SerializedName("humidity")

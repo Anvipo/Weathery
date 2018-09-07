@@ -1,6 +1,6 @@
 package ru.mts.avpopo85.weathery.models.weather.yandexWeather
 
-data class Hours(
+data class HourInfo(
     val hourInLocalTime: String,
 
     val hourInUnixTime: String,

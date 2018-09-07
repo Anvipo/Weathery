@@ -4,8 +4,8 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import ru.mts.avpopo85.weathery.data.network.YandexWeatherApiService
-import ru.mts.avpopo85.weathery.data.repositories.YandexWeatherRepositoryImpl
-import ru.mts.avpopo85.weathery.domain.global.repositories.YandexWeatherRepository
+import ru.mts.avpopo85.weathery.data.repositories.YandexWeatherRepository
+import ru.mts.avpopo85.weathery.domain.global.repositories.WeatherRepository
 import javax.inject.Singleton
 
 @Module
@@ -18,13 +18,13 @@ class AppModule(context: Context) {
 
     @Provides
     @Singleton
-    fun provideYandexWeatherRepository(yandexWeatherRepository: YandexWeatherRepositoryImpl): YandexWeatherRepository {
-        return yandexWeatherRepository
+    fun provideYandexWeatherRepository(yandexYandexWeatherRepository: YandexWeatherRepository): WeatherRepository {
+        return yandexYandexWeatherRepository
     }
 
     @Provides
     @Singleton
-    fun provideYandexWeatherRepositoryImpl(yandexWeatherApiService: YandexWeatherApiService): YandexWeatherRepositoryImpl {
-        return YandexWeatherRepositoryImpl(yandexWeatherApiService)
+    fun provideYandexWeatherRepositoryImpl(yandexWeatherApiService: YandexWeatherApiService): YandexWeatherRepository {
+        return YandexWeatherRepository(yandexWeatherApiService)
     }
 }

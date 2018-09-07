@@ -2,47 +2,60 @@ package ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.currentWeath
 
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
-import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherInteractor
-import ru.mts.avpopo85.weathery.presentation.weather.WeatherContract
+import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.currentWeather.YandexCurrentWeatherInteractor
 
 class YandexCurrentWeatherPresenter(
-        private val yandexWeatherInteractor: YandexWeatherInteractor,
-        private val schedulerManagerModule: SchedulerManagerModule
-) : WeatherContract.WeatherPresenter {
-    private var view: WeatherContract.WeatherView? = null
+    private val yandexCurrentWeatherInteractor: YandexCurrentWeatherInteractor,
+    private val schedulerManagerModule: SchedulerManagerModule
+) : CurrentWeatherContract.CurrentWeatherPresenter {
+    private var view: CurrentWeatherContract.CurrentWeatherView? = null
 
     private lateinit var disposableWork: Disposable
 
     override fun loadData() {
-        disposableWork = yandexWeatherInteractor.getCurrentWeather()
-                .compose(schedulerManagerModule.singleTransformer())
-                .doOnSubscribe {
-                    view?.showLoadingProgress()
+        disposableWork = yandexCurrentWeatherInteractor.getCurrentWeather()
+            .compose(schedulerManagerModule.singleTransformer())
+            .doOnSubscribe {
+                view?.showLoadingProgress()
+            }
+            .doAfterTerminate {
+                view?.hideLoadingProgress()
+            }
+            .subscribe(
+                {
+                    view?.showWeatherResponse(it)
+                },
+                {
+                    view?.showError(it)
                 }
-                .doAfterTerminate {
-                    view?.hideLoadingProgress()
+            )
+
+        /*Single.zip(
+            yandexCurrentWeatherInteractor.getCurrentWeather2(),
+            yandexCurrentWeatherInteractor.getCurrentWeather3(),
+            BiFunction(this::my)
+        )
+            .compose(schedulerManagerModule.singleTransformer())
+            .subscribe(
+                {
+                    val c = 1
+                }, {
+                    val c = 1
                 }
-                .subscribe(
-                        {
-                            view?.showWeatherResponse(it.joinToString("\n"))
-                        },
-                        {
-                            view?.showError(it)
-                        }
-                )
+            )*/
     }
 
     override fun onStart() {
         loadData()
     }
 
-    override fun onBindView(view: WeatherContract.WeatherView) {
+    override fun onBindView(view: CurrentWeatherContract.CurrentWeatherView) {
         this.view = view
     }
 
     override fun onUnbindView() {
         this.view = null
-        this.disposableWork.dispose()
+//        this.disposableWork.dispose()
     }
 }
 

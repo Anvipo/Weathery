@@ -4,8 +4,9 @@ import dagger.Module
 import dagger.Provides
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.di.global.scopes.YandexWeatherScope
-import ru.mts.avpopo85.weathery.domain.global.repositories.YandexWeatherRepository
-import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherInteractor
+import ru.mts.avpopo85.weathery.domain.global.repositories.WeatherRepository
+import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.currentWeather.YandexCurrentWeatherInteractor
+import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.forecast.YandexForecastInteractor
 import ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.currentWeather.YandexCurrentWeatherPresenter
 import ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast.YandexForecastPresenter
 
@@ -13,25 +14,35 @@ import ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast.Yand
 class YandexWeatherModule {
     @Provides
     @YandexWeatherScope
-    fun provideInteractor(yandexWeatherRepository: YandexWeatherRepository): YandexWeatherInteractor {
-        return YandexWeatherInteractor(yandexWeatherRepository)
+    fun provideYandexCurrentWeatherInteractor(weatherRepository: WeatherRepository): YandexCurrentWeatherInteractor {
+        return YandexCurrentWeatherInteractor(
+            weatherRepository
+        )
     }
 
     @Provides
     @YandexWeatherScope
     fun provideYandexCurrentWeatherPresenter(
-            yandexWeatherInteractor: YandexWeatherInteractor,
-            schedulerManagerModule: SchedulerManagerModule
+        yandexCurrentWeatherInteractor: YandexCurrentWeatherInteractor,
+        schedulerManagerModule: SchedulerManagerModule
     ): YandexCurrentWeatherPresenter {
-        return YandexCurrentWeatherPresenter(yandexWeatherInteractor, schedulerManagerModule)
+        return YandexCurrentWeatherPresenter(yandexCurrentWeatherInteractor, schedulerManagerModule)
+    }
+
+    @Provides
+    @YandexWeatherScope
+    fun provideYandexForecastInteractor(weatherRepository: WeatherRepository): YandexForecastInteractor {
+        return YandexForecastInteractor(
+            weatherRepository
+        )
     }
 
     @Provides
     @YandexWeatherScope
     fun provideYandexForecastPresenter(
-            yandexWeatherInteractor: YandexWeatherInteractor,
-            schedulerManagerModule: SchedulerManagerModule
+        yandexForecastInteractor: YandexForecastInteractor,
+        schedulerManagerModule: SchedulerManagerModule
     ): YandexForecastPresenter {
-        return YandexForecastPresenter(yandexWeatherInteractor, schedulerManagerModule)
+        return YandexForecastPresenter(yandexForecastInteractor, schedulerManagerModule)
     }
 }

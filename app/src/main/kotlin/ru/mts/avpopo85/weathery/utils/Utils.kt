@@ -5,7 +5,12 @@ import java.util.*
 
 fun Int.toDate(): String {
     val date = Date(this * 1000L)
-    val dateFormat = DateFormat.getDateTimeInstance()
+//    val dateTimeFormat = DateFormat.getDateTimeInstance()
+
+    val dateFormat = DateFormat.getDateInstance()
+
+//    val s = dateTimeFormat.format(date)!!
+//    val s2 = dateFormat.format(date)!!
 
     return dateFormat.format(date)!!
 }

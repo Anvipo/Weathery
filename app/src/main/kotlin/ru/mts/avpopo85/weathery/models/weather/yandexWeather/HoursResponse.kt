@@ -71,7 +71,7 @@ data class HoursResponse(
         @Expose
         val precipitationInMm: Double,
 
-        //прогнозируемый период осадков (в мм)
+        //прогнозируемый период осадков (в минутах)
         @SerializedName("prec_period")
         @Expose
         val precipitationInMinutes: Double,

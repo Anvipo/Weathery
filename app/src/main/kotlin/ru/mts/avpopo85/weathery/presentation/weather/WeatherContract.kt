@@ -1,5 +1,6 @@
 package ru.mts.avpopo85.weathery.presentation.weather
 
+import ru.mts.avpopo85.weathery.models.weather.yandexWeather.Forecast
 import ru.mts.avpopo85.weathery.presentation.base.BaseContract
 
 interface WeatherContract : BaseContract {
@@ -7,12 +8,9 @@ interface WeatherContract : BaseContract {
     interface WeatherView : BaseContract.View {
         fun showLoadingProgress()
         fun hideLoadingProgress()
-        fun showWeatherResponse(weatherResponse: String)
         fun showError(throwable: Throwable)
         fun showError(message: String)
     }
 
-    interface WeatherPresenter : BaseContract.Presenter<WeatherView> {
-        fun loadData()
-    }
+//    interface WeatherPresenter : BaseContract.Presenter<WeatherView>
 }
