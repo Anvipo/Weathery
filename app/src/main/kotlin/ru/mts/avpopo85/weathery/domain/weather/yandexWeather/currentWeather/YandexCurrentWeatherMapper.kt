@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.domain.weather.yandexWeather
+package ru.mts.avpopo85.weathery.domain.weather.yandexWeather.currentWeather
 
 import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getCloudnessString
 import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getDaytimeString

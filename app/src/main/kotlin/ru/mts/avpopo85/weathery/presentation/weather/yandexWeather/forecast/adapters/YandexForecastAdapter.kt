@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast.adapter
+package ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast.adapters
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -8,14 +8,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.models.weather.yandexWeather.Forecast
+import ru.mts.avpopo85.weathery.models.weather.yandexWeather.HourInfo
+import ru.mts.avpopo85.weathery.models.weather.yandexWeather.Parts
 
 
 class YandexForecastAdapter :
     RecyclerView.Adapter<YandexForecastAdapter.YandexForecastAdapterViewHolder>() {
     private val items = mutableListOf<Forecast>()
 
-    fun addItems(item: List<Forecast>) {
-        items += item
+    fun addItems(items: List<Forecast>) {
+        this.items += items
         notifyDataSetChanged()
     }
 
@@ -38,35 +40,37 @@ class YandexForecastAdapter :
 
     @Suppress("PrivatePropertyName")
     class YandexForecastAdapterViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        //        private val morningForecastValueTV = view.findViewById(R.id.morningForecastValueTV) as TextView
-//        private val dayForecastValueTV = view.findViewById(R.id.dayForecastValueTV) as TextView
-//        private val eveningForecastValueTV =
-//            view.findViewById(R.id.eveningForecastValueTV) as TextView
-//        private val nightForecastValueTV = view.findViewById(R.id.nightForecastValueTV) as TextView
         fun bind(forecast: Forecast) {
             fillFields(forecast)
 
-            initRV(forecast)
-
-//            _12HoursNightForecastValueTV.text = forecast.parts._12HoursNightForecast.toString()
-//            morningForecastValueTV.text = forecast.parts.morningForecast.toString()
-//            dayForecastValueTV.text = forecast.parts.dayForecast.toString()
-//            eveningForecastValueTV.text = forecast.parts.eveningForecast.toString()
-//            nightForecastValueTV.text = forecast.parts.nightForecast.toString()
+            init12HoursRV(forecast.parts)
+            if (forecast.hours != null)
+                initHoursRV(forecast.hours)
         }
 
-        private fun initRV(forecast: Forecast) {
-            @Suppress("LocalVariableName")
-            val yandex_12_hours_forecast_recycler_view =
+        private fun initHoursRV(hours: List<HourInfo>) {
+            val yandexHoursForecastRV =
+                view.findViewById<RecyclerView>(R.id.yandex_hours_forecast_recycler_view)
+
+            yandexHoursForecastRV.apply {
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(context)
+
+                adapter = YandexHoursForecastAdapter(hours)
+            }
+        }
+
+        private fun init12HoursRV(parts: Parts) {
+            val yandex12HoursForecastRecyclerView =
                 view.findViewById<RecyclerView>(R.id.yandex_12_hours_forecast_recycler_view)
 
-            yandex_12_hours_forecast_recycler_view.apply {
+            yandex12HoursForecastRecyclerView.apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context)
 
                 val forecastParts = listOf(
-                    forecast.parts._12HoursDayForecast,
-                    forecast.parts._12HoursNightForecast
+                    parts._12HoursDayForecast,
+                    parts._12HoursNightForecast
                 )
 
                 adapter = Yandex12HoursForecastAdapter(forecastParts)

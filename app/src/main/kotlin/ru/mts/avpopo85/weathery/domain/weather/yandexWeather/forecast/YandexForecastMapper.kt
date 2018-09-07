@@ -1,5 +1,6 @@
-package ru.mts.avpopo85.weathery.domain.weather.yandexWeather
+package ru.mts.avpopo85.weathery.domain.weather.yandexWeather.forecast
 
+import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper
 import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getCloudnessString
 import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getDaytimeString
 import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getMoonCodeString
@@ -28,10 +29,10 @@ object YandexForecastMapper {
         }
     }
 
-    private fun mapHoursResponse(hoursResponse: List<HoursResponse>?): List<Hours>? {
+    private fun mapHoursResponse(hoursResponse: List<HoursResponse>?): List<HourInfo>? {
         return hoursResponse?.map {
-            Hours(
-                hourInLocalTime = it.hourInLocalTime,
+            HourInfo(
+                hourInLocalTime = "${it.hourInLocalTime}:00",
                 hourInUnixTime = it.hourInUnixTime.toDate(),
                 temperature = it.temperature,
                 feelsLikeTemperature = it.feelsLikeTemperature,
@@ -59,8 +60,14 @@ object YandexForecastMapper {
                 morningForecast = mapDayTime(it.morningForecast),
                 dayForecast = mapDayTime(it.dayForecastResponse),
                 eveningForecast = mapDayTime(it.eveningForecast),
-                _12HoursDayForecast = map12HoursForecast(it._12HoursDayForecastResponse),
-                _12HoursNightForecast = map12HoursForecast(it._12HoursNightForecast)
+                _12HoursDayForecast = map12HoursForecast(
+                    "12 часовой прогноз на день",
+                    it._12HoursDayForecastResponse
+                ),
+                _12HoursNightForecast = map12HoursForecast(
+                    "12 часовой прогноз на ночь",
+                    it._12HoursNightForecast
+                )
             )
         }
     }
@@ -91,9 +98,10 @@ object YandexForecastMapper {
         }
     }
 
-    private fun map12HoursForecast(_12HoursForecast: DayShortResponse): DayShort {
+    private fun map12HoursForecast(title: String, _12HoursForecast: DayShortResponse): DayShort {
         return _12HoursForecast.let {
             DayShort(
+                title = title,
                 temperature = it.temperature,
                 feelsLikeTemperature = it.feelsLikeTemperature,
                 iconUrl = "https://yastatic.net/weather/i/icons/blueye/color/svg/${it.iconId}.svg",
@@ -130,7 +138,7 @@ object YandexForecastMapper {
         }
     }*/
 
-    private fun getHoursString(hours: List<Hours>): List<String> {
+    /*private fun getHoursString(hours: List<HourInfo>): List<String> {
         return hours.map {
             "\n\t" + listOf(
 //                "Прогноз на: ${it.hourInLocalTime}",
@@ -160,22 +168,34 @@ object YandexForecastMapper {
             val separator = "\n\t\t"
 
             val _12HoursDayStr =
-                separator + getDayShortString(it._12HoursDayForecast).joinToString(separator)
+                separator + getDayShortString(
+                    it._12HoursDayForecast
+                ).joinToString(separator)
 
             val _12HoursNightString =
-                separator + getDayShortString(it._12HoursNightForecast).joinToString(separator)
+                separator + getDayShortString(
+                    it._12HoursNightForecast
+                ).joinToString(separator)
 
             val morningForecast =
-                separator + getDayTimeString(it.morningForecast).joinToString(separator)
+                separator + getDayTimeString(
+                    it.morningForecast
+                ).joinToString(separator)
 
             val dayForecast =
-                separator + getDayTimeString(it.dayForecast).joinToString(separator)
+                separator + getDayTimeString(
+                    it.dayForecast
+                ).joinToString(separator)
 
             val eveningForecast =
-                separator + getDayTimeString(it.eveningForecast).joinToString(separator)
+                separator + getDayTimeString(
+                    it.eveningForecast
+                ).joinToString(separator)
 
             val nightForecast =
-                separator + getDayTimeString(it.nightForecast).joinToString(separator)
+                separator + getDayTimeString(
+                    it.nightForecast
+                ).joinToString(separator)
 
             listOf(
                 "\n\t12-часовой прогноз на день текущих суток:$_12HoursDayStr",
@@ -233,5 +253,5 @@ object YandexForecastMapper {
 //                "Код иконки погоды: ${it.iconUrl}"
             )
         }
-    }
+    }*/
 }

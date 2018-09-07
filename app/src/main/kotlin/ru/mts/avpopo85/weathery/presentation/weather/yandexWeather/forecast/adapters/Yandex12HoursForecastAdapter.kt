@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast.adapter
+package ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -40,7 +40,7 @@ class Yandex12HoursForecastAdapter(private val items: List<DayShort>) :
             val windGustValueTV = view.findViewById<TextView>(R.id.windGustValueTV)
             val windDirectionValueTV = view.findViewById<TextView>(R.id.windDirectionValueTV)
             val pressureInMMValueTV = view.findViewById<TextView>(R.id.pressureInMMValueTV)
-            val pressureInPaValueTV = view.findViewById<TextView>(R.id.pressureInPaValueTV)
+            val pressureInPaValueTV = view.findViewById<TextView>(R.id.hourPressureInPaValueTV)
             val humidityInPercentsValueTV = view.findViewById<TextView>(R.id.humidityInPercentsValueTV)
             val precipitationTypeValueTV = view.findViewById<TextView>(R.id.precipitationTypeValueTV)
             val precipitationStrengthValueTV = view.findViewById<TextView>(R.id.precipitationStrengthValueTV)
