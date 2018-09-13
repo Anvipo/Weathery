@@ -1,47 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cv_SCV"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="false"
+    android:orientation="horizontal"
+    app:cardBackgroundColor="?attr/colorButtonNormal"
     app:cardCornerRadius="20dp"
     app:cardElevation="2dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
-        android:id="@+id/itemYandexHourForecastLL"
+        android:id="@+id/itemYandexToDForecastLL"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/titleValueToDTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/hourInLocalTV"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:contentDescription="@string/local_time"
-                android:gravity="center"
-                android:text="@string/local_time"
-                android:textAppearance="?attr/textAppearanceListItem" />
-
-            <TextView
-                android:id="@+id/hourInLocalValueTV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:contentDescription="@string/local_time_value"
-                android:gravity="center"
-                android:text="@string/local_time_value"
-                android:textAppearance="?attr/textAppearanceListItem" />
-        </LinearLayout>
+            android:contentDescription="@string/title"
+            android:gravity="center"
+            android:text="@string/title"
+            android:textAppearance="?attr/textAppearanceListItem" />
 
         <LinearLayout
-            android:id="@+id/hourTemperatureLayout"
+            android:id="@+id/temperatureToDLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
@@ -56,23 +41,23 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourTemperatureTV"
+                    android:id="@+id/minimumTemperatureToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:contentDescription="@string/temperature"
+                    android:contentDescription="@string/minimum_temperature"
                     android:gravity="center"
-                    android:text="@string/temperature"
+                    android:text="@string/minimum_temperature"
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourTemperatureValueTV"
+                    android:id="@+id/minimumTemperatureValueToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:contentDescription="@string/temperature_value"
+                    android:contentDescription="@string/minimum_temperature_value"
                     android:gravity="center"
-                    android:text="@string/temperature_value"
+                    android:text="@string/minimum_temperature_value"
                     android:textAppearance="?attr/textAppearanceListItem" />
             </LinearLayout>
 
@@ -84,35 +69,92 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/feelsLikeHourTemperatureTV"
+                    android:id="@+id/averageTemperatureToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:contentDescription="@string/feels_like_temperature"
+                    android:contentDescription="@string/average_temperature"
                     android:gravity="center"
-                    android:text="@string/feels_like_temperature"
+                    android:text="@string/average_temperature"
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/feelsLikeHourTemperatureValueTV"
+                    android:id="@+id/averageTemperatureValueToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:contentDescription="@string/feels_like_temperature_value"
+                    android:contentDescription="@string/average_temperature_value"
                     android:gravity="center"
-                    android:text="@string/feels_like_temperature_value"
+                    android:text="@string/average_temperature_value"
+                    android:textAppearance="?attr/textAppearanceListItem" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/maximumTemperatureToDTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/maximum_temperature"
+                    android:gravity="center"
+                    android:text="@string/maximum_temperature"
+                    android:textAppearance="?attr/textAppearanceListItem" />
+
+                <TextView
+                    android:id="@+id/maximumTemperatureValueToDTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/maximum_temperature_value"
+                    android:gravity="center"
+                    android:text="@string/maximum_temperature_value"
                     android:textAppearance="?attr/textAppearanceListItem" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@drawable/border"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/hourConditionTV"
+                android:id="@+id/feelsLikeTemperatureToDTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/feels_like_temperature"
+                android:gravity="center"
+                android:text="@string/feels_like_temperature"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/feelsLikeTemperatureValueToDTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:contentDescription="@string/feels_like_temperature_value"
+                android:gravity="center"
+                android:text="@string/feels_like_temperature_value"
+                android:textAppearance="?attr/textAppearanceListItem" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/conditionToDTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/condition"
@@ -121,9 +163,9 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/hourConditionValueTV"
+                android:id="@+id/conditionValueToDTV"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/condition_value"
                 android:gravity="center"
                 android:text="@string/condition_value"
@@ -131,7 +173,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/hourWindLayout"
+            android:id="@+id/windLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
@@ -146,7 +188,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourWindSpeedTV"
+                    android:id="@+id/windSpeedToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -156,7 +198,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourWindSpeedValueTV"
+                    android:id="@+id/windSpeedValueToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/wind_speed_value"
@@ -173,7 +215,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourWindGustsSpeedTV"
+                    android:id="@+id/windGustsSpeedToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -183,7 +225,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourWindGustValueTV"
+                    android:id="@+id/windGustValueToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -197,11 +239,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/border"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourWindDirectionTV"
+                    android:id="@+id/windDirectionToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -211,7 +252,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourWindDirectionValueTV"
+                    android:id="@+id/windDirectionValueToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -223,7 +264,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/hourPressureLayout"
+            android:id="@+id/pressureLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
@@ -238,7 +279,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/atmospherePressureInMmHgTV"
+                    android:id="@+id/pressureInMmToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -248,7 +289,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourPressureInMMValueTV"
+                    android:id="@+id/pressureInMmValueToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -266,7 +307,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourPressureInPaTV"
+                    android:id="@+id/pressureInPaToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -276,7 +317,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourPressureInPaValueTV"
+                    android:id="@+id/pressureInPaValueToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -289,12 +330,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@drawable/border"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/hourHumidityInPercentsTV"
+                android:id="@+id/humidityInPercentsToDTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/humidity"
@@ -303,7 +345,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/hourHumidityInPercentsValueTV"
+                android:id="@+id/humidityInPercentsValueToDTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/humidity_value"
@@ -313,7 +355,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/hourPrecipitationLayout"
+            android:id="@+id/precipitationLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
@@ -324,10 +366,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/border"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourPrecipitationTypeTV"
+                    android:id="@+id/precipitationTypeToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -337,7 +380,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourPrecipitationTypeValueTV"
+                    android:id="@+id/precipitationTypeValueToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -345,17 +388,17 @@
                     android:gravity="center"
                     android:text="@string/precipitation_type_value"
                     android:textAppearance="?attr/textAppearanceListItem" />
-
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/border"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourPrecipitationStrengthTV"
+                    android:id="@+id/precipitationStrengthToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -365,7 +408,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourPrecipitationStrengthValueTV"
+                    android:id="@+id/precipitationStrengthValueToDTV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -398,11 +441,11 @@
                     android:layout_gravity="center"
                     android:contentDescription="@string/precipitation_in_mm"
                     android:gravity="center"
-                    android:text="@string/precipitation"
+                    android:text="@string/precipitation_in_mm"
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourPrecipitationInMmValueTV"
+                    android:id="@+id/precipitationInMmValueTV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -410,7 +453,6 @@
                     android:gravity="center"
                     android:text="@string/precipitation_value"
                     android:textAppearance="?attr/textAppearanceListItem" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -431,7 +473,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourPrecipitationInMinutesValueTV"
+                    android:id="@+id/precipitationInMinutesValueTV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -444,11 +486,64 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/border"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/hourCloudinessTV"
+                android:id="@+id/daytimeToDTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/daytime"
+                android:gravity="center"
+                android:text="@string/daytime"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/daytimeValueToDTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/daytime_value"
+                android:gravity="center"
+                android:text="@string/daytime_value"
+                android:textAppearance="?attr/textAppearanceListItem" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/polarToDTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/is_there_polar"
+                android:gravity="center"
+                android:text="@string/is_there_polar"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/polarValueToDTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/is_there_polar_value"
+                android:gravity="center"
+                android:text="@string/is_there_polar_value"
+                android:textAppearance="?attr/textAppearanceListItem" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cloudinessToDTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/cloudiness"
@@ -457,7 +552,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/hourCloudinessValueTV"
+                android:id="@+id/cloudinessValueToDTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/cloudiness_value"

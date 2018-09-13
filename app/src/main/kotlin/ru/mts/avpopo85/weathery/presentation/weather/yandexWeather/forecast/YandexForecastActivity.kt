@@ -1,25 +1,33 @@
 package ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast
 
+import android.content.Context
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentStatePagerAdapter
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import kotlinx.android.synthetic.main.activity_yandex_forecast.*
+import kotlinx.android.synthetic.main.activity_yandex_forecast.yandex_forecast_PB
 import org.jetbrains.anko.longToast
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.weather.yandexWeather.YandexWeatherModule
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.Forecast
-import ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast.adapters.YandexForecastAdapter
+import ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain.Forecast
+import ru.mts.avpopo85.weathery.utils.ARG_FORECAST
+import ru.mts.avpopo85.weathery.utils.makeTitle
 import javax.inject.Inject
 
+
 class YandexForecastActivity : AppCompatActivity(), ForecastContract.ForecastView {
+    override val context: Context = this
+
     @Inject
     lateinit var yandexForecastPresenter: YandexForecastPresenter
 
-    private lateinit var yandexForecastAdapter: YandexForecastAdapter
+    private lateinit var mPager: ViewPager
 
-//    private lateinit var viewPagerAdapter: ViewPagerAdapter
+    private lateinit var mPagerAdapter: ScreenSlidePagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,30 +36,7 @@ class YandexForecastActivity : AppCompatActivity(), ForecastContract.ForecastVie
         App.appComponentForYandexWeather.plus(YandexWeatherModule()).inject(this)
         yandexForecastPresenter.onBindView(this)
 
-        initRecyclerViews()
-
         yandexForecastPresenter.onStart()
-    }
-
-    private fun initRecyclerViews() {
-        //TODO ViewPager
-//        viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
-//
-//        viewPager.adapter = viewPagerAdapter
-
-        yandexForecastAdapter = YandexForecastAdapter()
-
-        yandex_forecast_recycler_view.apply {
-            setHasFixedSize(true)
-
-            layoutManager = LinearLayoutManager(
-                this@YandexForecastActivity,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-
-            adapter = yandexForecastAdapter
-        }
     }
 
     override fun onDestroy() {
@@ -68,14 +53,29 @@ class YandexForecastActivity : AppCompatActivity(), ForecastContract.ForecastVie
     }
 
     override fun showWeatherResponse(data: List<Forecast>) {
-        yandexForecastAdapter.addItems(data)
+        initPager()
 
-        //TODO ViewPager
-        /*for (forecast in data) {
+        putForecastDataInPager(data)
+    }
+
+    private fun putForecastDataInPager(data: List<Forecast>) {
+        for (forecast in data) {
             val yfr = YandexForecastFragment()
-            yfr.yandexForecastAdapter.addItem(forecast)
-            viewPagerAdapter.addFragment(yfr, forecast.date_ts)
-        }*/
+
+            yfr.arguments = Bundle().apply {
+                putParcelable(ARG_FORECAST, forecast)
+            }
+
+            val title = makeTitle(forecast)
+
+            mPagerAdapter.addFragment(yfr, title)
+        }
+    }
+
+    private fun initPager() {
+        mPager = findViewById(R.id.pager)
+        mPagerAdapter = ScreenSlidePagerAdapter(supportFragmentManager)
+        mPager.adapter = mPagerAdapter
     }
 
     override fun showError(throwable: Throwable) {
@@ -83,25 +83,27 @@ class YandexForecastActivity : AppCompatActivity(), ForecastContract.ForecastVie
         longToast(str)
     }
 
-    override fun showError(message: String) {
-        longToast(message)
+    override fun showError(message: String?) {
+        if (message != null)
+            longToast(message)
     }
 
-    //TODO ViewPager
-    /*class ViewPagerAdapter(fragmentManager: FragmentManager) :
-        FragmentPagerAdapter(fragmentManager) {
+    private class ScreenSlidePagerAdapter(fm: FragmentManager) :
+        FragmentStatePagerAdapter(fm) {
+
         private val items = mutableListOf<Fragment>()
         private val tabTitles = mutableListOf<String>()
-
-        fun addFragment(fragment: Fragment, title: String) {
-            items.add(fragment)
-            tabTitles.add(title)
-        }
 
         override fun getItem(position: Int): Fragment = items[position]
 
         override fun getCount(): Int = items.size
 
-        override fun getPageTitle(position: Int) = tabTitles[position]
-    }*/
+        override fun getPageTitle(position: Int): CharSequence? = tabTitles[position]
+
+        fun addFragment(fragment: Fragment, title: String) {
+            items.add(fragment)
+            tabTitles.add(title)
+            notifyDataSetChanged()
+        }
+    }
 }

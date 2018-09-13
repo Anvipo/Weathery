@@ -1,9 +1,5 @@
 package ru.mts.avpopo85.weathery.utils
 
-enum class PossibleUnits {
-    METRIC, STANDARD, IMPERIAL
-}
-
 enum class YandexWeatherLanguages(val lang_code: String) {
     RU_RU("ru_RU"),
     RU_UA("ru_UA"),

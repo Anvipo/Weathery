@@ -1,12 +1,15 @@
 package ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.currentWeather
 
+import android.content.Context
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.currentWeather.YandexCurrentWeatherInteractor
+import ru.mts.avpopo85.weathery.utils.makeErrorText
 
 class YandexCurrentWeatherPresenter(
     private val yandexCurrentWeatherInteractor: YandexCurrentWeatherInteractor,
-    private val schedulerManagerModule: SchedulerManagerModule
+    private val schedulerManagerModule: SchedulerManagerModule,
+    private val context: Context
 ) : CurrentWeatherContract.CurrentWeatherPresenter {
     private var view: CurrentWeatherContract.CurrentWeatherView? = null
 
@@ -26,23 +29,11 @@ class YandexCurrentWeatherPresenter(
                     view?.showWeatherResponse(it)
                 },
                 {
-                    view?.showError(it)
+                    val message = context.makeErrorText(it)
+
+                    view?.showError(message)
                 }
             )
-
-        /*Single.zip(
-            yandexCurrentWeatherInteractor.getCurrentWeather2(),
-            yandexCurrentWeatherInteractor.getCurrentWeather3(),
-            BiFunction(this::my)
-        )
-            .compose(schedulerManagerModule.singleTransformer())
-            .subscribe(
-                {
-                    val c = 1
-                }, {
-                    val c = 1
-                }
-            )*/
     }
 
     override fun onStart() {
@@ -55,7 +46,7 @@ class YandexCurrentWeatherPresenter(
 
     override fun onUnbindView() {
         this.view = null
-//        this.disposableWork.dispose()
+        this.disposableWork.dispose()
     }
 }
 

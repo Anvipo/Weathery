@@ -18,13 +18,11 @@ class AppModule(context: Context) {
 
     @Provides
     @Singleton
-    fun provideYandexWeatherRepository(yandexYandexWeatherRepository: YandexWeatherRepository): WeatherRepository {
-        return yandexYandexWeatherRepository
-    }
+    fun provideYandexWeatherRepository(yandexYandexWeatherRepository: YandexWeatherRepository)
+            : WeatherRepository = yandexYandexWeatherRepository
 
     @Provides
     @Singleton
-    fun provideYandexWeatherRepositoryImpl(yandexWeatherApiService: YandexWeatherApiService): YandexWeatherRepository {
-        return YandexWeatherRepository(yandexWeatherApiService)
-    }
+    fun provideYandexWeatherRepositoryImpl(yandexWeatherApiService: YandexWeatherApiService)
+            : YandexWeatherRepository = YandexWeatherRepository(yandexWeatherApiService)
 }

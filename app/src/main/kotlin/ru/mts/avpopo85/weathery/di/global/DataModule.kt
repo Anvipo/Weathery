@@ -19,10 +19,10 @@ class DataModule(private val baseUrl: String) {
         val gson = GsonBuilder().create()
 
         return Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(baseUrl)
-                .build()
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .baseUrl(baseUrl)
+            .build()
     }
 
     @Provides
@@ -31,7 +31,6 @@ class DataModule(private val baseUrl: String) {
 
     @Provides
     @Singleton
-    fun provideApi(retrofit: Retrofit): YandexWeatherApiService {
-        return retrofit.create(YandexWeatherApiService::class.java)
-    }
+    fun provideApi(retrofit: Retrofit)
+            : YandexWeatherApiService = retrofit.create(YandexWeatherApiService::class.java)
 }

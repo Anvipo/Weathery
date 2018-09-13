@@ -1,12 +1,15 @@
 package ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast
 
+import android.content.Context
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.forecast.YandexForecastInteractor
+import ru.mts.avpopo85.weathery.utils.makeErrorText
 
 class YandexForecastPresenter(
     private val yandexCurrentWeatherInteractor: YandexForecastInteractor,
-    private val schedulerManagerModule: SchedulerManagerModule
+    private val schedulerManagerModule: SchedulerManagerModule,
+    private val context: Context
 ) : ForecastContract.ForecastPresenter {
     private var view: ForecastContract.ForecastView? = null
 
@@ -26,7 +29,9 @@ class YandexForecastPresenter(
                     view?.showWeatherResponse(it)
                 },
                 {
-                    view?.showError(it)
+                    val message = context.makeErrorText(it)
+
+                    view?.showError(message)
                 }
             )
     }

@@ -7,7 +7,7 @@ sealed class MyParsingException(cause: String) : Throwable() {
     class PrecipitationTypeParsingException(cause: String) : MyParsingException(cause)
     class PrecipitationStrengthParsingException(cause: String) : MyParsingException(cause)
     class DaytimeParsingException(cause: String) : MyParsingException(cause)
-    class CloudnessParsingException(cause: String) : MyParsingException(cause)
+    class CloudinessParsingException(cause: String) : MyParsingException(cause)
     class WeatherDescriptionParsingException(cause: String) : MyParsingException(cause)
     class WindDirectionParsingException(cause: String) : MyParsingException(cause)
     class MoonCodeParsingException(cause: String) : MyParsingException(cause)

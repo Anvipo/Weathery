@@ -1,30 +1,39 @@
 package ru.mts.avpopo85.weathery.utils
 
-import java.text.DateFormat
-import java.util.*
+import android.content.Context
+import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain.Forecast
+import java.net.UnknownHostException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
 
 fun Int.toDate(): String {
     val date = Date(this * 1000L)
-//    val dateTimeFormat = DateFormat.getDateTimeInstance()
 
-    val dateFormat = DateFormat.getDateInstance()
+    val simpleDateFormat = SimpleDateFormat("dd MMM YYYY (E)", Locale.getDefault())
 
-//    val s = dateTimeFormat.format(date)!!
-//    val s2 = dateFormat.format(date)!!
-
-    return dateFormat.format(date)!!
+    return simpleDateFormat.format(date)
 }
 
-object Utils {
-    fun getTemperatureUnit(unitsFormat: PossibleUnits): String = when (unitsFormat) {
-        PossibleUnits.METRIC -> "°C"
-        PossibleUnits.STANDARD -> "K"
-        PossibleUnits.IMPERIAL -> "°F"
-    }
+fun Context.makeTitle(forecast: Forecast) =
+    "${forecast.date_ts} (${forecast.weekSerialNumber} ${getString(R.string.week)})"
 
-    fun getSpeedUnit(unitsFormat: PossibleUnits): String = when (unitsFormat) {
-        PossibleUnits.METRIC -> "м/c"
-        PossibleUnits.STANDARD -> "м/c"
-        PossibleUnits.IMPERIAL -> "м/ч"
-    }
+fun Double.roundIfNeeded(): String {
+    val res = this.toInt()
+    val fraction = res - this
+    val needed = fraction == 0.0
+
+    return if (needed)
+        "$res"
+    else
+        "$this"
+}
+
+fun Context.makeErrorText(it: Throwable): String {
+    return if (it is UnknownHostException)
+        "${getString(R.string.error)}.${getString(R.string.there_may_be_a_problem_with_the_Internet_connection)}."
+    else
+        it.message ?: getString(R.string.unknown_error)
 }

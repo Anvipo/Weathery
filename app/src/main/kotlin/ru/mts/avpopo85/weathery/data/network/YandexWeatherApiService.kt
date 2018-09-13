@@ -1,13 +1,10 @@
 package ru.mts.avpopo85.weathery.data.network
 
 import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.CurrentWeatherResponse
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.ForecastResponse
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.WeatherResponse
+import ru.mts.avpopo85.weathery.models.weather.yandexWeather.data.WeatherResponse
 
 interface YandexWeatherApiService {
     @Headers("X-Yandex-API-Key: $API_KEY")
@@ -21,12 +18,12 @@ interface YandexWeatherApiService {
     @Headers("X-Yandex-API-Key: $API_KEY")
     @GET("forecast")
     fun forecast(
-            @Query("lat") latitude: Double,
-            @Query("lon") longitude: Double,
-            @Query("lang") language: String,
-            @Query("limit") dayNumberInForecast: Int,
-            @Query("hours") withForecastForHours: Boolean,
-            @Query("extra") withExtraInformation: Boolean
+        @Query("lat") latitude: Double,
+        @Query("lon") longitude: Double,
+        @Query("lang") language: String,
+        @Query("limit") dayNumberInForecast: Int,
+        @Query("hours") withForecastForHours: Boolean,
+        @Query("extra") withExtraInformation: Boolean
     ): Single<WeatherResponse>
 
     companion object {

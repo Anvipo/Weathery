@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/itemYandexCurrentWeatherLL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/observationUnixTimeCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/observation_time"
+            android:gravity="center"
+            android:text="@string/observation_time"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/observationUnixTimeValueCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/observation_time_value"
+            android:gravity="center"
+            android:text="@string/observation_time_value"
+            android:textAppearance="?attr/textAppearanceListItem" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/temperatureLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/border"
         android:baselineAligned="false"
         android:orientation="horizontal">
 
@@ -17,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:orientation="vertical">
 
             <TextView
@@ -24,9 +51,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="Температура"
+                android:contentDescription="@string/temperature"
                 android:gravity="center"
-                android:text="Температура"
+                android:text="@string/temperature"
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
@@ -34,9 +61,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:contentDescription="Значение температуры"
+                android:contentDescription="@string/temperature_value"
                 android:gravity="center"
-                android:text="Значение температуры"
+                android:text="@string/temperature_value"
                 android:textAppearance="?attr/textAppearanceListItem" />
         </LinearLayout>
 
@@ -44,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:orientation="vertical">
 
             <TextView
@@ -51,45 +79,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="Ощущаемая температура"
+                android:contentDescription="@string/feels_like_temperature"
                 android:gravity="center"
-                android:text="Ощущаемая температура"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:text="@string/feels_like_temperature"
+                android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
                 android:id="@+id/feelsLikeTemperatureValueCWTV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:contentDescription="Значение ощущаемой температуры"
+                android:contentDescription="@string/feels_like_temperature_value"
                 android:gravity="center"
-                android:text="Значение ощущаемой температуры"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:text="@string/feels_like_temperature_value"
+                android:textAppearance="?attr/textAppearanceListItem" />
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/conditionCWTV"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Расшифровка погодного расписания"
-        android:gravity="center"
-        android:text="Расшифровка погодного расписания"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/conditionValueCWTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Значение расшифровки погодного расписания"
-        android:gravity="center"
-        android:text="Значение расшифровки погодного расписания"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        <TextView
+            android:id="@+id/conditionCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/condition"
+            android:gravity="center"
+            android:text="@string/condition"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/conditionValueCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/condition_value"
+            android:gravity="center"
+            android:text="@string/condition_value"
+            android:textAppearance="?attr/textAppearanceListItem" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/windLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/border"
         android:baselineAligned="false"
         android:orientation="horizontal">
 
@@ -97,6 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:orientation="vertical">
 
             <TextView
@@ -104,53 +142,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="Скорость ветра"
+                android:contentDescription="@string/wind_speed"
                 android:gravity="center"
-                android:text="Скорость ветра"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:text="@string/wind_speed"
+                android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
                 android:id="@+id/windSpeedValueCWTV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="Значение скорости ветра"
+                android:contentDescription="@string/wind_speed_value"
                 android:gravity="center"
-                android:text="Значение скорости ветра"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:text="@string/wind_speed_value"
+                android:textAppearance="?attr/textAppearanceListItem" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/windGustCWTV"
+                android:id="@+id/windGustsSpeedCWTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="Скорость порывов ветра"
+                android:contentDescription="@string/wind_gusts_speed"
                 android:gravity="center"
-                android:text="Скорость порывов ветра"
+                android:text="@string/wind_gusts_speed"
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/windGustValueCWTV"
+                android:id="@+id/windGustsSpeedValueCWTV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:contentDescription="Значение скорости порывов ветра"
+                android:contentDescription="@string/wind_gusts_speed_value"
                 android:gravity="center"
-                android:text="Значение скорости порывов ветра"
+                android:text="@string/wind_gusts_speed_value"
                 android:textAppearance="?attr/textAppearanceListItem" />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:orientation="vertical">
 
             <TextView
@@ -158,9 +197,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="Направление ветра"
+                android:contentDescription="@string/wind_direction"
                 android:gravity="center"
-                android:text="Направление ветра"
+                android:text="@string/wind_direction"
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
@@ -168,10 +207,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:contentDescription="Значение направления ветра"
+                android:contentDescription="@string/wind_direction_value"
                 android:gravity="center"
-                android:text="Значение направления ветра"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:text="@string/wind_direction_value"
+                android:textAppearance="?attr/textAppearanceListItem" />
         </LinearLayout>
     </LinearLayout>
 
@@ -179,6 +218,7 @@
         android:id="@+id/pressureCWLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/border"
         android:baselineAligned="false"
         android:orientation="horizontal">
 
@@ -186,81 +226,90 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/pressureInMMCWTV"
+                android:id="@+id/atmosphericPressureInMmHgCWTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="Давление (в мм рт. ст.)"
+                android:contentDescription="@string/atmospheric_pressure_mm_hg"
                 android:gravity="center"
-                android:text="Давление (в мм рт. ст.)"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:text="@string/atmospheric_pressure"
+                android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/pressureInMMValueCWTV"
+                android:id="@+id/atmosphericPressureInMmHgValueCWTV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:contentDescription="Значение давления (в мм рт. ст.)"
+                android:contentDescription="@string/atmospheric_pressure_mm_hg_value"
                 android:gravity="center"
-                android:text="Значение давления (в мм рт. ст.)"
+                android:text="@string/atmospheric_pressure_value"
                 android:textAppearance="?attr/textAppearanceListItem" />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/pressureInPaCWTV"
+                android:id="@+id/atmosphericPressureInhPaCWTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="Давление (в гПа)"
+                android:contentDescription="@string/atmospheric_pressure_hPa"
                 android:gravity="center"
-                android:text="Давление (в гПа)"
+                android:text="@string/atmospheric_pressure"
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/pressureInPaValueCWTV"
+                android:id="@+id/atmosphericPressureInhPaValueCWTV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:contentDescription="Значение давления (в гПа)"
+                android:contentDescription="@string/atmospheric_pressure_hPa_value"
                 android:gravity="center"
-                android:text="Значение давления (в гПа)"
+                android:text="@string/atmospheric_pressure"
                 android:textAppearance="?attr/textAppearanceListItem" />
-
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/humidityInPercentsCWTV"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Влажность воздуха (%)"
-        android:gravity="center"
-        android:text="Влажность воздуха (%)"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/humidityInPercentsValueCWTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Значение влажности воздуха (%)"
-        android:gravity="center"
-        android:text="Значение влажности воздуха (%)"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        <TextView
+            android:id="@+id/humidityCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/humidity"
+            android:gravity="center"
+            android:text="@string/humidity"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/humidityValueCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/humidity_value"
+            android:gravity="center"
+            android:text="@string/humidity_value"
+            android:textAppearance="?attr/textAppearanceListItem" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/precipitationCWLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/border"
         android:baselineAligned="false"
         android:orientation="horizontal">
 
@@ -268,6 +317,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:orientation="vertical">
 
             <TextView
@@ -275,27 +325,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="Тип осадков"
+                android:contentDescription="@string/precipitation_type"
                 android:gravity="center"
-                android:text="Тип осадков"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:text="@string/precipitation_type"
+                android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
                 android:id="@+id/precipitationTypeValueCWTV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:contentDescription="Значение типа осадков"
+                android:contentDescription="@string/precipitation_type_value"
                 android:gravity="center"
-                android:text="Значение типа осадков"
+                android:text="@string/precipitation_type_value"
                 android:textAppearance="?attr/textAppearanceListItem" />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:orientation="vertical">
 
             <TextView
@@ -303,110 +353,124 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="Сила осадков"
+                android:contentDescription="@string/precipitation_strength"
                 android:gravity="center"
-                android:text="Сила осадков"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:text="@string/precipitation_strength"
+                android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
                 android:id="@+id/precipitationStrengthValueCWTV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:contentDescription="Значение силы осадков"
+                android:contentDescription="@string/precipitation_strength_value"
                 android:gravity="center"
-                android:text="Значение силы осадков"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:text="@string/precipitation_strength_value"
+                android:textAppearance="?attr/textAppearanceListItem" />
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/cloudnessCWTV"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Облачность"
-        android:gravity="center"
-        android:text="Облачность"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/cloudnessValueCWTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Значение облачности"
-        android:gravity="center"
-        android:text="Значение облачности"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        <TextView
+            android:id="@+id/cloudinessCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/cloudiness"
+            android:gravity="center"
+            android:text="@string/cloudiness"
+            android:textAppearance="?attr/textAppearanceListItem" />
 
-    <TextView
-        android:id="@+id/daytimeCWTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Время суток"
-        android:gravity="center"
-        android:text="Время суток"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        <TextView
+            android:id="@+id/cloudinessValueCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/cloudiness_value"
+            android:gravity="center"
+            android:text="@string/cloudiness_value"
+            android:textAppearance="?attr/textAppearanceListItem" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/daytimeValueCWTV"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Значение времени суток"
-        android:gravity="center"
-        android:text="Значение времени суток"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/polarCWTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Наличие полярного дня или ночи"
-        android:gravity="center"
-        android:text="Наличие полярного дня или ночи"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        <TextView
+            android:id="@+id/daytimeCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/daytime"
+            android:gravity="center"
+            android:text="@string/daytime"
+            android:textAppearance="?attr/textAppearanceListItem" />
 
-    <TextView
-        android:id="@+id/polarValueCWTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Значение наличия полярного дня или ночи"
-        android:gravity="center"
-        android:text="Значение наличия полярного дня или ночи"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        <TextView
+            android:id="@+id/daytimeValueCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/daytime_value"
+            android:gravity="center"
+            android:text="@string/daytime_value"
+            android:textAppearance="?attr/textAppearanceListItem" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/seasonCWTV"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Время года"
-        android:gravity="center"
-        android:text="Время года"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/seasonValueCWTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Значение времени года"
-        android:gravity="center"
-        android:text="Значение времени года"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        <TextView
+            android:id="@+id/polarCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/is_there_polar"
+            android:gravity="center"
+            android:text="@string/is_there_polar"
+            android:textAppearance="?attr/textAppearanceListItem" />
 
-    <TextView
-        android:id="@+id/observationUnixTimeCWTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Время сбора прогноза"
-        android:gravity="center"
-        android:text="Время сбора прогноза"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        <TextView
+            android:id="@+id/polarValueCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/is_there_polar_value"
+            android:gravity="center"
+            android:text="@string/is_there_polar_value"
+            android:textAppearance="?attr/textAppearanceListItem" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/observationUnixTimeValueCWTV"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Значение времени сбора прогноза"
-        android:gravity="center"
-        android:text="Значение времени сбора прогноза"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/seasonCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/season"
+            android:gravity="center"
+            android:text="@string/season"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/seasonValueCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/season_value"
+            android:gravity="center"
+            android:text="@string/season_value"
+            android:textAppearance="?attr/textAppearanceListItem" />
+    </LinearLayout>
 </LinearLayout>

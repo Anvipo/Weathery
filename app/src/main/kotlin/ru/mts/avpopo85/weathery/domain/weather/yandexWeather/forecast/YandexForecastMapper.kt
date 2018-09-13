@@ -1,257 +1,112 @@
 package ru.mts.avpopo85.weathery.domain.weather.yandexWeather.forecast
 
-import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper
-import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getCloudnessString
-import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getDaytimeString
-import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getMoonCodeString
-import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getMoonTextString
-import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getPrecipitationStrengthString
-import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getPrecipitationTypeString
-import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getWeatherDescriptionString
-import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getWindDirectionString
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.*
+import android.content.Context
+import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.*
+import ru.mts.avpopo85.weathery.models.weather.yandexWeather.data.*
+import ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain.*
+import ru.mts.avpopo85.weathery.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.utils.toDate
 
-object YandexForecastMapper {
-    fun mapForecast(forecastResponse: List<ForecastResponse>): List<Forecast> {
-        return forecastResponse.map {
+class YandexForecastMapper(private val context: Context) {
+    fun mapForecast(forecastResponse: List<ForecastResponse>): List<Forecast> =
+        forecastResponse.map {
             Forecast(
                 date = it.date,
                 date_ts = it.date_ts.toDate(),
                 weekSerialNumber = it.weekSerialNumber,
                 sunriseInLocalTime = it.sunriseInLocalTime,
                 sunsetInLocalTime = it.sunsetInLocalTime,
-                moonCode = getMoonCodeString(it.moonCode),
-                moonText = getMoonTextString(it.moonText),
+                moonCode = context.getMoonCodeString(it.moonCode),
+                moonText = context.getMoonTextString(it.moonText),
                 parts = mapPartsResponse(it.partsResponse),
                 hours = mapHoursResponse(it.hours)
             )
         }
-    }
 
-    private fun mapHoursResponse(hoursResponse: List<HoursResponse>?): List<HourInfo>? {
-        return hoursResponse?.map {
+    private fun mapHoursResponse(hourInfoResponse: List<HourInfoResponse>?): List<HourInfo>? =
+        hourInfoResponse?.map {
             HourInfo(
                 hourInLocalTime = "${it.hourInLocalTime}:00",
                 hourInUnixTime = it.hourInUnixTime.toDate(),
-                temperature = it.temperature,
-                feelsLikeTemperature = it.feelsLikeTemperature,
+                temperature = it.temperature.roundIfNeeded(),
+                feelsLikeTemperature = it.feelsLikeTemperature.roundIfNeeded(),
                 iconUrl = "https://yastatic.net/weather/i/icons/blueye/color/svg/${it.iconId}.svg",
-                condition = getWeatherDescriptionString(it.condition),
-                windSpeed = it.windSpeed,
-                windGust = it.windGust,
-                windDirection = getWindDirectionString(it.windDirection),
-                pressureInMM = it.pressureInMM,
-                pressureInPa = it.pressureInPa,
-                humidityInPercents = it.humidityInPercents,
-                precipitationInMm = it.precipitationInMm,
-                precipitationInMinutes = it.precipitationInMinutes,
-                precipitationType = getPrecipitationTypeString(it.precipitationType),
-                precipitationStrength = getPrecipitationStrengthString(it.precipitationStrength),
-                cloudness = getCloudnessString(it.cloudness)
+                condition = context.getWeatherDescriptionString(it.condition),
+                windSpeed = it.windSpeed.roundIfNeeded(),
+                windGustsSpeed = it.windGustsSpeed.roundIfNeeded(),
+                windDirection = context.getWindDirectionString(it.windDirection),
+                atmosphericPressureInMmHg = it.atmosphericPressureInMmHg.roundIfNeeded(),
+                atmosphericPressureInhPa = it.atmosphericPressureInhPa.roundIfNeeded(),
+                humidity = it.humidity.roundIfNeeded(),
+                precipitationInMm = it.precipitationInMm.roundIfNeeded(),
+                precipitationInMinutes = it.precipitationInMinutes.roundIfNeeded(),
+                precipitationType = context.getPrecipitationTypeString(it.precipitationType),
+                precipitationStrength = context.getPrecipitationStrengthString(it.precipitationStrength),
+                cloudiness = context.getCloudinessString(it.cloudiness)
             )
         }
-    }
 
-    private fun mapPartsResponse(partsResponse: PartsResponse): Parts {
-        return partsResponse.let {
+    private fun mapPartsResponse(partsResponse: PartsResponse): Parts =
+        partsResponse.let {
             Parts(
-                nightForecast = mapDayTime(it.nightForecast),
-                morningForecast = mapDayTime(it.morningForecast),
-                dayForecast = mapDayTime(it.dayForecastResponse),
-                eveningForecast = mapDayTime(it.eveningForecast),
+                nightForecast = mapDayTime("Прогноз на ночь", it.nightForecastResponse),
+                morningForecast = mapDayTime("Прогноз на утро", it.morningForecastResponse),
+                dayForecast = mapDayTime("Прогноз на день", it.dayForecastResponse),
+                eveningForecast = mapDayTime("Прогноз на вечер", it.eveningForecastResponse),
                 _12HoursDayForecast = map12HoursForecast(
                     "12 часовой прогноз на день",
                     it._12HoursDayForecastResponse
                 ),
                 _12HoursNightForecast = map12HoursForecast(
                     "12 часовой прогноз на ночь",
-                    it._12HoursNightForecast
+                    it._12HoursNightForecastResponse
                 )
             )
         }
-    }
 
-    private fun mapDayTime(dayForecastResponse: DayTimeResponse): DayTime {
-        return dayForecastResponse.let {
+    private fun mapDayTime(title: String, dayForecastResponse: DayTimeResponse): DayTime =
+        dayForecastResponse.let {
             DayTime(
-                temperatureMinimum = it.temperatureMinimum,
-                temperatureMaximum = it.temperatureMaximum,
-                temperatureAverage = it.temperatureAverage,
-                feelsLikeTemperature = it.feelsLikeTemperature,
+                title = title,
+                temperatureMinimum = it.temperatureMinimum.roundIfNeeded(),
+                temperatureMaximum = it.temperatureMaximum.roundIfNeeded(),
+                temperatureAverage = it.temperatureAverage.roundIfNeeded(),
+                feelsLikeTemperature = it.feelsLikeTemperature.roundIfNeeded(),
                 iconUrl = "https://yastatic.net/weather/i/icons/blueye/color/svg/${it.iconId}.svg",
-                condition = getWeatherDescriptionString(it.condition),
-                daytime = getDaytimeString(it.daytime),
-                polar = YandexWeatherMapper.getPolarString(it.polar),
-                windSpeed = it.windSpeed,
-                windGust = it.windGust,
-                windDirection = getWindDirectionString(it.windDirection),
-                pressureInMM = it.pressureInMM,
-                pressureInPa = it.pressureInPa,
-                humidityInPercents = it.humidityInPercents,
-                precipitationInMm = it.precipitationInMm,
-                precipitationInMinutes = it.precipitationInMinutes,
-                precipitationType = getPrecipitationTypeString(it.precipitationType),
-                precipitationStrength = getPrecipitationStrengthString(it.precipitationStrength),
-                cloudness = getCloudnessString(it.cloudness)
+                condition = context.getWeatherDescriptionString(it.condition),
+                daytime = context.getDaytimeString(it.daytime),
+                polar = context.getPolarString(it.polar),
+                windSpeed = it.windSpeed.roundIfNeeded(),
+                windGustsSpeed = it.windGustsSpeed.roundIfNeeded(),
+                windDirection = context.getWindDirectionString(it.windDirection),
+                atmosphericPressureInMmHg = it.atmosphericPressureInMmHg.roundIfNeeded(),
+                atmosphericPressureInhPa = it.atmosphericPressureInhPa.roundIfNeeded(),
+                humidity = it.humidity.roundIfNeeded(),
+                precipitationInMm = it.precipitationInMm.roundIfNeeded(),
+                precipitationInMinutes = it.precipitationInMinutes.roundIfNeeded(),
+                precipitationType = context.getPrecipitationTypeString(it.precipitationType),
+                precipitationStrength = context.getPrecipitationStrengthString(it.precipitationStrength),
+                cloudiness = context.getCloudinessString(it.cloudiness)
             )
         }
-    }
 
-    private fun map12HoursForecast(title: String, _12HoursForecast: DayShortResponse): DayShort {
-        return _12HoursForecast.let {
+    private fun map12HoursForecast(title: String, _12HoursForecast: DayShortResponse): DayShort =
+        _12HoursForecast.let {
             DayShort(
                 title = title,
-                temperature = it.temperature,
-                feelsLikeTemperature = it.feelsLikeTemperature,
+                temperature = it.temperature.roundIfNeeded(),
+                feelsLikeTemperature = it.feelsLikeTemperature.roundIfNeeded(),
                 iconUrl = "https://yastatic.net/weather/i/icons/blueye/color/svg/${it.iconId}.svg",
-                condition = getWeatherDescriptionString(it.condition),
-                windSpeed = it.windSpeed,
-                windGust = it.windGust,
-                windDirection = getWindDirectionString(it.windDirection),
-                pressureInMM = it.pressureInMM,
-                pressureInPa = it.pressureInPa,
-                humidityInPercents = _12HoursForecast.humidityInPercents,
-                precipitationType = getPrecipitationTypeString(it.precipitationType),
-                precipitationStrength = getPrecipitationStrengthString(it.precipitationStrength),
-                cloudness = getCloudnessString(it.cloudness)
+                condition = context.getWeatherDescriptionString(it.condition),
+                windSpeed = it.windSpeed.roundIfNeeded(),
+                windGustsSpeed = it.windGustsSpeed.roundIfNeeded(),
+                windDirection = context.getWindDirectionString(it.windDirection),
+                atmosphericPressureInMmHg = it.atmosphericPressureInMmHg.roundIfNeeded(),
+                atmosphericPressureInhPa = it.atmosphericPressureInhPa.roundIfNeeded(),
+                humidity = _12HoursForecast.humidity.roundIfNeeded(),
+                precipitationType = context.getPrecipitationTypeString(it.precipitationType),
+                precipitationStrength = context.getPrecipitationStrengthString(it.precipitationStrength),
+                cloudiness = context.getCloudinessString(it.cloudiness)
             )
         }
-    }
-
-    /*fun getForecastInfoList(mappedInfoList: List<Forecast>): List<String> {
-        return mappedInfoList.map {
-            val dailyForecastString = getPartsString(it.parts).joinToString("\n")
-            listOf(
-                "Дата прогноза (в формате ГГГГ-ММ-ДД): ${it.date}",
-                "Дата прогноза: ${it.date_ts}",
-                "Фаза Луны: ${it.moonCode}",
-                "Время восхода Солнца: ${it.sunriseInLocalTime}",
-                "Время заката Солнца: ${it.sunsetInLocalTime}",
-                "Порядковый номер недели: ${it.weekSerialNumber}",
-                "\n\nПрогнозы по времени суток и 12-часовые прогнозы:\n$dailyForecastString",
-                if (it.hours != null)
-                    "\n\nПочасовой прогноз погоды:\n\n${getHoursString(it.hours).joinToString("\n")}"
-                else
-                    ""
-            ).joinToString("\n", postfix = "\n\n\n\n")
-        }
-    }*/
-
-    /*private fun getHoursString(hours: List<HourInfo>): List<String> {
-        return hours.map {
-            "\n\t" + listOf(
-//                "Прогноз на: ${it.hourInLocalTime}",
-                "Прогноз на: ${it.hourInUnixTime}",
-                "Облачность: ${it.cloudness}",
-                "Погода: ${it.condition}",
-                "Давление (в мм рт. ст.): ${it.pressureInMM}",
-                "Давление (в гектопаскалях): ${it.pressureInPa}",
-                "Температура: ${it.temperature}°C",
-                "Ощущаемая температура: ${it.feelsLikeTemperature}°C",
-                "Влажность воздуха: ${it.humidityInPercents}%",
-                "Сила осадков: ${it.precipitationStrength}",
-                "Тип осадков: ${it.precipitationType}",
-                "Прогнозируемый период осадков (в минутах): ${it.precipitationInMinutes}",
-                "Прогнозируемое количество осадков (в мм): ${it.precipitationInMm}",
-                "Направление ветра: ${it.windDirection}",
-                "Скорость порывов ветра: ${it.windGust} м/c",
-                "Скорость ветра: ${it.windSpeed} м/с"
-//                "Код иконки погоды:\n${it.iconUrl}"
-            ).joinToString("\n\t\t")
-        }
-    }
-
-    @Suppress("LocalVariableName")
-    private fun getPartsString(parts: Parts): List<String> {
-        return parts.let {
-            val separator = "\n\t\t"
-
-            val _12HoursDayStr =
-                separator + getDayShortString(
-                    it._12HoursDayForecast
-                ).joinToString(separator)
-
-            val _12HoursNightString =
-                separator + getDayShortString(
-                    it._12HoursNightForecast
-                ).joinToString(separator)
-
-            val morningForecast =
-                separator + getDayTimeString(
-                    it.morningForecast
-                ).joinToString(separator)
-
-            val dayForecast =
-                separator + getDayTimeString(
-                    it.dayForecast
-                ).joinToString(separator)
-
-            val eveningForecast =
-                separator + getDayTimeString(
-                    it.eveningForecast
-                ).joinToString(separator)
-
-            val nightForecast =
-                separator + getDayTimeString(
-                    it.nightForecast
-                ).joinToString(separator)
-
-            listOf(
-                "\n\t12-часовой прогноз на день текущих суток:$_12HoursDayStr",
-                "\n\t12-часовой прогноз на ночь текущих суток:$_12HoursNightString",
-
-                "\n\tПрогноз на утро:$morningForecast",
-                "\n\tПрогноз на день:$dayForecast",
-                "\n\tПрогноз на вечер:$eveningForecast",
-                "\n\tПрогноз на ночь:$nightForecast"
-            )
-        }
-    }
-
-    private fun getDayTimeString(dayTimeForecast: DayTime): List<String> {
-        return dayTimeForecast.let {
-            listOf(
-                "Облачность: ${it.cloudness}",
-                "Погода: ${it.condition}",
-                "Время суток: ${it.daytime}",
-                "Температура: ${it.temperatureMinimum}°C",
-                "Температура: ${it.temperatureAverage}°C",
-                "Температура: ${it.temperatureMaximum}°C",
-                "Ощущаемая температура: ${it.feelsLikeTemperature}°C",
-                "Влажность воздуха: ${it.humidityInPercents}%",
-                "Сила осадков: ${it.precipitationStrength}",
-                "Тип осадков: ${it.precipitationType}",
-                "Прогнозируемый период осадков (в минутах): ${it.precipitationInMinutes}",
-                "Прогнозируемое количество осадков (в мм): ${it.precipitationInMm}",
-                "Направление ветра: ${it.windDirection}",
-                "Скорость порывов ветра: ${it.windGust} м/c",
-                "Скорость ветра: ${it.windSpeed} м/с",
-                "Давление (мм рт. ст.): ${it.precipitationInMm}",
-                "Давление (в гектопаскалях): ${it.pressureInPa}",
-                "Бывает ли полярная ночь/день: ${it.polar}"
-//                "Код иконки погоды:\n${it.iconUrl}"
-            )
-        }
-    }
-
-    private fun getDayShortString(_12HoursForecast: DayShort): List<String> {
-        return _12HoursForecast.let {
-            listOf(
-                "Облачность: ${it.cloudness}",
-                "Погода: ${it.condition}",
-                "Давление (в мм рт. ст.): ${it.pressureInMM}",
-                "Давление (в гектопаскалях): ${it.pressureInPa}",
-                "Температура: ${it.temperature}°C",
-                "Ощущаемая температура: ${it.feelsLikeTemperature}°C",
-                "Влажность воздуха: ${it.humidityInPercents}%",
-                "Сила осадков: ${it.precipitationStrength}",
-                "Тип осадков: ${it.precipitationType}",
-                "Направление ветра: ${it.windDirection}",
-                "Скорость порывов ветра: ${it.windGust} м/c",
-                "Скорость ветра: ${it.windSpeed} м/с"
-//                "Код иконки погоды: ${it.iconUrl}"
-            )
-        }
-    }*/
 }
