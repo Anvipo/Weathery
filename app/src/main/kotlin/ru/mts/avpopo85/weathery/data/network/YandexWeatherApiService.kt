@@ -27,7 +27,7 @@ interface YandexWeatherApiService {
     ): Single<WeatherResponse>
 
     companion object {
-        const val BASE_URL = "http://api.weather.yandex.ru/v1/"
-        const val API_KEY = "c927ab88-f126-4d38-bebb-8857c4520861"
+        const val BASE_URL: String = "http://api.weather.yandex.ru/v1/"
+        const val API_KEY: String = "c927ab88-f126-4d38-bebb-8857c4520861"
     }
 }

@@ -17,7 +17,7 @@ fun Int.toDate(): String {
     return simpleDateFormat.format(date)
 }
 
-fun Context.makeTitle(forecast: Forecast) =
+fun Context.makeTitle(forecast: Forecast): String =
     "${forecast.date_ts} (${forecast.weekSerialNumber} ${getString(R.string.week)})"
 
 fun Double.roundIfNeeded(): String {
@@ -31,9 +31,7 @@ fun Double.roundIfNeeded(): String {
         "$this"
 }
 
-fun Context.makeErrorText(it: Throwable): String {
-    return if (it is UnknownHostException)
-        "${getString(R.string.error)}.${getString(R.string.there_may_be_a_problem_with_the_Internet_connection)}."
-    else
-        it.message ?: getString(R.string.unknown_error)
-}
+fun Context.makeErrorText(it: Throwable): String = if (it is UnknownHostException)
+    "${getString(R.string.error)}.${getString(R.string.there_may_be_a_problem_with_the_Internet_connection)}."
+else
+    it.message ?: getString(R.string.unknown_error)

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cv_SCV"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="20dp"
@@ -9,7 +8,6 @@
     app:cardUseCompatPadding="true">
 
     <LinearLayout
-        android:id="@+id/itemYandexHourForecastLL"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -20,7 +18,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/hourInLocalTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -41,7 +38,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/hourTemperatureLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
@@ -56,7 +52,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourTemperatureTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -84,7 +79,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/feelsLikeHourTemperatureTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -112,7 +106,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/hourConditionTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/condition"
@@ -131,7 +124,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/hourWindLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
@@ -146,7 +138,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourWindSpeedTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -173,7 +164,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourWindGustsSpeedTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -201,7 +191,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourWindDirectionTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -223,7 +212,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/hourPressureLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
@@ -238,7 +226,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/atmospherePressureInMmHgTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -266,7 +253,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourPressureInPaTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -294,7 +280,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/hourHumidityInPercentsTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/humidity"
@@ -313,7 +298,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/hourPrecipitationLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
@@ -327,7 +311,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourPrecipitationTypeTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -355,7 +338,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourPrecipitationStrengthTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -377,7 +359,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/hourPrecipitationValuesLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
@@ -392,7 +373,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourPrecipitationInMmTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -421,7 +401,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/hourPrecipitationInMinutesTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -448,7 +427,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/hourCloudinessTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/cloudiness"

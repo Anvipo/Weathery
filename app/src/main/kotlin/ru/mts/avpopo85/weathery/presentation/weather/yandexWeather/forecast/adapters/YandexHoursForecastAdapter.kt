@@ -29,7 +29,7 @@ class YandexHoursForecastAdapter(private val items: List<HourInfo>) :
         holder.bind(items[position])
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount(): Int = items.size
 
     class Yandex12HoursForecastViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         @SuppressLint("SetTextI18n")

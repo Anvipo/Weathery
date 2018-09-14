@@ -29,7 +29,7 @@ class YandexTimesOfDayForecastAdapter(private val items: List<DayTime>) :
         holder.bind(items[position])
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount(): Int = items.size
 
     class YandexTimeOfDayForecastViewHolder(private val view: View) :
         RecyclerView.ViewHolder(view) {

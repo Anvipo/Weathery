@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 @Module
 class SchedulerManagerModule {
     @Provides
-    fun provideSchedulerMangerModule() = SchedulerManagerModule()
+    fun provideSchedulerMangerModule(): SchedulerManagerModule = SchedulerManagerModule()
 
     fun <T> observableTransformer(): ObservableTransformer<T, T> =
         ObservableTransformer { observable ->

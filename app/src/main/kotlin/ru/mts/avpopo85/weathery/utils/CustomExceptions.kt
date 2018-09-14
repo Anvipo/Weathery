@@ -1,7 +1,7 @@
 package ru.mts.avpopo85.weathery.utils
 
 sealed class MyParsingException(cause: String) : Throwable() {
-    override val message = cause
+    override val message: String = cause
 
     class SeasonParsingException(cause: String) : MyParsingException(cause)
     class PrecipitationTypeParsingException(cause: String) : MyParsingException(cause)
