@@ -13,10 +13,10 @@ class YandexForecastPresenter(
 ) : ForecastContract.ForecastPresenter {
     private var view: ForecastContract.ForecastView? = null
 
-    private lateinit var disposableWork: Disposable
+    private lateinit var disposable: Disposable
 
     override fun loadData() {
-        disposableWork = yandexCurrentWeatherInteractor.getForecast()
+        disposable = yandexCurrentWeatherInteractor.getForecast()
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe {
                 view?.showLoadingProgress()
@@ -45,8 +45,10 @@ class YandexForecastPresenter(
     }
 
     override fun onUnbindView() {
-        this.view = null
-        this.disposableWork.dispose()
+        view = null
+        if (!disposable.isDisposed)
+            disposable.dispose()
+
     }
 }
 

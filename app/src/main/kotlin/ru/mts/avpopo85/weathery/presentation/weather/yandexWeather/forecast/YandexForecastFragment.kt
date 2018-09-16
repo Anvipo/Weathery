@@ -30,7 +30,7 @@ class YandexForecastFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.takeIf { it.containsKey(ARG_FORECAST) }?.apply {
-            val forecast = getParcelable<Forecast>(ARG_FORECAST)
+            val forecast = getParcelable<Forecast>(ARG_FORECAST) ?: return
 
             fillFields(forecast)
 

@@ -7,12 +7,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 27
 
     defaultConfig {
         applicationId "ru.mts.avpopo85.weathery"
         minSdkVersion 19
-        targetSdkVersion 28
+        //noinspection OldTargetApi
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -39,44 +40,60 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation "com.android.support:support-vector-drawable:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+
+    def supportLibraryVersion = '27.1.1'
+
+    implementation "com.android.support:support-vector-drawable:$supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$supportLibraryVersion"
+    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation "com.android.support:design:$supportLibraryVersion"
+    implementation "com.android.support:support-v4:$supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$supportLibraryVersion"
 
     //moxy
-    //    implementation "com.arello-mobile:moxy:$rootProject.moxyVersion"
-    //    kapt "com.arello-mobile:moxy-compiler:$rootProject.moxyVersion"
-    //    implementation "com.arello-mobile:moxy-android:$rootProject.moxyVersion"
-    //    implementation "com.arello-mobile:moxy-app-compat:$rootProject.moxyVersion"
+//    def moxyVersion = '1.5.5'
+//
+//    implementation "com.arello-mobile:moxy:$moxyVersion"
+//    kapt "com.arello-mobile:moxy-compiler:$moxyVersion"
+//    implementation "com.arello-mobile:moxy-android:$moxyVersion"
+//    implementation "com.arello-mobile:moxy-app-compat:$moxyVersion"
 
     //retrofit2
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    def retrofitVersion = "2.4.0"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     //Dagger 2
-    implementation "com.google.dagger:dagger:$rootProject.dagger2Version"
-    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+    def dagger2Version = '2.17'
+
+    implementation "com.google.dagger:dagger:$dagger2Version"
+    kapt "com.google.dagger:dagger-compiler:$dagger2Version"
     compileOnly 'org.glassfish:javax.annotation:3.1.1'
 
     //Dagger android
-    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
-    implementation "com.google.dagger:dagger-android:$rootProject.dagger2Version"
-    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger2Version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger2Version"
+    implementation "com.google.dagger:dagger-android:$dagger2Version"
+    implementation "com.google.dagger:dagger-android-support:$dagger2Version"
 
     //RxJava2
-    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava2Version"
-    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxjava2AndroidVersion"
+    def rxjava2Version = '2.2.1'
+
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava2Version"
+
+    def rxjava2AndroidVersion = '2.1.0'
+
+    implementation "io.reactivex.rxjava2:rxandroid:$rxjava2AndroidVersion"
 
     //Data binding
     //    kapt "com.android.databinding:compiler:3.1.4"
 
     //Anko
-    implementation "org.jetbrains.anko:anko:$rootProject.ankoVersion"
-    implementation "org.jetbrains.anko:anko-commons:$rootProject.ankoVersion"
+    def ankoVersion = '0.10.5'
+
+    implementation "org.jetbrains.anko:anko:$ankoVersion"
+    implementation "org.jetbrains.anko:anko-commons:$ankoVersion"
 }
 
 androidExtensions {

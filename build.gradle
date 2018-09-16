@@ -25,14 +25,3 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-ext{
-    //app dependencies
-    retrofitVersion = '2.4.0'
-    dagger2Version = '2.17'
-    rxjava2Version = '2.2.1'
-    rxjava2AndroidVersion = '2.1.0'
-    moxyVersion = '1.5.5'
-    supportLibraryVersion = '28.0.0-rc02'
-    ankoVersion = '0.10.5'
-}

@@ -7,7 +7,15 @@ import ru.mts.avpopo85.weathery.domain.global.repositories.WeatherRepository
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class, DataModule::class, SchedulerManagerModule::class])
+@Component(
+    modules = [
+        AppModule::class,
+        DataModule::class,
+        RetrofitModule::class,
+        NetworkModule::class,
+        SchedulerManagerModule::class
+    ]
+)
 interface AppComponent {
     fun provideYandexWeatherRepository(): WeatherRepository
 

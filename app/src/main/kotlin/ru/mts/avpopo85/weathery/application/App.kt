@@ -14,7 +14,8 @@ class App : Application() {
     private fun initDagger() {
         appComponentForYandexWeather = DaggerAppComponent.builder()
             .appModule(AppModule(this))
-            .dataModule(DataModule(BASE_URL))
+            .dataModule(DataModule())
+            .retrofitModule(RetrofitModule(BASE_URL))
             .schedulerManagerModule(SchedulerManagerModule())
             .build()
     }
