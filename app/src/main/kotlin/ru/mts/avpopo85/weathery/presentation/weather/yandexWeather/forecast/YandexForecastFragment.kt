@@ -9,11 +9,11 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.main.item_yandex_forecast.yandex_hours_forecast_recycler_view
+import kotlinx.android.synthetic.main.item_yandex_forecast.*
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain.Forecast
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain.HourInfo
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain.Parts
+import ru.mts.avpopo85.weathery.domain.models.Forecast
+import ru.mts.avpopo85.weathery.domain.models.HourInfo
+import ru.mts.avpopo85.weathery.domain.models.Parts
 import ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast.adapters.YandexHoursForecastAdapter
 import ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast.adapters.YandexTimesOfDayForecastAdapter
 import ru.mts.avpopo85.weathery.utils.ARG_FORECAST

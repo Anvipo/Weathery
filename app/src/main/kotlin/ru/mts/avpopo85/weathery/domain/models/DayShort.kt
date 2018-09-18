@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain
+package ru.mts.avpopo85.weathery.domain.models
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -6,6 +6,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 /**Object with a 12-hour forecast for the day.*/
 data class DayShort(
+
     val title: String,
 
     /**Highest daytime or lowest nighttime temperature (°C).*/
@@ -46,4 +47,5 @@ data class DayShort(
 
     /**Cloud cover.*/
     val cloudiness: String
+
 ) : Parcelable

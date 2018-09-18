@@ -1,10 +1,11 @@
-package ru.mts.avpopo85.weathery.models.weather.yandexWeather.data
+package ru.mts.avpopo85.weathery.data.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 /**Forecasts by time of day and 12-hour forecasts.*/
 data class PartsResponse(
+
     /**Nighttime forecast.*/
     @SerializedName("night")
     @Expose
@@ -34,4 +35,5 @@ data class PartsResponse(
     @SerializedName("night_short")
     @Expose
     val _12HoursNightForecastResponse: DayShortResponse
+
 )

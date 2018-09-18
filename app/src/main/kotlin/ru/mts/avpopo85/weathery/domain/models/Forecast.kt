@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain
+package ru.mts.avpopo85.weathery.domain.models
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -7,6 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 /**This object contains weather forecast data.*/
 data class Forecast(
+
     /**Date of the forecast, in the format YYYY-MM-DD.*/
     val date: String,
 
@@ -33,4 +34,5 @@ data class Forecast(
 
     /**Object for the hourly forecast*/
     val hours: List<HourInfo>?
+
 ) : Parcelable

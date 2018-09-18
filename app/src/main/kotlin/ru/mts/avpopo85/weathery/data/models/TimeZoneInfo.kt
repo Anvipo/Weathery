@@ -1,10 +1,11 @@
-package ru.mts.avpopo85.weathery.models.weather.yandexWeather.data
+package ru.mts.avpopo85.weathery.data.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 /**Information about the time zone.*/
 data class TimeZoneInfo(
+
     /**Time zone in seconds from UTC.*/
     @SerializedName("offset")
     @Expose
@@ -24,4 +25,5 @@ data class TimeZoneInfo(
     @SerializedName("dst")
     @Expose
     val withSummerTime: Boolean
+
 )

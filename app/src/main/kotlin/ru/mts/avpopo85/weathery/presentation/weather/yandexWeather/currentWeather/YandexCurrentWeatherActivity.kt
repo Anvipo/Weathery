@@ -1,48 +1,38 @@
 package ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.currentWeather
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.view.View
-import kotlinx.android.synthetic.main.activity_yandex_current_weather.yandex_current_weather_PB
+import android.widget.ProgressBar
+import kotlinx.android.synthetic.main.activity_yandex_current_weather.*
 import kotlinx.android.synthetic.main.item_yandex_current_weather.*
-import org.jetbrains.anko.longToast
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.weather.yandexWeather.YandexWeatherModule
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain.CurrentWeather
+import ru.mts.avpopo85.weathery.domain.models.CurrentWeather
+import ru.mts.avpopo85.weathery.presentation.weather.WeatherActivity
 import ru.mts.avpopo85.weathery.utils.CELSIUS_DEGREE
 import javax.inject.Inject
 
-class YandexCurrentWeatherActivity : AppCompatActivity(),
-    CurrentWeatherContract.CurrentWeatherView {
-    override val context: Context = this
+class YandexCurrentWeatherActivity : WeatherActivity(), CurrentWeatherContract.View {
+
+    override val progressBar: ProgressBar by lazy { yandex_current_weather_PB }
 
     @Inject
-    lateinit var yandexCurrentWeatherPresenter: YandexCurrentWeatherPresenter
+    lateinit var presenter: CurrentWeatherContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_yandex_current_weather)
 
         App.appComponentForYandexWeather.plus(YandexWeatherModule()).inject(this)
-        yandexCurrentWeatherPresenter.onBindView(this)
 
-        yandexCurrentWeatherPresenter.onStart()
+        presenter.onBindView(this)
+        presenter.onStart()
     }
 
     override fun onDestroy() {
-        yandexCurrentWeatherPresenter.onUnbindView()
+        presenter.onUnbindView()
         super.onDestroy()
-    }
-
-    override fun showLoadingProgress() {
-        yandex_current_weather_PB.visibility = View.VISIBLE
-    }
-
-    override fun hideLoadingProgress() {
-        yandex_current_weather_PB.visibility = View.GONE
     }
 
     @SuppressLint("SetTextI18n")
@@ -70,12 +60,4 @@ class YandexCurrentWeatherActivity : AppCompatActivity(),
         }
     }
 
-    override fun showError(throwable: Throwable) {
-        longToast(throwable.message ?: "")
-    }
-
-    override fun showError(message: String?) {
-        if (message != null)
-            longToast(message)
-    }
 }

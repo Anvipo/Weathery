@@ -1,14 +1,17 @@
 package ru.mts.avpopo85.weathery.domain.weather.yandexWeather.currentWeather
 
 import android.content.Context
+import ru.mts.avpopo85.weathery.data.models.CurrentWeatherResponse
+import ru.mts.avpopo85.weathery.domain.models.CurrentWeather
 import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.*
 import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.YandexWeatherMapper.getWaterTemperatureString
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.data.CurrentWeatherResponse
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain.CurrentWeather
 import ru.mts.avpopo85.weathery.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.utils.toDate
+import javax.inject.Inject
 
-class YandexCurrentWeatherMapper(private val context: Context) {
+class YandexCurrentWeatherMapper
+@Inject constructor(private val context: Context) {
+
     fun mapCurrentWeatherResponse(currentWeatherResponse: CurrentWeatherResponse): CurrentWeather =
         CurrentWeather(
             cloudiness = context.getCloudinessString(currentWeatherResponse.cloudiness),
@@ -30,6 +33,7 @@ class YandexCurrentWeatherMapper(private val context: Context) {
             windGustsSpeed = currentWeatherResponse.windGustsSpeed.roundIfNeeded(),
             windSpeed = currentWeatherResponse.windSpeed.roundIfNeeded()
         )
+
 }
 
 

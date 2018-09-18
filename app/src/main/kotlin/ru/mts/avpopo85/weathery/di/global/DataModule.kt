@@ -9,10 +9,12 @@ import javax.inject.Singleton
 
 @Module
 class DataModule {
+
     @Provides
     @Singleton
     fun provideGson(): Gson = GsonBuilder()
         .setLenient()
         .setPrettyPrinting()
         .create()
+
 }

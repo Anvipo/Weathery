@@ -101,6 +101,8 @@ fun Context.getPolarString(polar: Boolean): String =
     if (polar) getString(R.string.yes) else getString(R.string.no)
 
 object YandexWeatherMapper {
+
     fun getWaterTemperatureString(waterTemperature: Double): String =
         if (waterTemperature != 0.0) "${waterTemperature.roundIfNeeded()}°C" else ""
+
 }

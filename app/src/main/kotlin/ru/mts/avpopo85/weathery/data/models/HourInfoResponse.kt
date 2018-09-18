@@ -1,34 +1,36 @@
-package ru.mts.avpopo85.weathery.models.weather.yandexWeather.data
+package ru.mts.avpopo85.weathery.data.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-/**This object contains information about the current weather.*/
-data class CurrentWeatherResponse(
-    /**Temperature (°С).*/
+/**Object for the hourly forecast. Contains 24 parts.*/
+data class HourInfoResponse(
+
+    /**The hour the forecast is for (0-23) using the local time.*/
+    @SerializedName("hour")
+    @Expose
+    val hourInLocalTime: String,
+
+    /**The time of the forecast in Unix time.*/
+    @SerializedName("hour_ts")
+    @Expose
+    val hourInUnixTime: Int,
+
+    /**Temperature (°C).*/
     @SerializedName("temp")
     @Expose
     val temperature: Double,
 
-    /**What the temperature feels like (°С).*/
+    /**What the temperature feels like (°C).*/
     @SerializedName("feels_like")
     @Expose
     val feelsLikeTemperature: Double,
 
-    /**
-     * The water temperature (°С).
-     *
-     * This parameter is returned for localities where this information is relevant.
-     */
-    @SerializedName("temp_water")
-    @Expose
-    val waterTemperature: Double,
-
     /**The code of the weather icon.
      *
      * The icon is available at
-     * https://yastatic/weather/i/icons/blueye/color/svg/<value from the icon field>.svg.
-     */
+     * https://yastatic.net/weather/i/icons/blueye/color/svg/<value from the icon field>.svg.
+     * */
     @SerializedName("icon")
     @Expose
     val iconId: String,
@@ -36,7 +38,7 @@ data class CurrentWeatherResponse(
     /**The code for the weather description.*/
     @SerializedName("condition")
     @Expose
-    val weatherDescription: String,
+    val condition: String,
 
     /**Wind speed (meters per second).*/
     @SerializedName("wind_speed")
@@ -68,25 +70,15 @@ data class CurrentWeatherResponse(
     @Expose
     val humidity: Double,
 
-    /**Light or dark time of the day.*/
-    @SerializedName("daytime")
+    /**Predicted amount of precipitation (mm).*/
+    @SerializedName("prec_mm")
     @Expose
-    val daytime: String,
+    val precipitationInMm: Double,
 
-    /**Polar day or polar night.*/
-    @SerializedName("polar")
+    /**Predicted duration of precipitation (minutes).*/
+    @SerializedName("prec_period")
     @Expose
-    val polar: Boolean,
-
-    /**Time of year in this locality.*/
-    @SerializedName("season")
-    @Expose
-    val season: String,
-
-    /**The time when weather data was measured, in Unix time.*/
-    @SerializedName("obs_time")
-    @Expose
-    val observationUnixTime: Int,
+    val precipitationInMinutes: Double,
 
     /**Type of precipitation.*/
     @SerializedName("prec_type")
@@ -102,4 +94,5 @@ data class CurrentWeatherResponse(
     @SerializedName("cloudness")
     @Expose
     val cloudiness: Double
+
 )

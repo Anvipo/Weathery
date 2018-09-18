@@ -1,13 +1,16 @@
 package ru.mts.avpopo85.weathery.domain.weather.yandexWeather.forecast
 
 import android.content.Context
+import ru.mts.avpopo85.weathery.data.models.*
+import ru.mts.avpopo85.weathery.domain.models.*
 import ru.mts.avpopo85.weathery.domain.weather.yandexWeather.*
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.data.*
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain.*
 import ru.mts.avpopo85.weathery.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.utils.toDate
+import javax.inject.Inject
 
-class YandexForecastMapper(private val context: Context) {
+class YandexForecastMapper
+@Inject constructor(private val context: Context) {
+
     fun mapForecast(forecastResponse: List<ForecastResponse>): List<Forecast> =
         forecastResponse.map {
             Forecast(
@@ -54,12 +57,10 @@ class YandexForecastMapper(private val context: Context) {
                 dayForecast = mapDayTime("Прогноз на день", it.dayForecastResponse),
                 eveningForecast = mapDayTime("Прогноз на вечер", it.eveningForecastResponse),
                 _12HoursDayForecast = map12HoursForecast(
-                    "12 часовой прогноз на день",
-                    it._12HoursDayForecastResponse
+                    "12 часовой прогноз на день", it._12HoursDayForecastResponse
                 ),
                 _12HoursNightForecast = map12HoursForecast(
-                    "12 часовой прогноз на ночь",
-                    it._12HoursNightForecastResponse
+                    "12 часовой прогноз на ночь", it._12HoursNightForecastResponse
                 )
             )
         }
@@ -109,4 +110,5 @@ class YandexForecastMapper(private val context: Context) {
                 cloudiness = context.getCloudinessString(it.cloudiness)
             )
         }
+
 }

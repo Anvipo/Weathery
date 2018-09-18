@@ -1,9 +1,10 @@
-package ru.mts.avpopo85.weathery.models.weather.yandexWeather.data
+package ru.mts.avpopo85.weathery.data.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class WeatherResponse(
+
     /**The time on the server in Unix time.*/
     @SerializedName("now")
     @Expose
@@ -28,4 +29,5 @@ data class WeatherResponse(
     @SerializedName("forecasts")
     @Expose
     val forecasts: List<ForecastResponse>
+
 )

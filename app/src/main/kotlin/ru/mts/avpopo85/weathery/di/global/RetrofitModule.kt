@@ -11,6 +11,7 @@ import javax.inject.Singleton
 
 @Module
 class RetrofitModule(private val baseUrl: String) {
+
     @Provides
     @Singleton
     fun provideRetrofit(gson: Gson): Retrofit {
@@ -25,4 +26,5 @@ class RetrofitModule(private val baseUrl: String) {
     @Singleton
     fun provideApi(retrofit: Retrofit): YandexWeatherApiService =
         retrofit.create(YandexWeatherApiService::class.java)
+
 }

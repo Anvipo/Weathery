@@ -12,6 +12,7 @@ import io.reactivex.schedulers.Schedulers
 @Suppress("unused")
 @Module
 class SchedulerManagerModule {
+
     @Provides
     fun provideSchedulerMangerModule(): SchedulerManagerModule = SchedulerManagerModule()
 
@@ -39,4 +40,5 @@ class SchedulerManagerModule {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
+
 }

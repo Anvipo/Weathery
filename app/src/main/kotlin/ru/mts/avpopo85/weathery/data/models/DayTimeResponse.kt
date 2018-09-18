@@ -1,24 +1,25 @@
-package ru.mts.avpopo85.weathery.models.weather.yandexWeather.data
+package ru.mts.avpopo85.weathery.data.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-/**Object for the hourly forecast. Contains 24 parts.*/
-data class HourInfoResponse(
-    /**The hour the forecast is for (0-23) using the local time.*/
-    @SerializedName("hour")
-    @Expose
-    val hourInLocalTime: String,
+/**Object with the weather forecast for the time of the day*/
+data class DayTimeResponse(
 
-    /**The time of the forecast in Unix time.*/
-    @SerializedName("hour_ts")
+    /**Minimum temperature for the time of day (°C).*/
+    @SerializedName("temp_min")
     @Expose
-    val hourInUnixTime: Int,
+    val temperatureMinimum: Double,
 
-    /**Temperature (°C).*/
-    @SerializedName("temp")
+    /**Maximum temperature for the time of day (°C).*/
+    @SerializedName("temp_max")
     @Expose
-    val temperature: Double,
+    val temperatureMaximum: Double,
+
+    /**Average temperature for the time of day (°C).*/
+    @SerializedName("temp_avg")
+    @Expose
+    val temperatureAverage: Double,
 
     /**What the temperature feels like (°C).*/
     @SerializedName("feels_like")
@@ -29,7 +30,7 @@ data class HourInfoResponse(
      *
      * The icon is available at
      * https://yastatic.net/weather/i/icons/blueye/color/svg/<value from the icon field>.svg.
-     * */
+     */
     @SerializedName("icon")
     @Expose
     val iconId: String,
@@ -38,6 +39,16 @@ data class HourInfoResponse(
     @SerializedName("condition")
     @Expose
     val condition: String,
+
+    /**Light or dark time of the day.*/
+    @SerializedName("daytime")
+    @Expose
+    val daytime: String,
+
+    /**Polar day or polar night.*/
+    @SerializedName("polar")
+    @Expose
+    val polar: Boolean,
 
     /**Wind speed (meters per second).*/
     @SerializedName("wind_speed")
@@ -93,4 +104,5 @@ data class HourInfoResponse(
     @SerializedName("cloudness")
     @Expose
     val cloudiness: Double
+
 )

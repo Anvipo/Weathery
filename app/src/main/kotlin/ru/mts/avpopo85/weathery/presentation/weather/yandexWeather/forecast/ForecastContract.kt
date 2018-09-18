@@ -1,15 +1,16 @@
 package ru.mts.avpopo85.weathery.presentation.weather.yandexWeather.forecast
 
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain.Forecast
-import ru.mts.avpopo85.weathery.presentation.base.BaseContract
+import ru.mts.avpopo85.weathery.domain.models.Forecast
 import ru.mts.avpopo85.weathery.presentation.weather.WeatherContract
 
 interface ForecastContract : WeatherContract {
-    interface ForecastView : WeatherContract.WeatherView {
+
+    interface View : WeatherContract.View {
+
         fun showWeatherResponse(data: List<Forecast>)
+
     }
 
-    interface ForecastPresenter : BaseContract.Presenter<ForecastContract.ForecastView> {
-        fun loadData()
-    }
+    interface Presenter : WeatherContract.Presenter<View>
+
 }

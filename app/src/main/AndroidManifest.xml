@@ -23,7 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.settings.SettingsActivity" />
         <activity android:name=".presentation.weather.yandexWeather.currentWeather.YandexCurrentWeatherActivity" />
         <activity android:name=".presentation.weather.yandexWeather.forecast.YandexForecastActivity" />
     </application>

@@ -1,28 +1,26 @@
-package ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain
+package ru.mts.avpopo85.weathery.domain.models
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+/**This object contains information about the current weather.*/
+data class CurrentWeather(
 
-@Parcelize
-/**Object for the hourly forecast. Contains 24 parts.*/
-data class HourInfo(
-    /**The hour the forecast is for (0-23) using the local time.*/
-    val hourInLocalTime: String,
-
-    /**The time of the forecast in Unix time.*/
-    val hourInUnixTime: String,
-
-    /**Temperature (°C).*/
+    /**Temperature (°С).*/
     val temperature: String,
 
-    /**What the temperature feels like (°C).*/
+    /**What the temperature feels like (°С).*/
     val feelsLikeTemperature: String,
+
+    /**
+     * The water temperature (°С).
+     *
+     * This parameter is returned for localities where this information is relevant.
+     */
+    val waterTemperature: String,
 
     /**The url of the weather icon.*/
     val iconUrl: String,
 
     /**Weather description.*/
-    val condition: String,
+    val weatherDescription: String,
 
     /**Wind speed (meters per second).*/
     val windSpeed: String,
@@ -42,11 +40,17 @@ data class HourInfo(
     /**Humidity (percent).*/
     val humidity: String,
 
-    /**Predicted amount of precipitation (mm).*/
-    val precipitationInMm: String,
+    /**Light or dark time of the day.*/
+    val daytime: String,
 
-    /**Predicted duration of precipitation (minutes).*/
-    val precipitationInMinutes: String,
+    /**Polar day or polar night.*/
+    val polar: String,
+
+    /**Time of year in this locality.*/
+    val season: String,
+
+    /**The time when weather data was measured, in Unix time.*/
+    val observationUnixTime: String,
 
     /**Type of precipitation.*/
     val precipitationType: String,
@@ -56,4 +60,5 @@ data class HourInfo(
 
     /**Cloud cover.*/
     val cloudiness: String
-) : Parcelable
+
+)

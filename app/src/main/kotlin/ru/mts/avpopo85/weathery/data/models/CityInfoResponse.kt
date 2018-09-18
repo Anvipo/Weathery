@@ -1,10 +1,11 @@
-package ru.mts.avpopo85.weathery.models.weather.yandexWeather.data
+package ru.mts.avpopo85.weathery.data.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 /**This object contains information about the locality.*/
 data class CityInfoResponse(
+
     /**The latitude (in degrees).*/
     @SerializedName("lat")
     @Expose
@@ -34,4 +35,5 @@ data class CityInfoResponse(
     @SerializedName("url")
     @Expose
     val localityUrlPath: String
+
 )

@@ -51,8 +51,6 @@
     <string name="growing_moon">растущая Луна</string>
     <string name="yes">да</string>
     <string name="no">нет</string>
-    <string name="locate">Определить местоположение</string>
-    <string name="settings">Настройки</string>
     <string name="forecast">Прогноз на неделю</string>
     <string name="current_weather">Текущая погода</string>
     <string name="observation_time">Время сбора прогноза</string>
@@ -110,5 +108,4 @@
     <string name="average_temperature_value">Значение средней температуры</string>
     <string name="maximum_temperature">Максимальная температура</string>
     <string name="maximum_temperature_value">Значение максимальной температуры</string>
-    <string name="city_id">ID города</string>
 </resources>

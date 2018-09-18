@@ -2,11 +2,10 @@ package ru.mts.avpopo85.weathery.utils
 
 import android.content.Context
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.models.weather.yandexWeather.domain.Forecast
+import ru.mts.avpopo85.weathery.domain.models.Forecast
 import java.net.UnknownHostException
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 
 fun Int.toDate(): String {
