@@ -1,9 +1,6 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.implementation
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
 import android.widget.ProgressBar
 import kotlinx.android.synthetic.main.activity_yandex_forecast.yandex_forecast_PB
@@ -14,10 +11,10 @@ import ru.mts.avpopo85.weathery.presentation.utils.ARG_FORECAST
 import ru.mts.avpopo85.weathery.presentation.utils.makeTitle
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.base.ForecastActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.base.ForecastContract
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.implementation.adapters.ForecastActivityPagerAdapter
 import ru.mts.avpopo85.weathery.utils.ForecastListType
 import ru.mts.avpopo85.weathery.utils.ForecastType
 import javax.inject.Inject
-
 
 class YWForecastActivity : ForecastActivity(),
     ForecastContract.View {
@@ -27,9 +24,7 @@ class YWForecastActivity : ForecastActivity(),
 
     override val progressBar: ProgressBar by lazy { yandex_forecast_PB }
 
-    private lateinit var pager: ViewPager
-
-    private lateinit var pagerAdapter: ScreenSlidePagerAdapter
+    private lateinit var pagerAdapter: ForecastActivityPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,26 +63,9 @@ class YWForecastActivity : ForecastActivity(),
     }
 
     private fun initPager() {
-        pager = findViewById(R.id.pager)
-        pagerAdapter = ScreenSlidePagerAdapter(supportFragmentManager)
+        val pager = findViewById<ViewPager>(R.id.pager)
+        pagerAdapter = ForecastActivityPagerAdapter(supportFragmentManager)
         pager.adapter = pagerAdapter
-    }
-
-    private class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
-        private val items = mutableListOf<Fragment>()
-        private val tabTitles = mutableListOf<String>()
-
-        override fun getItem(position: Int): Fragment = items[position]
-
-        override fun getCount(): Int = items.size
-
-        override fun getPageTitle(position: Int): CharSequence? = tabTitles[position]
-
-        fun addFragment(fragment: Fragment, title: String) {
-            items.add(fragment)
-            tabTitles.add(title)
-            notifyDataSetChanged()
-        }
     }
 
 }
