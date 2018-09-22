@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import org.jetbrains.anko.longToast
 
+//TODO как это реализовать, чтобы прокинуть это всё к наследникам?
 abstract class BaseActivity/*<out P : BaseContract.Presenter<BaseContract.View>>*/ :
     AppCompatActivity(),
     BaseContract.View {

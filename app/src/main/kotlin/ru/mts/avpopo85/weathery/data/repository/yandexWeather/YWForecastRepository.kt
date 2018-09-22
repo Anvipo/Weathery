@@ -2,10 +2,8 @@ package ru.mts.avpopo85.weathery.data.repository.yandexWeather
 
 import io.reactivex.Single
 import ru.mts.avpopo85.weathery.data.db.base.ForecastDbService
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWForecastParameters
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWWeatherResponse
-import ru.mts.avpopo85.weathery.data.network.base.ForecastApiService
 import ru.mts.avpopo85.weathery.data.network.base.NetworkManager
+import ru.mts.avpopo85.weathery.data.network.implementation.yandexWeather.YWForecastApiService
 import ru.mts.avpopo85.weathery.data.utils.YW_FORECAST_PARAMETERS
 import ru.mts.avpopo85.weathery.domain.repository.ForecastRepository
 import ru.mts.avpopo85.weathery.utils.YWForecastResponseType
@@ -14,7 +12,7 @@ import javax.inject.Inject
 
 class YWForecastRepository
 @Inject constructor(
-    private val forecastApiService: ForecastApiService<YWWeatherResponse, YWForecastParameters>,
+    private val forecastApiService: YWForecastApiService,
     private val networkManager: NetworkManager,
     private val currentWeatherDbService: ForecastDbService<YWForecastResponseType>
 ) : ForecastRepository<YWForecastResponseType> {
@@ -26,7 +24,14 @@ class YWForecastRepository
 
         val apiCall: Single<YWForecastResponseType> =
             forecastApiService
-                .getForecast(YW_FORECAST_PARAMETERS)
+                .getForecast(
+                    YW_FORECAST_PARAMETERS.latitude,
+                    YW_FORECAST_PARAMETERS.longitude,
+                    YW_FORECAST_PARAMETERS.language,
+                    YW_FORECAST_PARAMETERS.dayNumberInForecast,
+                    YW_FORECAST_PARAMETERS.withForecastForHours,
+                    YW_FORECAST_PARAMETERS.withExtraInformation
+                )
                 .map { it.forecasts }
 
         return apiCall.flatMap { currentWeatherDbService.saveForecastResponse(it) }

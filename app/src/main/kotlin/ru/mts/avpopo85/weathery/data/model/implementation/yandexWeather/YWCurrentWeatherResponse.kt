@@ -3,6 +3,7 @@ package ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 import ru.mts.avpopo85.weathery.data.model.base.CurrentWeatherResponse
 
 /**This object contains information about the current weather.*/
@@ -39,7 +40,7 @@ open class YWCurrentWeatherResponse(
     /**The code for the weather description.*/
     @SerializedName("condition")
     @Expose
-    var weatherDescription: String,
+    var weatherDescription: String = "",
 
     /**Wind speed (meters per second).*/
     @SerializedName("wind_speed")
@@ -87,6 +88,7 @@ open class YWCurrentWeatherResponse(
     var season: String = "",
 
     /**The time when weather data was measured, in Unix time.*/
+    @PrimaryKey
     @SerializedName("obs_time")
     @Expose
     var observationUnixTime: Int = 0,

@@ -18,7 +18,7 @@ class App : Application() {
             .builder()
             .appModule(AppModule(this))
             .dataModule(DataModule())
-            .networkModule(NetworkModule())
+            .networkModule(NetworkModule(this))
             .realmModule(RealmModule(this))
             .retrofitModule(RetrofitModule(BASE_URL))
             .schedulerManagerModule(SchedulerManagerModule())

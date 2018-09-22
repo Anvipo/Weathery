@@ -6,11 +6,6 @@ import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWCurrentWeatherParameters
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWForecastParameters
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWWeatherResponse
-import ru.mts.avpopo85.weathery.data.network.base.CurrentWeatherApiService
-import ru.mts.avpopo85.weathery.data.network.base.ForecastApiService
 import ru.mts.avpopo85.weathery.data.network.implementation.yandexWeather.YWCurrentWeatherApiService
 import ru.mts.avpopo85.weathery.data.network.implementation.yandexWeather.YWForecastApiService
 import javax.inject.Singleton
@@ -30,12 +25,12 @@ class RetrofitModule(private val baseUrl: String) {
 
     @Provides
     @Singleton
-    fun provideCurrentWeatherApiService(retrofit: Retrofit): CurrentWeatherApiService<YWWeatherResponse, YWCurrentWeatherParameters> =
+    fun provideCurrentWeatherApiService(retrofit: Retrofit): YWCurrentWeatherApiService =
         retrofit.create(YWCurrentWeatherApiService::class.java)
 
     @Provides
     @Singleton
-    fun provideForecastApiService(retrofit: Retrofit): ForecastApiService<YWWeatherResponse, YWForecastParameters> =
+    fun provideForecastApiService(retrofit: Retrofit): YWForecastApiService =
         retrofit.create(YWForecastApiService::class.java)
 
 }

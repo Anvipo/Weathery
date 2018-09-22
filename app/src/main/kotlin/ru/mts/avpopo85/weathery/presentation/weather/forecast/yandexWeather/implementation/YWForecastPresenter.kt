@@ -3,7 +3,7 @@ package ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.imp
 import android.content.Context
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.ForecastInteractor
-import ru.mts.avpopo85.weathery.presentation.utils.makeErrorText
+import ru.mts.avpopo85.weathery.presentation.utils.parseError
 import ru.mts.avpopo85.weathery.presentation.weather.base.WeatherPresenter
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.base.ForecastContract
 import ru.mts.avpopo85.weathery.utils.YWForecastType
@@ -33,7 +33,7 @@ class YWForecastPresenter
                 },
                 { throwable: Throwable? ->
                     if (throwable != null) {
-                        val message = context.makeErrorText(throwable)
+                        val message = context.parseError(throwable)
 
                         view?.showError(message)
                     }

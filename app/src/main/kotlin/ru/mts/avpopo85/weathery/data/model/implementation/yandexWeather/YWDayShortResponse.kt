@@ -63,7 +63,7 @@ open class YWDayShortResponse(
     /**Type of precipitation.*/
     @SerializedName("prec_type")
     @Expose
-    var precipitationType: Int,
+    var precipitationType: Int = 0,
 
     /**Intensity of precipitation.*/
     @SerializedName("prec_strength")
