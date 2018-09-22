@@ -6,12 +6,12 @@ import ru.mts.avpopo85.weathery.domain.interactor.base.CurrentWeatherInteractor
 import ru.mts.avpopo85.weathery.presentation.utils.parseError
 import ru.mts.avpopo85.weathery.presentation.weather.base.WeatherPresenter
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherType
+import ru.mts.avpopo85.weathery.utils.CurrentWeatherType
 import javax.inject.Inject
 
 class YWCurrentWeatherPresenter
 @Inject constructor(
-    private val currentWeatherInteractor: CurrentWeatherInteractor<YWCurrentWeatherType>,
+    private val currentWeatherInteractor: CurrentWeatherInteractor<CurrentWeatherType>,
     private val schedulerManagerModule: SchedulerManagerModule,
     private val context: Context
 ) : WeatherPresenter<CurrentWeatherContract.View>(),
@@ -27,9 +27,9 @@ class YWCurrentWeatherPresenter
                 view?.hideLoadingProgress()
             }
             .subscribe(
-                { ywCurrentWeather: YWCurrentWeatherType? ->
-                    if (ywCurrentWeather != null)
-                        view?.showWeatherResponse(ywCurrentWeather)
+                { currentWeather: CurrentWeatherType? ->
+                    if (currentWeather != null)
+                        view?.showWeatherResponse(currentWeather)
                     else {
                         view?.showError("Непридвиденная ошибка в onSuccess YWCurrentWeatherPresenter")
                     }
@@ -40,7 +40,7 @@ class YWCurrentWeatherPresenter
 
                         view?.showError(message)
                     } else {
-                        view?.showError("Непридвиденная ошибка в onError YWCurrentWeatherPresenter")
+                        view?.showError("Непредвиденная ошибка в ${this::class.java.simpleName}.onError")
                     }
                 }
             )

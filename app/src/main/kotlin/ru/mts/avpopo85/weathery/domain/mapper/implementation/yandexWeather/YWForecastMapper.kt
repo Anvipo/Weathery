@@ -9,16 +9,16 @@ import ru.mts.avpopo85.weathery.domain.mapper.base.ForecastMapper
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.*
 import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.utils.toDate
-import ru.mts.avpopo85.weathery.utils.YWForecastResponseType
-import ru.mts.avpopo85.weathery.utils.YWForecastType
+import ru.mts.avpopo85.weathery.utils.ForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.ForecastListType
 import javax.inject.Inject
 
 class YWForecastMapper
 @Inject constructor(private val context: Context) :
-    ForecastMapper<YWForecastResponseType, YWForecastType> {
+    ForecastMapper<ForecastListResponseType, ForecastListType> {
 
-    override fun mapForecast(forecastResponse: YWForecastResponseType): YWForecastType =
-        forecastResponse.map {
+    override fun mapForecast(forecastListResponse: ForecastListResponseType): ForecastListType =
+        forecastListResponse.map {
             YWForecast(
                 date = it.date,
                 date_ts = it.date_ts.toDate(),

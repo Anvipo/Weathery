@@ -6,7 +6,7 @@ import ru.mts.avpopo85.weathery.data.network.base.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.implementation.yandexWeather.YWForecastApiService
 import ru.mts.avpopo85.weathery.data.utils.YW_FORECAST_PARAMETERS
 import ru.mts.avpopo85.weathery.domain.repository.ForecastRepository
-import ru.mts.avpopo85.weathery.utils.YWForecastResponseType
+import ru.mts.avpopo85.weathery.utils.ForecastListResponseType
 import javax.inject.Inject
 
 
@@ -14,15 +14,15 @@ class YWForecastRepository
 @Inject constructor(
     private val forecastApiService: YWForecastApiService,
     private val networkManager: NetworkManager,
-    private val currentWeatherDbService: ForecastDbService<YWForecastResponseType>
-) : ForecastRepository<YWForecastResponseType> {
+    private val currentWeatherDbService: ForecastDbService<ForecastListResponseType>
+) : ForecastRepository<ForecastListResponseType> {
 
-    override fun getForecast(): Single<YWForecastResponseType> {
+    override fun getForecast(): Single<ForecastListResponseType> {
         if (!networkManager.isConnectedToInternet) {
             return currentWeatherDbService.getForecastResponse(networkManager.isConnectedToInternet)
         }
 
-        val apiCall: Single<YWForecastResponseType> =
+        val apiCall: Single<ForecastListResponseType> =
             forecastApiService
                 .getForecast(
                     YW_FORECAST_PARAMETERS.latitude,

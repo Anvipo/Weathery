@@ -19,10 +19,10 @@ import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.Current
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.yandexWeather.YWCurrentWeatherPresenter
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.base.ForecastContract
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.implementation.YWForecastPresenter
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherType
-import ru.mts.avpopo85.weathery.utils.YWForecastResponseType
-import ru.mts.avpopo85.weathery.utils.YWForecastType
+import ru.mts.avpopo85.weathery.utils.CurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.CurrentWeatherType
+import ru.mts.avpopo85.weathery.utils.ForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.ForecastListType
 
 @Module
 class YandexWeatherModule {
@@ -30,12 +30,12 @@ class YandexWeatherModule {
     @Provides
     @YandexWeatherScope
     fun provideYWCurrentWeatherPresenter(
-        yandexYWCurrentWeatherInteractor: CurrentWeatherInteractor<YWCurrentWeatherType>,
+        yandexCurrentWeatherInteractor: CurrentWeatherInteractor<CurrentWeatherType>,
         schedulerManagerModule: SchedulerManagerModule,
         context: Context
     ): CurrentWeatherContract.Presenter =
         YWCurrentWeatherPresenter(
-            yandexYWCurrentWeatherInteractor,
+            yandexCurrentWeatherInteractor,
             schedulerManagerModule,
             context
         )
@@ -43,9 +43,9 @@ class YandexWeatherModule {
     @Provides
     @YandexWeatherScope
     fun provideYWCurrentWeatherInteractor(
-        currentWeatherRepository: CurrentWeatherRepository<YWCurrentWeatherResponseType>,
-        currentWeatherMapper: CurrentWeatherMapper<YWCurrentWeatherResponseType, YWCurrentWeatherType>
-    ): CurrentWeatherInteractor<YWCurrentWeatherType> =
+        currentWeatherRepository: CurrentWeatherRepository<CurrentWeatherResponseType>,
+        currentWeatherMapper: CurrentWeatherMapper<CurrentWeatherResponseType, CurrentWeatherType>
+    ): CurrentWeatherInteractor<CurrentWeatherType> =
         YWCurrentWeatherInteractor(
             currentWeatherRepository,
             currentWeatherMapper
@@ -54,18 +54,18 @@ class YandexWeatherModule {
     @Provides
     @YandexWeatherScope
     fun provideYWCurrentWeatherMapper(context: Context):
-            CurrentWeatherMapper<YWCurrentWeatherResponseType, YWCurrentWeatherType> =
+            CurrentWeatherMapper<CurrentWeatherResponseType, CurrentWeatherType> =
         YWCurrentWeatherMapper(context)
 
     @Provides
     @YandexWeatherScope
     fun provideYWForecastPresenter(
-        forecastInteractor: ForecastInteractor<YWForecastType>,
+        forecastListInteractor: ForecastInteractor<ForecastListType>,
         schedulerManagerModule: SchedulerManagerModule,
         context: Context
     ): ForecastContract.Presenter =
         YWForecastPresenter(
-            forecastInteractor,
+            forecastListInteractor,
             schedulerManagerModule,
             context
         )
@@ -73,17 +73,17 @@ class YandexWeatherModule {
     @Provides
     @YandexWeatherScope
     fun provideYWForecastInteractor(
-        forecastRepository: ForecastRepository<YWForecastResponseType>,
-        forecastMapper: ForecastMapper<YWForecastResponseType, YWForecastType>
-    ): ForecastInteractor<YWForecastType> =
+        forecastListRepository: ForecastRepository<ForecastListResponseType>,
+        forecastListListMapper: ForecastMapper<ForecastListResponseType, ForecastListType>
+    ): ForecastInteractor<ForecastListType> =
         YWForecastInteractor(
-            forecastRepository,
-            forecastMapper
+            forecastListRepository,
+            forecastListListMapper
         )
 
     @Provides
     @YandexWeatherScope
-    fun provideYWForecastMapper(context: Context): ForecastMapper<YWForecastResponseType, YWForecastType> =
+    fun provideYWForecastMapper(context: Context): ForecastMapper<ForecastListResponseType, ForecastListType> =
         YWForecastMapper(context)
 
 }

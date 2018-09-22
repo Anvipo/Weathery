@@ -9,8 +9,8 @@ import ru.mts.avpopo85.weathery.data.db.base.CurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.base.ForecastDbService
 import ru.mts.avpopo85.weathery.data.db.implementation.CurrentWeatherRealmService
 import ru.mts.avpopo85.weathery.data.db.implementation.ForecastRealmService
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWCurrentWeatherResponse
-import ru.mts.avpopo85.weathery.utils.YWForecastResponseType
+import ru.mts.avpopo85.weathery.utils.CurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.ForecastListResponseType
 import javax.inject.Singleton
 
 @Module
@@ -29,12 +29,12 @@ class RealmModule(val context: Context) {
 
     @Provides
     @Singleton
-    fun provideForecastDbService(): ForecastDbService<YWForecastResponseType> =
+    fun provideForecastDbService(): ForecastDbService<ForecastListResponseType> =
         ForecastRealmService()
 
     @Provides
     @Singleton
-    fun provideCurrentWeatherDbService(): CurrentWeatherDbService<YWCurrentWeatherResponse> =
+    fun provideCurrentWeatherDbService(): CurrentWeatherDbService<CurrentWeatherResponseType> =
         CurrentWeatherRealmService()
 
 }

@@ -6,15 +6,15 @@ import ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather.Yande
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWCurrentWeather
 import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.utils.toDate
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherType
+import ru.mts.avpopo85.weathery.utils.CurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.CurrentWeatherType
 import javax.inject.Inject
 
 class YWCurrentWeatherMapper
 @Inject constructor(private val context: Context) :
-    CurrentWeatherMapper<YWCurrentWeatherResponseType, YWCurrentWeatherType> {
+    CurrentWeatherMapper<CurrentWeatherResponseType, CurrentWeatherType> {
 
-    override fun mapCurrentWeatherResponse(currentWeatherResponse: YWCurrentWeatherResponseType): YWCurrentWeatherType =
+    override fun mapCurrentWeatherResponse(currentWeatherResponse: CurrentWeatherResponseType): CurrentWeatherType =
         currentWeatherResponse.let {
             YWCurrentWeather(
                 cloudiness = context.getCloudinessString(it.cloudiness),

@@ -11,7 +11,7 @@ import ru.mts.avpopo85.weathery.di.modules.YandexWeatherModule
 import ru.mts.avpopo85.weathery.presentation.utils.CELSIUS_DEGREE
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherActivity
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherType
+import ru.mts.avpopo85.weathery.utils.CurrentWeatherType
 import javax.inject.Inject
 
 class YWCurrentWeatherActivity :
@@ -41,7 +41,7 @@ class YWCurrentWeatherActivity :
     }
 
     @SuppressLint("SetTextI18n")
-    override fun showWeatherResponse(data: YWCurrentWeatherType) {
+    override fun showWeatherResponse(data: CurrentWeatherType) {
         data.let {
             temperatureValueCWTV.text = "${it.temperature} $CELSIUS_DEGREE"
             feelsLikeTemperatureValueCWTV.text = "${it.feelsLikeTemperature}$CELSIUS_DEGREE"

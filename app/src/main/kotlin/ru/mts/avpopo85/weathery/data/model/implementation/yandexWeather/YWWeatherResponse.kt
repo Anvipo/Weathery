@@ -3,7 +3,8 @@ package ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import ru.mts.avpopo85.weathery.data.model.base.WeatherResponse
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.CurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.ForecastListResponseType
 
 data class YWWeatherResponse(
 
@@ -25,11 +26,11 @@ data class YWWeatherResponse(
     /**Current weather information object.	*/
     @SerializedName("fact")
     @Expose
-    val currentWeatherResponse: YWCurrentWeatherResponseType,
+    val currentWeatherResponse: CurrentWeatherResponseType,
 
     /**Weather forecast object.*/
     @SerializedName("forecasts")
     @Expose
-    val forecasts: List<YWForecastResponse>
+    val forecasts: ForecastListResponseType
 
 ) : WeatherResponse

@@ -5,16 +5,16 @@ import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.where
 import ru.mts.avpopo85.weathery.data.db.base.ForecastDbService
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWForecastResponse
-import ru.mts.avpopo85.weathery.utils.YWForecastResponseType
+import ru.mts.avpopo85.weathery.utils.ForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.ForecastResponseType
 
-class ForecastRealmService : ForecastDbService<YWForecastResponseType> {
+class ForecastRealmService : ForecastDbService<ForecastListResponseType> {
 
-    override fun saveForecastResponse(currentWeatherResponse: YWForecastResponseType): Single<YWForecastResponseType> =
+    override fun saveForecastResponse(forecastListResponse: ForecastListResponseType): Single<ForecastListResponseType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
-                val data: YWForecastResponseType? =
-                    realmInstance.copyToRealmOrUpdate(currentWeatherResponse)
+                val data: ForecastListResponseType? =
+                    realmInstance.copyToRealmOrUpdate(forecastListResponse)
 
                 if (data != null) {
                     emitter.onSuccess(data)
@@ -24,12 +24,12 @@ class ForecastRealmService : ForecastDbService<YWForecastResponseType> {
             }
         }
 
-    override fun getForecastResponse(isConnectedToInternet: Boolean): Single<YWForecastResponseType> =
+    override fun getForecastResponse(isConnectedToInternet: Boolean): Single<ForecastListResponseType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
-                val data: RealmResults<YWForecastResponse>? =
+                val data: RealmResults<ForecastResponseType>? =
                     realmInstance
-                        .where<YWForecastResponse>()
+                        .where<ForecastResponseType>()
                         .findAll()
 
                 if (data != null) {

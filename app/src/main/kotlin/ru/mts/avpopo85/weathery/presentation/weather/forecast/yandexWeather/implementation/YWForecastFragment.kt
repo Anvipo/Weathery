@@ -11,12 +11,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.item_yandex_forecast.yandex_hours_forecast_recycler_view
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWForecast
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWHourInfo
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWParts
 import ru.mts.avpopo85.weathery.presentation.utils.ARG_FORECAST
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.implementation.adapters.YWHoursForecastAdapter
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.implementation.adapters.YWTimesOfDayForecastAdapter
+import ru.mts.avpopo85.weathery.utils.ForecastType
 
 
 class YWForecastFragment : Fragment() {
@@ -32,7 +32,7 @@ class YWForecastFragment : Fragment() {
         arguments
             ?.takeIf { it.containsKey(ARG_FORECAST) }
             ?.apply {
-                val forecast = getParcelable<YWForecast>(ARG_FORECAST) ?: return
+                val forecast = getParcelable<ForecastType>(ARG_FORECAST) ?: return
 
                 fillFields(forecast)
 
@@ -75,7 +75,7 @@ class YWForecastFragment : Fragment() {
         }
     }
 
-    private fun fillFields(YWForecast: YWForecast) {
+    private fun fillFields(YWForecast: ForecastType) {
         val moonTextValueTV = view?.findViewById<TextView>(R.id.moonTextValueTV)
         val sunriseTimeValueTV = view?.findViewById<TextView>(R.id.sunriseTimeValueTV)
         val sunsetTimeValueTV = view?.findViewById<TextView>(R.id.sunsetTimeValueTV)

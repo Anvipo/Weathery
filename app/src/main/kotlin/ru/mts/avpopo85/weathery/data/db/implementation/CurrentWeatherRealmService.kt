@@ -4,14 +4,14 @@ import io.reactivex.Single
 import io.realm.Realm
 import io.realm.kotlin.where
 import ru.mts.avpopo85.weathery.data.db.base.CurrentWeatherDbService
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.CurrentWeatherResponseType
 
-class CurrentWeatherRealmService : CurrentWeatherDbService<YWCurrentWeatherResponseType> {
+class CurrentWeatherRealmService : CurrentWeatherDbService<CurrentWeatherResponseType> {
 
-    override fun saveCurrentWeatherResponse(currentWeatherResponse: YWCurrentWeatherResponseType): Single<YWCurrentWeatherResponseType> =
+    override fun saveCurrentWeatherResponse(currentWeatherResponse: CurrentWeatherResponseType): Single<CurrentWeatherResponseType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
-                val data: YWCurrentWeatherResponseType? =
+                val data: CurrentWeatherResponseType? =
                     realmInstance.copyToRealmOrUpdate(currentWeatherResponse)
 
                 if (data != null) {
@@ -22,12 +22,12 @@ class CurrentWeatherRealmService : CurrentWeatherDbService<YWCurrentWeatherRespo
             }
         }
 
-    override fun getCurrentWeatherResponse(isConnectedToInternet: Boolean): Single<YWCurrentWeatherResponseType> =
+    override fun getCurrentWeatherResponse(isConnectedToInternet: Boolean): Single<CurrentWeatherResponseType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
                 val data =
                     realmInstance
-                        .where<YWCurrentWeatherResponseType>()
+                        .where<CurrentWeatherResponseType>()
                         .findFirst()
 
                 if (data != null) {

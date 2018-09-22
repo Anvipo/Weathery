@@ -6,22 +6,22 @@ import ru.mts.avpopo85.weathery.data.network.base.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.implementation.yandexWeather.YWCurrentWeatherApiService
 import ru.mts.avpopo85.weathery.data.utils.YW_CURRENT_WEATHER_PARAMETERS
 import ru.mts.avpopo85.weathery.domain.repository.CurrentWeatherRepository
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.CurrentWeatherResponseType
 import javax.inject.Inject
 
 class YWCurrentWeatherRepository
 @Inject constructor(
     private val currentWeatherApiService: YWCurrentWeatherApiService,
     private val networkManager: NetworkManager,
-    private val currentWeatherDbService: CurrentWeatherDbService<YWCurrentWeatherResponseType>
-) : CurrentWeatherRepository<YWCurrentWeatherResponseType> {
+    private val currentWeatherDbService: CurrentWeatherDbService<CurrentWeatherResponseType>
+) : CurrentWeatherRepository<CurrentWeatherResponseType> {
 
-    override fun getCurrentWeather(): Single<YWCurrentWeatherResponseType> {
+    override fun getCurrentWeather(): Single<CurrentWeatherResponseType> {
         if (!networkManager.isConnectedToInternet) {
             return currentWeatherDbService.getCurrentWeatherResponse(false)
         }
 
-        val apiCall: Single<YWCurrentWeatherResponseType> =
+        val apiCall: Single<CurrentWeatherResponseType> =
             currentWeatherApiService
                 .getCurrentWeather(
                     YW_CURRENT_WEATHER_PARAMETERS.latitude,

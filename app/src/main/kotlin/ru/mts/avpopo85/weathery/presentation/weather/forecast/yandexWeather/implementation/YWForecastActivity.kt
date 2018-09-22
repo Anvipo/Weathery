@@ -10,11 +10,12 @@ import kotlinx.android.synthetic.main.activity_yandex_forecast.yandex_forecast_P
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.YandexWeatherModule
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWForecast
 import ru.mts.avpopo85.weathery.presentation.utils.ARG_FORECAST
 import ru.mts.avpopo85.weathery.presentation.utils.makeTitle
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.base.ForecastActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.base.ForecastContract
+import ru.mts.avpopo85.weathery.utils.ForecastListType
+import ru.mts.avpopo85.weathery.utils.ForecastType
 import javax.inject.Inject
 
 
@@ -46,13 +47,13 @@ class YWForecastActivity : ForecastActivity(),
         super.onDestroy()
     }
 
-    override fun showWeatherResponse(data: List<YWForecast>) {
+    override fun showWeatherResponse(data: ForecastListType) {
         initPager()
 
         putForecastDataInPager(data)
     }
 
-    private fun putForecastDataInPager(data: List<YWForecast>) {
+    private fun putForecastDataInPager(data: List<ForecastType>) {
         for (forecast in data) {
             val yfr = YWForecastFragment()
 

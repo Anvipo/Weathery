@@ -4,20 +4,20 @@ import io.reactivex.Single
 import ru.mts.avpopo85.weathery.domain.interactor.base.ForecastInteractor
 import ru.mts.avpopo85.weathery.domain.mapper.base.ForecastMapper
 import ru.mts.avpopo85.weathery.domain.repository.ForecastRepository
-import ru.mts.avpopo85.weathery.utils.YWForecastResponseType
-import ru.mts.avpopo85.weathery.utils.YWForecastType
+import ru.mts.avpopo85.weathery.utils.ForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.ForecastListType
 import javax.inject.Inject
 
 
 class YWForecastInteractor
 @Inject constructor(
-    private val forecastRepository: ForecastRepository<YWForecastResponseType>,
-    private val yandexForecastMapper: ForecastMapper<YWForecastResponseType, YWForecastType>
-) : ForecastInteractor<YWForecastType> {
+    private val forecastListRepository: ForecastRepository<ForecastListResponseType>,
+    private val yandexForecastListListMapper: ForecastMapper<ForecastListResponseType, ForecastListType>
+) : ForecastInteractor<ForecastListType> {
 
-    override fun getForecast(): Single<YWForecastType> =
-        forecastRepository
+    override fun getForecast(): Single<ForecastListType> =
+        forecastListRepository
             .getForecast()
-            .map { yandexForecastMapper.mapForecast(it) }
+            .map { yandexForecastListListMapper.mapForecast(it) }
 
 }
