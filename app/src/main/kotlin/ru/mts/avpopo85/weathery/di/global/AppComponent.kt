@@ -1,22 +1,22 @@
 package ru.mts.avpopo85.weathery.di.global
 
 import dagger.Component
-import ru.mts.avpopo85.weathery.data.repositories.WeatherRepository
-import ru.mts.avpopo85.weathery.di.weather.yandexWeather.YandexWeatherModule
-import ru.mts.avpopo85.weathery.di.weather.yandexWeather.YandexWeatherSubcomponent
+import ru.mts.avpopo85.weathery.di.modules.YandexWeatherModule
+import ru.mts.avpopo85.weathery.di.subcomponents.YandexWeatherSubcomponent
 import javax.inject.Singleton
 
-@Singleton
 @Component(
     modules = [
         AppModule::class,
+        SchedulerManagerModule::class,
         DataModule::class,
-        RetrofitModule::class, NetworkModule::class, SchedulerManagerModule::class, DbModule::class
+        NetworkModule::class,
+        RealmModule::class,
+        RetrofitModule::class
     ]
 )
+@Singleton
 interface AppComponent {
-
-    fun provideYandexWeatherRepository(): WeatherRepository
 
     fun plus(yandexWeatherModule: YandexWeatherModule): YandexWeatherSubcomponent
 

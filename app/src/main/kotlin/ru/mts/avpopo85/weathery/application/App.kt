@@ -1,9 +1,7 @@
 package ru.mts.avpopo85.weathery.application
 
 import android.app.Application
-import io.realm.Realm
-import io.realm.RealmConfiguration
-import ru.mts.avpopo85.weathery.data.network.YandexWeatherApiService.Companion.BASE_URL
+import ru.mts.avpopo85.weathery.data.network.implementation.yandexWeather.YWConstants.BASE_URL
 import ru.mts.avpopo85.weathery.di.global.*
 
 
@@ -13,22 +11,15 @@ class App : Application() {
         super.onCreate()
 
         initDagger()
-
-        initRealm()
-    }
-
-    private fun initRealm() {
-        Realm.init(this)
-
-        val config = RealmConfiguration.Builder().name("forecasts").deleteRealmIfMigrationNeeded()
-
-        Realm.setDefaultConfiguration(config.build()!!)
     }
 
     private fun initDagger() {
-        appComponentForYandexWeather = DaggerAppComponent.builder()
+        appComponentForYandexWeather = DaggerAppComponent
+            .builder()
             .appModule(AppModule(this))
             .dataModule(DataModule())
+            .networkModule(NetworkModule())
+            .realmModule(RealmModule(this))
             .retrofitModule(RetrofitModule(BASE_URL))
             .schedulerManagerModule(SchedulerManagerModule())
             .build()

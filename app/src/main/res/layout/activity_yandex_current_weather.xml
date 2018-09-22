@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.weather.yandexWeather.currentWeather.YandexCurrentWeatherActivity">
+    tools:context=".presentation.weather.currentWeather.implementation.yandexWeather.YWCurrentWeatherActivity">
 
     <ProgressBar
         android:id="@+id/yandex_current_weather_PB"

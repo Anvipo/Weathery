@@ -75,9 +75,9 @@ dependencies {
     compileOnly 'org.glassfish:javax.annotation:3.1.1'
 
     //Dagger android
-    kapt "com.google.dagger:dagger-android-processor:$dagger2Version"
-    implementation "com.google.dagger:dagger-android:$dagger2Version"
-    implementation "com.google.dagger:dagger-android-support:$dagger2Version"
+//    kapt "com.google.dagger:dagger-android-processor:$dagger2Version"
+//    implementation "com.google.dagger:dagger-android:$dagger2Version"
+//    implementation "com.google.dagger:dagger-android-support:$dagger2Version"
 
     //RxJava2
     def rxjava2Version = '2.2.1'

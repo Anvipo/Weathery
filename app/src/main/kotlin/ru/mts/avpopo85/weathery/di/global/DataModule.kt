@@ -12,9 +12,10 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideGson(): Gson = GsonBuilder()
-        .setLenient()
-        .setPrettyPrinting()
-        .create()
+    fun provideGson(): Gson =
+        GsonBuilder()
+            .setLenient()
+            .setPrettyPrinting()
+            .create()
 
 }

@@ -18,27 +18,30 @@ class SchedulerManagerModule {
 
     fun <T> observableTransformer(): ObservableTransformer<T, T> =
         ObservableTransformer { observable ->
-            (observable)
+            observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
         }
 
-    fun <T> singleTransformer(): SingleTransformer<T, T> = SingleTransformer { single ->
-        (single)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-    }
+    fun <T> singleTransformer(): SingleTransformer<T, T> =
+        SingleTransformer { single ->
+            single
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+        }
 
-    fun <T> maybeTransformer(): MaybeTransformer<T, T> = MaybeTransformer { maybe ->
-        (maybe)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-    }
+    fun <T> maybeTransformer(): MaybeTransformer<T, T> =
+        MaybeTransformer { maybe ->
+            maybe
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+        }
 
-    fun completableTransformer(): CompletableTransformer = CompletableTransformer { completable ->
-        (completable)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-    }
+    fun completableTransformer(): CompletableTransformer =
+        CompletableTransformer { completable ->
+            completable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+        }
 
 }
