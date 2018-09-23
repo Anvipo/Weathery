@@ -4,8 +4,8 @@ import io.reactivex.Single
 import ru.mts.avpopo85.weathery.domain.interactor.base.IForecastInteractor
 import ru.mts.avpopo85.weathery.domain.mapper.base.IForecastMapper
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
-import ru.mts.avpopo85.weathery.utils.YWForecastListResponseType
-import ru.mts.avpopo85.weathery.utils.YWForecastListType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
 import javax.inject.Inject
 
 

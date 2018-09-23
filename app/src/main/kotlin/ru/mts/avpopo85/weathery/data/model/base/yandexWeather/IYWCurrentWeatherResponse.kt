@@ -5,7 +5,7 @@ import ru.mts.avpopo85.weathery.data.model.base.common.ICurrentWeatherResponse
 interface IYWCurrentWeatherResponse : ICurrentWeatherResponse {
 
     /**Temperature (°С).*/
-    override val temperature: Double
+    val temperature: Double
 
     /**What the temperature feels like (°С).*/
     val feelsLikeTemperature: Double

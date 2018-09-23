@@ -1,8 +1,8 @@
 package ru.mts.avpopo85.weathery.data.model.base.yandexWeather
 
 import ru.mts.avpopo85.weathery.data.model.base.common.IWeatherResponse
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
-import ru.mts.avpopo85.weathery.utils.YWForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 
 interface IYWWeatherResponse : IWeatherResponse {
 

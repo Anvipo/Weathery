@@ -4,9 +4,10 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWCityInfoResponse
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWWeatherResponse
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
-import ru.mts.avpopo85.weathery.utils.YWForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 
+@Suppress("unused")
 data class YWWeatherResponse(
 
     @SerializedName("now")

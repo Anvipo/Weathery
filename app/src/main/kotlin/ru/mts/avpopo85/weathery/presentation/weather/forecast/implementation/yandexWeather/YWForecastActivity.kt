@@ -14,7 +14,7 @@ import ru.mts.avpopo85.weathery.presentation.utils.makeTitle
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.AbsForecastActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.adapters.ForecastActivityPagerAdapter
-import ru.mts.avpopo85.weathery.utils.YWForecastListType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
 import javax.inject.Inject
 
 class YWForecastActivity : AbsForecastActivity(),

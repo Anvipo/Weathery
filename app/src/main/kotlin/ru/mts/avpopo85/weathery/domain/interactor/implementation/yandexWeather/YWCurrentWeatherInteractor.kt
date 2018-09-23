@@ -4,8 +4,8 @@ import io.reactivex.Single
 import ru.mts.avpopo85.weathery.domain.interactor.base.ICurrentWeatherInteractor
 import ru.mts.avpopo85.weathery.domain.mapper.base.ICurrentWeatherMapper
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 import javax.inject.Inject
 
 class YWCurrentWeatherInteractor

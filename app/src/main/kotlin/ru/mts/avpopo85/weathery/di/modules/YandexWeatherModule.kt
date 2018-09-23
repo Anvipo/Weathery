@@ -19,10 +19,10 @@ import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.Current
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.yandexWeather.YWCurrentWeatherPresenter
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.YWForecastPresenter
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherType
-import ru.mts.avpopo85.weathery.utils.YWForecastListResponseType
-import ru.mts.avpopo85.weathery.utils.YWForecastListType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
 
 @Module
 class YandexWeatherModule {

@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.data.utils
+package ru.mts.avpopo85.weathery.data.utils.yandexWeather
 
 enum class YandexWeatherLanguages(val lang_code: String) {
     RU_RU("ru_RU"),

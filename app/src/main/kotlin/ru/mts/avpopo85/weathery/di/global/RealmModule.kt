@@ -7,10 +7,12 @@ import io.realm.Realm
 import io.realm.RealmConfiguration
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.openWeatherMap.OWMCurrentWeatherRealmService
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.yandexWeather.YWCurrentWeatherRealmService
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.yandexWeather.YWForecastRealmService
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
-import ru.mts.avpopo85.weathery.utils.YWForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 import javax.inject.Singleton
 
 @Module
@@ -29,12 +31,17 @@ class RealmModule(val context: Context) {
 
     @Provides
     @Singleton
-    fun provideForecastDbService(): IForecastDbService<YWForecastListResponseType> =
+    fun provideYWForecastRealmService(): IForecastDbService<YWForecastListResponseType> =
         YWForecastRealmService()
 
     @Provides
     @Singleton
-    fun provideCurrentWeatherDbService(): ICurrentWeatherDbService<YWCurrentWeatherResponseType> =
+    fun provideYWCurrentWeatherRealmService(): ICurrentWeatherDbService<YWCurrentWeatherResponseType> =
         YWCurrentWeatherRealmService()
+
+    @Provides
+    @Singleton
+    fun provideOWMCurrentWeatherRealmService(): ICurrentWeatherDbService<OWMCurrentWeatherResponseType> =
+        OWMCurrentWeatherRealmService()
 
 }

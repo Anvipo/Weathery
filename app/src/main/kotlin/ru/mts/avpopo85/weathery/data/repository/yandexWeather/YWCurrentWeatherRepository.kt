@@ -4,9 +4,9 @@ import io.reactivex.Single
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWCurrentWeatherApiService
-import ru.mts.avpopo85.weathery.data.utils.YW_CURRENT_WEATHER_PARAMETERS
+import ru.mts.avpopo85.weathery.data.utils.yandexWeather.YW_CURRENT_WEATHER_PARAMETERS
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 import javax.inject.Inject
 
 class YWCurrentWeatherRepository
@@ -18,10 +18,12 @@ class YWCurrentWeatherRepository
 
     override fun getCurrentWeather(): Single<YWCurrentWeatherResponseType> {
         if (!networkManager.isConnectedToInternet) {
-            return currentWeatherDbService.getCurrentWeatherResponse(false)
+            return currentWeatherDbService.getCurrentWeatherResponse(networkManager.isConnectedToInternet)
         }
 
-        val apiCall: Single<YWCurrentWeatherResponseType> =
+        //TODO как выполнить запрос на сервер, если в БД ничего нет?
+        return Single.ambArray(
+            currentWeatherDbService.getCurrentWeatherResponse(networkManager.isConnectedToInternet),
             ywCurrentWeatherApiService
                 .getCurrentWeather(
                     YW_CURRENT_WEATHER_PARAMETERS.latitude,
@@ -29,8 +31,8 @@ class YWCurrentWeatherRepository
                     YW_CURRENT_WEATHER_PARAMETERS.language
                 )
                 .map { it.currentWeatherResponse }
-
-        return apiCall.flatMap { currentWeatherDbService.saveCurrentWeatherResponse(it) }
+                .flatMap { currentWeatherDbService.saveCurrentWeatherResponse(it) }
+        )
     }
 
 }

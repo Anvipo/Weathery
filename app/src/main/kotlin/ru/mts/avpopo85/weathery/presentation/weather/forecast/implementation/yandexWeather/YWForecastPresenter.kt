@@ -6,7 +6,7 @@ import ru.mts.avpopo85.weathery.domain.interactor.base.IForecastInteractor
 import ru.mts.avpopo85.weathery.presentation.utils.parseError
 import ru.mts.avpopo85.weathery.presentation.weather.base.AbsWeatherPresenter
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
-import ru.mts.avpopo85.weathery.utils.YWForecastListType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
 import javax.inject.Inject
 
 class YWForecastPresenter

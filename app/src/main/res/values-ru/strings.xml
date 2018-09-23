@@ -48,7 +48,7 @@
     <string name="growing_moon">растущая Луна</string>
     <string name="yes">да</string>
     <string name="no">нет</string>
-    <string name="YWForecast">Прогноз на неделю</string>
+    <string name="forecast">Прогноз на неделю</string>
     <string name="current_weather">Текущая погода</string>
     <string name="observation_time">Время сбора прогноза</string>
     <string name="observation_time_value">Значение времени сбора прогноза</string>

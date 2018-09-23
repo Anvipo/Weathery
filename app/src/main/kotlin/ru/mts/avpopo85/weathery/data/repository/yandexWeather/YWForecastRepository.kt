@@ -4,9 +4,9 @@ import io.reactivex.Single
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
-import ru.mts.avpopo85.weathery.data.utils.YW_FORECAST_PARAMETERS
+import ru.mts.avpopo85.weathery.data.utils.yandexWeather.YW_FORECAST_PARAMETERS
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
-import ru.mts.avpopo85.weathery.utils.YWForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 import javax.inject.Inject
 
 
@@ -22,7 +22,9 @@ class YWForecastRepository
             return currentWeatherDbService.getForecastResponse(networkManager.isConnectedToInternet)
         }
 
-        val apiCall: Single<YWForecastListResponseType> =
+        //TODO как выполнить запрос на сервер, если в БД ничего нет?
+        return Single.ambArray(
+            currentWeatherDbService.getForecastResponse(networkManager.isConnectedToInternet),
             ywForecastApiService
                 .getForecast(
                     YW_FORECAST_PARAMETERS.latitude,
@@ -33,8 +35,8 @@ class YWForecastRepository
                     YW_FORECAST_PARAMETERS.withExtraInformation
                 )
                 .map { it.forecasts }
-
-        return apiCall.flatMap { currentWeatherDbService.saveForecastResponse(it) }
+                .flatMap { currentWeatherDbService.saveForecastResponse(it) }
+        )
     }
 
 }

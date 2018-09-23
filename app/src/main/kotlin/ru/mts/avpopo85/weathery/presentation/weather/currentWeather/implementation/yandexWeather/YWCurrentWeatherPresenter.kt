@@ -6,7 +6,7 @@ import ru.mts.avpopo85.weathery.domain.interactor.base.ICurrentWeatherInteractor
 import ru.mts.avpopo85.weathery.presentation.utils.parseError
 import ru.mts.avpopo85.weathery.presentation.weather.base.AbsWeatherPresenter
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
-import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 import javax.inject.Inject
 
 class YWCurrentWeatherPresenter

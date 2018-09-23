@@ -47,7 +47,7 @@
     <string name="growing_moon">growing moon</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
-    <string name="YWForecast">Forecast</string>
+    <string name="forecast">Forecast</string>
     <string name="current_weather">Current weather</string>
     <string name="observation_time">Observation time</string>
     <string name="observation_time_value">Observation time value</string>

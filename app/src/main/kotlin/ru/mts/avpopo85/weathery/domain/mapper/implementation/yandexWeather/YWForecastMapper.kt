@@ -12,9 +12,9 @@ import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWHour
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWParts
 import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.utils.toDate
-import ru.mts.avpopo85.weathery.utils.YWForecastListResponseType
-import ru.mts.avpopo85.weathery.utils.YWForecastListType
-import ru.mts.avpopo85.weathery.utils.YWForecastType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastType
 import javax.inject.Inject
 
 class YWForecastMapper

@@ -3,7 +3,7 @@ package ru.mts.avpopo85.weathery.presentation.utils
 import android.content.Context
 import retrofit2.HttpException
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.utils.YWForecastType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastType
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException

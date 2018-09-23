@@ -16,7 +16,7 @@ import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWPart
 import ru.mts.avpopo85.weathery.presentation.utils.ARG_FORECAST
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.adapters.YWHoursForecastAdapter
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.adapters.YWTimesOfDayForecastAdapter
-import ru.mts.avpopo85.weathery.utils.YWForecastType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastType
 
 
 class YWForecastFragment : Fragment() {
