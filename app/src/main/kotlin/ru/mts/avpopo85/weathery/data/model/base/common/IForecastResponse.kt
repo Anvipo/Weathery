@@ -1,6 +1,6 @@
-package ru.mts.avpopo85.weathery.data.model.base
+package ru.mts.avpopo85.weathery.data.model.base.common
 
-interface ForecastResponse {
+interface IForecastResponse {
 
     val date: String
 
