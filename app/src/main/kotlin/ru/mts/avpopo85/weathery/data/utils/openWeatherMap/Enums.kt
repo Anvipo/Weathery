@@ -1,14 +1,4 @@
-package ru.mts.avpopo85.weathery.data.utils
-
-enum class YandexWeatherLanguages(val lang_code: String) {
-    RU_RU("ru_RU"),
-    RU_UA("ru_UA"),
-    UK_UA("uk_UA"),
-    BE_BY("be_BY"),
-    KK_KZ("kk_KZ"),
-    TR_TR("tr_TR"),
-    EN_US("en_US")
-}
+package ru.mts.avpopo85.weathery.data.utils.openWeatherMap
 
 enum class OpenWeatherMapLanguages(val lang_code: String) {
     ARABIC("ar"),
@@ -46,8 +36,8 @@ enum class OpenWeatherMapLanguages(val lang_code: String) {
     CHINESE_TRADITIONAL("zh_tw")
 }
 
-enum class OWMUnitsFormat(val temperature: String) {
-    STANDARD("Kelvin"),
-    METRIC("Celsius"),
-    IMPERIAL ("Fahrenheit")
+enum class OWMUnitsFormat(val _name: String, val temperature: String) {
+    STANDARD("standard", "Kelvin"),
+    METRIC("metric", "Celsius"),
+    IMPERIAL("imperial", "Fahrenheit")
 }
