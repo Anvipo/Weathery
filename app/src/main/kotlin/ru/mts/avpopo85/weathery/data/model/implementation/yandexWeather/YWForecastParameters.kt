@@ -1,17 +1,19 @@
 package ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather
 
+import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWForecastParameters
+
 data class YWForecastParameters(
 
-    val latitude: Double,
+    override val latitude: Double,
 
-    val longitude: Double,
+    override val longitude: Double,
 
-    val language: String,
+    override val language: String,
 
-    val dayNumberInForecast: Int,
+    override val dayNumberInForecast: Int,
 
-    val withForecastForHours: Boolean,
+    override val withForecastForHours: Boolean,
 
-    val withExtraInformation: Boolean
+    override val withExtraInformation: Boolean
 
-)
+) : IYWForecastParameters

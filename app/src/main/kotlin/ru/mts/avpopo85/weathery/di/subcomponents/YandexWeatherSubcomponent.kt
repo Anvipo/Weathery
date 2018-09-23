@@ -4,7 +4,7 @@ import dagger.Subcomponent
 import ru.mts.avpopo85.weathery.di.modules.YandexWeatherModule
 import ru.mts.avpopo85.weathery.di.scopes.YandexWeatherScope
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.yandexWeather.YWCurrentWeatherActivity
-import ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.implementation.YWForecastActivity
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.YWForecastActivity
 
 @Subcomponent(modules = [YandexWeatherModule::class])
 @YandexWeatherScope

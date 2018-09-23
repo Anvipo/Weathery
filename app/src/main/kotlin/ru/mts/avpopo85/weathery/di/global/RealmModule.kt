@@ -5,12 +5,12 @@ import dagger.Module
 import dagger.Provides
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import ru.mts.avpopo85.weathery.data.db.base.CurrentWeatherDbService
-import ru.mts.avpopo85.weathery.data.db.base.ForecastDbService
-import ru.mts.avpopo85.weathery.data.db.implementation.CurrentWeatherRealmService
-import ru.mts.avpopo85.weathery.data.db.implementation.ForecastRealmService
-import ru.mts.avpopo85.weathery.utils.CurrentWeatherResponseType
-import ru.mts.avpopo85.weathery.utils.ForecastListResponseType
+import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
+import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.yandexWeather.YWCurrentWeatherRealmService
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.yandexWeather.YWForecastRealmService
+import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.YWForecastListResponseType
 import javax.inject.Singleton
 
 @Module
@@ -19,22 +19,22 @@ class RealmModule(val context: Context) {
     init {
         Realm.init(context)
         Realm.setDefaultConfiguration(
-            RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().name("realm").build()
+            RealmConfiguration
+                .Builder()
+                .deleteRealmIfMigrationNeeded()
+                .name("realm")
+                .build()
         )
     }
 
-    /* @Provides
-     @Singleton
-     fun provideAccountManagerModule(context: Context) = RealmModule(context)*/
+    @Provides
+    @Singleton
+    fun provideForecastDbService(): IForecastDbService<YWForecastListResponseType> =
+        YWForecastRealmService()
 
     @Provides
     @Singleton
-    fun provideForecastDbService(): ForecastDbService<ForecastListResponseType> =
-        ForecastRealmService()
-
-    @Provides
-    @Singleton
-    fun provideCurrentWeatherDbService(): CurrentWeatherDbService<CurrentWeatherResponseType> =
-        CurrentWeatherRealmService()
+    fun provideCurrentWeatherDbService(): ICurrentWeatherDbService<YWCurrentWeatherResponseType> =
+        YWCurrentWeatherRealmService()
 
 }

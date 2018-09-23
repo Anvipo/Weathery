@@ -2,50 +2,38 @@ package ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWDayShort
 
 @Parcelize
 /**Object with a 12-hour forecast for the day.*/
 data class YWDayShort(
 
-    val title: String,
+    override val title: String,
 
-    /**Highest daytime or lowest nighttime temperature (°C).*/
-    val temperature: String,
+    override val temperature: String,
 
-    /**What the temperature feels like (°C).*/
-    val feelsLikeTemperature: String,
+    override val feelsLikeTemperature: String,
 
-    /**The url of the weather icon.*/
-    val iconUrl: String,
+    override val iconUrl: String,
 
-    /**Weather description.*/
-    val condition: String,
+    override val condition: String,
 
-    /**Wind speed (meters per second).*/
-    val windSpeed: String,
+    override val windSpeed: String,
 
-    /**Speed of wind gusts (meters per second).*/
-    val windGustsSpeed: String,
+    override val windGustsSpeed: String,
 
-    /**Wind direction.*/
-    val windDirection: String,
+    override val windDirection: String,
 
-    /**Atmospheric pressure (mm Hg).*/
-    val atmosphericPressureInMmHg: String,
+    override val atmosphericPressureInMmHg: String,
 
-    /**Atmospheric pressure (hPa).*/
-    val atmosphericPressureInhPa: String,
+    override val atmosphericPressureInhPa: String,
 
-    /**Humidity (percent).*/
-    val humidity: String,
+    override val humidity: String,
 
-    /**Type of precipitation.*/
-    val precipitationType: String,
+    override val precipitationType: String,
 
-    /**Intensity of precipitation.*/
-    val precipitationStrength: String,
+    override val precipitationStrength: String,
 
-    /**Cloud cover.*/
-    val cloudiness: String
+    override val cloudiness: String
 
-) : Parcelable
+) : Parcelable, IYWDayShort

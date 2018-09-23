@@ -1,13 +1,13 @@
 package ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather
 
-import ru.mts.avpopo85.weathery.data.model.base.CurrentWeatherParameters
+import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWCurrentWeatherParameters
 
 data class YWCurrentWeatherParameters(
 
-    val latitude: Double,
+    override val latitude: Double,
 
-    val longitude: Double,
+    override val longitude: Double,
 
-    val language: String
+    override val language: String
 
-) : CurrentWeatherParameters
+) : IYWCurrentWeatherParameters

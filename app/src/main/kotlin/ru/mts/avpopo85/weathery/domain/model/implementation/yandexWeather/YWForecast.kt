@@ -2,38 +2,30 @@ package ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import ru.mts.avpopo85.weathery.domain.model.base.Forecast
+import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWForecast
 
+@Suppress("SpellCheckingInspection")
 @Parcelize
 
 /**This object contains weather forecast data.*/
 data class YWForecast(
 
-    /**Date of the forecast, in the format YYYY-MM-DD.*/
     override val date: String,
 
-    /**The date of the forecast in Unix time.*/
-    val date_ts: String,
+    override val dateInUnixtime: String,
 
-    /**Week number.*/
-    val weekSerialNumber: Int,
+    override val weekSerialNumber: Int,
 
-    /**Time of the sunrise in local time (may be omitted for polar regions).*/
-    val sunriseInLocalTime: String?,
+    override val sunriseInLocalTime: String?,
 
-    /**Time of the sunset in local time (may be omitted for polar regions).*/
-    val sunsetInLocalTime: String?,
+    override val sunsetInLocalTime: String?,
 
-    /**Code of the lunar phase*/
-    val moonCode: String,
+    override val moonCode: String,
 
-    /**Text code for the lunar phase*/
-    val moonText: String,
+    override val moonText: String,
 
-    /**Forecasts by time of day and 12-hour yandexForecasts*/
-    val YWParts: YWParts,
+    override val parts: YWParts,
 
-    /**Object for the hourly forecast*/
-    val YWHours: List<YWHourInfo>?
+    override val hours: List<YWHourInfo>?
 
-) : Parcelable, Forecast
+) : Parcelable, IYWForecast

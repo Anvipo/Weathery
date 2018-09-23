@@ -1,7 +1,7 @@
 package ru.mts.avpopo85.weathery.application
 
 import android.app.Application
-import ru.mts.avpopo85.weathery.data.network.implementation.yandexWeather.YWConstants.BASE_URL
+import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.YWConstants.BASE_URL
 import ru.mts.avpopo85.weathery.di.global.*
 
 

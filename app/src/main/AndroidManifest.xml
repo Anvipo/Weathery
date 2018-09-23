@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name="ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.yandexWeather.YWCurrentWeatherActivity" />
-        <activity android:name=".presentation.weather.forecast.yandexWeather.implementation.YWForecastActivity" />
+        <activity android:name=".presentation.weather.forecast.implementation.yandexWeather.YWForecastActivity" />
     </application>
 
 </manifest>

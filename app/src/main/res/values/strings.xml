@@ -5,9 +5,6 @@
     <string name="hPa">hPa</string>
     <string name="mm">mm</string>
     <string name="minutes">min</string>
-    <string name="error">ERROR</string>
-    <string name="there_may_be_a_problem_with_the_Internet_connection">There may be a problem with the Internet connection</string>
-    <string name="unknown_error">Unknown error</string>
     <string name="week">week</string>
     <string name="clear">clear</string>
     <string name="partly_cloudy">partly cloudy</string>

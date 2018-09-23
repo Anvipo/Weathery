@@ -1,22 +1,21 @@
 package ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather
 
 import android.content.Context
-import ru.mts.avpopo85.weathery.domain.mapper.base.CurrentWeatherMapper
+import ru.mts.avpopo85.weathery.domain.mapper.base.ICurrentWeatherMapper
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather.YandexWeatherMapper.getWaterTemperatureString
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWCurrentWeather
 import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.utils.toDate
-import ru.mts.avpopo85.weathery.utils.CurrentWeatherResponseType
-import ru.mts.avpopo85.weathery.utils.CurrentWeatherType
+import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherType
 import javax.inject.Inject
 
 class YWCurrentWeatherMapper
 @Inject constructor(private val context: Context) :
-    CurrentWeatherMapper<CurrentWeatherResponseType, CurrentWeatherType> {
+    ICurrentWeatherMapper<YWCurrentWeatherResponseType, YWCurrentWeatherType> {
 
-    override fun mapCurrentWeatherResponse(currentWeatherResponse: CurrentWeatherResponseType): CurrentWeatherType =
+    override fun mapCurrentWeatherResponse(currentWeatherResponse: YWCurrentWeatherResponseType): YWCurrentWeatherType =
         currentWeatherResponse.let {
-            YWCurrentWeather(
+            YWCurrentWeatherType(
                 cloudiness = context.getCloudinessString(it.cloudiness),
                 daytime = context.getDaytimeString(it.daytime),
                 feelsLikeTemperature = it.feelsLikeTemperature.roundIfNeeded(),

@@ -2,38 +2,34 @@ package ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWCityInfoResponse
 
 /**This object contains information about the locality.*/
+@Suppress("SpellCheckingInspection", "unused")
 data class YWCityInfoResponse(
 
-    /**The latitude (in degrees).*/
     @SerializedName("lat")
     @Expose
-    val latitude: Double,
+    override val latitude: Double,
 
-    /**The longitude (in degrees).*/
     @SerializedName("lon")
     @Expose
-    val longitude: Double,
+    override val longitude: Double,
 
-    /**Information about the time zone.*/
     @SerializedName("tzinfo")
     @Expose
-    val YWTimeZoneInfo: YWTimeZoneInfo,
+    override val timeZoneInfo: YWTimeZoneInfo,
 
-    /**The normal pressure for the given coordinates (mm Hg).*/
     @SerializedName("def_pressure_mm")
     @Expose
-    val normalPressureMmHg: Double,
+    override val normalPressureMmHg: Double,
 
-    /**The normal pressure for the given coordinates (hPa).*/
     @SerializedName("def_pressure_pa")
     @Expose
-    val pressureNormInPa: Double,
+    override val pressureNormInPa: Double,
 
-    /**Locality page on yandex.weather.*/
     @SerializedName("url")
     @Expose
-    val localityUrlPath: String
+    override val localityUrlPath: String
 
-)
+) : IYWCityInfoResponse

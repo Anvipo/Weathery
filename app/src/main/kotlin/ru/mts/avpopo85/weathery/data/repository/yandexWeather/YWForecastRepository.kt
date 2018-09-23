@@ -1,29 +1,29 @@
 package ru.mts.avpopo85.weathery.data.repository.yandexWeather
 
 import io.reactivex.Single
-import ru.mts.avpopo85.weathery.data.db.base.ForecastDbService
-import ru.mts.avpopo85.weathery.data.network.base.NetworkManager
-import ru.mts.avpopo85.weathery.data.network.implementation.yandexWeather.YWForecastApiService
+import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
+import ru.mts.avpopo85.weathery.data.network.NetworkManager
+import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
 import ru.mts.avpopo85.weathery.data.utils.YW_FORECAST_PARAMETERS
-import ru.mts.avpopo85.weathery.domain.repository.ForecastRepository
-import ru.mts.avpopo85.weathery.utils.ForecastListResponseType
+import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
+import ru.mts.avpopo85.weathery.utils.YWForecastListResponseType
 import javax.inject.Inject
 
 
 class YWForecastRepository
 @Inject constructor(
-    private val forecastApiService: YWForecastApiService,
+    private val ywForecastApiService: IYWForecastApiService,
     private val networkManager: NetworkManager,
-    private val currentWeatherDbService: ForecastDbService<ForecastListResponseType>
-) : ForecastRepository<ForecastListResponseType> {
+    private val currentWeatherDbService: IForecastDbService<YWForecastListResponseType>
+) : IForecastRepository<YWForecastListResponseType> {
 
-    override fun getForecast(): Single<ForecastListResponseType> {
+    override fun getForecast(): Single<YWForecastListResponseType> {
         if (!networkManager.isConnectedToInternet) {
             return currentWeatherDbService.getForecastResponse(networkManager.isConnectedToInternet)
         }
 
-        val apiCall: Single<ForecastListResponseType> =
-            forecastApiService
+        val apiCall: Single<YWForecastListResponseType> =
+            ywForecastApiService
                 .getForecast(
                     YW_FORECAST_PARAMETERS.latitude,
                     YW_FORECAST_PARAMETERS.longitude,

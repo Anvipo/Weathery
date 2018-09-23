@@ -5,14 +5,14 @@ import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWForeca
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWCurrentWeather
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWForecast
 
-typealias CurrentWeatherType = YWCurrentWeather
+typealias YWCurrentWeatherType = YWCurrentWeather
 
-typealias CurrentWeatherResponseType = YWCurrentWeatherResponse
+typealias YWCurrentWeatherResponseType = YWCurrentWeatherResponse
 
-typealias ForecastType = YWForecast
+typealias YWForecastType = YWForecast
 
-typealias ForecastListType = List<YWForecast>
+typealias YWForecastListType = List<YWForecastType>
 
-typealias ForecastResponseType = YWForecastResponse
+typealias YWForecastResponseType = YWForecastResponse
 
-typealias ForecastListResponseType = List<YWForecastResponse>
+typealias YWForecastListResponseType = List<YWForecastResponseType>

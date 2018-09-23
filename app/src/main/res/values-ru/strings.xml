@@ -6,9 +6,6 @@
     <string name="hPa">гПа</string>
     <string name="mm">мм</string>
     <string name="minutes">мин</string>
-    <string name="error">ОШИБКА</string>
-    <string name="there_may_be_a_problem_with_the_Internet_connection">Возможно отсутствует подключение к Интернету</string>
-    <string name="unknown_error">Неизвестная ошибка</string>
     <string name="week">неделя</string>
     <string name="clear">ясно</string>
     <string name="partly_cloudy">малооблачно</string>

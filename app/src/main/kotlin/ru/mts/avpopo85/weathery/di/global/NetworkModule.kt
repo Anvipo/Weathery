@@ -4,7 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import dagger.Module
 import dagger.Provides
-import ru.mts.avpopo85.weathery.data.network.base.NetworkManager
+import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import javax.inject.Singleton
 
 @Module

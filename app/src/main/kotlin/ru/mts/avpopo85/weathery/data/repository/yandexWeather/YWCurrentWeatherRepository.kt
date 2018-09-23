@@ -1,28 +1,28 @@
 package ru.mts.avpopo85.weathery.data.repository.yandexWeather
 
 import io.reactivex.Single
-import ru.mts.avpopo85.weathery.data.db.base.CurrentWeatherDbService
-import ru.mts.avpopo85.weathery.data.network.base.NetworkManager
-import ru.mts.avpopo85.weathery.data.network.implementation.yandexWeather.YWCurrentWeatherApiService
+import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
+import ru.mts.avpopo85.weathery.data.network.NetworkManager
+import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWCurrentWeatherApiService
 import ru.mts.avpopo85.weathery.data.utils.YW_CURRENT_WEATHER_PARAMETERS
-import ru.mts.avpopo85.weathery.domain.repository.CurrentWeatherRepository
-import ru.mts.avpopo85.weathery.utils.CurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
+import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherResponseType
 import javax.inject.Inject
 
 class YWCurrentWeatherRepository
 @Inject constructor(
-    private val currentWeatherApiService: YWCurrentWeatherApiService,
+    private val ywCurrentWeatherApiService: IYWCurrentWeatherApiService,
     private val networkManager: NetworkManager,
-    private val currentWeatherDbService: CurrentWeatherDbService<CurrentWeatherResponseType>
-) : CurrentWeatherRepository<CurrentWeatherResponseType> {
+    private val currentWeatherDbService: ICurrentWeatherDbService<YWCurrentWeatherResponseType>
+) : ICurrentWeatherRepository<YWCurrentWeatherResponseType> {
 
-    override fun getCurrentWeather(): Single<CurrentWeatherResponseType> {
+    override fun getCurrentWeather(): Single<YWCurrentWeatherResponseType> {
         if (!networkManager.isConnectedToInternet) {
             return currentWeatherDbService.getCurrentWeatherResponse(false)
         }
 
-        val apiCall: Single<CurrentWeatherResponseType> =
-            currentWeatherApiService
+        val apiCall: Single<YWCurrentWeatherResponseType> =
+            ywCurrentWeatherApiService
                 .getCurrentWeather(
                     YW_CURRENT_WEATHER_PARAMETERS.latitude,
                     YW_CURRENT_WEATHER_PARAMETERS.longitude,

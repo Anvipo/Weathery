@@ -1,17 +1,17 @@
 package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base
 
+import ru.mts.avpopo85.weathery.domain.model.base.common.ICurrentWeather
 import ru.mts.avpopo85.weathery.presentation.weather.base.WeatherContract
-import ru.mts.avpopo85.weathery.utils.CurrentWeatherType
 
 interface CurrentWeatherContract : WeatherContract {
 
-    interface View : WeatherContract.View {
+    interface View<T : ICurrentWeather> : WeatherContract.View {
 
-        fun showWeatherResponse(data: CurrentWeatherType)
+        fun showWeatherResponse(data: T)
 
     }
 
-    interface Presenter : WeatherContract.Presenter<View> {
+    interface Presenter<T : ICurrentWeather> : WeatherContract.Presenter<View<T>> {
 
         fun loadCurrentWeather()
 

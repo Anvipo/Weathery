@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.activity_main.forecastBtn
 import org.jetbrains.anko.startActivity
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.yandexWeather.YWCurrentWeatherActivity
-import ru.mts.avpopo85.weathery.presentation.weather.forecast.yandexWeather.implementation.YWForecastActivity
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.YWForecastActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,13 +19,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initButtons() {
-        /*locateButton.setOnClickListener {
-            startActivity<MapActivity>()
-        }*/
-
-        /*openWeatherBtn.setOnClickListener {
-            startActivity<OpenWeatherActivity>()
-        }*/
 
         currentWeatherBtn.setOnClickListener {
             startActivity<YWCurrentWeatherActivity>()
@@ -35,9 +28,6 @@ class MainActivity : AppCompatActivity() {
             startActivity<YWForecastActivity>()
         }
 
-        /*settingsBtn.setOnClickListener {
-            startActivity<SettingsActivity>()
-        }*/
     }
 
 }

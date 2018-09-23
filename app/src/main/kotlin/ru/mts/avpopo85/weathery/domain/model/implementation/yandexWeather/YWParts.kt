@@ -2,27 +2,22 @@ package ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWParts
 
 @Parcelize
 /**Forecasts by time of day and 12-hour yandexForecasts.*/
 data class YWParts(
 
-    /**Nighttime forecast.*/
-    val nightForecast: YWDayTime,
+    override val nightForecast: YWDayTime,
 
-    /**Morning forecast.*/
-    val morningForecast: YWDayTime,
+    override val morningForecast: YWDayTime,
 
-    /**Afternoon forecast.*/
-    val YWDayForecast: YWDayTime,
+    override val dayForecast: YWDayTime,
 
-    /**Evening forecast.*/
-    val eveningForecast: YWDayTime,
+    override val eveningForecast: YWDayTime,
 
-    /**12-hour forecast for the day.*/
-    val _12HoursYWDayForecast: YWDayShort,
+    override val _12HoursDayForecast: YWDayShort,
 
-    /**12-hour forecast for the upcoming night.*/
-    val _12HoursNightForecast: YWDayShort
+    override val _12HoursNightForecast: YWDayShort
 
-) : Parcelable
+) : Parcelable, IYWParts

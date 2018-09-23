@@ -2,68 +2,50 @@ package ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWDayTime
 
 @Parcelize
 /**Object with the weather forecast for the night*/
 data class YWDayTime(
 
-    val title: String,
+    override val title: String,
 
-    /**Minimum temperature for the time of day (°C).*/
-    val temperatureMinimum: String,
+    override val temperatureMinimum: String,
 
-    /**Maximum temperature for the time of day (°C).*/
-    val temperatureMaximum: String,
+    override val temperatureMaximum: String,
 
-    /**Average temperature for the time of day (°C).*/
-    val temperatureAverage: String,
+    override val temperatureAverage: String,
 
-    /**What the temperature feels like (°C).*/
-    val feelsLikeTemperature: String,
+    override val feelsLikeTemperature: String,
 
-    /**The url of the weather icon.*/
-    val iconUrl: String,
+    override val iconUrl: String,
 
-    /**Weather description.*/
-    val condition: String,
+    override val condition: String,
 
-    /**Light or dark time of the day.*/
-    val daytime: String,
+    override val daytime: String,
 
-    /**Polar day or polar night.*/
-    val polar: String,
+    override val polar: String,
 
-    /**Wind speed (meters per second).*/
-    val windSpeed: String,
+    override val windSpeed: String,
 
-    /**Speed of wind gusts (meters per second).*/
-    val windGustsSpeed: String,
+    override val windGustsSpeed: String,
 
-    /**Wind direction.*/
-    val windDirection: String,
+    override val windDirection: String,
 
-    /**Atmospheric pressure (mm Hg).*/
-    val atmosphericPressureInMmHg: String,
+    override val atmosphericPressureInMmHg: String,
 
-    /**Atmospheric pressure (hPa).*/
-    val atmosphericPressureInhPa: String,
+    override val atmosphericPressureInhPa: String,
 
-    /**Humidity (percent).*/
-    val humidity: String,
+    override val humidity: String,
 
-    /**Predicted amount of precipitation (mm).*/
-    val precipitationInMm: String,
+    override val precipitationInMm: String,
 
-    /**Predicted duration of precipitation (minutes).*/
-    val precipitationInMinutes: String,
+    override val precipitationInMinutes: String,
 
-    /**Type of precipitation.*/
-    val precipitationType: String,
+    override val precipitationType: String,
 
-    /**Intensity of precipitation.*/
-    val precipitationStrength: String,
+    override val precipitationStrength: String,
 
-    /**Cloud cover.*/
-    val cloudiness: String
+    override val cloudiness: String
 
-) : Parcelable
+) : Parcelable, IYWDayTime

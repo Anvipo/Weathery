@@ -1,38 +1,42 @@
 package ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather
 
 import android.content.Context
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWDayShortResponse
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWDayTimeResponse
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWHourInfoResponse
+import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWDayShortResponse
+import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWDayTimeResponse
+import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWHourInfoResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWPartsResponse
-import ru.mts.avpopo85.weathery.domain.mapper.base.ForecastMapper
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.*
+import ru.mts.avpopo85.weathery.domain.mapper.base.IForecastMapper
+import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWDayShort
+import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWDayTime
+import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWHourInfo
+import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWParts
 import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.utils.toDate
-import ru.mts.avpopo85.weathery.utils.ForecastListResponseType
-import ru.mts.avpopo85.weathery.utils.ForecastListType
+import ru.mts.avpopo85.weathery.utils.YWForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.YWForecastListType
+import ru.mts.avpopo85.weathery.utils.YWForecastType
 import javax.inject.Inject
 
 class YWForecastMapper
 @Inject constructor(private val context: Context) :
-    ForecastMapper<ForecastListResponseType, ForecastListType> {
+    IForecastMapper<YWForecastListResponseType, YWForecastListType> {
 
-    override fun mapForecast(forecastListResponse: ForecastListResponseType): ForecastListType =
+    override fun mapForecast(forecastListResponse: YWForecastListResponseType): YWForecastListType =
         forecastListResponse.map {
-            YWForecast(
+            YWForecastType(
                 date = it.date,
-                date_ts = it.date_ts.toDate(),
+                dateInUnixtime = it.dateInUnixtime.toDate(),
                 weekSerialNumber = it.weekSerialNumber,
                 sunriseInLocalTime = it.sunriseInLocalTime,
                 sunsetInLocalTime = it.sunsetInLocalTime,
                 moonCode = context.getMoonCodeString(it.moonCode),
                 moonText = context.getMoonTextString(it.moonText),
-                YWParts = mapPartsResponse(it.YWPartsResponse!!),
-                YWHours = mapHoursResponse(it.YWHours)
+                parts = mapPartsResponse(it.partsResponse!!),
+                hours = mapHoursResponse(it.hours)
             )
         }
 
-    private fun mapHoursResponse(YWHourInfoResponse: List<YWHourInfoResponse>?): List<YWHourInfo>? =
+    private fun mapHoursResponse(YWHourInfoResponse: List<IYWHourInfoResponse>?): List<YWHourInfo>? =
         YWHourInfoResponse?.map {
             YWHourInfo(
                 hourInLocalTime = "${it.hourInLocalTime}:00",
@@ -60,34 +64,34 @@ class YWForecastMapper
             YWParts(
                 nightForecast = mapDayTime(
                     "Прогноз на ночь",
-                    it.nightForecastResponseYW!!
+                    it.nightForecastResponse!!
                 ),
                 morningForecast = mapDayTime(
                     "Прогноз на утро",
-                    it.morningForecastResponseYW!!
+                    it.morningForecastResponse!!
                 ),
-                YWDayForecast = mapDayTime(
+                dayForecast = mapDayTime(
                     "Прогноз на день",
-                    it.YWDayForecastResponse!!
+                    it.dayForecastResponse!!
                 ),
                 eveningForecast = mapDayTime(
                     "Прогноз на вечер",
-                    it.eveningForecastResponseYW!!
+                    it.eveningForecastResponse!!
                 ),
-                _12HoursYWDayForecast = map12HoursForecast(
+                _12HoursDayForecast = map12HoursForecast(
                     "12 часовой прогноз на день",
-                    it._12HoursYWDayForecastResponse!!
+                    it._12HoursDayForecastResponse!!
                 ),
                 _12HoursNightForecast = map12HoursForecast(
                     "12 часовой прогноз на ночь",
-                    it._12HoursNightForecastResponseYW!!
+                    it._12HoursNightForecastResponse!!
                 )
             )
         }
 
     private fun mapDayTime(
         title: String,
-        YWDayForecastResponse: YWDayTimeResponse
+        YWDayForecastResponse: IYWDayTimeResponse
     ): YWDayTime =
         YWDayForecastResponse.let {
             YWDayTime(
@@ -116,7 +120,7 @@ class YWForecastMapper
 
     private fun map12HoursForecast(
         title: String,
-        _12HoursForecast: YWDayShortResponse
+        _12HoursForecast: IYWDayShortResponse
     ): YWDayShort =
         _12HoursForecast.let {
             YWDayShort(

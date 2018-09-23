@@ -2,20 +2,20 @@ package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementat
 
 import android.content.Context
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
-import ru.mts.avpopo85.weathery.domain.interactor.base.CurrentWeatherInteractor
+import ru.mts.avpopo85.weathery.domain.interactor.base.ICurrentWeatherInteractor
 import ru.mts.avpopo85.weathery.presentation.utils.parseError
-import ru.mts.avpopo85.weathery.presentation.weather.base.WeatherPresenter
+import ru.mts.avpopo85.weathery.presentation.weather.base.AbsWeatherPresenter
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
-import ru.mts.avpopo85.weathery.utils.CurrentWeatherType
+import ru.mts.avpopo85.weathery.utils.YWCurrentWeatherType
 import javax.inject.Inject
 
 class YWCurrentWeatherPresenter
 @Inject constructor(
-    private val currentWeatherInteractor: CurrentWeatherInteractor<CurrentWeatherType>,
+    private val currentWeatherInteractor: ICurrentWeatherInteractor<YWCurrentWeatherType>,
     private val schedulerManagerModule: SchedulerManagerModule,
     private val context: Context
-) : WeatherPresenter<CurrentWeatherContract.View>(),
-    CurrentWeatherContract.Presenter {
+) : AbsWeatherPresenter<CurrentWeatherContract.View<YWCurrentWeatherType>>(),
+    CurrentWeatherContract.Presenter<YWCurrentWeatherType> {
 
     override fun loadCurrentWeather() {
         disposable = currentWeatherInteractor.getCurrentWeather()
@@ -27,7 +27,7 @@ class YWCurrentWeatherPresenter
                 view?.hideLoadingProgress()
             }
             .subscribe(
-                { currentWeather: CurrentWeatherType? ->
+                { currentWeather: YWCurrentWeatherType? ->
                     if (currentWeather != null)
                         view?.showWeatherResponse(currentWeather)
                     else {

@@ -1,66 +1,44 @@
 package ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather
 
-import ru.mts.avpopo85.weathery.domain.model.base.CurrentWeather
+import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWCurrentWeather
 
 /**This object contains information about the current weather.*/
 data class YWCurrentWeather(
 
-    /**Temperature (°С).*/
     override val temperature: String,
 
-    /**What the temperature feels like (°С).*/
-    val feelsLikeTemperature: String,
+    override val feelsLikeTemperature: String,
 
-    /**
-     * The water temperature (°С).
-     *
-     * This parameter is returned for localities where this information is relevant.
-     */
-    val waterTemperature: String,
+    override val waterTemperature: String,
 
-    /**The url of the weather icon.*/
-    val iconUrl: String,
+    override val iconUrl: String,
 
-    /**Weather description.*/
-    val weatherDescription: String,
+    override val weatherDescription: String,
 
-    /**Wind speed (meters per second).*/
-    val windSpeed: String,
+    override val windSpeed: String,
 
-    /**Speed of wind gusts (meters per second).*/
-    val windGustsSpeed: String,
+    override val windGustsSpeed: String,
 
-    /**Wind direction.*/
-    val windDirection: String,
+    override val windDirection: String,
 
-    /**Atmospheric pressure (mm Hg).*/
-    val atmosphericPressureInMmHg: String,
+    override val atmosphericPressureInMmHg: String,
 
-    /**Atmospheric pressure (hPa).*/
-    val atmosphericPressureInhPa: String,
+    override val atmosphericPressureInhPa: String,
 
-    /**Humidity (percent).*/
-    val humidity: String,
+    override val humidity: String,
 
-    /**Light or dark time of the day.*/
-    val daytime: String,
+    override val daytime: String,
 
-    /**Polar day or polar night.*/
-    val polar: String,
+    override val polar: String,
 
-    /**Time of year in this locality.*/
-    val season: String,
+    override val season: String,
 
-    /**The time when weather data was measured, in Unix time.*/
-    val observationUnixTime: String,
+    override val observationUnixTime: String,
 
-    /**Type of precipitation.*/
-    val precipitationType: String,
+    override val precipitationType: String,
 
-    /**Intensity of precipitation.*/
-    val precipitationStrength: String,
+    override val precipitationStrength: String,
 
-    /**Cloud cover.*/
-    val cloudiness: String
+    override val cloudiness: String
 
-) : CurrentWeather
+) : IYWCurrentWeather
