@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.activity_owm.*
 import org.jetbrains.anko.startActivity
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.openWeatherMap.OWMCurrentWeatherActivity
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.OWMForecastActivity
 
 class OWMActivity : AppCompatActivity() {
 
@@ -22,9 +23,9 @@ class OWMActivity : AppCompatActivity() {
             startActivity<OWMCurrentWeatherActivity>()
         }
 
-//        owm_forecast_B.setOnClickListener {
-//            startActivity<OWMForecastActivity>()
-//        }
+        owm_forecast_B.setOnClickListener {
+            startActivity<OWMForecastActivity>()
+        }
 
     }
 

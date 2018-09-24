@@ -16,15 +16,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!--<Button-->
-        <!--android:cityID="@+cityID/owm_forecast_B"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/forecast"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toStartOf="@+cityID/weatherBtnsLayout"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--tools:ignore="UnusedIds" />-->
+        <Button
+            android:id="@+id/owm_forecast_B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forecast" />
 
         <Button
             android:id="@+id/owm_current_weather_B"

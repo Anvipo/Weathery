@@ -1,9 +1,9 @@
-package ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap
+package ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
-import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.IOWMMainResponse
+import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.currentWeather.IOWMMainResponse
 
 open class OWMMainResponse(
 
@@ -27,4 +27,5 @@ open class OWMMainResponse(
     @Expose
     override var maximumTemperature: Double = 0.0
 
-) : RealmObject(), IOWMMainResponse
+) : RealmObject(),
+    IOWMMainResponse

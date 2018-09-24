@@ -28,6 +28,7 @@
         <activity android:name=".presentation.weather.currentWeather.implementation.yandexWeather.YWCurrentWeatherActivity" />
         <activity android:name=".presentation.weather.forecast.implementation.yandexWeather.YWForecastActivity" />
         <activity android:name=".presentation.weather.currentWeather.implementation.openWeatherMap.OWMCurrentWeatherActivity" />
+        <activity android:name=".presentation.weather.forecast.implementation.openWeatherMap.OWMForecastActivity" />
     </application>
 
 </manifest>

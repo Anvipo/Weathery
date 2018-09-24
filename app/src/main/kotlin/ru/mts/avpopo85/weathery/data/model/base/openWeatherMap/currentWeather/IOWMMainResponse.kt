@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.data.model.base.openWeatherMap
+package ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.currentWeather
 
 
 interface IOWMMainResponse {
@@ -14,7 +14,7 @@ interface IOWMMainResponse {
 
     /**Minimum temperature at the moment.
      *
-     *This is deviation from current temp
+     *This is deviation from current temperature
      *that is possible for large cities and megalopolises geographically expanded
      *(use these parameter optionally).
      *
@@ -23,7 +23,7 @@ interface IOWMMainResponse {
 
     /**Maximum temperature at the moment.
      *
-     *This is deviation from current temp
+     *This is deviation from current temperature
      *that is possible for large cities and megalopolises geographically expanded
      *(use these parameter optionally).
      *

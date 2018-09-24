@@ -1,19 +1,20 @@
 package ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap
 
 import io.reactivex.Single
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.currentWeather.IOWMCurrentWeatherResponse
-import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OWMConstants.API_ID
+import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OWMConstants
 import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OWMUnitsFormat
 import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OpenWeatherMapLanguages
-import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
 
-@Suppress("SpellCheckingInspection", "unused")
-interface IOWMCurrentWeatherApiService {
+@Suppress("unused")
+interface IOWMForecastApiService {
 
-    @GET("weather")
-    fun getCurrentWeatherById(
+    @GET("forecast")
+    fun getForecastById(
         @Query("id")
         cityID: Int,
 
@@ -24,25 +25,10 @@ interface IOWMCurrentWeatherApiService {
         lang: String = OpenWeatherMapLanguages.RUSSIAN.lang_code,
 
         @Query("appid")
-        appId: String = API_ID
-    ): Single<OWMCurrentWeatherResponseType>
+        appId: String = OWMConstants.API_ID
+    ): Call<OWMForecastResponseType>
 
-    @GET("weather")
-    fun getCurrentWeatherForSeveralIDs(
-        @Query("id")
-        cityIDs: List<Int>,
-
-        @Query("units")
-        units: String = OWMUnitsFormat.METRIC._name,
-
-        @Query("lang")
-        lang: String = OpenWeatherMapLanguages.RUSSIAN.lang_code,
-
-        @Query("appid")
-        appId: String = API_ID
-    ): Single<IOWMCurrentWeatherResponse>
-
-    @GET("weather")
+    @GET("forecast")
     fun getCurrentWeatherByCityName(
         @Query("q")
         cityName: String,
@@ -54,10 +40,10 @@ interface IOWMCurrentWeatherApiService {
         lang: String = OpenWeatherMapLanguages.RUSSIAN.lang_code,
 
         @Query("appid")
-        appId: String = API_ID
+        appId: String = OWMConstants.API_ID
     ): Single<IOWMCurrentWeatherResponse>
 
-    @GET("weather")
+    @GET("forecast")
     fun getCurrentWeatherByGeographicCoordinates(
         @Query("lat")
         lat: String,
@@ -72,10 +58,10 @@ interface IOWMCurrentWeatherApiService {
         lang: String = OpenWeatherMapLanguages.RUSSIAN.lang_code,
 
         @Query("appid")
-        appId: String = API_ID
+        appId: String = OWMConstants.API_ID
     ): Single<IOWMCurrentWeatherResponse>
 
-    @GET("weather")
+    @GET("forecast")
     fun getCurrentWeatherByZipCode(
         @Query("zip")
         zip: String,
@@ -87,7 +73,7 @@ interface IOWMCurrentWeatherApiService {
         lang: String = OpenWeatherMapLanguages.RUSSIAN.lang_code,
 
         @Query("appid")
-        appId: String = API_ID
+        appId: String = OWMConstants.API_ID
     ): Single<IOWMCurrentWeatherResponse>
 
 }

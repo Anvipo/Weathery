@@ -1,0 +1,31 @@
+package ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.forecast
+
+import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMCloudsResponse
+import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMWeatherResponse
+import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather.OWMWindResponse
+import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecast.OWMForecastMainResponse
+import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecast.OWMForecastSysResponse
+import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecast.OWMRainResponse
+
+@Suppress("SpellCheckingInspection")
+interface IOWMListItemResponse {
+
+    /**Time of data forecasted, unix, UTC*/
+    val timeOfDataForecastedUnixUTC: Double
+
+    val rain: OWMRainResponse?
+
+    /**Data/time of calculation, UTC*/
+    val timeOfCalculationUTC: String
+
+    val weather: List<OWMWeatherResponse>
+
+    val main: OWMForecastMainResponse
+
+    val clouds: OWMCloudsResponse
+
+    val sys: OWMForecastSysResponse
+
+    val wind: OWMWindResponse
+
+}

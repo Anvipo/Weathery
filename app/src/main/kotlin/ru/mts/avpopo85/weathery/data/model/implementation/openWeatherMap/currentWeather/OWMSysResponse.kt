@@ -1,9 +1,9 @@
-package ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap
+package ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
-import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.IOWMSysResponse
+import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.currentWeather.IOWMSysResponse
 
 open class OWMSysResponse(
 
@@ -31,4 +31,5 @@ open class OWMSysResponse(
     @Expose
     override var sunset: Int = 0
 
-) : RealmObject(), IOWMSysResponse
+) : RealmObject(),
+    IOWMSysResponse

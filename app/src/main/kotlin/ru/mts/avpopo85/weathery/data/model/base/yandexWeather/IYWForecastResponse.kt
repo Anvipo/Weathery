@@ -10,7 +10,7 @@ interface IYWForecastResponse : IForecastResponse {
     val saveUnixTime: Long
 
     /**Date of the forecast, in the format YYYY-MM-DD.*/
-    override val date: String
+    val date: String
 
     /**The date of the forecast in Unix time.*/
     val dateInUnixtime: Int

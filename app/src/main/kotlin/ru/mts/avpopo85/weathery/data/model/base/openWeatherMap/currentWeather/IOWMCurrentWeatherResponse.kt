@@ -1,9 +1,11 @@
-package ru.mts.avpopo85.weathery.data.model.base.openWeatherMap
+package ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.currentWeather
 
 import ru.mts.avpopo85.weathery.data.model.base.common.ICurrentWeatherResponse
-import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.OWMMainResponse
-import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.OWMSysResponse
-import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.OWMWeatherResponse
+import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.common.IOWMCloudsResponse
+import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.common.IOWMCoordinatesResponse
+import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMWeatherResponse
+import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather.OWMMainResponse
+import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather.OWMSysResponse
 
 interface IOWMCurrentWeatherResponse : ICurrentWeatherResponse {
 

@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.data.model.base.openWeatherMap
+package ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.currentWeather
 
 
 interface IOWMWindResponse {
@@ -6,9 +6,9 @@ interface IOWMWindResponse {
     /**Wind speed.
      *
      *Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.*/
-    val speed: Int
+    val speed: Double
 
     /**Wind direction, degrees (meteorological)*/
-    val directionInDegrees: Int
+    val directionInDegrees: Double
 
 }
