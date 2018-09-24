@@ -18,7 +18,7 @@
         tools:ignore="UnusedIds" />
 
     <include
-        layout="@layout/item_yandex_current_weather"
+        layout="@layout/item_yw_current_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

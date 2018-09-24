@@ -105,4 +105,102 @@
     <string name="average_temperature_value">Значение средней температуры</string>
     <string name="maximum_temperature">Максимальная температура</string>
     <string name="maximum_temperature_value">Значение максимальной температуры</string>
+    <string name="meters">метров</string>
+    <string name="description">Описание</string>
+    <string name="description_value">Значение описания</string>
+    <string name="visibility">Видимость</string>
+    <string name="visibility_value">Значение видимости</string>
+    <string name="yandex_weather">Яндекс.Погода</string>
+    <string name="open_weather_map">Open Weather Map</string>
+
+    <!--1xx informational codes-->
+    <string name="unknown_informational_code_1xx">Неизвестный информационный код (1xx)</string>
+    <string name="_continue">Продолжай</string>
+    <string name="switching_protocols">Переключение протоколов</string>
+    <string name="processing">Идёт обработка</string>
+
+    <!--2xx success codes-->
+    <string name="unknown_success_code_2xx">Unknown success code (2xx)</string>
+    <string name="ok">OK</string>
+    <string name="created">Created</string>
+    <string name="accepted">Accepted</string>
+    <string name="non_authoritative_information">Non-authoritative information</string>
+    <string name="no_content">No content</string>
+    <string name="reset_content">Reset content</string>
+    <string name="partial_content">Partial content</string>
+    <string name="multi_status">Multi-status</string>
+    <string name="already_reported">Already reported</string>
+    <string name="im_used">IM used</string>
+
+    <!--3xx redirection codes-->
+    <string name="unknown_error_3xx">Неизвестная ошибка перенаправления (3xx)</string>
+    <string name="multiple_choices">Множество выборов</string>
+    <string name="moved_permanently">Перемещено навсегда</string>
+    <string name="found_or_moved_temporarily">Найдено или перемещено временно</string>
+    <string name="see_other">Смотреть другое</string>
+    <string name="not_modified">Не изменялось</string>
+    <string name="use_proxy">Использовать прокси</string>
+    <string name="temporary_redirect">Временное перенаправление</string>
+    <string name="permanent_redirect">Постоянное перенаправление</string>
+
+    <!--4xx client errors-->
+    <string name="unknown_error_4xx">Неизвестная ошибка клиента (4xx)</string>
+    <string name="bad_request">Неверный запрос</string>
+    <string name="unauthorized">Неавторизован</string>
+    <string name="payment_required">Необходима оплата</string>
+    <string name="forbidden">Доступ запрещён</string>
+    <string name="not_found">Не найдено</string>
+    <string name="method_not_allowed">Метод не поддерживается</string>
+    <string name="not_acceptable">Неприемлемо</string>
+    <string name="proxy_authentication_required">Необходима аутентификация прокси</string>
+    <string name="request_timeout">Истекло время ожидания</string>
+    <string name="conflict">Конфликт</string>
+    <string name="gone">Удалён (ресурс раньше был по указанному URL, но был удалён и теперь недоступен)</string>
+    <string name="length_required">Необходима длина</string>
+    <string name="precondition_failed">Условие ложно</string>
+    <string name="payload_too_large">Полезная нагрузка слишком велика</string>
+    <string name="uri_too_long">URI слишком длинный</string>
+    <string name="unsupported_media_type">Неподдерживаемый тип данных</string>
+    <string name="range_not_satisfiable">Диапазон не достижим</string>
+    <string name="expectation_failed">Ожидание не удалось</string>
+    <string name="im_a_teapot">Я — чайник</string>
+    <string name="misdirected_request">Misdirected request</string>
+    <string name="unprocessable_entity">Необрабатываемый экземпляр</string>
+    <string name="locked">Заблокировано</string>
+    <string name="failed_dependency">Невыполненная зависимость</string>
+    <string name="upgrade_required">Обновите страницу</string>
+    <string name="precondition_required">Необходимо предусловие</string>
+    <string name="too_many_requests">Слишком много запросов</string>
+    <string name="request_header_fields_too_large">Поля заголовка запроса слишком большие</string>
+    <string name="requested_host_unavailable">Requested host unavailable</string>
+    <string name="retry_with">Повторить с</string>
+    <string name="unavailable_for_legal_reasons">Недоступно по юридическим причинам</string>
+
+    <!--5xx server errors-->
+    <string name="unknown_error_5xx">Неизвестная ошибка сервера (5xx)</string>
+    <string name="internal_server_error">Внутренняя ошибка сервера (пожалуйста, попробуйте позже)</string>
+    <string name="not_implemented">Не реализовано</string>
+    <string name="bad_gateway">Ошибочный шлюз</string>
+    <string name="service_unavailable">Сервис недоступен</string>
+    <string name="gateway_timeout">Шлюз не отвечает</string>
+    <string name="http_version_not_supported">Версия HTTP не поддерживается</string>
+    <string name="variant_also_negotiates">Вариант тоже проводит согласование</string>
+    <string name="insufficient_storage">Переполнение хранилища</string>
+    <string name="loop_detected">Обнаружено бесконечное перенаправление</string>
+    <string name="bandwidth_limit_exceeded">Исчерпана пропускная ширина канала</string>
+    <string name="not_extended">Не расширено</string>
+    <string name="network_authentication_required">Требуется сетевая аутентификация</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="web_server_is_down">Веб-сервер не работает</string>
+    <string name="connection_timed_out">Соединение не отвечает</string>
+    <string name="origin_is_unreachable">Источник недоступен</string>
+    <string name="a_timeout_occurred">Время ожидания истекло</string>
+    <string name="ssl_handshake_failed">Квитирование SSL не удалось</string>
+    <string name="invalid_ssl_certificate">Недействительный сертификат SSL</string>
+    <string name="please_try_later">Пожалуйста, попробуйте позже</string>
+    <string name="unknown_http_code">Неизвестный http код</string>
+    <string name="the_server_is_temporarily_unavailable">Сервер временно недоступен</string>
+    <string name="authorisation_error">Ошибка авторизации</string>
+    <string name="response_timeout">Время ожидания ответа истекло</string>
+    <string name="make_sure_your_device_has_a_network_connection">Убедитесь, что на устройсте есть подключение к сети</string>
 </resources>

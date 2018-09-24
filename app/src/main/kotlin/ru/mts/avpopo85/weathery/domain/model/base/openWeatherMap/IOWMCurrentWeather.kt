@@ -16,7 +16,7 @@ interface IOWMCurrentWeather : ICurrentWeather {
     val main: IOWMMain
 
     /**Visibility, meter*/
-    val visibility: Int
+    val visibilityInMeters: Int
 
     val wind: IOWMWind
 

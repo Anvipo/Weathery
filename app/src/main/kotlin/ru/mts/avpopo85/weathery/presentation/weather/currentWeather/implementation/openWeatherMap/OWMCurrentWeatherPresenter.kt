@@ -1,7 +1,6 @@
 package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.openWeatherMap
 
 import android.content.Context
-import retrofit2.HttpException
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.ICurrentWeatherInteractor
 import ru.mts.avpopo85.weathery.presentation.utils.parseError
@@ -37,11 +36,6 @@ class OWMCurrentWeatherPresenter
                 },
                 { throwable: Throwable? ->
                     if (throwable != null) {
-                        if (throwable is HttpException) {
-                            val s = throwable.response().raw().request().url()
-                            val ss = 1
-                        }
-
                         val message = context.parseError(throwable)
 
                         view?.showError(message)

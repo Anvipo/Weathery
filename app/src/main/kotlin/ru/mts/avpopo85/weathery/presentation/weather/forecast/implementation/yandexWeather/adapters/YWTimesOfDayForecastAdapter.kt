@@ -16,7 +16,7 @@ class YWTimesOfDayForecastAdapter(private val items: List<IYWDayTime>) :
     ): YWTimeOfDayForecastViewHolder {
         val view = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.item_yandex_time_of_day_forecast, parent, false)
+            .inflate(R.layout.item_yw_time_of_day_forecast, parent, false)
 
         return YWTimeOfDayForecastViewHolder(view)
     }

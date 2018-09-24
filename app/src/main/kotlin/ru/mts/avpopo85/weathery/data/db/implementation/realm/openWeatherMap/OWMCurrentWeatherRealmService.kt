@@ -8,7 +8,7 @@ import ru.mts.avpopo85.weathery.data.utils.isFreshThan
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 
 //TODO пользователь выбирает интервал обновления
-const val OWM_DEFAULT_CACHE_LIFETIME = 900_000L //= 15 min
+const val OWM_DEFAULT_CACHE_LIFETIME: Long = 1_800_000 //= 30 min
 
 class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeatherResponseType> {
 

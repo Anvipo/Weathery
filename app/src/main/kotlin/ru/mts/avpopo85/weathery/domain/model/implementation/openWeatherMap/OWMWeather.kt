@@ -4,7 +4,7 @@ import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.IOWMWeather
 
 data class OWMWeather(
 
-    override val id: Int,
+    override val conditionCode: Int,
 
     override val groupOfWeatherParameters: String,
 

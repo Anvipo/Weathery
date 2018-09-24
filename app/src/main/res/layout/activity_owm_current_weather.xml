@@ -17,17 +17,12 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UnusedIds" />
 
-    <TextView
-        android:id="@+id/owm_cw_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <!--<include
-        layout="@layout/item_yandex_current_weather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <include
+        layout="@layout/item_owm_current_weather"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

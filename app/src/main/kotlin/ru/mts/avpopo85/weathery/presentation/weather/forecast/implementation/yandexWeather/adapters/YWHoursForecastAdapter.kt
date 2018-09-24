@@ -13,7 +13,7 @@ class YWHoursForecastAdapter(private val items: List<IYWHourInfo>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YW12HoursForecastViewHolder {
         val view = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.item_yandex_hour_forecast, parent, false)
+            .inflate(R.layout.item_yw_hour_forecast, parent, false)
 
         return YW12HoursForecastViewHolder(view)
     }

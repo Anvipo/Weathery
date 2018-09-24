@@ -1,10 +1,10 @@
 package ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap
 
-
+//https://openweathermap.org/weather-conditions
 interface IOWMWeather {
 
     /**Weather condition id*/
-    val id: Int
+    val conditionCode: Int
 
     /**Group of weather parameters (Rain, Snow, Extreme etc.)*/
     val groupOfWeatherParameters: String

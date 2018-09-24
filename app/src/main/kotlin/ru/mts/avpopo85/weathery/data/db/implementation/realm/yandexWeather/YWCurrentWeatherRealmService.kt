@@ -7,7 +7,7 @@ import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.utils.isFreshThan
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 
-const val YW_DEFAULT_CACHE_LIFETIME = 7_200_000L //= 2 hours
+const val YW_DEFAULT_CACHE_LIFETIME: Long = 7_200_000 //= 2 hours
 
 class YWCurrentWeatherRealmService : ICurrentWeatherDbService<YWCurrentWeatherResponseType> {
 

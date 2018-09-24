@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/observation_time"
+            android:gravity="center"
+            android:text="@string/observation_time"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/observationUnixTimeValueOWMCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/observation_time_value"
+            android:gravity="center"
+            android:text="@string/observation_time_value"
+            android:textAppearance="?attr/textAppearanceListItem"
+            tools:ignore="UnusedIds" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/temperature"
+            android:gravity="center"
+            android:text="@string/temperature"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/temperatureValueOWMCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:contentDescription="@string/temperature_value"
+            android:gravity="center"
+            android:text="@string/temperature_value"
+            android:textAppearance="?attr/textAppearanceListItem"
+            tools:ignore="UnusedIds" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/visibility"
+            android:gravity="center"
+            android:text="@string/visibility"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/visibilityValueOWMCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/visibility_value"
+            android:gravity="center"
+            android:text="@string/visibility_value"
+            android:textAppearance="?attr/textAppearanceListItem"
+            tools:ignore="UnusedIds" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/wind_speed"
+                android:gravity="center"
+                android:text="@string/wind_speed"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/windSpeedValueOWMCWTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/wind_speed_value"
+                android:gravity="center"
+                android:text="@string/wind_speed_value"
+                android:textAppearance="?attr/textAppearanceListItem"
+                tools:ignore="UnusedIds" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/wind_direction"
+                android:gravity="center"
+                android:text="@string/wind_direction"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/windDirectionValueOWMCWTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:contentDescription="@string/wind_direction_value"
+                android:gravity="center"
+                android:text="@string/wind_direction_value"
+                android:textAppearance="?attr/textAppearanceListItem"
+                tools:ignore="UnusedIds" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/atmospheric_pressure"
+            android:gravity="center"
+            android:text="@string/atmospheric_pressure"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/atmosphericPressureValueOWMCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:contentDescription="@string/atmospheric_pressure_value"
+            android:gravity="center"
+            android:text="@string/atmospheric_pressure_value"
+            android:textAppearance="?attr/textAppearanceListItem"
+            tools:ignore="UnusedIds" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/humidity"
+            android:gravity="center"
+            android:text="@string/humidity"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/humidityValueOWMCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/humidity_value"
+            android:gravity="center"
+            android:text="@string/humidity_value"
+            android:textAppearance="?attr/textAppearanceListItem"
+            tools:ignore="UnusedIds" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/sunrise_time"
+                android:gravity="center"
+                android:text="@string/sunrise_time"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/sunriseValueOWMCWTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:contentDescription="@string/sunrise_time_value"
+                android:gravity="center"
+                android:text="@string/sunrise_time_value"
+                android:textAppearance="?attr/textAppearanceListItem"
+                tools:ignore="UnusedIds" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/sunset_time"
+                android:gravity="center"
+                android:text="@string/sunset_time"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/sunsetValueOWMCWTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:contentDescription="@string/sunset_time_value"
+                android:gravity="center"
+                android:text="@string/sunset_time_value"
+                android:textAppearance="?attr/textAppearanceListItem"
+                tools:ignore="UnusedIds" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/cloudiness"
+            android:gravity="center"
+            android:text="@string/cloudiness"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/cloudinessValueOWMCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/cloudiness_value"
+            android:gravity="center"
+            android:text="@string/cloudiness_value"
+            android:textAppearance="?attr/textAppearanceListItem"
+            tools:ignore="UnusedIds" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/description"
+            android:gravity="center"
+            android:text="@string/description"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/descriptionValueOWMCWTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/description_value"
+            android:gravity="center"
+            android:text="@string/description_value"
+            android:textAppearance="?attr/textAppearanceListItem"
+            tools:ignore="UnusedIds" />
+    </LinearLayout>
+</LinearLayout>

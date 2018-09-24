@@ -26,6 +26,7 @@ fun Int.toDate(): String {
     return simpleDateFormat.format(date)
 }
 
+@Suppress("unused")
 fun Int.toDateTime(): String {
     val date = Date(this * 1000L)
 

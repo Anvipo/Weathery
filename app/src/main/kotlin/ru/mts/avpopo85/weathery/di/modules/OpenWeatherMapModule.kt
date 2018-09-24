@@ -44,37 +44,8 @@ class OpenWeatherMapModule {
 
     @Provides
     @OpenWeatherMapScope
-    fun provideOWMCurrentWeatherMapper(context: Context):
+    fun provideOWMCurrentWeatherMapper():
             ICurrentWeatherMapper<OWMCurrentWeatherResponseType, OWMCurrentWeatherType> =
-        OWMCurrentWeatherMapper(context)
-
-    /*@Provides
-    @OpenWeatherMapScope
-    fun provideYWForecastPresenter(
-        forecastInteractor: IForecastInteractor<YWForecastListType>,
-        schedulerManagerModule: SchedulerManagerModule,
-        context: Context
-    ): ForecastContract.Presenter<YWForecastListType> =
-        YWForecastPresenter(
-            forecastInteractor,
-            schedulerManagerModule,
-            context
-        )
-
-    @Provides
-    @OpenWeatherMapScope
-    fun provideYWForecastInteractor(
-        forecastRepository: IForecastRepository<YWForecastListResponseType>,
-        forecastMapper: IForecastMapper<YWForecastListResponseType, YWForecastListType>
-    ): IForecastInteractor<YWForecastListType> =
-        YWForecastInteractor(
-            forecastRepository,
-            forecastMapper
-        )
-
-    @Provides
-    @OpenWeatherMapScope
-    fun provideYWForecastMapper(context: Context): IForecastMapper<YWForecastListResponseType, YWForecastListType> =
-        YWForecastMapper(context)*/
+        OWMCurrentWeatherMapper()
 
 }

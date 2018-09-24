@@ -9,7 +9,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.main.item_yandex_forecast.yandex_hours_forecast_recycler_view
+import kotlinx.android.synthetic.main.item_yw_forecast.yandex_hours_forecast_recycler_view
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWHourInfo
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWParts
@@ -24,7 +24,7 @@ class YWForecastFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.item_yandex_forecast, container, false) as ViewGroup
+    ): View? = inflater.inflate(R.layout.item_yw_forecast, container, false) as ViewGroup
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

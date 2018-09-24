@@ -3,11 +3,14 @@ package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementat
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.ProgressBar
-import kotlinx.android.synthetic.main.activity_owm_current_weather.owm_current_weather_PB
-import kotlinx.android.synthetic.main.activity_owm_current_weather.owm_cw_TV
+import kotlinx.android.synthetic.main.activity_owm_current_weather.*
+import kotlinx.android.synthetic.main.item_owm_current_weather.*
+import org.jetbrains.anko.longToast
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.OpenWeatherMapModule
+import ru.mts.avpopo85.weathery.presentation.utils.CELSIUS_DEGREE
+import ru.mts.avpopo85.weathery.presentation.utils.DEGREE
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.AbsCurrentWeatherActivity
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
@@ -42,26 +45,28 @@ class OWMCurrentWeatherActivity :
     @SuppressLint("SetTextI18n")
     override fun showWeatherResponse(data: OWMCurrentWeatherType) {
         data.let {
-            owm_cw_TV.text = it.toString()
-            /*temperatureValueCWTV.text = "${it.temperature} $CELSIUS_DEGREE"
-            feelsLikeTemperatureValueCWTV.text = "${it.feelsLikeTemperature}$CELSIUS_DEGREE"
-            conditionValueCWTV.text = it.weatherDescription
-            windSpeedValueCWTV.text = "${it.windSpeed} ${getString(R.string.meters_per_second)}"
-            windGustsSpeedValueCWTV.text =
-                    "${it.windGustsSpeed} ${getString(R.string.meters_per_second)}"
-            windDirectionValueCWTV.text = it.windDirection
-            atmosphericPressureInMmHgValueCWTV.text =
-                    "${it.atmosphericPressureInMmHg} ${getString(R.string.mm_hg)}"
-            atmosphericPressureInhPaValueCWTV.text =
-                    "${it.atmosphericPressureInhPa} ${getString(R.string.hPa)}"
-            humidityValueCWTV.text = "${it.humidity}%"
-            precipitationTypeValueCWTV.text = it.precipitationType
-            precipitationStrengthValueCWTV.text = it.precipitationStrength
-            cloudinessValueCWTV.text = it.cloudiness
-            daytimeValueCWTV.text = it.daytime
-            polarValueCWTV.text = it.polar
-            seasonValueCWTV.text = it.season
-            observationUnixTimeValueCWTV.text = it.observationUnixTime*/
+            observationUnixTimeValueOWMCWTV.text = it.date
+            cloudinessValueOWMCWTV.text = "${it.clouds.cloudiness}%"
+            temperatureValueOWMCWTV.text = "${it.main.temperature} $CELSIUS_DEGREE"
+            atmosphericPressureValueOWMCWTV.text =
+                    "${it.main.atmosphericPressureInhPa} ${getString(R.string.hPa)}"
+            humidityValueOWMCWTV.text = "${it.main.humidity}%"
+            sunriseValueOWMCWTV.text = it.sys.sunrise
+            sunsetValueOWMCWTV.text = it.sys.sunset
+            visibilityValueOWMCWTV.text = "${it.visibilityInMeters} ${getString(R.string.meters)}"
+            windSpeedValueOWMCWTV.text =
+                    "${it.wind.speedInUnits} ${getString(R.string.meters_per_second)}"
+            windDirectionValueOWMCWTV.text = "${it.wind.directionInDegrees}$DEGREE"
+
+            val onlyOne = it.weather.size == 1
+
+            if (onlyOne) {
+                val description = it.weather.first().description
+
+                descriptionValueOWMCWTV.text = description
+            } else {
+                longToast("${this::class.java.simpleName}.showWeatherResponse - data.weather.size > 1")
+            }
         }
     }
 

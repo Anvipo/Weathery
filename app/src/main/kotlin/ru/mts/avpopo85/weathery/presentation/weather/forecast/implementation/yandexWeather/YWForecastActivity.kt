@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ProgressBar
-import kotlinx.android.synthetic.main.activity_yandex_forecast.pager
-import kotlinx.android.synthetic.main.activity_yandex_forecast.yandex_forecast_PB
+import kotlinx.android.synthetic.main.activity_yw_forecast.pager
+import kotlinx.android.synthetic.main.activity_yw_forecast.yandex_forecast_PB
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.YandexWeatherModule
@@ -29,7 +29,7 @@ class YWForecastActivity : AbsForecastActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_yandex_forecast)
+        setContentView(R.layout.activity_yw_forecast)
 
         App.appComponentForYandexWeather.plus(YandexWeatherModule())
             .inject(this)

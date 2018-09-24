@@ -104,4 +104,103 @@
     <string name="average_temperature_value">Average temperature</string>
     <string name="maximum_temperature">Maximum temperature</string>
     <string name="maximum_temperature_value">Maximum temperature value</string>
+    <string name="meters">meters</string>
+    <string name="description">Description</string>
+    <string name="description_value">Description value</string>
+    <string name="visibility">Visibility</string>
+    <string name="visibility_value">Visibility value</string>
+    <string name="yandex_weather">Yandex.Weather</string>
+    <string name="open_weather_map">Open Weather Map</string>
+
+    <!--1xx informational codes-->
+    <string name="unknown_informational_code_1xx">Unknown informational code (1xx)</string>
+    <string name="_continue">Continue</string>
+    <string name="switching_protocols">Switching protocols</string>
+    <string name="processing">Processing</string>
+
+    <!--2xx success codes-->
+    <string name="unknown_success_code_2xx">Unknown success code (2xx)</string>
+    <string name="ok">OK</string>
+    <string name="created">Created</string>
+    <string name="accepted">Accepted</string>
+    <string name="non_authoritative_information">Non-authoritative information</string>
+    <string name="no_content">No content</string>
+    <string name="reset_content">Reset content</string>
+    <string name="partial_content">Partial content</string>
+    <string name="multi_status">Multi-status</string>
+    <string name="already_reported">Already reported</string>
+    <string name="im_used">IM used</string>
+
+    <!--3xx redirection codes-->
+    <string name="unknown_error_3xx">Unknown redirection code (3xx)</string>
+    <string name="multiple_choices">Multiple choices</string>
+    <string name="moved_permanently">Moved permanently</string>
+    <string name="found_or_moved_temporarily">Found or Moved temporarily</string>
+    <string name="see_other">See other</string>
+    <string name="not_modified">Not modified</string>
+    <string name="use_proxy">Use proxy</string>
+    <string name="temporary_redirect">Temporary redirect</string>
+    <string name="permanent_redirect">Permanent redirect</string>
+
+    <!--4xx client errors-->
+    <string name="unknown_error_4xx">Unknown client error (4xx)</string>
+    <string name="bad_request">Bad request</string>
+    <string name="unauthorized">Unauthorized</string>
+    <string name="payment_required">Payment required</string>
+    <string name="forbidden">Forbidden</string>
+    <string name="not_found">Not found</string>
+    <string name="method_not_allowed">Method not allowed</string>
+    <string name="not_acceptable">Not acceptable</string>
+    <string name="proxy_authentication_required">Proxy authentication required</string>
+    <string name="request_timeout">Request timeout</string>
+    <string name="conflict">Conflict</string>
+    <string name="gone">Gone</string>
+    <string name="length_required">Length required</string>
+    <string name="precondition_failed">Precondition failed</string>
+    <string name="payload_too_large">Payload too large</string>
+    <string name="uri_too_long">URI too long</string>
+    <string name="unsupported_media_type">Unsupported media type</string>
+    <string name="range_not_satisfiable">Range not satisfiable</string>
+    <string name="expectation_failed">Expectation failed</string>
+    <string name="im_a_teapot">I’m a teapot</string>
+    <string name="misdirected_request">Misdirected request</string>
+    <string name="unprocessable_entity">Unprocessable entity</string>
+    <string name="locked">Locked</string>
+    <string name="failed_dependency">Failed dependency</string>
+    <string name="upgrade_required">Upgrade required</string>
+    <string name="precondition_required">Precondition required</string>
+    <string name="too_many_requests">Too many requests</string>
+    <string name="request_header_fields_too_large">Request header fields too large</string>
+    <string name="requested_host_unavailable">Requested host unavailable</string>
+    <string name="retry_with">Retry with</string>
+    <string name="unavailable_for_legal_reasons">Unavailable for legal reasons</string>
+
+    <!--5xx server errors-->
+    <string name="unknown_error_5xx">Unknown server error (5xx)</string>
+    <string name="internal_server_error">Internal server error</string>
+    <string name="not_implemented">Not implemented</string>
+    <string name="bad_gateway">Bad gateway</string>
+    <string name="service_unavailable">Service unavailable</string>
+    <string name="gateway_timeout">Gateway timeout</string>
+    <string name="http_version_not_supported">HTTP version not supported</string>
+    <string name="variant_also_negotiates">Variant also negotiates</string>
+    <string name="insufficient_storage">Insufficient storage</string>
+    <string name="loop_detected">Loop detected</string>
+    <string name="bandwidth_limit_exceeded">Bandwidth limit exceeded</string>
+    <string name="not_extended">Not extended</string>
+    <string name="network_authentication_required">Network authentication required</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="web_server_is_down">Web server is down</string>
+    <string name="connection_timed_out">Connection timed out</string>
+    <string name="origin_is_unreachable">Origin is unreachable</string>
+    <string name="a_timeout_occurred">A timeout occurred</string>
+    <string name="ssl_handshake_failed">SSL handshake failed</string>
+    <string name="invalid_ssl_certificate">Invalid SSL certificate</string>
+
+    <string name="please_try_later">Please, try later</string>
+    <string name="unknown_http_code">Unknown http code</string>
+    <string name="the_server_is_temporarily_unavailable">The server is temporarily unavailable</string>
+    <string name="authorisation_error">Authorisation error</string>
+    <string name="response_timeout">Response timeout</string>
+    <string name="make_sure_your_device_has_a_network_connection">Make sure your device has a network connection</string>
 </resources>

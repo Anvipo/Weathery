@@ -1,16 +1,12 @@
 package ru.mts.avpopo85.weathery.domain.mapper.implementation.openWeatherMap
 
-import android.content.Context
 import ru.mts.avpopo85.weathery.domain.mapper.base.ICurrentWeatherMapper
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.*
-import ru.mts.avpopo85.weathery.domain.utils.toDateTime
 import ru.mts.avpopo85.weathery.domain.utils.toTime
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
-import javax.inject.Inject
 
-class OWMCurrentWeatherMapper
-@Inject constructor(private val context: Context) :
+class OWMCurrentWeatherMapper :
     ICurrentWeatherMapper<OWMCurrentWeatherResponseType, OWMCurrentWeatherType> {
 
     override fun mapCurrentWeatherResponse(currentWeatherResponse: OWMCurrentWeatherResponseType): OWMCurrentWeatherType =
@@ -40,7 +36,7 @@ class OWMCurrentWeatherMapper
                         main.maximumTemperature
                     )
                 },
-                visibility = it.visibility,
+                visibilityInMeters = it.visibility,
                 wind = it.wind!!.let { wind ->
                     OWMWind(
                         wind.speed,
@@ -48,7 +44,7 @@ class OWMCurrentWeatherMapper
                     )
                 },
                 clouds = OWMClouds(it.clouds!!.cloudiness),
-                date = it.date.toDateTime(),
+                date = it.date.toTime(),
                 sys = it.sys!!.let { sys ->
                     OWMSys(
                         sys.type,

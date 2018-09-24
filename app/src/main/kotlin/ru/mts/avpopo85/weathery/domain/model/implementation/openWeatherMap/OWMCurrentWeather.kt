@@ -13,7 +13,7 @@ data class OWMCurrentWeather(
 
     override val main: OWMMain,
 
-    override val visibility: Int,
+    override val visibilityInMeters: Int,
 
     override val wind: OWMWind,
 
