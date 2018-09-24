@@ -1,8 +1,7 @@
 package ru.mts.avpopo85.weathery.domain.utils
 
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 fun Int.toTime(): String {
     val date = Date(this * 1000L)

@@ -4,7 +4,7 @@ import io.reactivex.Single
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
-import ru.mts.avpopo85.weathery.data.utils.yandexWeather.YW_FORECAST_PARAMETERS
+import ru.mts.avpopo85.weathery.data.utils.yandexWeather.YWConstants.YW_FORECAST_PARAMETERS
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 import javax.inject.Inject

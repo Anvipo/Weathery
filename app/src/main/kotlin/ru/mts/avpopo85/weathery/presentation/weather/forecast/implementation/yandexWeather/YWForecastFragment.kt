@@ -9,7 +9,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.main.item_yw_forecast.yandex_hours_forecast_recycler_view
+import kotlinx.android.synthetic.main.item_yw_forecast.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWHourInfo
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWParts

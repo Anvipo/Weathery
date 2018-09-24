@@ -4,8 +4,7 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ProgressBar
-import kotlinx.android.synthetic.main.activity_yw_forecast.pager
-import kotlinx.android.synthetic.main.activity_yw_forecast.yandex_forecast_PB
+import kotlinx.android.synthetic.main.activity_yw_forecast.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.YandexWeatherModule

@@ -4,7 +4,7 @@ import io.reactivex.Single
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWCurrentWeatherApiService
-import ru.mts.avpopo85.weathery.data.utils.yandexWeather.YW_CURRENT_WEATHER_PARAMETERS
+import ru.mts.avpopo85.weathery.data.utils.yandexWeather.YWConstants.YW_CURRENT_WEATHER_PARAMETERS
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 import javax.inject.Inject

@@ -7,7 +7,7 @@ import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.utils.isFreshThan
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastResponseType
-import java.util.Date
+import java.util.*
 
 class YWForecastRealmService : IForecastDbService<YWForecastListResponseType> {
 

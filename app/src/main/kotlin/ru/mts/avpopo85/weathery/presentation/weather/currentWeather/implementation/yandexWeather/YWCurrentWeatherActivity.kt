@@ -3,7 +3,7 @@ package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementat
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.ProgressBar
-import kotlinx.android.synthetic.main.activity_yw_current_weather.yandex_current_weather_PB
+import kotlinx.android.synthetic.main.activity_yw_current_weather.*
 import kotlinx.android.synthetic.main.item_yw_current_weather.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App

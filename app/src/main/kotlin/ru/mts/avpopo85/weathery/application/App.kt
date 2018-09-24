@@ -1,8 +1,8 @@
 package ru.mts.avpopo85.weathery.application
 
 import android.app.Application
-import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.OWMConstants
-import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.YWConstants
+import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OWMConstants
+import ru.mts.avpopo85.weathery.data.utils.yandexWeather.YWConstants
 import ru.mts.avpopo85.weathery.di.global.*
 
 
