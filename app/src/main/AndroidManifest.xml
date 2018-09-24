@@ -23,8 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.weather.weather.YWActivity" />
-        <activity android:name=".presentation.weather.weather.OWMActivity" />
+        <activity android:name=".presentation.weather.main.YWActivity" />
+        <activity android:name=".presentation.weather.main.OWMActivity" />
         <activity android:name=".presentation.weather.currentWeather.implementation.yandexWeather.YWCurrentWeatherActivity" />
         <activity android:name=".presentation.weather.forecast.implementation.yandexWeather.YWForecastActivity" />
         <activity android:name=".presentation.weather.currentWeather.implementation.openWeatherMap.OWMCurrentWeatherActivity" />

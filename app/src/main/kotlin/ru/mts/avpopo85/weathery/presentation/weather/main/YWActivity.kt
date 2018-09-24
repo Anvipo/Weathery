@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.presentation.weather.weather
+package ru.mts.avpopo85.weathery.presentation.weather.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

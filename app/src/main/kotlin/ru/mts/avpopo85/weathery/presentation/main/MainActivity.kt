@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.presentation.weather.weather.OWMActivity
-import ru.mts.avpopo85.weathery.presentation.weather.weather.YWActivity
+import ru.mts.avpopo85.weathery.presentation.weather.main.OWMActivity
+import ru.mts.avpopo85.weathery.presentation.weather.main.YWActivity
 
 class MainActivity : AppCompatActivity() {
 
