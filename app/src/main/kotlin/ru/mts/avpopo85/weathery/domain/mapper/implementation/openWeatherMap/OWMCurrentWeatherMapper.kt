@@ -44,7 +44,7 @@ class OWMCurrentWeatherMapper :
                     )
                 },
                 clouds = OWMClouds(it.clouds!!.cloudiness),
-                date = it.date.toTime(),
+                timeOfDataCalculation = it.timeOfDataCalculationUnixUTC.toTime(),
                 sys = it.sys!!.let { sys ->
                     OWMSys(
                         sys.type,

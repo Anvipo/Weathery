@@ -20,7 +20,8 @@
             android:id="@+id/owm_forecast_B"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/forecast" />
+            android:text="@string/forecast"
+            tools:ignore="UnusedIds" />
 
         <Button
             android:id="@+id/owm_current_weather_B"

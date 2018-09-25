@@ -20,7 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/yandex_weather" />
+            android:text="@string/yandex_weather"
+            tools:ignore="UnusedIds" />
 
         <Button
             android:id="@+id/owm_B"
@@ -28,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/open_weather_map"
-            android:visibility="visible" />
+            android:visibility="visible"
+            tools:ignore="UnusedIds" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

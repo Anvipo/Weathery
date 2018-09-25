@@ -22,7 +22,8 @@ interface IOWMCurrentWeather : ICurrentWeather {
 
     val clouds: IOWMClouds
 
-    val date: String
+    /**Time of data calculation*/
+    val timeOfDataCalculation: String
 
     val sys: IOWMSys
 

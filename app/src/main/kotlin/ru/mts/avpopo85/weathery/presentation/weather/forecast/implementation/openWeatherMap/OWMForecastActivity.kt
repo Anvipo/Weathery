@@ -19,7 +19,6 @@ import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OWMConstants.KRASNODAR
 import ru.mts.avpopo85.weathery.di.modules.OpenWeatherMapModule
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.AbsForecastActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
-import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.adapters.ForecastActivityPagerAdapter
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
 
@@ -31,7 +30,7 @@ class OWMForecastActivity : AbsForecastActivity(),
 
     override val progressBar: ProgressBar by lazy { yandex_forecast_PB }
 
-    private lateinit var pagerAdapter: ForecastActivityPagerAdapter
+//    private lateinit var pagerAdapter: ForecastActivityPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,10 +88,10 @@ class OWMForecastActivity : AbsForecastActivity(),
 //        forecastPresenter.loadForecast()
     }
 
-    override fun onDestroy() {
-//        forecastPresenter.onUnbindView()
+    /*override fun onDestroy() {
+        forecastPresenter.onUnbindView()
         super.onDestroy()
-    }
+    }*/
 
     override fun showWeatherResponse(data: YWForecastListType) {
 //        if (data.isNotEmpty()) {
@@ -102,24 +101,24 @@ class OWMForecastActivity : AbsForecastActivity(),
 //            pager.visibility = GONE
     }
 
-    private fun putForecastDataInPager(data: YWForecastListType) {
-//        for (forecast in data) {
-//            val yfr = YWForecastFragment()
-//
-//            yfr.arguments = Bundle().apply {
-//                putParcelable(ARG_FORECAST, forecast)
-//            }
-//
-//            val title = makeTitle(forecast)
-//
-//            pagerAdapter.addFragment(yfr, title)
-//        }
-    }
+    /*private fun putForecastDataInPager(data: YWForecastListType) {
+        for (forecast in data) {
+            val yfr = YWForecastFragment()
 
-    private fun initPager() {
-//        pagerAdapter = ForecastActivityPagerAdapter(supportFragmentManager)
-//        pager.adapter = pagerAdapter
-//        pager.visibility = GONE
-    }
+            yfr.arguments = Bundle().apply {
+                putParcelable(ARG_FORECAST, forecast)
+            }
+
+            val title = makeTitle(forecast)
+
+            pagerAdapter.addFragment(yfr, title)
+        }
+    }*/
+
+    /*private fun initPager() {
+        pagerAdapter = ForecastActivityPagerAdapter(supportFragmentManager)
+        pager.adapter = pagerAdapter
+        pager.visibility = GONE
+    }*/
 
 }

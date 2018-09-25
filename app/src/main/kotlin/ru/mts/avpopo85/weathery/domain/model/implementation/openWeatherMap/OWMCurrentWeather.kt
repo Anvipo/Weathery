@@ -19,7 +19,7 @@ data class OWMCurrentWeather(
 
     override val clouds: OWMClouds,
 
-    override val date: String,
+    override val timeOfDataCalculation: String,
 
     override val sys: OWMSys,
 

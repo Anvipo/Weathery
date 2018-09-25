@@ -20,5 +20,7 @@
     <TextView
         android:id="@+id/owm_TV"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textIsSelectable="true"
+        tools:ignore="UnusedIds" />
 </android.support.constraint.ConstraintLayout>

@@ -2,10 +2,15 @@ package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementat
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Layout
+import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ProgressBar
 import kotlinx.android.synthetic.main.activity_yw_current_weather.*
 import kotlinx.android.synthetic.main.item_yw_current_weather.*
 import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.R.layout.item_yw_current_weather
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.YandexWeatherModule
 import ru.mts.avpopo85.weathery.presentation.utils.CELSIUS_DEGREE
@@ -31,8 +36,14 @@ class YWCurrentWeatherActivity :
             .plus(YandexWeatherModule())
             .inject(this)
 
+        hideLayout()
+
         currentWeatherPresenter.onBindView(this)
         currentWeatherPresenter.loadCurrentWeather()
+    }
+
+    override fun hideLayout() {
+        item_yw_current_weather.visibility = GONE
     }
 
     override fun onDestroy() {
@@ -42,6 +53,8 @@ class YWCurrentWeatherActivity :
 
     @SuppressLint("SetTextI18n")
     override fun showWeatherResponse(data: YWCurrentWeatherType) {
+        showLayout()
+
         data.let {
             temperatureValueCWTV.text = "${it.temperature} $CELSIUS_DEGREE"
             feelsLikeTemperatureValueCWTV.text = "${it.feelsLikeTemperature}$CELSIUS_DEGREE"
@@ -63,6 +76,10 @@ class YWCurrentWeatherActivity :
             seasonValueCWTV.text = it.season
             observationUnixTimeValueCWTV.text = it.observationUnixTime
         }
+    }
+
+    override fun showLayout() {
+        item_yw_current_weather.visibility = VISIBLE
     }
 
 }

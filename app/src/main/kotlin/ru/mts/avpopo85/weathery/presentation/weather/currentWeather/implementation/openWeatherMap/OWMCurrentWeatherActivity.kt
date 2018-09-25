@@ -2,9 +2,11 @@ package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementat
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import android.widget.ProgressBar
 import kotlinx.android.synthetic.main.activity_owm_current_weather.*
 import kotlinx.android.synthetic.main.item_owm_current_weather.*
+import kotlinx.android.synthetic.main.item_yw_current_weather.*
 import org.jetbrains.anko.longToast
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
@@ -33,8 +35,15 @@ class OWMCurrentWeatherActivity :
             .plus(OpenWeatherMapModule())
             .inject(this)
 
+        hideLayout()
+
         currentWeatherPresenter.onBindView(this)
+
         currentWeatherPresenter.loadCurrentWeather()
+    }
+
+    override fun hideLayout() {
+        item_owm_current_weather.visibility = View.GONE
     }
 
     override fun onDestroy() {
@@ -44,8 +53,10 @@ class OWMCurrentWeatherActivity :
 
     @SuppressLint("SetTextI18n")
     override fun showWeatherResponse(data: OWMCurrentWeatherType) {
+        showLayout()
+
         data.let {
-            observationUnixTimeValueOWMCWTV.text = it.date
+            observationUnixTimeValueOWMCWTV.text = it.timeOfDataCalculation
             cloudinessValueOWMCWTV.text = "${it.clouds.cloudiness}%"
             temperatureValueOWMCWTV.text = "${it.main.temperature} $CELSIUS_DEGREE"
             atmosphericPressureValueOWMCWTV.text =
@@ -68,6 +79,10 @@ class OWMCurrentWeatherActivity :
                 longToast("${this::class.java.simpleName}.showWeatherResponse - data.weather.size > 1")
             }
         }
+    }
+
+    override fun showLayout() {
+        item_owm_current_weather.visibility = View.VISIBLE
     }
 
 }

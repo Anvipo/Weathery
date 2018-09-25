@@ -12,7 +12,7 @@ abstract class AbsWeatherPresenter<V : WeatherContract.View> :
     override fun onUnbindView() {
         super.onUnbindView()
 
-        if (!disposable.isDisposed)
+        if (this::disposable.isInitialized && !disposable.isDisposed)
             disposable.dispose()
     }
 

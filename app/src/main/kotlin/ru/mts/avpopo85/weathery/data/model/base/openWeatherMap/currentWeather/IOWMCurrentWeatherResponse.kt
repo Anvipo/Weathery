@@ -11,10 +11,9 @@ interface IOWMCurrentWeatherResponse : ICurrentWeatherResponse {
 
     val coordinates: IOWMCoordinatesResponse?
 
-    /**more info Weather condition codes*/
     val weather: List<OWMWeatherResponse>
 
-    /**Weather condition cityID*/
+    /**Internal parameter*/
     val base: String
 
     val main: OWMMainResponse?
@@ -25,7 +24,8 @@ interface IOWMCurrentWeatherResponse : ICurrentWeatherResponse {
 
     val clouds: IOWMCloudsResponse?
 
-    val date: Int
+    /**Time of data calculation, unix, UTC*/
+    val timeOfDataCalculationUnixUTC: Int
 
     val sys: OWMSysResponse?
 

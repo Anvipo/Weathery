@@ -30,7 +30,8 @@ class YWForecastActivity : AbsForecastActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_yw_forecast)
 
-        App.appComponentForYandexWeather.plus(YandexWeatherModule())
+        App.appComponentForYandexWeather
+            .plus(YandexWeatherModule())
             .inject(this)
 
         initPager()

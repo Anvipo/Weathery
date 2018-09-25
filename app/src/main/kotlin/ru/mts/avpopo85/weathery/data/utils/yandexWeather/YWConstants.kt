@@ -22,7 +22,7 @@ object YWConstants {
         YWCurrentWeatherParameters(
             KRASNODAR_LATITUDE,
             KRASNODAR_LONGITUDE,
-            YandexWeatherLanguages.RU_RU.lang_code
+            YandexWeatherLanguages.RU_RU.languageCode
         )
     }
 
@@ -30,7 +30,7 @@ object YWConstants {
         YWForecastParameters(
             KRASNODAR_LATITUDE,
             KRASNODAR_LONGITUDE,
-            YandexWeatherLanguages.RU_RU.lang_code,
+            YandexWeatherLanguages.RU_RU.languageCode,
             DAY_NUMBER_IN_FORECAST,
             true,
             true

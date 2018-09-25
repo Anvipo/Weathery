@@ -30,4 +30,7 @@ abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.Vie
             longToast(message)
     }
 
+    override fun hideLayout() {}
+
+    override fun showLayout() {}
 }

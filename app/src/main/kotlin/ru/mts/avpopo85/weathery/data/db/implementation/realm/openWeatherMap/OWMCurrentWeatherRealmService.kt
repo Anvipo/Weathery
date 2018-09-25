@@ -56,7 +56,7 @@ class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeather
                         realmInstance.copyFromRealm(proxyData!!)
 
                     if (data != null) {
-                        val unixtimeInMillis = data.date * 1000L
+                        val unixtimeInMillis = data.timeOfDataCalculationUnixUTC * 1000L
 
                         val dataIsFresh = unixtimeInMillis.isFreshThan(OWM_DEFAULT_CACHE_LIFETIME)
 

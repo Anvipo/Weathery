@@ -15,15 +15,45 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
-        versionName "0.21"
+        versionName "0.24"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+//            minifyEnabled true
+//            useProguard false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+//                    'proguard-rules.pro'
+        }
         release {
+            shrinkResources true
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
         }
     }
+    // When building Android App Bundles, the splits block is ignored.
+    splits {
+        density {
+            enable true
+            exclude 'ldpi', 'tvdpi'/*, 'xxxhdpi'*/
+//alternatively use the following two lines to only include:
+//            reset()
+//            include 'mdpi', 'hdpi', 'xhdpi', 'xxhdpi'
+            compatibleScreens 'small', 'normal', 'large', 'xlarge'
+        }
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a', 'mips'
+            universalApk false
+        }
+    }
+//    bundle {
+//        language {
+//            enableSplit = true
+//        }
+//    }
     sourceSets {
         main.java.srcDirs = ['src/main/kotlin']
         test.java.srcDirs = ['src/test/kotlin']
@@ -32,6 +62,7 @@ android {
     buildToolsVersion '28.0.3'
 }
 
+//noinspection SpellCheckingInspection
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

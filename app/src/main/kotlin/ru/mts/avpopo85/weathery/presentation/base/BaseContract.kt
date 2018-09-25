@@ -8,6 +8,10 @@ interface BaseContract {
 
         fun showError(message: String?)
 
+        fun hideLayout()
+
+        fun showLayout()
+
     }
 
     interface Presenter<in V> {
