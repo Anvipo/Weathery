@@ -22,6 +22,6 @@ data class OWMCityResponse(
 
     @SerializedName("id")
     @Expose
-    override val id: Double
+    override val id: Int
 
 ) : IOWMCityResponse

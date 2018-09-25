@@ -69,7 +69,7 @@ open class YWCurrentWeatherResponse(
     @PrimaryKey
     @SerializedName("obs_time")
     @Expose
-    override var observationUnixTime: Int = 0,
+    override var observationUnixTime: Long = 0,
 
     @SerializedName("prec_type")
     @Expose

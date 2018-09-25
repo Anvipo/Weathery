@@ -25,11 +25,11 @@ open class OWMSysResponse(
 
     @SerializedName("sunrise")
     @Expose
-    override var sunrise: Int = 0,
+    override var sunrise: Long = 0,
 
     @SerializedName("sunset")
     @Expose
-    override var sunset: Int = 0
+    override var sunset: Long = 0
 
 ) : RealmObject(),
     IOWMSysResponse

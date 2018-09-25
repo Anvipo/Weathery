@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.ProgressBar
 import kotlinx.android.synthetic.main.activity_owm_current_weather.*
 import kotlinx.android.synthetic.main.item_owm_current_weather.*
-import kotlinx.android.synthetic.main.item_yw_current_weather.*
 import org.jetbrains.anko.longToast
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App

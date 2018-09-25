@@ -15,7 +15,7 @@ open class YWHourInfoResponse(
 
     @SerializedName("hour_ts")
     @Expose
-    override var hourInUnixTime: Int = 0,
+    override var hourInUnixTime: Long = 0,
 
     @SerializedName("temp")
     @Expose

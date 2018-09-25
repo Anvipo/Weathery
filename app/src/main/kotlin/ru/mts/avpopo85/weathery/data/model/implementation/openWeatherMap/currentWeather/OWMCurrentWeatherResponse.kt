@@ -43,7 +43,7 @@ open class OWMCurrentWeatherResponse(
     @PrimaryKey
     @SerializedName("dt")
     @Expose
-    override var timeOfDataCalculationUnixUTC: Int = 0,
+    override var timeOfDataCalculationUnixUTC: Long = 0,
 
     @SerializedName("sys")
     @Expose

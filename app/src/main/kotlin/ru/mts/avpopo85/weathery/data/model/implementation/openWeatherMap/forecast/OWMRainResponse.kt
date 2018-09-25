@@ -2,12 +2,13 @@ package ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.foreca
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmObject
 import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.forecast.IOWMRainResponse
 
-data class OWMRainResponse(
+open class OWMRainResponse(
 
     @SerializedName("3h")
     @Expose
-    override val rainVolumeForLast3hoursMm: Double
+    override var rainVolumeForLast3hoursMm: Double = 0.0
 
-) : IOWMRainResponse
+) : RealmObject(), IOWMRainResponse

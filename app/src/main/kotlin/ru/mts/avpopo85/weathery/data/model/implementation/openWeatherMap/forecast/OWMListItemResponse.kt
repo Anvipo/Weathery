@@ -2,44 +2,50 @@ package ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.foreca
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmList
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.forecast.IOWMListItemResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMCloudsResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMWeatherResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather.OWMWindResponse
 
 @Suppress("SpellCheckingInspection")
-data class OWMListItemResponse(
+open class OWMListItemResponse(
 
+    override var saveUnixTime: Long = 0,
+
+    @PrimaryKey
     @SerializedName("dt")
     @Expose
-    override val timeOfDataForecastedUnixUTC: Double,
+    override var dateInUnixtimeUTC: Long = 0,
 
     @SerializedName("rain")
     @Expose
-    override val rain: OWMRainResponse?,
+    override var rain: OWMRainResponse? = null,
 
     @SerializedName("dt_txt")
     @Expose
-    override val timeOfCalculationUTC: String,
+    override var dateUTC: String = "",
 
     @SerializedName("weather")
     @Expose
-    override val weather: List<OWMWeatherResponse>,
+    override var weather: RealmList<OWMWeatherResponse> = RealmList(),
 
     @SerializedName("main")
     @Expose
-    override val main: OWMForecastMainResponse,
+    override var main: OWMForecastMainResponse? = null,
 
     @SerializedName("clouds")
     @Expose
-    override val clouds: OWMCloudsResponse,
+    override var clouds: OWMCloudsResponse? = null,
 
     @SerializedName("sys")
     @Expose
-    override val sys: OWMForecastSysResponse,
+    override var sys: OWMForecastSysResponse? = null,
 
     @SerializedName("wind")
     @Expose
-    override val wind: OWMWindResponse
+    override var wind: OWMWindResponse? = null
 
-) : IOWMListItemResponse
+) : RealmObject(), IOWMListItemResponse

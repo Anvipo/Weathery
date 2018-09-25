@@ -2,15 +2,12 @@ package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementat
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Layout
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ProgressBar
 import kotlinx.android.synthetic.main.activity_yw_current_weather.*
 import kotlinx.android.synthetic.main.item_yw_current_weather.*
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.R.layout.item_yw_current_weather
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.YandexWeatherModule
 import ru.mts.avpopo85.weathery.presentation.utils.CELSIUS_DEGREE

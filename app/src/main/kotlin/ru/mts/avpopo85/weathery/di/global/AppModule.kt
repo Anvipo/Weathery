@@ -9,14 +9,17 @@ import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMCurrentWeatherApiService
+import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMForecastApiService
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWCurrentWeatherApiService
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
 import ru.mts.avpopo85.weathery.data.repository.openWeatherMap.OWMCurrentWeatherRepository
+import ru.mts.avpopo85.weathery.data.repository.openWeatherMap.OWMForecastRepository
 import ru.mts.avpopo85.weathery.data.repository.yandexWeather.YWCurrentWeatherRepository
 import ru.mts.avpopo85.weathery.data.repository.yandexWeather.YWForecastRepository
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 import javax.inject.Singleton
@@ -67,6 +70,18 @@ class AppModule(private val context: Context) {
         networkManager: NetworkManager,
         currentWeatherDbService: IForecastDbService<YWForecastListResponseType>
     ): IForecastRepository<YWForecastListResponseType> = YWForecastRepository(
+        forecastApiService,
+        networkManager,
+        currentWeatherDbService
+    )
+
+    @Provides
+    @Singleton
+    fun provideOWMForecastRepository(
+        forecastApiService: IOWMForecastApiService,
+        networkManager: NetworkManager,
+        currentWeatherDbService: IForecastDbService<OWMForecastListResponseType>
+    ): IForecastRepository<OWMForecastListResponseType> = OWMForecastRepository(
         forecastApiService,
         networkManager,
         currentWeatherDbService

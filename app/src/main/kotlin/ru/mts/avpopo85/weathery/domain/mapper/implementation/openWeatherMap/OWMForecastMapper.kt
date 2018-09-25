@@ -1,42 +1,33 @@
-package ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather
+package ru.mts.avpopo85.weathery.domain.mapper.implementation.openWeatherMap
 
 import android.content.Context
-import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWDayShortResponse
-import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWDayTimeResponse
-import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWHourInfoResponse
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWPartsResponse
 import ru.mts.avpopo85.weathery.domain.mapper.base.IForecastMapper
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWDayShort
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWDayTime
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWHourInfo
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWParts
-import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
-import ru.mts.avpopo85.weathery.domain.utils.toDate
-import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
-import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
-import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 import javax.inject.Inject
 
-class YWForecastMapper
+class OWMForecastMapper
 @Inject constructor(private val context: Context) :
-    IForecastMapper<YWForecastListResponseType, YWForecastListType> {
+    IForecastMapper<OWMForecastListResponseType, OWMForecastListType> {
 
-    override fun mapForecast(forecastListResponse: YWForecastListResponseType): YWForecastListType =
+    override fun mapForecast(forecastListResponse: OWMForecastListResponseType): OWMForecastListType =
         forecastListResponse.map {
-            YWForecastType(
-                date = it.dateUTC,
-                dateInUnixtime = it.dateInUnixtimeUTC.toDate(),
+            OWMForecastType(
+                ""
+                /*dateUTC = it.dateUTC,
+                dateInUnixtimeUTC = it.dateInUnixtimeUTC.toDate(),
                 weekSerialNumber = it.weekSerialNumber,
                 sunriseInLocalTime = it.sunriseInLocalTime,
                 sunsetInLocalTime = it.sunsetInLocalTime,
                 moonCode = context.getMoonCodeString(it.moonCode),
                 moonText = context.getMoonTextString(it.moonText),
                 parts = mapPartsResponse(it.partsResponse!!),
-                hours = mapHoursResponse(it.hours)
+                hours = mapHoursResponse(it.hours)*/
             )
         }
 
-    private fun mapHoursResponse(YWHourInfoResponse: List<IYWHourInfoResponse>?): List<YWHourInfo>? =
+    /*private fun mapHoursResponse(YWHourInfoResponse: List<IYWHourInfoResponse>?): List<YWHourInfo>? =
         YWHourInfoResponse?.map {
             YWHourInfo(
                 hourInLocalTime = "${it.hourInLocalTime}:00",
@@ -139,6 +130,6 @@ class YWForecastMapper
                 precipitationStrength = context.getPrecipitationStrengthString(it.precipitationStrength),
                 cloudiness = context.getCloudinessString(it.cloudiness)
             )
-        }
+        }*/
 
 }

@@ -25,7 +25,7 @@ interface IOWMCurrentWeatherResponse : ICurrentWeatherResponse {
     val clouds: IOWMCloudsResponse?
 
     /**Time of data calculation, unix, UTC*/
-    val timeOfDataCalculationUnixUTC: Int
+    val timeOfDataCalculationUnixUTC: Long
 
     val sys: OWMSysResponse?
 

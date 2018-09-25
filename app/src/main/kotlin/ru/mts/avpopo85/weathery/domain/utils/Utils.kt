@@ -3,8 +3,8 @@ package ru.mts.avpopo85.weathery.domain.utils
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun Int.toTime(): String {
-    val date = Date(this * 1000L)
+fun Long.toTime(): String {
+    val date = Date(this * 1000)
 
     val simpleDateFormat = SimpleDateFormat(
         "HH:mm",
@@ -14,8 +14,8 @@ fun Int.toTime(): String {
     return simpleDateFormat.format(date)
 }
 
-fun Int.toDate(): String {
-    val date = Date(this * 1000L)
+fun Long.toDate(): String {
+    val date = Date(this * 1000)
 
     val simpleDateFormat = SimpleDateFormat(
         "dd MMM YYYY (E)",
@@ -26,8 +26,8 @@ fun Int.toDate(): String {
 }
 
 @Suppress("unused")
-fun Int.toDateTime(): String {
-    val date = Date(this * 1000L)
+fun Long.toDateTime(): String {
+    val date = Date(this * 1000)
 
     val simpleDateFormat = SimpleDateFormat(
         "HH:mm dd MMM YYYY",

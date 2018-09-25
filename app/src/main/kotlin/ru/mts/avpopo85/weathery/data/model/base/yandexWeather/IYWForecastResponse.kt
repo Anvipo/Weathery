@@ -7,13 +7,13 @@ import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWPartsR
 @Suppress("SpellCheckingInspection")
 interface IYWForecastResponse : IForecastResponse {
 
-    val saveUnixTime: Long
+    override var saveUnixTime: Long
 
     /**Date of the forecast, in the format YYYY-MM-DD.*/
-    val date: String
+    override val dateUTC: String
 
     /**The date of the forecast in Unix time.*/
-    val dateInUnixtime: Int
+    override val dateInUnixtimeUTC: Long
 
     /**Week number.*/
     val weekSerialNumber: Int

@@ -1,9 +1,9 @@
 package ru.mts.avpopo85.weathery.data.db.base
 
 import io.reactivex.Single
-import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastResponseType
+import ru.mts.avpopo85.weathery.data.model.base.common.IForecastResponse
 
-interface IForecastDbService<T : Collection<YWForecastResponseType>> {
+interface IForecastDbService<T : Collection<IForecastResponse>> {
 
     fun saveForecastResponse(forecastResponseList: T): Single<T>
 

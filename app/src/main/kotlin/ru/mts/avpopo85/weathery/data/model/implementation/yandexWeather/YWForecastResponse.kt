@@ -11,18 +11,16 @@ import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWForecastRespons
 @Suppress("SpellCheckingInspection")
 open class YWForecastResponse(
 
-    @PrimaryKey
-    @SerializedName("date_ts")
-    @Expose
     override var saveUnixTime: Long = 0,
 
     @SerializedName("date")
     @Expose
-    override var date: String = "",
+    override var dateUTC: String = "",
 
+    @PrimaryKey
     @SerializedName("date_ts")
     @Expose
-    override var dateInUnixtime: Int = 0,
+    override var dateInUnixtimeUTC: Long = 0,
 
     @SerializedName("week")
     @Expose

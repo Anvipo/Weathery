@@ -17,9 +17,9 @@ interface IOWMSysResponse {
     val countryCode: String
 
     /**Sunrise time, unix, UTC*/
-    val sunrise: Int
+    val sunrise: Long
 
     /**Sunset time, unix, UTC*/
-    val sunset: Int
+    val sunset: Long
 
 }

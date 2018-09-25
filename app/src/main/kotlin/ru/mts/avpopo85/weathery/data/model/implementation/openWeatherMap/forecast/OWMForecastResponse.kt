@@ -24,6 +24,6 @@ data class OWMForecastResponse(
 
     @SerializedName("list")
     @Expose
-    override val list: List<OWMListItemResponse>
+    override val forecastsList: List<OWMListItemResponse>
 
 ) : IOWMForecastResponse

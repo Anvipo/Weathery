@@ -2,12 +2,13 @@ package ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.foreca
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmObject
 import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.forecast.IOWMForecastSysResponse
 
-data class OWMForecastSysResponse(
+open class OWMForecastSysResponse(
 
     @SerializedName("pod")
     @Expose
-    override val dayTime: String
+    override var dayTime: String = ""
 
-) : IOWMForecastSysResponse
+) : RealmObject(), IOWMForecastSysResponse

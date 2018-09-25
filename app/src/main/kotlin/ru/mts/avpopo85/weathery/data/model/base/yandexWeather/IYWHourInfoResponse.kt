@@ -6,7 +6,7 @@ interface IYWHourInfoResponse {
     val hourInLocalTime: String
 
     /**The time of the forecast in Unix time.*/
-    val hourInUnixTime: Int
+    val hourInUnixTime: Long
 
     /**Temperature (°C).*/
     val temperature: Double

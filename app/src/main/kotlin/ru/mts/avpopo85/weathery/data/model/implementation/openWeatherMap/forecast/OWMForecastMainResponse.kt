@@ -2,41 +2,42 @@ package ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.foreca
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmObject
 import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.forecast.IOWMForecastMainResponse
 
 @Suppress("SpellCheckingInspection")
-data class OWMForecastMainResponse(
+open class OWMForecastMainResponse(
 
     @SerializedName("temp")
     @Expose
-    override val temperature: Double,
+    override var temperature: Double = 0.0,
 
     @SerializedName("temp_min")
     @Expose
-    override val minimumTemperature: Double,
+    override var minimumTemperature: Double = 0.0,
 
     @SerializedName("grnd_level")
     @Expose
-    override val atmosphericPressureOnTheGroundLevelInhPa: Double,
+    override var atmosphericPressureOnTheGroundLevelInhPa: Double = 0.0,
 
     @SerializedName("temp_kf")
     @Expose
-    override val tempKf: Double,
+    override var tempKf: Double = 0.0,
 
     @SerializedName("humidity")
     @Expose
-    override val humidity: Double,
+    override var humidity: Double = 0.0,
 
     @SerializedName("pressure")
     @Expose
-    override val atmosphericPressureOnTheSeaLevelByDefaultInhPa: Double,
+    override var atmosphericPressureOnTheSeaLevelByDefaultInhPa: Double = 0.0,
 
     @SerializedName("sea_level")
     @Expose
-    override val atmosphericPressureOnTheSeaLevelInhPa: Double,
+    override var atmosphericPressureOnTheSeaLevelInhPa: Double = 0.0,
 
     @SerializedName("temp_max")
     @Expose
-    override val maximumTemperature: Double
+    override var maximumTemperature: Double = 0.0
 
-) : IOWMForecastMainResponse
+) : RealmObject(), IOWMForecastMainResponse

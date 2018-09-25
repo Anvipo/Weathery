@@ -13,6 +13,6 @@ interface IOWMCityResponse {
     val name: String
 
     /**City ID*/
-    val id: Double
+    val id: Int
 
 }
