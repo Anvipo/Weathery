@@ -7,7 +7,7 @@
     tools:context=".presentation.weather.forecast.implementation.yandexWeather.YWForecastActivity">
 
     <ProgressBar
-        android:id="@+id/yandex_forecast_PB"
+        android:id="@+id/yw_forecast_PB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"

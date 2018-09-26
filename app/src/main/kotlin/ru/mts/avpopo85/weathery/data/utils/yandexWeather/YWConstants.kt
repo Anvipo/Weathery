@@ -1,9 +1,9 @@
 package ru.mts.avpopo85.weathery.data.utils.yandexWeather
 
-import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWCurrentWeatherParameters
-import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWForecastParameters
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWCurrentWeatherParameters
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWForecastParameters
+import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.currentWeather.IYWCurrentWeatherParameters
+import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWForecastParameters
+import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.currentWeather.YWCurrentWeatherParameters
+import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.forecast.YWForecastParameters
 
 @Suppress("SpellCheckingInspection")
 object YWConstants {

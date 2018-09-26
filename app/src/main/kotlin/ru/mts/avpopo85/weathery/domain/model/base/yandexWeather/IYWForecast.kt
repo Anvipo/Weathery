@@ -1,7 +1,7 @@
 package ru.mts.avpopo85.weathery.domain.model.base.yandexWeather
 
 import ru.mts.avpopo85.weathery.domain.model.base.common.IForecast
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWParts
+import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWParts
 
 @Suppress("SpellCheckingInspection")
 interface IYWForecast : IForecast {

@@ -1,32 +1,24 @@
-package ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap
+package ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather
 
-import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.IOWMCurrentWeather
+import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.currentWeather.IOWMCurrentWeather
+import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.currentWeather.IOWMCurrentWeatherMain
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
 
 /**This object contains information about the current weather.*/
 data class OWMCurrentWeather(
 
-    override val coordinates: OWMCoordinates,
-
     override val weather: List<OWMWeather>,
 
-    override val base: String,
-
-    override val main: OWMMain,
+    override val main: IOWMCurrentWeatherMain,
 
     override val visibilityInMeters: Int,
 
     override val wind: OWMWind,
 
-    override val clouds: OWMClouds,
+    override val cloudiness: Int,
 
     override val timeOfDataCalculation: String,
 
-    override val sys: OWMSys,
-
-    override val cityID: Int,
-
-    override val cityName: String,
-
-    override val code: Int
+    override val sys: OWMSys
 
 ) : IOWMCurrentWeather

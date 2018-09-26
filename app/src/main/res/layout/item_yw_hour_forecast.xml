@@ -27,7 +27,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/hourInLocalValueTV"
+                android:id="@+id/hour_in_local_value_YW_F_TV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -61,7 +61,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourTemperatureValueTV"
+                    android:id="@+id/hour_temperature_value_YW_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -88,7 +88,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/feelsLikeHourTemperatureValueTV"
+                    android:id="@+id/feels_like_hour_temperature_value_YW_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -114,7 +114,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/hourConditionValueTV"
+                android:id="@+id/hour_condition_value_YW_F_TV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/condition_value"
@@ -147,7 +147,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourWindSpeedValueTV"
+                    android:id="@+id/hour_wind_speed_value_YW_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/wind_speed_value"
@@ -173,7 +173,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourWindGustValueTV"
+                    android:id="@+id/hour_wind_gust_value_YW_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -200,7 +200,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourWindDirectionValueTV"
+                    android:id="@+id/hour_wind_direction_value_YW_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -235,7 +235,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourPressureInMMValueTV"
+                    android:id="@+id/hour_pressure_in_mm_value_YW_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -262,7 +262,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourPressureInPaValueTV"
+                    android:id="@+id/hour_pressure_in_hPa_value_YW_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -288,7 +288,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/hourHumidityInPercentsValueTV"
+                android:id="@+id/hour_humidity_in_percents_value_YW_F_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/humidity_value"
@@ -320,7 +320,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourPrecipitationTypeValueTV"
+                    android:id="@+id/hour_precipitation_type_value_YW_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -347,7 +347,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourPrecipitationStrengthValueTV"
+                    android:id="@+id/hour_precipitation_strength_value_YW_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -382,7 +382,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourPrecipitationInMmValueTV"
+                    android:id="@+id/hour_precipitation_in_mm_value_YW_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -410,7 +410,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/hourPrecipitationInMinutesValueTV"
+                    android:id="@+id/hour_precipitation_in_minutes_value_YW_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -435,7 +435,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/hourCloudinessValueTV"
+                android:id="@+id/hour_cloudiness_value_YW_F_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/cloudiness_value"

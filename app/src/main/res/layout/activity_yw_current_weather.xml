@@ -7,7 +7,7 @@
     tools:context=".presentation.weather.currentWeather.implementation.yandexWeather.YWCurrentWeatherActivity">
 
     <ProgressBar
-        android:id="@+id/yandex_current_weather_PB"
+        android:id="@+id/yw_current_weather_PB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"

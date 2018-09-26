@@ -2,8 +2,11 @@ package ru.mts.avpopo85.weathery.domain.mapper.implementation.openWeatherMap
 
 import android.content.Context
 import ru.mts.avpopo85.weathery.domain.mapper.base.ICurrentWeatherMapper
-import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.*
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMSys
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMWind
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMCurrentWeatherMain
+import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.utils.toTime
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
@@ -16,12 +19,6 @@ class OWMCurrentWeatherMapper
     override fun mapCurrentWeatherResponse(currentWeatherResponseData: OWMCurrentWeatherResponseType): OWMCurrentWeatherType =
         currentWeatherResponseData.let { currentWeatherResponse: OWMCurrentWeatherResponseType ->
             OWMCurrentWeatherType(
-                coordinates = currentWeatherResponse.coordinates!!.let {
-                    OWMCoordinates(
-                        longitude = it.longitude,
-                        latitude = it.latitude
-                    )
-                },
                 weather = currentWeatherResponse.weather.map {
                     OWMWeather(
                         conditionCode = it.conditionCode,
@@ -30,38 +27,28 @@ class OWMCurrentWeatherMapper
                         icon = it.icon
                     )
                 },
-                base = currentWeatherResponse.base,
                 main = currentWeatherResponse.main!!.let {
                     OWMCurrentWeatherMain(
-                        temperature = it.temperature,
+                        temperature = it.temperature.roundIfNeeded(),
                         atmosphericPressureInhPa = it.atmosphericPressureInhPa,
-                        humidity = it.humidity,
-                        minimumTemperature = it.minimumTemperature,
-                        maximumTemperature = it.maximumTemperature
+                        humidity = it.humidity
                     )
                 },
                 visibilityInMeters = currentWeatherResponse.visibility,
                 wind = currentWeatherResponse.wind!!.let {
                     OWMWind(
-                        speedInUnits = it.speedInUnits,
+                        speedInUnits = it.speedInUnits.roundIfNeeded(),
                         direction = context.getWindDirectionString(it.directionInDegrees)
                     )
                 },
-                clouds = OWMClouds(currentWeatherResponse.clouds!!.cloudiness),
+                cloudiness = currentWeatherResponse.clouds!!.cloudiness,
                 timeOfDataCalculation = currentWeatherResponse.timeOfDataCalculationUnixUTC.toTime(),
                 sys = currentWeatherResponse.sys!!.let {
                     OWMSys(
-                        type = it.type,
-                        id = it.id,
-                        message = it.message,
-                        countryCode = it.countryCode,
                         sunrise = it.sunrise.toTime(),
                         sunset = it.sunset.toTime()
                     )
-                },
-                cityID = currentWeatherResponse.cityID,
-                cityName = currentWeatherResponse.cityName,
-                code = currentWeatherResponse.code
+                }
             )
         }
 

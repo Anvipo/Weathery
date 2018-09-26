@@ -23,7 +23,7 @@
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
-            android:id="@+id/observationUnixTimeValueCWTV"
+            android:id="@+id/observation_unix_time_value_YW_CW_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/observation_time_value"
@@ -57,7 +57,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/temperatureValueCWTV"
+                android:id="@+id/temperature_value_YW_CW_TV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -85,7 +85,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/feelsLikeTemperatureValueCWTV"
+                android:id="@+id/feels_like_temperature_value_YW_CW_TV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -113,7 +113,7 @@
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
-            android:id="@+id/conditionValueCWTV"
+            android:id="@+id/condition_value_YW_CW_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/condition_value"
@@ -147,7 +147,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/windSpeedValueCWTV"
+                android:id="@+id/wind_speed_value_YW_CW_TV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/wind_speed_value"
@@ -174,7 +174,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/windGustsSpeedValueCWTV"
+                android:id="@+id/wind_gusts_speed_value_YW_CW_TV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -202,7 +202,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/windDirectionValueCWTV"
+                android:id="@+id/wind_direction_value_YW_CW_TV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -238,7 +238,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/atmosphericPressureInMmHgValueCWTV"
+                android:id="@+id/atmospheric_pressure_in_mm_hg_value_YW_CW_TV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -266,7 +266,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/atmosphericPressureInhPaValueCWTV"
+                android:id="@+id/atmospheric_pressure_in_hPa_value_YW_CW_TV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -294,7 +294,7 @@
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
-            android:id="@+id/humidityValueCWTV"
+            android:id="@+id/humidity_value_YW_CW_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/humidity_value"
@@ -328,7 +328,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/precipitationTypeValueCWTV"
+                android:id="@+id/precipitation_type_value_YW_CW_TV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -356,7 +356,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/precipitationStrengthValueCWTV"
+                android:id="@+id/precipitation_strength_value_YW_CW_TV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -384,7 +384,7 @@
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
-            android:id="@+id/cloudinessValueCWTV"
+            android:id="@+id/cloudiness_value_YW_CW_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/cloudiness_value"
@@ -410,7 +410,7 @@
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
-            android:id="@+id/daytimeValueCWTV"
+            android:id="@+id/daytime_value_YW_CW_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/daytime_value"
@@ -436,7 +436,7 @@
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
-            android:id="@+id/polarValueCWTV"
+            android:id="@+id/polar_value_YW_CW_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/is_there_polar_value"
@@ -462,7 +462,7 @@
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
-            android:id="@+id/seasonValueCWTV"
+            android:id="@+id/season_value_YW_CW_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/season_value"

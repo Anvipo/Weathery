@@ -1,16 +1,16 @@
 package ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather
 
 import android.content.Context
-import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWDayShortResponse
-import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWDayTimeResponse
-import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWHourInfoResponse
-import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWPartsResponse
+import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWDayShortResponse
+import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWDayTimeResponse
+import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWHourInfoResponse
+import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.forecast.YWPartsResponse
 import ru.mts.avpopo85.weathery.domain.mapper.base.IForecastMapper
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.getDaytimeString
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWDayShort
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWDayTime
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWHourInfo
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWParts
+import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWDayShort
+import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWDayTime
+import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWHourInfo
+import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWParts
 import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.utils.toDate
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType

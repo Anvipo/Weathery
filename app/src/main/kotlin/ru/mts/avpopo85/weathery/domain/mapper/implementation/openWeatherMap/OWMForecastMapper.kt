@@ -3,9 +3,10 @@ package ru.mts.avpopo85.weathery.domain.mapper.implementation.openWeatherMap
 import android.content.Context
 import ru.mts.avpopo85.weathery.domain.mapper.base.IForecastMapper
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.getDaytimeString
-import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.OWMForecastMain
-import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.OWMWeather
-import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.OWMWind
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.forecast.OWMForecastMain
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMWind
+import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.utils.toDateTime
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
@@ -24,7 +25,7 @@ class OWMForecastMapper
                 cloudiness = forecastResponse.clouds!!.cloudiness,
                 wind = forecastResponse.wind!!.let {
                     OWMWind(
-                        speedInUnits = it.speedInUnits,
+                        speedInUnits = it.speedInUnits.roundIfNeeded(),
                         direction = context.getWindDirectionString(it.directionInDegrees)
                     )
                 },
@@ -42,10 +43,7 @@ class OWMForecastMapper
                     OWMForecastMain(
                         temperature = it.temperature,
                         humidity = it.humidity,
-                        minimumTemperature = it.minimumTemperature,
-                        maximumTemperature = it.maximumTemperature,
                         atmosphericPressureOnTheGroundLevelInhPa = it.atmosphericPressureOnTheGroundLevelInhPa,
-                        atmosphericPressureOnTheSeaLevelByDefaultInhPa = it.atmosphericPressureOnTheSeaLevelByDefaultInhPa,
                         atmosphericPressureOnTheSeaLevelInhPa = it.atmosphericPressureOnTheSeaLevelInhPa
                     )
                 }

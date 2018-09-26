@@ -36,24 +36,23 @@ class OWMForecastFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun fillFields(forecast: OWMForecastType) {
-        val cloudinessValueOWMFTV = view?.findViewById<TextView>(R.id.cloudinessValueOWMFTV)
-        val temperatureValueOWMFTV = view?.findViewById<TextView>(R.id.temperatureValueOWMFTV)
-        val dayTimeValueOWMFTV = view?.findViewById<TextView>(R.id.dayTimeValueOWMFTV)
-        val rainVolumeValueOWMFTV = view?.findViewById<TextView>(R.id.rainVolumeValueOWMFTV)
+        val cloudinessValueOWMFTV = view?.findViewById<TextView>(R.id.cloudiness_value_OWM_F_TV)
+        val temperatureValueOWMFTV = view?.findViewById<TextView>(R.id.temperature_value_OWM_F_TV)
+        val dayTimeValueOWMFTV = view?.findViewById<TextView>(R.id.day_time_value_OWM_F_TV)
+        val rainVolumeValueOWMFTV = view?.findViewById<TextView>(R.id.rain_volume_value_OWM_F_TV)
         val weatherDescriptionValueOWMFTV =
-            view?.findViewById<TextView>(R.id.weatherDescriptionValueOWMFTV)
-        val windSpeedValueOWMFTV = view?.findViewById<TextView>(R.id.windSpeedValueOWMFTV)
-        val windDirectionValueOWMFTV = view?.findViewById<TextView>(R.id.windDirectionValueOWMFTV)
+            view?.findViewById<TextView>(R.id.weather_description_value_OWM_F_TV)
+        val windSpeedValueOWMFTV = view?.findViewById<TextView>(R.id.wind_speed_value_OWM_F_TV)
+        val windDirectionValueOWMFTV =
+            view?.findViewById<TextView>(R.id.wind_direction_value_OWM_F_TV)
         val atmosphericPressureOnTheGroundLevelInhPaValueOWMFTV =
-            view?.findViewById<TextView>(R.id.atmosphericPressureOnTheGroundLevelInhPaValueOWMFTV)
+            view?.findViewById<TextView>(R.id.atmospheric_pressure_on_the_ground_level_in_hPa_value_OWM_F_TV)
         val atmosphericPressureOnTheSeaLevelInhPaValueOWMFTV =
-            view?.findViewById<TextView>(R.id.atmosphericPressureOnTheSeaLevelInhPaValueOWMFTV)
-        val humidityValueOWMFTV = view?.findViewById<TextView>(R.id.humidityValueOWMFTV)
+            view?.findViewById<TextView>(R.id.atmospheric_pressure_on_the_sea_level_in_hPa_value_OWM_F_TV)
+        val humidityValueOWMFTV = view?.findViewById<TextView>(R.id.humidity_value_OWM_F_TV)
 
         forecast.let {
             cloudinessValueOWMFTV?.text = "${it.cloudiness}$PERCENT_SIGN"
-            //TODO единицы измерения как в запросе
-            temperatureValueOWMFTV?.text = "${it.main.temperature} $CELSIUS_DEGREE"
             dayTimeValueOWMFTV?.text = it.dayTime
             rainVolumeValueOWMFTV?.text =
                     "${it.rainVolumeMm.roundIfNeeded()} ${getString(R.string.mm)}"
@@ -63,19 +62,15 @@ class OWMForecastFragment : Fragment() {
                 windSpeedValueOWMFTV?.text = "$speedInUnits м/c"
                 windDirectionValueOWMFTV?.text = direction
             }
-            it.main.let { (
-                                  _,
-                                  atmosphericPressureOnTheGroundLevelInhPa,
-                                  _,
-                                  atmosphericPressureOnTheSeaLevelInhPa,
-                                  humidity
-                          ) ->
+            it.main.let { (temperature, atmosphericPressureOnTheGroundLevelInhPa, atmosphericPressureOnTheSeaLevelInhPa, humidity) ->
                 //TODO конверция в другие измерения
                 atmosphericPressureOnTheGroundLevelInhPaValueOWMFTV?.text =
                         "$atmosphericPressureOnTheGroundLevelInhPa ${getString(R.string.hPa)}"
                 atmosphericPressureOnTheSeaLevelInhPaValueOWMFTV?.text =
                         "$atmosphericPressureOnTheSeaLevelInhPa ${getString(R.string.hPa)}"
                 humidityValueOWMFTV?.text = "$humidity$PERCENT_SIGN"
+                //TODO единицы измерения как в запросе
+                temperatureValueOWMFTV?.text = "$temperature $CELSIUS_DEGREE"
             }
 
         }

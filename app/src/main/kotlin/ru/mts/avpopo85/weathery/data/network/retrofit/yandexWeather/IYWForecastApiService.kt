@@ -4,7 +4,7 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
-import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWWeatherResponse
+import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.common.IYWWeatherResponse
 import ru.mts.avpopo85.weathery.data.utils.yandexWeather.YWConstants.API_KEY
 
 interface IYWForecastApiService {

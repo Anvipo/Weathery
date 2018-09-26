@@ -3,9 +3,8 @@ package ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.fore
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.forecast.IOWMForecast
-import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.OWMForecastMain
-import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.OWMWeather
-import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.OWMWind
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMWind
 
 @Suppress("SpellCheckingInspection")
 @Parcelize

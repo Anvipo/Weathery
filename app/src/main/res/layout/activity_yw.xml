@@ -7,10 +7,12 @@
     tools:context=".presentation.weather.main.YWActivity">
 
     <LinearLayout
-        android:id="@+id/weatherBtnsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,9 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/forecast"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/weatherBtnsLayout"
-            app:layout_constraintStart_toStartOf="parent"
             tools:ignore="UnusedIds" />
 
         <Button
@@ -31,9 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/current_weather"
-            tools:ignore="UnusedIds"
-            tools:layout_editor_absoluteX="228dp"
-            tools:layout_editor_absoluteY="455dp" />
+            tools:ignore="UnusedIds" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

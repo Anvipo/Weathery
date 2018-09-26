@@ -23,7 +23,7 @@ class YWCurrentWeatherActivity :
     @Inject
     lateinit var currentWeatherPresenter: CurrentWeatherContract.Presenter<YWCurrentWeatherType>
 
-    override val progressBar: ProgressBar by lazy { yandex_current_weather_PB }
+    override val progressBar: ProgressBar by lazy { yw_current_weather_PB }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,25 +53,26 @@ class YWCurrentWeatherActivity :
         showLayout()
 
         data.let {
-            temperatureValueCWTV.text = "${it.temperature} $CELSIUS_DEGREE"
-            feelsLikeTemperatureValueCWTV.text = "${it.feelsLikeTemperature}$CELSIUS_DEGREE"
-            conditionValueCWTV.text = it.weatherDescription
-            windSpeedValueCWTV.text = "${it.windSpeed} ${getString(R.string.meters_per_second)}"
-            windGustsSpeedValueCWTV.text =
+            temperature_value_YW_CW_TV.text = "${it.temperature} $CELSIUS_DEGREE"
+            feels_like_temperature_value_YW_CW_TV.text = "${it.feelsLikeTemperature}$CELSIUS_DEGREE"
+            condition_value_YW_CW_TV.text = it.weatherDescription
+            wind_speed_value_YW_CW_TV.text =
+                    "${it.windSpeed} ${getString(R.string.meters_per_second)}"
+            wind_gusts_speed_value_YW_CW_TV.text =
                     "${it.windGustsSpeed} ${getString(R.string.meters_per_second)}"
-            windDirectionValueCWTV.text = it.windDirection
-            atmosphericPressureInMmHgValueCWTV.text =
+            wind_direction_value_YW_CW_TV.text = it.windDirection
+            atmospheric_pressure_in_mm_hg_value_YW_CW_TV.text =
                     "${it.atmosphericPressureInMmHg} ${getString(R.string.mm_hg)}"
-            atmosphericPressureInhPaValueCWTV.text =
+            atmospheric_pressure_in_hPa_value_YW_CW_TV.text =
                     "${it.atmosphericPressureInhPa} ${getString(R.string.hPa)}"
-            humidityValueCWTV.text = "${it.humidity}%"
-            precipitationTypeValueCWTV.text = it.precipitationType
-            precipitationStrengthValueCWTV.text = it.precipitationStrength
-            cloudinessValueCWTV.text = it.cloudiness
-            daytimeValueCWTV.text = it.daytime
-            polarValueCWTV.text = it.polar
-            seasonValueCWTV.text = it.season
-            observationUnixTimeValueCWTV.text = it.observationUnixTime
+            humidity_value_YW_CW_TV.text = "${it.humidity}%"
+            precipitation_type_value_YW_CW_TV.text = it.precipitationType
+            precipitation_strength_value_YW_CW_TV.text = it.precipitationStrength
+            cloudiness_value_YW_CW_TV.text = it.cloudiness
+            daytime_value_YW_CW_TV.text = it.daytime
+            polar_value_YW_CW_TV.text = it.polar
+            season_value_YW_CW_TV.text = it.season
+            observation_unix_time_value_YW_CW_TV.text = it.observationUnixTime
         }
     }
 

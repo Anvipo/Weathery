@@ -21,7 +21,7 @@ class YWForecastActivity : AbsForecastActivity<YWForecastListType>(),
     @Inject
     lateinit var forecastPresenter: ForecastContract.Presenter<YWForecastListType>
 
-    override val progressBar: ProgressBar by lazy { yandex_forecast_PB }
+    override val progressBar: ProgressBar by lazy { yw_forecast_PB }
 
     private lateinit var pagerAdapter: YWForecastActivityPagerAdapter
 

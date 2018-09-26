@@ -29,7 +29,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/dayTimeValueOWMFTV"
+                android:id="@+id/day_time_value_OWM_F_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/daytime_value"
@@ -53,12 +53,13 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/temperatureValueOWMFTV"
+                android:id="@+id/temperature_value_OWM_F_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/temperature_value"
                 android:gravity="center_horizontal"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textIsSelectable="true" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,12 +77,13 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/cloudinessValueOWMFTV"
+                android:id="@+id/cloudiness_value_OWM_F_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/cloudiness_value"
                 android:gravity="center_horizontal"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textIsSelectable="true" />
         </LinearLayout>
 
         <LinearLayout
@@ -99,12 +101,13 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/humidityValueOWMFTV"
+                android:id="@+id/humidity_value_OWM_F_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/humidity_value"
                 android:gravity="center_horizontal"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textIsSelectable="true" />
         </LinearLayout>
 
         <LinearLayout
@@ -122,12 +125,13 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/rainVolumeValueOWMFTV"
+                android:id="@+id/rain_volume_value_OWM_F_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/rain_volume_for_last_3_hours_value"
                 android:gravity="center_horizontal"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textIsSelectable="true" />
         </LinearLayout>
 
         <LinearLayout
@@ -145,12 +149,13 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/weatherDescriptionValueOWMFTV"
+                android:id="@+id/weather_description_value_OWM_F_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/description_value"
                 android:gravity="center_horizontal"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textIsSelectable="true" />
         </LinearLayout>
 
         <LinearLayout
@@ -178,13 +183,14 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/windSpeedValueOWMFTV"
+                    android:id="@+id/wind_speed_value_OWM_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:contentDescription="@string/wind_speed_value"
                     android:gravity="center"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textIsSelectable="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -204,13 +210,14 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/windDirectionValueOWMFTV"
+                    android:id="@+id/wind_direction_value_OWM_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:contentDescription="@string/wind_direction_value"
                     android:gravity="center"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textIsSelectable="true" />
             </LinearLayout>
         </LinearLayout>
 
@@ -238,12 +245,13 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/atmosphericPressureOnTheGroundLevelInhPaValueOWMFTV"
+                    android:id="@+id/atmospheric_pressure_on_the_ground_level_in_hPa_value_OWM_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/atmospheric_pressure_on_the_ground_level_value"
                     android:gravity="center"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textIsSelectable="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -263,12 +271,13 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/atmosphericPressureOnTheSeaLevelInhPaValueOWMFTV"
+                    android:id="@+id/atmospheric_pressure_on_the_sea_level_in_hPa_value_OWM_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/atmospheric_pressure_on_the_sea_level_value"
                     android:gravity="center"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textIsSelectable="true" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

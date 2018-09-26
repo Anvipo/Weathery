@@ -54,18 +54,19 @@ class OWMCurrentWeatherActivity :
         showLayout()
 
         data.let {
-            observationUnixTimeValueOWMCWTV.text = it.timeOfDataCalculation
-            cloudinessValueOWMCWTV.text = "${it.clouds.cloudiness}%"
-            temperatureValueOWMCWTV.text = "${it.main.temperature} $CELSIUS_DEGREE"
-            atmosphericPressureValueOWMCWTV.text =
+            observation_unix_time_value_OWM_CW_TV.text = it.timeOfDataCalculation
+            cloudinessValueOWMCWTV.text = "${it.cloudiness}%"
+            temperature_value_OWM_CW_TV.text = "${it.main.temperature} $CELSIUS_DEGREE"
+            atmospheric_pressure_value_OWM_CW_TV.text =
                     "${it.main.atmosphericPressureInhPa} ${getString(R.string.hPa)}"
-            humidityValueOWMCWTV.text = "${it.main.humidity}%"
-            sunriseValueOWMCWTV.text = it.sys.sunrise
-            sunsetValueOWMCWTV.text = it.sys.sunset
-            visibilityValueOWMCWTV.text = "${it.visibilityInMeters} ${getString(R.string.meters)}"
-            windSpeedValueOWMCWTV.text =
+            humidity_value_OWM_CW_TV.text = "${it.main.humidity}%"
+            sunrise_value_OWM_CW_TV.text = it.sys.sunrise
+            sunset_value_OWM_CW_TV.text = it.sys.sunset
+            visibility_value_OWM_CW_TV.text =
+                    "${it.visibilityInMeters} ${getString(R.string.meters)}"
+            wind_speed_value_OWM_CW_TV.text =
                     "${it.wind.speedInUnits} ${getString(R.string.meters_per_second)}"
-            windDirectionValueOWMCWTV.text = it.wind.direction
+            wind_direction_value_OWM_CW_TV.text = it.wind.direction
 
             val onlyOne = it.weather.size == 1
 

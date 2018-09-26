@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/titleValueToDTV"
+            android:id="@+id/title_value_YW_ToD_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/title"
@@ -48,7 +48,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/minimumTemperatureValueToDTV"
+                    android:id="@+id/minimum_temperature_value_YW_ToD_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -75,7 +75,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/averageTemperatureValueToDTV"
+                    android:id="@+id/average_temperature_value_YW_ToD_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -102,7 +102,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/maximumTemperatureValueToDTV"
+                    android:id="@+id/maximum_temperature_value_YW_ToD_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -130,7 +130,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/feelsLikeTemperatureValueToDTV"
+                android:id="@+id/feels_like_temperature_value_YW_ToD_TV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -156,7 +156,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/conditionValueToDTV"
+                android:id="@+id/condition_value_YW_ToD_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/condition_value"
@@ -189,7 +189,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/windSpeedValueToDTV"
+                    android:id="@+id/wind_speed_value_YW_ToD_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/wind_speed_value"
@@ -215,7 +215,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/windGustValueToDTV"
+                    android:id="@+id/wind_gust_value_YW_ToD_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -241,7 +241,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/windDirectionValueToDTV"
+                    android:id="@+id/wind_direction_value_YW_ToD_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -276,7 +276,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/pressureInMmValueToDTV"
+                    android:id="@+id/pressure_in_mm_value_YW_ToD_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -303,7 +303,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/pressureInPaValueToDTV"
+                    android:id="@+id/pressure_in_hPa_value_YW_ToD_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -330,7 +330,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/humidityInPercentsValueToDTV"
+                android:id="@+id/humidity_in_percents_value_YW_ToD_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/humidity_value"
@@ -363,7 +363,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/precipitationTypeValueToDTV"
+                    android:id="@+id/precipitation_type_value_YW_ToD_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -390,7 +390,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/precipitationStrengthValueToDTV"
+                    android:id="@+id/precipitation_strength_value_YW_ToD_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -425,7 +425,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/precipitationInMmValueTV"
+                    android:id="@+id/precipitation_in_mm_value_YW_ToD_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -452,7 +452,7 @@
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
-                    android:id="@+id/precipitationInMinutesValueTV"
+                    android:id="@+id/precipitation_in_minutes_value_YW_ToD_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -479,7 +479,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/daytimeValueToDTV"
+                android:id="@+id/daytime_value_YW_ToD_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/daytime_value"
@@ -504,7 +504,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/polarValueToDTV"
+                android:id="@+id/polar_value_YW_ToD_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/is_there_polar_value"
@@ -528,7 +528,7 @@
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <TextView
-                android:id="@+id/cloudinessValueToDTV"
+                android:id="@+id/cloudiness_value_YW_ToD_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/cloudiness_value"

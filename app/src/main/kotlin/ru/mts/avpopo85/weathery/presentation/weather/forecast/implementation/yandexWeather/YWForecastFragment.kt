@@ -12,7 +12,7 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.item_yw_forecast.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWHourInfo
-import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWParts
+import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWParts
 import ru.mts.avpopo85.weathery.presentation.utils.ARG_FORECAST
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.adapters.YWHoursForecastAdapter
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.adapters.YWTimesOfDayForecastAdapter
@@ -41,13 +41,13 @@ class YWForecastFragment : Fragment() {
                 if (forecast.hours != null && forecast.hours.isNotEmpty())
                     initHoursRV(forecast.hours)
                 else
-                    yandex_hours_forecast_recycler_view.visibility = GONE
+                    hours_YW_F_RV.visibility = GONE
             }
     }
 
     private fun initHoursRV(YWHours: List<IYWHourInfo>) {
         val yandexHoursForecastRV =
-            view?.findViewById<RecyclerView>(R.id.yandex_hours_forecast_recycler_view)
+            view?.findViewById<RecyclerView>(R.id.hours_YW_F_RV)
 
         yandexHoursForecastRV?.apply {
             setHasFixedSize(true)
@@ -58,7 +58,7 @@ class YWForecastFragment : Fragment() {
 
     private fun init12HoursRV(YWParts: YWParts) {
         val yandex12HoursForecastRecyclerView =
-            view?.findViewById<RecyclerView>(R.id.yandex_12_hours_forecast_recycler_view)
+            view?.findViewById<RecyclerView>(R.id._12_hours_YW_F_RV)
 
         yandex12HoursForecastRecyclerView?.apply {
             setHasFixedSize(true)
@@ -76,9 +76,9 @@ class YWForecastFragment : Fragment() {
     }
 
     private fun fillFields(YWYWForecast: YWForecastType) {
-        val moonTextValueTV = view?.findViewById<TextView>(R.id.moonTextValueTV)
-        val sunriseTimeValueTV = view?.findViewById<TextView>(R.id.sunriseTimeValueTV)
-        val sunsetTimeValueTV = view?.findViewById<TextView>(R.id.sunsetTimeValueTV)
+        val moonTextValueTV = view?.findViewById<TextView>(R.id.moon_text_value_YW_F_TV)
+        val sunriseTimeValueTV = view?.findViewById<TextView>(R.id.sunrise_time_value_YW_F_TV)
+        val sunsetTimeValueTV = view?.findViewById<TextView>(R.id.sunset_time_value_YW_F_TV)
 
         moonTextValueTV?.text = YWYWForecast.moonText
         sunriseTimeValueTV?.text = YWYWForecast.sunriseInLocalTime

@@ -13,32 +13,36 @@ class YWTimeOfDayForecastViewHolder(private val view: View) : ViewHolder(view) {
 
     fun bind(YWDayTime: IYWDayTime) {
         val minimumTemperatureValueToDTV =
-            view.findViewById<TextView>(R.id.minimumTemperatureValueToDTV)
+            view.findViewById<TextView>(R.id.minimum_temperature_value_YW_ToD_TV)
         val averageTemperatureValueToDTV =
-            view.findViewById<TextView>(R.id.averageTemperatureValueToDTV)
+            view.findViewById<TextView>(R.id.average_temperature_value_YW_ToD_TV)
         val maximumTemperatureValueToDTV =
-            view.findViewById<TextView>(R.id.maximumTemperatureValueToDTV)
+            view.findViewById<TextView>(R.id.maximum_temperature_value_YW_ToD_TV)
         val feelsLikeTemperatureValueToDTV =
-            view.findViewById<TextView>(R.id.feelsLikeTemperatureValueToDTV)
-        val conditionValueToDTV = view.findViewById<TextView>(R.id.conditionValueToDTV)
-        val windSpeedValueToDTV = view.findViewById<TextView>(R.id.windSpeedValueToDTV)
-        val windGustValueToDTV = view.findViewById<TextView>(R.id.windGustValueToDTV)
-        val windDirectionValueToDTV = view.findViewById<TextView>(R.id.windDirectionValueToDTV)
-        val pressureInMmHgValueToDTV = view.findViewById<TextView>(R.id.pressureInMmValueToDTV)
-        val pressureInhPaValueToDTV = view.findViewById<TextView>(R.id.pressureInPaValueToDTV)
+            view.findViewById<TextView>(R.id.feels_like_temperature_value_YW_ToD_TV)
+        val conditionValueToDTV = view.findViewById<TextView>(R.id.condition_value_YW_ToD_TV)
+        val windSpeedValueToDTV = view.findViewById<TextView>(R.id.wind_speed_value_YW_ToD_TV)
+        val windGustValueToDTV = view.findViewById<TextView>(R.id.wind_gust_value_YW_ToD_TV)
+        val windDirectionValueToDTV =
+            view.findViewById<TextView>(R.id.wind_direction_value_YW_ToD_TV)
+        val pressureInMmHgValueToDTV =
+            view.findViewById<TextView>(R.id.pressure_in_mm_value_YW_ToD_TV)
+        val pressureInhPaValueToDTV =
+            view.findViewById<TextView>(R.id.pressure_in_hPa_value_YW_ToD_TV)
         val humidityInPercentsValueToDTV =
-            view.findViewById<TextView>(R.id.humidityInPercentsValueToDTV)
+            view.findViewById<TextView>(R.id.humidity_in_percents_value_YW_ToD_TV)
         val precipitationTypeValueToDTV =
-            view.findViewById<TextView>(R.id.precipitationTypeValueToDTV)
+            view.findViewById<TextView>(R.id.precipitation_type_value_YW_ToD_TV)
         val precipitationStrengthValueToDTV =
-            view.findViewById<TextView>(R.id.precipitationStrengthValueToDTV)
-        val precipitationInMmValueTV = view.findViewById<TextView>(R.id.precipitationInMmValueTV)
+            view.findViewById<TextView>(R.id.precipitation_strength_value_YW_ToD_TV)
+        val precipitationInMmValueTV =
+            view.findViewById<TextView>(R.id.precipitation_in_mm_value_YW_ToD_TV)
         val precipitationInMinutesValueTV =
-            view.findViewById<TextView>(R.id.precipitationInMinutesValueTV)
-        val daytimeValueToDTV = view.findViewById<TextView>(R.id.daytimeValueToDTV)
-        val polarValueToDTV = view.findViewById<TextView>(R.id.polarValueToDTV)
-        val cloudinessValueToDTV = view.findViewById<TextView>(R.id.cloudinessValueToDTV)
-        val titleValueToDTV = view.findViewById<TextView>(R.id.titleValueToDTV)
+            view.findViewById<TextView>(R.id.precipitation_in_minutes_value_YW_ToD_TV)
+        val daytimeValueToDTV = view.findViewById<TextView>(R.id.daytime_value_YW_ToD_TV)
+        val polarValueToDTV = view.findViewById<TextView>(R.id.polar_value_YW_ToD_TV)
+        val cloudinessValueToDTV = view.findViewById<TextView>(R.id.cloudiness_value_YW_ToD_TV)
+        val titleValueToDTV = view.findViewById<TextView>(R.id.title_value_YW_ToD_TV)
 
         YWDayTime.let {
             titleValueToDTV.text = it.title
