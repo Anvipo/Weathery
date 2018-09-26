@@ -3,7 +3,6 @@ package ru.mts.avpopo85.weathery.presentation.utils
 import android.content.Context
 import retrofit2.HttpException
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastType
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -43,9 +42,6 @@ fun Context.parseError(throwable: Throwable): String {
     else
         "$msg (${throwable.message})"
 }
-
-fun Context.makeTitle(YWForecast: YWForecastType): String =
-    "${YWForecast.dateInUnixtime} (${YWForecast.weekSerialNumber} ${getString(R.string.week)})"
 
 private fun Context.parse1xxHttpCode(code: Int): String = when (code) {
     100 -> getString(R.string._continue)

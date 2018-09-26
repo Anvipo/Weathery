@@ -3,8 +3,8 @@ package ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.common
 
 interface IOWMWeatherResponse {
 
-    /**Weather condition cityID*/
-    val id: Int
+    /**Weather condition id*/
+    val conditionCode: Int
 
     /**Group of weather parameters (Rain, Snow, Extreme etc.)*/
     val groupOfWeatherParameters: String

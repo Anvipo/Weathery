@@ -58,7 +58,7 @@ class OWMForecastRealmService : IForecastDbService<OWMForecastListResponseType> 
                     val data: OWMForecastListResponseType? =
                         realmInstance.copyFromRealm(proxyData)
 
-                    if (data != null) {
+                    if (data != null && data.isNotEmpty()) {
                         val unixtimeInMillis = data.first().dateInUnixtimeUTC
 
                         val dataIsFresh = unixtimeInMillis.isFreshThan(YW_DEFAULT_CACHE_LIFETIME)

@@ -1,63 +1,67 @@
 package ru.mts.avpopo85.weathery.domain.mapper.implementation.openWeatherMap
 
+import android.content.Context
 import ru.mts.avpopo85.weathery.domain.mapper.base.ICurrentWeatherMapper
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.*
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMCurrentWeatherMain
 import ru.mts.avpopo85.weathery.domain.utils.toTime
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
+import javax.inject.Inject
 
-class OWMCurrentWeatherMapper :
+class OWMCurrentWeatherMapper
+@Inject constructor(val context: Context) :
     ICurrentWeatherMapper<OWMCurrentWeatherResponseType, OWMCurrentWeatherType> {
 
-    override fun mapCurrentWeatherResponse(currentWeatherResponse: OWMCurrentWeatherResponseType): OWMCurrentWeatherType =
-        currentWeatherResponse.let {
+    override fun mapCurrentWeatherResponse(currentWeatherResponseData: OWMCurrentWeatherResponseType): OWMCurrentWeatherType =
+        currentWeatherResponseData.let { currentWeatherResponse: OWMCurrentWeatherResponseType ->
             OWMCurrentWeatherType(
-                coordinates = it.coordinates!!.let { coordinates ->
+                coordinates = currentWeatherResponse.coordinates!!.let {
                     OWMCoordinates(
-                        coordinates.longitude,
-                        coordinates.latitude
+                        longitude = it.longitude,
+                        latitude = it.latitude
                     )
                 },
-                weather = it.weather.map { weather ->
+                weather = currentWeatherResponse.weather.map {
                     OWMWeather(
-                        weather.id,
-                        weather.groupOfWeatherParameters,
-                        weather.description,
-                        weather.icon
+                        conditionCode = it.conditionCode,
+                        groupOfWeatherParameters = it.groupOfWeatherParameters,
+                        description = it.description,
+                        icon = it.icon
                     )
                 },
-                base = it.base,
-                main = it.main!!.let { main ->
-                    OWMMain(
-                        main.temperature,
-                        main.atmosphericPressureInhPa,
-                        main.humidity,
-                        main.minimumTemperature,
-                        main.maximumTemperature
+                base = currentWeatherResponse.base,
+                main = currentWeatherResponse.main!!.let {
+                    OWMCurrentWeatherMain(
+                        temperature = it.temperature,
+                        atmosphericPressureInhPa = it.atmosphericPressureInhPa,
+                        humidity = it.humidity,
+                        minimumTemperature = it.minimumTemperature,
+                        maximumTemperature = it.maximumTemperature
                     )
                 },
-                visibilityInMeters = it.visibility,
-                wind = it.wind!!.let { wind ->
+                visibilityInMeters = currentWeatherResponse.visibility,
+                wind = currentWeatherResponse.wind!!.let {
                     OWMWind(
-                        wind.speed,
-                        wind.directionInDegrees
+                        speedInUnits = it.speedInUnits,
+                        direction = context.getWindDirectionString(it.directionInDegrees)
                     )
                 },
-                clouds = OWMClouds(it.clouds!!.cloudiness),
-                timeOfDataCalculation = it.timeOfDataCalculationUnixUTC.toTime(),
-                sys = it.sys!!.let { sys ->
+                clouds = OWMClouds(currentWeatherResponse.clouds!!.cloudiness),
+                timeOfDataCalculation = currentWeatherResponse.timeOfDataCalculationUnixUTC.toTime(),
+                sys = currentWeatherResponse.sys!!.let {
                     OWMSys(
-                        sys.type,
-                        sys.id,
-                        sys.message,
-                        sys.countryCode,
-                        sys.sunrise.toTime(),
-                        sys.sunset.toTime()
+                        type = it.type,
+                        id = it.id,
+                        message = it.message,
+                        countryCode = it.countryCode,
+                        sunrise = it.sunrise.toTime(),
+                        sunset = it.sunset.toTime()
                     )
                 },
-                cityID = it.cityID,
-                cityName = it.cityName,
-                code = it.code
+                cityID = currentWeatherResponse.cityID,
+                cityName = currentWeatherResponse.cityName,
+                code = currentWeatherResponse.code
             )
         }
 

@@ -1,7 +1,7 @@
-package ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap
+package ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.currentWeather
 
 
-interface IOWMMain {
+interface IOWMCurrentWeatherMainResponse {
 
     /**Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.*/
     val temperature: Double

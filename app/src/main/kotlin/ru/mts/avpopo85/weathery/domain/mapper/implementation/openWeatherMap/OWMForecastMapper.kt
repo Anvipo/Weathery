@@ -2,8 +2,14 @@ package ru.mts.avpopo85.weathery.domain.mapper.implementation.openWeatherMap
 
 import android.content.Context
 import ru.mts.avpopo85.weathery.domain.mapper.base.IForecastMapper
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.getDaytimeString
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.OWMForecastMain
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.OWMWeather
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.OWMWind
+import ru.mts.avpopo85.weathery.domain.utils.toDateTime
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 import javax.inject.Inject
 
@@ -12,18 +18,37 @@ class OWMForecastMapper
     IForecastMapper<OWMForecastListResponseType, OWMForecastListType> {
 
     override fun mapForecast(forecastListResponse: OWMForecastListResponseType): OWMForecastListType =
-        forecastListResponse.map {
+        forecastListResponse.map { forecastResponse: OWMForecastResponseType ->
             OWMForecastType(
-                ""
-                /*dateUTC = it.dateUTC,
-                dateInUnixtimeUTC = it.dateInUnixtimeUTC.toDate(),
-                weekSerialNumber = it.weekSerialNumber,
-                sunriseInLocalTime = it.sunriseInLocalTime,
-                sunsetInLocalTime = it.sunsetInLocalTime,
-                moonCode = context.getMoonCodeString(it.moonCode),
-                moonText = context.getMoonTextString(it.moonText),
-                parts = mapPartsResponse(it.partsResponse!!),
-                hours = mapHoursResponse(it.hours)*/
+                date = forecastResponse.dateInUnixtimeUTC.toDateTime(),
+                cloudiness = forecastResponse.clouds!!.cloudiness,
+                wind = forecastResponse.wind!!.let {
+                    OWMWind(
+                        speedInUnits = it.speedInUnits,
+                        direction = context.getWindDirectionString(it.directionInDegrees)
+                    )
+                },
+                weather = forecastResponse.weather.first()!!.let {
+                    OWMWeather(
+                        conditionCode = it.conditionCode,
+                        groupOfWeatherParameters = it.groupOfWeatherParameters,
+                        description = it.description,
+                        icon = it.icon
+                    )
+                },
+                dayTime = context.getDaytimeString(forecastResponse.sys!!.dayTime),
+                rainVolumeMm = forecastResponse.rain?.rainVolumeForLast3hoursMm ?: 0.0,
+                main = forecastResponse.main!!.let {
+                    OWMForecastMain(
+                        temperature = it.temperature,
+                        humidity = it.humidity,
+                        minimumTemperature = it.minimumTemperature,
+                        maximumTemperature = it.maximumTemperature,
+                        atmosphericPressureOnTheGroundLevelInhPa = it.atmosphericPressureOnTheGroundLevelInhPa,
+                        atmosphericPressureOnTheSeaLevelByDefaultInhPa = it.atmosphericPressureOnTheSeaLevelByDefaultInhPa,
+                        atmosphericPressureOnTheSeaLevelInhPa = it.atmosphericPressureOnTheSeaLevelInhPa
+                    )
+                }
             )
         }
 

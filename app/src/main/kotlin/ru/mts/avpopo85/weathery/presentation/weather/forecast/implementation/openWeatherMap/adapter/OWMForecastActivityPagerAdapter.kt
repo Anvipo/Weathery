@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 
-class ForecastActivityPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+class YWForecastActivityPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
     private val items = mutableListOf<Fragment>()
     private val tabTitles = mutableListOf<String>()
 

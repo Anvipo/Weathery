@@ -7,6 +7,6 @@ import ru.mts.avpopo85.weathery.domain.model.base.common.ICurrentWeather
 //то Dagger будет ругаться (не видит provide реализации?
 interface ICurrentWeatherMapper<D : ICurrentWeatherResponse, B : ICurrentWeather> {
 
-    fun mapCurrentWeatherResponse(currentWeatherResponse: D): B
+    fun mapCurrentWeatherResponse(currentWeatherResponseData: D): B
 
 }

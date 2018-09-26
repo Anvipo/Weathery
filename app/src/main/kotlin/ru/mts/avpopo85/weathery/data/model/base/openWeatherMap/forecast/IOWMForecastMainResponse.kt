@@ -22,7 +22,7 @@ interface IOWMForecastMainResponse {
     val tempKf: Double
 
     /**Humidity, %*/
-    val humidity: Double
+    val humidity: Int
 
     /**Atmospheric pressure on the sea level by default, hPa*/
     val atmosphericPressureOnTheSeaLevelByDefaultInhPa: Double

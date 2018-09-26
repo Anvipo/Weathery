@@ -11,7 +11,6 @@ import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.OpenWeatherMapModule
 import ru.mts.avpopo85.weathery.presentation.utils.CELSIUS_DEGREE
-import ru.mts.avpopo85.weathery.presentation.utils.DEGREE
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.AbsCurrentWeatherActivity
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
@@ -66,7 +65,7 @@ class OWMCurrentWeatherActivity :
             visibilityValueOWMCWTV.text = "${it.visibilityInMeters} ${getString(R.string.meters)}"
             windSpeedValueOWMCWTV.text =
                     "${it.wind.speedInUnits} ${getString(R.string.meters_per_second)}"
-            windDirectionValueOWMCWTV.text = "${it.wind.directionInDegrees}$DEGREE"
+            windDirectionValueOWMCWTV.text = it.wind.direction
 
             val onlyOne = it.weather.size == 1
 

@@ -1,29 +1,30 @@
 package ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.forecast
 
-import ru.mts.avpopo85.weathery.domain.model.base.common.IForecast
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.forecast.IOWMForecast
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.OWMForecastMain
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.OWMWeather
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.OWMWind
 
 @Suppress("SpellCheckingInspection")
-//@Parcelize
+@Parcelize
 
 /**This object contains weather forecast data.*/
-data class OWMForecast(override val date: String) : IForecast
+data class OWMForecast(
 
-/*override val dateUTC: String,
+    override val date: String,
 
-override val dateInUnixtimeUTC: String,
+    override val cloudiness: Int,
 
-override val weekSerialNumber: Int,
+    override val wind: OWMWind,
 
-override val sunriseInLocalTime: String?,
+    override val weather: OWMWeather,
 
-override val sunsetInLocalTime: String?,
+    override val dayTime: String,
 
-override val moonCode: String,
+    override val rainVolumeMm: Double,
 
-override val moonText: String,
+    override val main: OWMForecastMain
 
-override val parts: YWParts,
-
-override val hours: List<YWHourInfo>?*/
-
-/*: Parcelable, IYWForecast*/
+) : Parcelable, IOWMForecast

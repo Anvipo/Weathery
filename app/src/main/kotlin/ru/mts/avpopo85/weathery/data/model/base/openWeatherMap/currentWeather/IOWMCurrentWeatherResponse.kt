@@ -4,7 +4,7 @@ import ru.mts.avpopo85.weathery.data.model.base.common.ICurrentWeatherResponse
 import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.common.IOWMCloudsResponse
 import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.common.IOWMCoordinatesResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMWeatherResponse
-import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather.OWMMainResponse
+import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather.OWMCurrentWeatherMainResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather.OWMSysResponse
 
 interface IOWMCurrentWeatherResponse : ICurrentWeatherResponse {
@@ -16,7 +16,7 @@ interface IOWMCurrentWeatherResponse : ICurrentWeatherResponse {
     /**Internal parameter*/
     val base: String
 
-    val main: OWMMainResponse?
+    val main: OWMCurrentWeatherMainResponse?
 
     val visibility: Int
 

@@ -6,6 +6,7 @@ import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWDayTimeResponse
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.IYWHourInfoResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.YWPartsResponse
 import ru.mts.avpopo85.weathery.domain.mapper.base.IForecastMapper
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.getDaytimeString
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWDayShort
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWDayTime
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.YWHourInfo

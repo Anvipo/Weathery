@@ -9,14 +9,13 @@ import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.YandexWeatherModule
 import ru.mts.avpopo85.weathery.presentation.utils.ARG_FORECAST
-import ru.mts.avpopo85.weathery.presentation.utils.makeTitle
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.AbsForecastActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
-import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.adapters.ForecastActivityPagerAdapter
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.adapters.YWForecastActivityPagerAdapter
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
 import javax.inject.Inject
 
-class YWForecastActivity : AbsForecastActivity(),
+class YWForecastActivity : AbsForecastActivity<YWForecastListType>(),
     ForecastContract.View<YWForecastListType> {
 
     @Inject
@@ -24,7 +23,7 @@ class YWForecastActivity : AbsForecastActivity(),
 
     override val progressBar: ProgressBar by lazy { yandex_forecast_PB }
 
-    private lateinit var pagerAdapter: ForecastActivityPagerAdapter
+    private lateinit var pagerAdapter: YWForecastActivityPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,13 +46,13 @@ class YWForecastActivity : AbsForecastActivity(),
 
     override fun showWeatherResponse(data: YWForecastListType) {
         if (data.isNotEmpty()) {
-            pager.visibility = VISIBLE
+            yw_forecast_pager.visibility = VISIBLE
             putForecastDataInPager(data)
         } else
-            pager.visibility = GONE
+            yw_forecast_pager.visibility = GONE
     }
 
-    private fun putForecastDataInPager(data: YWForecastListType) {
+    override fun putForecastDataInPager(data: YWForecastListType) {
         for (forecast in data) {
             val yfr = YWForecastFragment()
 
@@ -61,16 +60,14 @@ class YWForecastActivity : AbsForecastActivity(),
                 putParcelable(ARG_FORECAST, forecast)
             }
 
-            val title = makeTitle(forecast)
-
-            pagerAdapter.addFragment(yfr, title)
+            pagerAdapter.addFragment(yfr, forecast.date)
         }
     }
 
     private fun initPager() {
-        pagerAdapter = ForecastActivityPagerAdapter(supportFragmentManager)
-        pager.adapter = pagerAdapter
-        pager.visibility = GONE
+        pagerAdapter = YWForecastActivityPagerAdapter(supportFragmentManager)
+        yw_forecast_pager.adapter = pagerAdapter
+        yw_forecast_pager.visibility = GONE
     }
 
 }

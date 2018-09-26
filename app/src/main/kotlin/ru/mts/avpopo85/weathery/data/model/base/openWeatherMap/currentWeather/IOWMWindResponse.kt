@@ -6,7 +6,7 @@ interface IOWMWindResponse {
     /**Wind speed.
      *
      *Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.*/
-    val speed: Double
+    val speedInUnits: Double
 
     /**Wind direction, degrees (meteorological)*/
     val directionInDegrees: Double

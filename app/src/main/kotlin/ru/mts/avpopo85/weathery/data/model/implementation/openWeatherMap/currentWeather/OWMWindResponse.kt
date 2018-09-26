@@ -9,7 +9,7 @@ open class OWMWindResponse(
 
     @SerializedName("speed")
     @Expose
-    override var speed: Double = 0.0,
+    override var speedInUnits: Double = 0.0,
 
     @SerializedName("deg")
     @Expose

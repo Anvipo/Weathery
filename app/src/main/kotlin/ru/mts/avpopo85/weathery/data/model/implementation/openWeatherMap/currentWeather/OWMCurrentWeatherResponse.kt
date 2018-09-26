@@ -26,7 +26,7 @@ open class OWMCurrentWeatherResponse(
 
     @SerializedName("main")
     @Expose
-    override var main: OWMMainResponse? = null,
+    override var main: OWMCurrentWeatherMainResponse? = null,
 
     @SerializedName("visibility")
     @Expose

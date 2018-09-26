@@ -2,6 +2,7 @@ package ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather
 
 import android.content.Context
 import ru.mts.avpopo85.weathery.domain.mapper.base.ICurrentWeatherMapper
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.getDaytimeString
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather.YandexWeatherMapper.getWaterTemperatureString
 import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.utils.toDate
@@ -13,8 +14,8 @@ class YWCurrentWeatherMapper
 @Inject constructor(private val context: Context) :
     ICurrentWeatherMapper<YWCurrentWeatherResponseType, YWCurrentWeatherType> {
 
-    override fun mapCurrentWeatherResponse(currentWeatherResponse: YWCurrentWeatherResponseType): YWCurrentWeatherType =
-        currentWeatherResponse.let {
+    override fun mapCurrentWeatherResponse(currentWeatherResponseData: YWCurrentWeatherResponseType): YWCurrentWeatherType =
+        currentWeatherResponseData.let {
             YWCurrentWeatherType(
                 cloudiness = context.getCloudinessString(it.cloudiness),
                 daytime = context.getDaytimeString(it.daytime),

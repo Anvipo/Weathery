@@ -5,7 +5,6 @@
     <string name="hPa">hPa</string>
     <string name="mm">mm</string>
     <string name="minutes">min</string>
-    <string name="week">week</string>
     <string name="clear">clear</string>
     <string name="partly_cloudy">partly cloudy</string>
     <string name="cloudy">cloudy</string>
@@ -203,4 +202,10 @@
     <string name="authorisation_error">Authorisation error</string>
     <string name="response_timeout">Response timeout</string>
     <string name="make_sure_your_device_has_a_network_connection">Make sure your device has a network connection</string>
+    <string name="rain_volume_for_last_3_hours">Rain volume for last 3 hours</string>
+    <string name="rain_volume_for_last_3_hours_value">Rain volume for last 3 hours value</string>
+    <string name="atmospheric_pressure_on_the_ground_level">Atmospheric pressure on the ground level</string>
+    <string name="atmospheric_pressure_on_the_ground_level_value">Atmospheric pressure on the ground level value</string>
+    <string name="atmospheric_pressure_on_the_sea_level">Atmospheric pressure on the sea level</string>
+    <string name="atmospheric_pressure_on_the_sea_level_value">Значение атмосферного давления на уровне моря</string>
 </resources>

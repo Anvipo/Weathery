@@ -63,12 +63,6 @@ fun Context.getWindDirectionString(windDirection: String): String = when (windDi
     else -> throw WindDirectionParsingException("${getString(R.string.unknown_parameter_value)}: $windDirection")
 }
 
-fun Context.getDaytimeString(daytime: String): String = when (daytime) {
-    "d" -> getString(R.string.light)
-    "n" -> getString(R.string.dark)
-    else -> throw DaytimeParsingException("${getString(R.string.unknown_parameter_value)}: $daytime")
-}
-
 fun Context.getSeasonString(season: String): String = when (season) {
     "summer" -> getString(R.string.summer)
     "autumn" -> getString(R.string.autumn)

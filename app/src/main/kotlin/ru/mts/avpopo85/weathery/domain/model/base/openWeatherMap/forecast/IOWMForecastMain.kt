@@ -1,13 +1,19 @@
-package ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.currentWeather
+package ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.forecast
 
 
-interface IOWMMainResponse {
+interface IOWMForecastMain {
 
     /**Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.*/
     val temperature: Double
 
-    /**Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa*/
-    val atmosphericPressureInhPa: Int
+    /**Atmospheric pressure on the ground level, hPa*/
+    val atmosphericPressureOnTheGroundLevelInhPa: Double
+
+    /**Atmospheric pressure on the sea level by default, hPa*/
+    val atmosphericPressureOnTheSeaLevelByDefaultInhPa: Double
+
+    /**Atmospheric pressure on the sea level, hPa*/
+    val atmosphericPressureOnTheSeaLevelInhPa: Double
 
     /**Humidity, %*/
     val humidity: Int

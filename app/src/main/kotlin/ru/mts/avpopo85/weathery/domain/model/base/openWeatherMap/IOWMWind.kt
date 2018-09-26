@@ -8,7 +8,6 @@ interface IOWMWind {
      *Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.*/
     val speedInUnits: Double
 
-    /**Wind direction, degrees (meteorological)*/
-    val directionInDegrees: Double
+    val direction: String
 
 }

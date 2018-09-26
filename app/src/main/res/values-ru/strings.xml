@@ -6,7 +6,6 @@
     <string name="hPa">гПа</string>
     <string name="mm">мм</string>
     <string name="minutes">мин</string>
-    <string name="week">неделя</string>
     <string name="clear">ясно</string>
     <string name="partly_cloudy">малооблачно</string>
     <string name="cloudy">облачно с прояснениями</string>
@@ -25,14 +24,14 @@
     <string name="rain_or_snow">средние осадки</string>
     <string name="heavy_rain_or_snowfall">сильные осадки</string>
     <string name="heavy_downpour_or_snowstorm">очень сильные осадки</string>
-    <string name="northwest">северо-западное</string>
-    <string name="north">северное</string>
-    <string name="northeast">северо-восточное</string>
-    <string name="east">восточное</string>
-    <string name="southeast">юго-восточное</string>
-    <string name="south">южное</string>
-    <string name="southwest">юго-западное</string>
-    <string name="west">западное</string>
+    <string name="northwest">северо-западный</string>
+    <string name="north">северный</string>
+    <string name="northeast">северо-восточный</string>
+    <string name="east">восточный</string>
+    <string name="southeast">юго-восточный</string>
+    <string name="south">южный</string>
+    <string name="southwest">юго-западный</string>
+    <string name="west">западный</string>
     <string name="calm">штиль</string>
     <string name="light">светлое</string>
     <string name="dark">тёмное</string>
@@ -106,7 +105,7 @@
     <string name="maximum_temperature">Максимальная температура</string>
     <string name="maximum_temperature_value">Значение максимальной температуры</string>
     <string name="meters">метров</string>
-    <string name="description">Описание</string>
+    <string name="description">Описание погоды</string>
     <string name="description_value">Значение описания</string>
     <string name="visibility">Видимость</string>
     <string name="visibility_value">Значение видимости</string>
@@ -203,4 +202,10 @@
     <string name="authorisation_error">Ошибка авторизации</string>
     <string name="response_timeout">Время ожидания ответа истекло</string>
     <string name="make_sure_your_device_has_a_network_connection">Убедитесь, что на устройсте есть подключение к сети</string>
+    <string name="rain_volume_for_last_3_hours">Количество дождя, выпавшего за последние 3 часа</string>
+    <string name="rain_volume_for_last_3_hours_value">Значение количества дождя, выпавшего за последние 3 часа</string>
+    <string name="atmospheric_pressure_on_the_ground_level">Атмосферное давление на уровне земли</string>
+    <string name="atmospheric_pressure_on_the_ground_level_value">Значение атмосферного давления на уровне земли</string>
+    <string name="atmospheric_pressure_on_the_sea_level">Атмосферное давление на уровне моря</string>
+    <string name="atmospheric_pressure_on_the_sea_level_value">Значение атмосферного давления на уровне моря</string>
 </resources>

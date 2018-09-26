@@ -10,7 +10,7 @@ open class OWMWeatherResponse(
 
     @SerializedName("id")
     @Expose
-    override var id: Int = 0,
+    override var conditionCode: Int = 0,
 
     @SerializedName("main")
     @Expose

@@ -26,7 +26,7 @@ open class OWMForecastMainResponse(
 
     @SerializedName("humidity")
     @Expose
-    override var humidity: Double = 0.0,
+    override var humidity: Int = 0,
 
     @SerializedName("pressure")
     @Expose

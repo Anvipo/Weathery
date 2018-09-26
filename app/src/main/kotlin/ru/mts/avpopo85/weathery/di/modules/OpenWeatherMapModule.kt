@@ -53,9 +53,9 @@ class OpenWeatherMapModule {
 
     @Provides
     @OpenWeatherMapScope
-    fun provideOWMCurrentWeatherMapper():
+    fun provideOWMCurrentWeatherMapper(context: Context):
             ICurrentWeatherMapper<OWMCurrentWeatherResponseType, OWMCurrentWeatherType> =
-        OWMCurrentWeatherMapper()
+        OWMCurrentWeatherMapper(context)
 
     @Provides
     @OpenWeatherMapScope
