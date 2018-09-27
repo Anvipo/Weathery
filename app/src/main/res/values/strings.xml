@@ -207,5 +207,10 @@
     <string name="atmospheric_pressure_on_the_ground_level">Atmospheric pressure on the ground level</string>
     <string name="atmospheric_pressure_on_the_ground_level_value">Atmospheric pressure on the ground level value</string>
     <string name="atmospheric_pressure_on_the_sea_level">Atmospheric pressure on the sea level</string>
-    <string name="atmospheric_pressure_on_the_sea_level_value">Значение атмосферного давления на уровне моря</string>
+    <string name="atmospheric_pressure_on_the_sea_level_value">Atmospheric pressure on the sea level value</string>
+
+    <string name="start_updates">Start updates</string>
+    <string name="stop_updates">Stop updates</string>
+    <string name="location_settings_inadequate_warning">The location settings on the device are not
+        adequate to run this sample. Fix in Settings.</string>
 </resources>

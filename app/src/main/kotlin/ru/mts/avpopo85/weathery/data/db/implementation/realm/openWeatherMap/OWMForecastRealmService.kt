@@ -4,7 +4,6 @@ import io.reactivex.Single
 import io.realm.Realm
 import io.realm.kotlin.where
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
-import ru.mts.avpopo85.weathery.data.db.implementation.realm.yandexWeather.YW_DEFAULT_CACHE_LIFETIME
 import ru.mts.avpopo85.weathery.data.utils.isFreshThan
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
@@ -61,7 +60,8 @@ class OWMForecastRealmService : IForecastDbService<OWMForecastListResponseType> 
                     if (data != null && data.isNotEmpty()) {
                         val unixtimeInMillis = data.first().dateInUnixtimeUTC
 
-                        val dataIsFresh = unixtimeInMillis.isFreshThan(YW_DEFAULT_CACHE_LIFETIME)
+                        val dataIsFresh =
+                            unixtimeInMillis.isFreshThan(OWM_FORECAST_DEFAULT_CACHE_LIFETIME_IN_MS)
 
                         if (dataIsFresh) {
                             emitter.onSuccess(data)

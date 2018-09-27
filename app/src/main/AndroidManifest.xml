@@ -6,7 +6,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--for location updates-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--for last know location-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".application.App"
@@ -17,7 +20,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/AppTheme.NoActionBar"
         tools:targetApi="n">
         <activity android:name=".presentation.main.MainActivity">
             <intent-filter>
@@ -32,6 +35,7 @@
         <activity android:name=".presentation.weather.forecast.implementation.yandexWeather.YWForecastActivity" />
         <activity android:name=".presentation.weather.currentWeather.implementation.openWeatherMap.OWMCurrentWeatherActivity" />
         <activity android:name=".presentation.weather.forecast.implementation.openWeatherMap.OWMForecastActivity" />
+        <activity android:name=".presentation.location.LocationActivity"></activity>
     </application>
 
 </manifest>

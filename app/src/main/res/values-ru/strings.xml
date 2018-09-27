@@ -201,6 +201,8 @@
     <string name="the_server_is_temporarily_unavailable">Сервер временно недоступен</string>
     <string name="authorisation_error">Ошибка авторизации</string>
     <string name="response_timeout">Время ожидания ответа истекло</string>
+
+
     <string name="make_sure_your_device_has_a_network_connection">Убедитесь, что на устройсте есть подключение к сети</string>
     <string name="rain_volume_for_last_3_hours">Количество дождя, выпавшего за последние 3 часа</string>
     <string name="rain_volume_for_last_3_hours_value">Значение количества дождя, выпавшего за последние 3 часа</string>
@@ -208,4 +210,9 @@
     <string name="atmospheric_pressure_on_the_ground_level_value">Значение атмосферного давления на уровне земли</string>
     <string name="atmospheric_pressure_on_the_sea_level">Атмосферное давление на уровне моря</string>
     <string name="atmospheric_pressure_on_the_sea_level_value">Значение атмосферного давления на уровне моря</string>
+
+    <string name="start_updates">Начать обновления</string>
+    <string name="stop_updates">Закончить обновления</string>
+    <string name="location_settings_inadequate_warning">Настройки геопозиции на устройстве неадекватны
+        для запуска функциональности. Почините в настройках.</string>
 </resources>

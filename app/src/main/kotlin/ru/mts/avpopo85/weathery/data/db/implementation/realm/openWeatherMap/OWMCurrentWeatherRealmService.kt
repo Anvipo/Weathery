@@ -7,9 +7,6 @@ import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.utils.isFreshThan
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 
-//TODO пользователь выбирает интервал обновления
-const val OWM_DEFAULT_CACHE_LIFETIME: Long = 1_800_000 //= 30 min
-
 class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeatherResponseType> {
 
     override fun saveCurrentWeatherResponse(currentWeatherResponse: OWMCurrentWeatherResponseType):
@@ -58,7 +55,8 @@ class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeather
                     if (data != null) {
                         val unixtimeInMillis = data.timeOfDataCalculationUnixUTC * 1000L
 
-                        val dataIsFresh = unixtimeInMillis.isFreshThan(OWM_DEFAULT_CACHE_LIFETIME)
+                        val dataIsFresh =
+                            unixtimeInMillis.isFreshThan(OWM_CURRENT_WEATHER_DEFAULT_CACHE_LIFETIME_IN_MS)
 
                         if (dataIsFresh) {
                             emitter.onSuccess(data)
