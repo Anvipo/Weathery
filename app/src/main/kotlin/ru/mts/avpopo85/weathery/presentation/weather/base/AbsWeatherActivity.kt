@@ -4,11 +4,13 @@ import android.view.View
 import android.widget.ProgressBar
 import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
 
-abstract class AbsWeatherActivity/*<out P : WeatherContract.Presenter<WeatherContract.View>>*/ :
+abstract class AbsWeatherActivity<V : View>/*<out P : WeatherContract.Presenter<WeatherContract.View>>*/ :
     AbsBaseActivity/*<BaseContract.Presenter<BaseContract.View>>*/(),
     WeatherContract.View {
 
     protected abstract val progressBar: ProgressBar
+
+    protected abstract val view: V
 
     /*abstract override val presenter: P
 
@@ -24,6 +26,14 @@ abstract class AbsWeatherActivity/*<out P : WeatherContract.Presenter<WeatherCon
 
     override fun hideLoadingProgress() {
         progressBar.visibility = View.GONE
+    }
+
+    override fun hideLayout() {
+        view.visibility = View.GONE
+    }
+
+    override fun showLayout() {
+        view.visibility = View.VISIBLE
     }
 
 }

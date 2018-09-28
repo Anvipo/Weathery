@@ -3,8 +3,8 @@ package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.op
 import android.content.Context
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.IForecastInteractor
+import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
 import ru.mts.avpopo85.weathery.presentation.utils.parseError
-import ru.mts.avpopo85.weathery.presentation.weather.base.AbsWeatherPresenter
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
 import javax.inject.Inject
@@ -14,11 +14,11 @@ class OWMForecastPresenter
     private val currentWeatherInteractor: IForecastInteractor<OWMForecastListType>,
     private val schedulerManagerModule: SchedulerManagerModule,
     private val context: Context
-) : AbsWeatherPresenter<ForecastContract.View<OWMForecastListType>>(),
+) : AbsBasePresenter<ForecastContract.View<OWMForecastListType>>(),
     ForecastContract.Presenter<OWMForecastListType> {
 
     override fun loadForecast() {
-        disposable = currentWeatherInteractor.getForecast()
+        val task = currentWeatherInteractor.getForecast()
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe {
                 view?.showLoadingProgress()
@@ -44,6 +44,8 @@ class OWMForecastPresenter
                     }
                 }
             )
+
+        compositeDisposable.add(task)
     }
 
 }

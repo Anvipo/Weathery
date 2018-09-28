@@ -1,13 +1,13 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap
 
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.widget.ProgressBar
 import kotlinx.android.synthetic.main.activity_owm_forecast.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
-import ru.mts.avpopo85.weathery.di.modules.OpenWeatherMapModule
+import ru.mts.avpopo85.weathery.di.modules.openWeatherMap.OWMForecastModule
 import ru.mts.avpopo85.weathery.presentation.utils.ARG_FORECAST
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.AbsForecastActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
@@ -15,7 +15,7 @@ import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.ope
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
 import javax.inject.Inject
 
-class OWMForecastActivity : AbsForecastActivity<OWMForecastListType>(),
+class OWMForecastActivity : AbsForecastActivity<ViewPager, OWMForecastListType>(),
     ForecastContract.View<OWMForecastListType> {
 
     @Inject
@@ -23,13 +23,16 @@ class OWMForecastActivity : AbsForecastActivity<OWMForecastListType>(),
 
     override val progressBar: ProgressBar by lazy { owm_forecast_PB }
 
+    override val view: ViewPager by lazy { owm_forecast_pager }
+
     private lateinit var pagerAdapter: OWMForecastActivityPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_owm_forecast)
 
-        App.appComponentForYandexWeather.plus(OpenWeatherMapModule())
+        App.appComponent
+            .plus(OWMForecastModule(this))
             .inject(this)
 
         initPager()
@@ -45,10 +48,10 @@ class OWMForecastActivity : AbsForecastActivity<OWMForecastListType>(),
 
     override fun showWeatherResponse(data: OWMForecastListType) {
         if (data.isNotEmpty()) {
-            owm_forecast_pager.visibility = VISIBLE
+            showLayout()
             putForecastDataInPager(data)
         } else
-            owm_forecast_pager.visibility = GONE
+            hideLayout()
     }
 
     override fun putForecastDataInPager(data: OWMForecastListType) {

@@ -10,8 +10,12 @@ interface WeatherContract : BaseContract {
 
         fun hideLoadingProgress()
 
+        fun hideLayout()
+
+        fun showLayout()
+
     }
 
-    interface Presenter<T> : BaseContract.Presenter<T>
+    interface Presenter<in V : View> : BaseContract.Presenter<V>
 
 }

@@ -2,14 +2,13 @@ package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementat
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import kotlinx.android.synthetic.main.activity_yw_current_weather.*
 import kotlinx.android.synthetic.main.item_yw_current_weather.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
-import ru.mts.avpopo85.weathery.di.modules.YandexWeatherModule
+import ru.mts.avpopo85.weathery.di.modules.yandexWeather.YWCurrentWeatherModule
 import ru.mts.avpopo85.weathery.presentation.utils.CELSIUS_DEGREE
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.AbsCurrentWeatherActivity
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
@@ -17,7 +16,7 @@ import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 import javax.inject.Inject
 
 class YWCurrentWeatherActivity :
-    AbsCurrentWeatherActivity(),
+    AbsCurrentWeatherActivity<LinearLayout>(),
     CurrentWeatherContract.View<YWCurrentWeatherType> {
 
     @Inject
@@ -25,22 +24,20 @@ class YWCurrentWeatherActivity :
 
     override val progressBar: ProgressBar by lazy { yw_current_weather_PB }
 
+    override val view: LinearLayout by lazy { item_yw_current_weather }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_yw_current_weather)
 
-        App.appComponentForYandexWeather
-            .plus(YandexWeatherModule())
+        App.appComponent
+            .plus(YWCurrentWeatherModule(this))
             .inject(this)
 
         hideLayout()
 
         currentWeatherPresenter.onBindView(this)
         currentWeatherPresenter.loadCurrentWeather()
-    }
-
-    override fun hideLayout() {
-        item_yw_current_weather.visibility = GONE
     }
 
     override fun onDestroy() {
@@ -74,10 +71,6 @@ class YWCurrentWeatherActivity :
             season_value_YW_CW_TV.text = it.season
             observation_unix_time_value_YW_CW_TV.text = it.observationUnixTime
         }
-    }
-
-    override fun showLayout() {
-        item_yw_current_weather.visibility = VISIBLE
     }
 
 }

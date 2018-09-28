@@ -1,5 +1,6 @@
-package ru.mts.avpopo85.weathery.presentation.location
+package ru.mts.avpopo85.weathery.presentation.location.trash
 
+/*
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -14,11 +15,12 @@ import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.activity_location.*
 import org.jetbrains.anko.design.indefiniteSnackbar
 import ru.mts.avpopo85.weathery.BuildConfig
-import ru.mts.avpopo85.weathery.domain.utils.toFullDateTime
 
+*/
 /**
  * Code used in requesting runtime permissions.
- */
+ *//*
+
 const val FROM_LAST_KNOWN_LOCATION: Int = 34
 
 class LastKnownLocationHelper(private val activity: Activity) {
@@ -163,4 +165,4 @@ class LastKnownLocationHelper(private val activity: Activity) {
         )
     }
 
-}
+}*/

@@ -1,25 +1,35 @@
 package ru.mts.avpopo85.weathery.presentation.location
 
-import android.app.Activity
 import android.content.Intent
+import android.location.Address
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.android.synthetic.main.activity_location.*
-import org.jetbrains.anko.longToast
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.design.indefiniteSnackbar
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.yesButton
 import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.application.App
+import ru.mts.avpopo85.weathery.di.modules.common.LocationModule
+import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
+import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
+import javax.inject.Inject
 
 
 @Suppress("PrivatePropertyName")
-class LocationActivity : AppCompatActivity() {
+class LocationActivity : AbsBaseActivity(), LocationContract.View {
 
-    private val lastKnownLocationHelper: LastKnownLocationHelper by lazy {
+    @Inject
+    lateinit var presenter: LocationContract.Presenter
+
+    /*private val lastKnownLocationHelper: LastKnownLocationHelper by lazy {
         LastKnownLocationHelper(this)
     }
     private val locationUpdatesHelper: LocationUpdatesHelper by lazy {
         LocationUpdatesHelper(this)
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +37,17 @@ class LocationActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        locationUpdatesHelper.initValues()
+        App.appComponent
+            .plus(LocationModule(this))
+            .inject(this)
+
+        presenter.onBindView(this)
+
+        get_location_LA_B.setOnClickListener {
+            presenter.getLocation()
+        }
+
+        /*locationUpdatesHelper.initValues()
 
         if (savedInstanceState != null)
             locationUpdatesHelper.updateValuesFromBundle(savedInstanceState)
@@ -43,33 +63,65 @@ class LocationActivity : AppCompatActivity() {
         stop_updates_button.setOnClickListener {
             // Remove location updates to save battery.
             locationUpdatesHelper.stopLocationUpdates()
-        }
+        }*/
     }
 
     override fun onResume() {
         super.onResume()
 
-        val googleApiAvailability = GoogleApiAvailability.getInstance()
-        val result = googleApiAvailability.isGooglePlayServicesAvailable(this)
+        checkPlayServicesAvailable()
 
-        if (result != ConnectionResult.SUCCESS && result != ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED) {
-            longToast(
-                "Кажется программа запущена на эмуляторе," +
-                        " и скорее всего геолокация (и/или что-нибудь ещё) не будет работать на нём"
-            )
-        }
-
-        locationUpdatesHelper.onResume()
+//        locationUpdatesHelper.onResume()
     }
 
     override fun onPause() {
         super.onPause()
 
         // Remove location updates to save battery.
-        locationUpdatesHelper.stopLocationUpdates()
+//        locationUpdatesHelper.stopLocationUpdates()
+    }
+
+    override fun showLocation(address: Address) {
+        other_info.text = address.getAddressLine(0)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PHONE_SETTINGS_REQUEST_CODE)
+            if (resultCode == 0)
+                presenter.onActivityResult()
+    }
+
+    override fun showRationaleDialog() {
+        alert(
+            "Для установки местоположения приложению необходимы права доступа к геопозиции. Предоставить?",
+            "Внимание"
+        ) {
+            yesButton {
+                presenter.onRationalePositiveClick()
+            }
+            noButton {
+                presenter.onRationaleNegativeClick()
+            }
+        }.show()
+    }
+
+    override fun showGoSettingsDialog() {
+        alert(
+            "Для установки местоположения необходимо перейти в настройки и включить разрешение доступа к геопозиции. Перейти?",
+            "Внимание"
+        ) {
+            yesButton {
+                presenter.onGoSettingsPositiveClick()
+            }
+            noButton {
+                presenter.onGoSettingNegativeClick()
+            }
+        }.show()
+    }
+
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             // Check for the integer request code originally supplied to startResolutionForResult().
             REQUEST_CHECK_SETTINGS -> locationUpdatesHelper.onActivityResult(resultCode)
@@ -83,7 +135,24 @@ class LocationActivity : AppCompatActivity() {
     ) {
         when (requestCode) {
             FROM_LOCATION_UPDATES -> locationUpdatesHelper.onRequestPermissionsResult(grantResults)
-            FROM_LAST_KNOWN_LOCATION -> lastKnownLocationHelper.onRequestPermissionsResult(grantResults)
+            FROM_LAST_KNOWN_LOCATION -> lastKnownLocationHelper
+                .onRequestPermissionsResult(grantResults)
+        }
+    }*/
+
+    private fun checkPlayServicesAvailable() {
+        val apiAvailability = GoogleApiAvailability.getInstance()
+        val status = apiAvailability.isGooglePlayServicesAvailable(this)
+
+        if (status != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(status)) {
+                apiAvailability.getErrorDialog(this, status, 1).show()
+            } else {
+                val message = "${getString(R.string.google_play_services_unavailable)}. " +
+                        getString(R.string.this_app_will_not_work)
+
+                indefiniteSnackbar(findViewById(android.R.id.content), message)
+            }
         }
     }
 

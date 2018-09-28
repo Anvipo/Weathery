@@ -6,15 +6,15 @@ interface BaseContract {
 
         fun showError(throwable: Throwable)
 
-        fun showError(message: String?)
+        fun showError(message: String)
 
-        fun hideLayout()
+        fun showToast(message: String)
 
-        fun showLayout()
+        fun showLongToast(message: String)
 
     }
 
-    interface Presenter<in V> {
+    interface Presenter<in V : View> {
 
         fun onBindView(view: V)
 

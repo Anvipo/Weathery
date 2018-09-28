@@ -12,12 +12,14 @@ import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMCurrent
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMForecastApiService
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWCurrentWeatherApiService
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
+import ru.mts.avpopo85.weathery.data.repository.common.LocationRepository
 import ru.mts.avpopo85.weathery.data.repository.openWeatherMap.OWMCurrentWeatherRepository
 import ru.mts.avpopo85.weathery.data.repository.openWeatherMap.OWMForecastRepository
 import ru.mts.avpopo85.weathery.data.repository.yandexWeather.YWCurrentWeatherRepository
 import ru.mts.avpopo85.weathery.data.repository.yandexWeather.YWForecastRepository
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
+import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
@@ -27,6 +29,7 @@ import javax.inject.Singleton
 @Module
 class AppModule(private val context: Context) {
 
+    @Suppress("SpellCheckingInspection")
     @Provides
     @Singleton
     fun provideGson(): Gson =
@@ -86,5 +89,9 @@ class AppModule(private val context: Context) {
         networkManager,
         currentWeatherDbService
     )
+
+    @Provides
+    @Singleton
+    fun provideLocationsRepository(): ILocationRepository = LocationRepository(context)
 
 }

@@ -15,7 +15,7 @@ class App : Application() {
     }
 
     private fun initDagger() {
-        appComponentForYandexWeather = DaggerAppComponent
+        appComponent = DaggerAppComponent
             .builder()
             .appModule(AppModule(this))
             .networkModule(NetworkModule(this))
@@ -27,7 +27,7 @@ class App : Application() {
 
     companion object {
 
-        lateinit var appComponentForYandexWeather: AppComponent
+        lateinit var appComponent: AppComponent
             private set
 
     }

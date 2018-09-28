@@ -2,6 +2,7 @@ package ru.mts.avpopo85.weathery.presentation.base
 
 import android.support.v7.app.AppCompatActivity
 import org.jetbrains.anko.longToast
+import org.jetbrains.anko.toast
 
 //TODO как это реализовать, чтобы прокинуть это всё к наследникам?
 abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.View>>*/ :
@@ -25,12 +26,15 @@ abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.Vie
         longToast(throwable.message ?: "")
     }
 
-    override fun showError(message: String?) {
-        if (message != null)
-            longToast(message)
+    override fun showError(message: String) {
+        longToast(message)
     }
 
-    override fun hideLayout() {}
+    override fun showToast(message: String) {
+        toast(message)
+    }
 
-    override fun showLayout() {}
+    override fun showLongToast(message: String) {
+        longToast(message)
+    }
 }

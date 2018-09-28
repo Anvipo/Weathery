@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.presentation.location
+package ru.mts.avpopo85.weathery.presentation.location.trash
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -18,9 +18,9 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import kotlinx.android.synthetic.main.activity_location.*
 import org.jetbrains.anko.design.indefiniteSnackbar
-import org.jetbrains.anko.longToast
 import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.domain.utils.toFullDateTime
+import ru.mts.avpopo85.weathery.presentation.location.LocationActivity
 import java.util.*
 
 /**
@@ -49,6 +49,7 @@ const val KEY_REQUESTING_LOCATION_UPDATES = "requesting-location-updates"
 const val KEY_LOCATION = "location"
 const val KEY_LAST_UPDATED_TIME_STRING = "last-updated-time-string"
 
+/*
 class LocationUpdatesHelper(private val activity: Activity) {
 
     fun initValues() {
@@ -73,10 +74,12 @@ class LocationUpdatesHelper(private val activity: Activity) {
         updateUI()
     }
 
-    /**
+    */
+/**
      * Handles the Start Updates button and requests start of location updates. Does nothing if
      * updates have already been requested.
-     */
+     *//*
+
     fun startWork() {
         if (!permissionsAreGranted()) {
             requestPermissions()
@@ -87,9 +90,11 @@ class LocationUpdatesHelper(private val activity: Activity) {
         }
     }
 
-    /**
+    */
+/**
      * Removes location updates from the FusedLocationApi.
-     */
+     *//*
+
     fun stopLocationUpdates() {
         if (!mRequestingLocationUpdates) {
             //updates never requested, no-op
@@ -188,17 +193,21 @@ class LocationUpdatesHelper(private val activity: Activity) {
         updateUI()
     }
 
-    /**
+    */
+/**
      * Updates all UI fields.
-     */
+     *//*
+
     private fun updateUI() {
         setButtonsEnabledState()
         updateLocationUI()
     }
 
-    /**
+    */
+/**
      * Creates a callback for receiving location events.
-     */
+     *//*
+
     private val mLocationCallback: LocationCallback by lazy {
         object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
@@ -236,7 +245,8 @@ class LocationUpdatesHelper(private val activity: Activity) {
         }
     }
 
-    /**
+    */
+/**
      * Sets up the location request. Android has two location request settings:
      * `ACCESS_COARSE_LOCATION` and `ACCESS_FINE_LOCATION`. These settings control
      * the accuracy of the current location. This sample uses ACCESS_FINE_LOCATION, as defined in
@@ -250,24 +260,31 @@ class LocationUpdatesHelper(private val activity: Activity) {
      *
      * These settings are appropriate for mapping applications that show real-time location
      * updates.
-     */
+     *//*
+
     private val mLocationRequest: LocationRequest by lazy {
         LocationRequest().apply {
-            interval = UPDATE_INTERVAL_IN_MILLISECONDS
-            fastestInterval = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
+            interval =
+                    UPDATE_INTERVAL_IN_MILLISECONDS
+            fastestInterval =
+                    FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
     }
 
-    /**
+    */
+/**
      * Stores the types of location services the client is interested in using. Used for checking
      * settings to determine if the device has optimal location settings.
-     */
-    /**
+     *//*
+
+    */
+/**
      * Uses a [com.google.android.gms.location.LocationSettingsRequest.Builder] to build
      * a [com.google.android.gms.location.LocationSettingsRequest] that is used for checking
      * if a device has the needed location settings.
-     */
+     *//*
+
     private val mLocationSettingsRequest: LocationSettingsRequest by lazy {
         LocationSettingsRequest.Builder().let {
             it.addLocationRequest(mLocationRequest)
@@ -277,25 +294,33 @@ class LocationUpdatesHelper(private val activity: Activity) {
 
     private val TAG = LocationActivity::class.java.simpleName
 
-    /**
+    */
+/**
      * Tracks the status of the location updates request. Value changes when the user presses the
      * Start Updates and Stop Updates buttons.
-     */
+     *//*
+
     private var mRequestingLocationUpdates: Boolean = false
 
-    /**
+    */
+/**
      * Represents a geographical location.
-     */
+     *//*
+
     private var mCurrentLocation: Location? = null
 
-    /**
+    */
+/**
      * Time when the location was updated represented as a String.
-     */
+     *//*
+
     private var mLastUpdateTime: String? = null
 
-    /**
+    */
+/**
      * Return the current state of the permissions needed.
-     */
+     *//*
+
     private fun permissionsAreGranted(): Boolean {
         val permissionState = ActivityCompat.checkSelfPermission(
             activity,
@@ -338,12 +363,14 @@ class LocationUpdatesHelper(private val activity: Activity) {
         )
     }
 
-    /**
+    */
+/**
      * Disables both buttons when functionality is disabled due to insuffucient location settings.
      * Otherwise ensures that only one button is enabled at any time. The Start Updates button is
      * enabled if the user is not requesting location updates. The Stop Updates button is enabled
      * if the user is requesting location updates.
-     */
+     *//*
+
     private fun setButtonsEnabledState() {
         if (mRequestingLocationUpdates) {
             activity.start_updates_button.isEnabled = false
@@ -354,9 +381,11 @@ class LocationUpdatesHelper(private val activity: Activity) {
         }
     }
 
-    /**
+    */
+/**
      * Sets the value of the UI fields for the location latitude, longitude and last update time.
-     */
+     *//*
+
     private fun updateLocationUI() {
         mCurrentLocation?.let { location ->
             val latitudeStr = "Широта: ${mCurrentLocation?.latitude}"
@@ -399,10 +428,12 @@ class LocationUpdatesHelper(private val activity: Activity) {
         LocationServices.getFusedLocationProviderClient(activity)
     }
 
-    /**
+    */
+/**
      * Requests location updates from the FusedLocationApi. Note: we don't call this unless location
      * runtime permission has been granted.
-     */
+     *//*
+
     private fun startLocationUpdates() {
         // Begin by checking if the device has the necessary location settings.
         mSettingsClient
@@ -499,4 +530,4 @@ class LocationUpdatesHelper(private val activity: Activity) {
         updateUI()
     }
 
-}
+}*/

@@ -60,6 +60,10 @@ android {
         androidTest.java.srcDirs = ['src/androidTest/kotlin']
     }
     buildToolsVersion '28.0.3'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 //noinspection SpellCheckingInspection
@@ -70,8 +74,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-    implementation "com.google.android.gms:play-services-location:15.0.1"
 
     def supportLibraryVersion = '28.0.0'
     implementation "com.android.support:support-vector-drawable:$supportLibraryVersion"
@@ -106,16 +108,25 @@ dependencies {
     //    implementation "com.google.dagger:dagger-android-support:$dagger2Version"
 
     //RxJava2
+    //noinspection SpellCheckingInspection
     def rxjava2Version = '2.2.2'
     implementation "io.reactivex.rxjava2:rxjava:$rxjava2Version"
 
+    //noinspection SpellCheckingInspection
     def rxjava2AndroidVersion = '2.1.0'
     implementation "io.reactivex.rxjava2:rxandroid:$rxjava2AndroidVersion"
+
+    //Maps
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
+    implementation 'com.patloew.rxlocation:rxlocation:1.0.5'
 
     //Data binding
     //    kapt "com.android.databinding:compiler:3.1.4"
 
     //Anko
+    //noinspection SpellCheckingInspection
     def ankoVersion = '0.10.5'
     implementation "org.jetbrains.anko:anko:$ankoVersion"
     implementation "org.jetbrains.anko:anko-commons:$ankoVersion"

@@ -1,13 +1,13 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather
 
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.widget.ProgressBar
 import kotlinx.android.synthetic.main.activity_yw_forecast.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
-import ru.mts.avpopo85.weathery.di.modules.YandexWeatherModule
+import ru.mts.avpopo85.weathery.di.modules.yandexWeather.YWForecastModule
 import ru.mts.avpopo85.weathery.presentation.utils.ARG_FORECAST
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.AbsForecastActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
@@ -15,7 +15,7 @@ import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yan
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
 import javax.inject.Inject
 
-class YWForecastActivity : AbsForecastActivity<YWForecastListType>(),
+class YWForecastActivity : AbsForecastActivity<ViewPager, YWForecastListType>(),
     ForecastContract.View<YWForecastListType> {
 
     @Inject
@@ -23,14 +23,16 @@ class YWForecastActivity : AbsForecastActivity<YWForecastListType>(),
 
     override val progressBar: ProgressBar by lazy { yw_forecast_PB }
 
+    override val view: ViewPager by lazy { yw_forecast_pager }
+
     private lateinit var pagerAdapter: YWForecastActivityPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_yw_forecast)
 
-        App.appComponentForYandexWeather
-            .plus(YandexWeatherModule())
+        App.appComponent
+            .plus(YWForecastModule(this))
             .inject(this)
 
         initPager()
@@ -46,10 +48,10 @@ class YWForecastActivity : AbsForecastActivity<YWForecastListType>(),
 
     override fun showWeatherResponse(data: YWForecastListType) {
         if (data.isNotEmpty()) {
-            yw_forecast_pager.visibility = VISIBLE
+            showLayout()
             putForecastDataInPager(data)
         } else
-            yw_forecast_pager.visibility = GONE
+            hideLayout()
     }
 
     override fun putForecastDataInPager(data: YWForecastListType) {

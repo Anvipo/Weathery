@@ -2,14 +2,14 @@ package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementat
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import kotlinx.android.synthetic.main.activity_owm_current_weather.*
 import kotlinx.android.synthetic.main.item_owm_current_weather.*
 import org.jetbrains.anko.longToast
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
-import ru.mts.avpopo85.weathery.di.modules.OpenWeatherMapModule
+import ru.mts.avpopo85.weathery.di.modules.openWeatherMap.OWMCurrentWeatherModule
 import ru.mts.avpopo85.weathery.presentation.utils.CELSIUS_DEGREE
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.AbsCurrentWeatherActivity
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
@@ -17,7 +17,7 @@ import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
 import javax.inject.Inject
 
 class OWMCurrentWeatherActivity :
-    AbsCurrentWeatherActivity(),
+    AbsCurrentWeatherActivity<LinearLayout>(),
     CurrentWeatherContract.View<OWMCurrentWeatherType> {
 
     @Inject
@@ -25,12 +25,14 @@ class OWMCurrentWeatherActivity :
 
     override val progressBar: ProgressBar by lazy { owm_current_weather_PB }
 
+    override val view: LinearLayout by lazy { item_owm_current_weather }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_owm_current_weather)
 
-        App.appComponentForYandexWeather
-            .plus(OpenWeatherMapModule())
+        App.appComponent
+            .plus(OWMCurrentWeatherModule(this))
             .inject(this)
 
         hideLayout()
@@ -38,10 +40,6 @@ class OWMCurrentWeatherActivity :
         currentWeatherPresenter.onBindView(this)
 
         currentWeatherPresenter.loadCurrentWeather()
-    }
-
-    override fun hideLayout() {
-        item_owm_current_weather.visibility = View.GONE
     }
 
     override fun onDestroy() {
@@ -78,10 +76,6 @@ class OWMCurrentWeatherActivity :
                 longToast("${this::class.java.simpleName}.showWeatherResponse - data.weather.size > 1")
             }
         }
-    }
-
-    override fun showLayout() {
-        item_owm_current_weather.visibility = View.VISIBLE
     }
 
 }
