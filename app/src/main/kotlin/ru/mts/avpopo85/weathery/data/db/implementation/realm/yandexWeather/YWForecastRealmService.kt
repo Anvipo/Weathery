@@ -6,13 +6,13 @@ import io.realm.kotlin.where
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.util.onDataIsNull
 import ru.mts.avpopo85.weathery.data.db.util.onProxyDataIsNull
-import ru.mts.avpopo85.weathery.data.utils.isFreshThan
+import ru.mts.avpopo85.weathery.data.utils.isFresh
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastResponseType
 import java.util.*
 
 class YWForecastRealmService : IForecastDbService<YWForecastListResponseType> {
-
+    //TODO починить как в owm
     override fun saveForecastResponse(forecastResponseList: YWForecastListResponseType): Single<YWForecastListResponseType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
@@ -71,7 +71,7 @@ class YWForecastRealmService : IForecastDbService<YWForecastListResponseType> {
                         @Suppress("SpellCheckingInspection")
                         val unixtimeInMillis = data.first().saveUnixTime
 
-                        val dataIsFresh = unixtimeInMillis.isFreshThan(YW_DEFAULT_CACHE_LIFETIME)
+                        val dataIsFresh = unixtimeInMillis.isFresh(YW_DEFAULT_CACHE_LIFETIME)
 
                         if (dataIsFresh) {
                             emitter.onSuccess(data)

@@ -38,8 +38,7 @@ class LocationRealmService : ILocationDbService<UserAddressType> {
         }
 
     @Suppress("SpellCheckingInspection")
-    override fun getLocation():
-            Single<UserAddressType> =
+    override fun getLocation(gpsIsEnabled: Boolean): Single<UserAddressType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
                 val proxyData =
@@ -53,16 +52,23 @@ class LocationRealmService : ILocationDbService<UserAddressType> {
                     val data: UserAddressType? = realmInstance.copyFromRealm(proxyData!!)
 
                     if (data != null) {
+                        //TODO проверять данные на устаревание
                         emitter.onSuccess(data)
                     } else {
-                        onDataIsNull<UserAddressType>(
+                        onDataIsNull(
                             emitter,
                             "getLocation",
                             this::class.java.simpleName
                         )
                     }
-                } else {
+                } else if (!gpsIsEnabled) {
                     emitter.onError(Throwable("Вы не включили геолокацию и в БД ничего нет"))
+                } else if (!dataExistsInDB) {
+                    onProxyDataIsNull(
+                        emitter,
+                        "getLocation",
+                        this::class.java.simpleName
+                    )
                 }
             }
         }

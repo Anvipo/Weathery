@@ -11,23 +11,27 @@ import javax.inject.Inject
 
 class OWMCurrentWeatherRepository
 @Inject constructor(
-    private val owmCurrentWeatherApiService: IOWMCurrentWeatherApiService,
+    private val apiService: IOWMCurrentWeatherApiService,
     private val networkManager: NetworkManager,
-    private val currentWeatherDbService: ICurrentWeatherDbService<OWMCurrentWeatherResponseType>
+    private val dbService: ICurrentWeatherDbService<OWMCurrentWeatherResponseType>
 ) : ICurrentWeatherRepository<OWMCurrentWeatherResponseType> {
 
     override fun getCurrentWeather(): Single<OWMCurrentWeatherResponseType> {
+        val dbCall = dbService
+            .getCurrentWeatherResponse(networkManager.isConnectedToInternet)
+
         if (!networkManager.isConnectedToInternet) {
-            return currentWeatherDbService.getCurrentWeatherResponse(networkManager.isConnectedToInternet)
+            return dbCall
         }
 
-        //TODO как выполнить запрос на сервер, если в БД ничего нет?
-        return Single.ambArray(
-            currentWeatherDbService.getCurrentWeatherResponse(networkManager.isConnectedToInternet),
-            owmCurrentWeatherApiService
-                .getCurrentWeatherById(KRASNODAR_ID)
-                .flatMap { currentWeatherDbService.saveCurrentWeatherResponse(it) }
-        )
+        return dbCall
+            .onErrorResumeNext { _ ->
+                apiService
+                    .getCurrentWeatherById(KRASNODAR_ID)
+                    .flatMap {
+                        dbService.saveCurrentWeatherResponse(it)
+                    }
+            }
     }
 
 }

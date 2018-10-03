@@ -36,8 +36,8 @@ class LocationRepository
         .flatMap(this::getAddress)
 
     @SuppressLint("MissingPermission")
-    private fun getAddress(success: Boolean): Single<UserAddressType> {
-        val gpsCall = if (success) {
+    private fun getAddress(gpsIsEnabled: Boolean): Single<UserAddressType> {
+        val gpsCall = if (gpsIsEnabled) {
             rxLocation.location()
                 .updates(locationRequest)
                 .firstOrError()
@@ -53,7 +53,7 @@ class LocationRepository
                 dbService.saveLocation(it)
             }
             .onErrorResumeNext {
-                dbService.getLocation()
+                dbService.getLocation(gpsIsEnabled)
             }
     }
 

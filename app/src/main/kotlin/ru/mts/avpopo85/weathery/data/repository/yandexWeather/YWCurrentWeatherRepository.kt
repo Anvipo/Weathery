@@ -11,28 +11,34 @@ import javax.inject.Inject
 
 class YWCurrentWeatherRepository
 @Inject constructor(
-    private val ywCurrentWeatherApiService: IYWCurrentWeatherApiService,
+    private val apiService: IYWCurrentWeatherApiService,
     private val networkManager: NetworkManager,
-    private val currentWeatherDbService: ICurrentWeatherDbService<YWCurrentWeatherResponseType>
+    private val dbService: ICurrentWeatherDbService<YWCurrentWeatherResponseType>
 ) : ICurrentWeatherRepository<YWCurrentWeatherResponseType> {
 
     override fun getCurrentWeather(): Single<YWCurrentWeatherResponseType> {
+        //TODO починить как в owm
+        val dbCall = dbService
+            .getCurrentWeatherResponse(networkManager.isConnectedToInternet)
+
         if (!networkManager.isConnectedToInternet) {
-            return currentWeatherDbService.getCurrentWeatherResponse(networkManager.isConnectedToInternet)
+            return dbCall
         }
 
-        //TODO как выполнить запрос на сервер, если в БД ничего нет?
-        return Single.ambArray(
-            currentWeatherDbService.getCurrentWeatherResponse(networkManager.isConnectedToInternet),
-            ywCurrentWeatherApiService
-                .getCurrentWeather(
-                    YW_CURRENT_WEATHER_PARAMETERS.latitude,
-                    YW_CURRENT_WEATHER_PARAMETERS.longitude,
-                    YW_CURRENT_WEATHER_PARAMETERS.language
-                )
-                .map { it.currentWeatherResponse }
-                .flatMap { currentWeatherDbService.saveCurrentWeatherResponse(it) }
-        )
+        return dbCall
+            .onErrorResumeNext { _ ->
+                apiService
+                    .getCurrentWeather(
+                        YW_CURRENT_WEATHER_PARAMETERS.latitude,
+                        YW_CURRENT_WEATHER_PARAMETERS.longitude,
+                        YW_CURRENT_WEATHER_PARAMETERS.language
+                    )
+                    .map { it.currentWeatherResponse }
+                    .flatMap { currentWeatherResponse ->
+                        dbService.saveCurrentWeatherResponse(currentWeatherResponse)
+                    }
+            }
+
     }
 
 }

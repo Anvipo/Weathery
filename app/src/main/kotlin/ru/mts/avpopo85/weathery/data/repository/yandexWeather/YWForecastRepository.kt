@@ -18,6 +18,7 @@ class YWForecastRepository
 ) : IForecastRepository<YWForecastListResponseType> {
 
     override fun getForecast(): Single<YWForecastListResponseType> {
+        //TODO починить как в owm
         if (!networkManager.isConnectedToInternet) {
             return currentWeatherDbService.getForecastResponse(networkManager.isConnectedToInternet)
         }

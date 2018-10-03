@@ -6,7 +6,7 @@ import io.realm.kotlin.where
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.util.onDataIsNull
 import ru.mts.avpopo85.weathery.data.db.util.onProxyDataIsNull
-import ru.mts.avpopo85.weathery.data.utils.isFreshThan
+import ru.mts.avpopo85.weathery.data.utils.isFresh
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 
 class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeatherResponseType> {
@@ -62,10 +62,10 @@ class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeather
                         realmInstance.copyFromRealm(proxyData!!)
 
                     if (data != null) {
-                        if (data.isFresh) {
+                        if (data.isFresh || data.isNotFresh && !isConnectedToInternet) {
                             emitter.onSuccess(data)
-                        } else if (!isConnectedToInternet) {
-                            emitter.onError(Throwable("Вы не подключены к интернету и в БД устаревшие данные"))
+                        } else if (isConnectedToInternet) {
+                            emitter.onError(Throwable("В БД устаревшие данные. Получите данные с сервера"))
                         }
                     } else {
                         onDataIsNull(
@@ -74,14 +74,16 @@ class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeather
                             this::class.java.simpleName
                         )
                     }
+                } else if (!isConnectedToInternet) {
+                    emitter.onError(Throwable("Вы не подключены к интернету и в БД ничего нет"))
+                } else if (isConnectedToInternet) {
+                    emitter.onError(Throwable("В БД ничего нет. Получите данные с сервера"))
                 } else if (!dataExistsInDB) {
                     onProxyDataIsNull(
                         emitter,
                         "getCurrentWeatherResponse",
                         this::class.java.simpleName
                     )
-                } else if (!isConnectedToInternet) {
-                    emitter.onError(Throwable("Вы не подключены к интернету и в БД ничего нет"))
                 }
             }
         }
@@ -89,11 +91,16 @@ class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeather
     private val OWMCurrentWeatherResponseType.isFresh: Boolean
         get() {
             @Suppress("SpellCheckingInspection")
-            val unixtimeInMillis = this.timeOfDataCalculationUnixUTC * 1000L
+            val unixtimeInMillis = this.timeOfDataCalculationUnixUTC * 1000
 
-            return unixtimeInMillis.isFreshThan(
-                OWM_CURRENT_WEATHER_DEFAULT_CACHE_LIFETIME_IN_MS
+            return unixtimeInMillis.isFresh(
+                OWM_CURRENT_WEATHER_CACHE_LIFETIME_IN_MS
             )
+        }
+
+    private val OWMCurrentWeatherResponseType.isNotFresh: Boolean
+        get() {
+            return !this.isFresh
         }
 
 }

@@ -6,13 +6,13 @@ import io.realm.kotlin.where
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.util.onDataIsNull
 import ru.mts.avpopo85.weathery.data.db.util.onProxyDataIsNull
-import ru.mts.avpopo85.weathery.data.utils.isFreshThan
+import ru.mts.avpopo85.weathery.data.utils.isFresh
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 
 const val YW_DEFAULT_CACHE_LIFETIME: Long = 7_200_000 //= 2 hours
 
 class YWCurrentWeatherRealmService : ICurrentWeatherDbService<YWCurrentWeatherResponseType> {
-
+    //TODO починить как в owm
     override fun saveCurrentWeatherResponse(currentWeatherResponse: YWCurrentWeatherResponseType): Single<YWCurrentWeatherResponseType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
@@ -65,7 +65,7 @@ class YWCurrentWeatherRealmService : ICurrentWeatherDbService<YWCurrentWeatherRe
                         @Suppress("SpellCheckingInspection")
                         val unixtimeInMillis = data.observationUnixTime * 1000L
 
-                        val dataIsFresh = unixtimeInMillis.isFreshThan(YW_DEFAULT_CACHE_LIFETIME)
+                        val dataIsFresh = unixtimeInMillis.isFresh(YW_DEFAULT_CACHE_LIFETIME)
 
                         if (dataIsFresh) {
                             emitter.onSuccess(data)
@@ -79,14 +79,16 @@ class YWCurrentWeatherRealmService : ICurrentWeatherDbService<YWCurrentWeatherRe
                             this::class.java.simpleName
                         )
                     }
+                } else if (!isConnectedToInternet) {
+                    emitter.onError(Throwable("Вы не подключены к интернету и в БД ничего нет"))
+                } else if (isConnectedToInternet) {
+                    emitter.onError(Throwable("В БД ничего нет. Получите данные с сервера"))
                 } else if (!dataExistsInDB) {
                     onProxyDataIsNull(
                         emitter,
                         "getCurrentWeatherResponse",
                         this::class.java.simpleName
                     )
-                } else if (!isConnectedToInternet) {
-                    emitter.onError(Throwable("Вы не подключены к интернету и в БД ничего нет"))
                 }
             }
         }

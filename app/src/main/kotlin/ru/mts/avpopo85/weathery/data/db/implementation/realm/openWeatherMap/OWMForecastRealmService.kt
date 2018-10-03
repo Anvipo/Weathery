@@ -6,7 +6,7 @@ import io.realm.kotlin.where
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.util.onDataIsNull
 import ru.mts.avpopo85.weathery.data.db.util.onProxyDataIsNull
-import ru.mts.avpopo85.weathery.data.utils.isFreshThan
+import ru.mts.avpopo85.weathery.data.utils.isFresh
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
 import java.util.*
@@ -68,16 +68,10 @@ class OWMForecastRealmService : IForecastDbService<OWMForecastListResponseType> 
                         realmInstance.copyFromRealm(proxyData)
 
                     if (data != null && data.isNotEmpty()) {
-                        @Suppress("SpellCheckingInspection")
-                        val unixtimeInMillis = data.first().dateInUnixtimeUTC
-
-                        val dataIsFresh =
-                            unixtimeInMillis.isFreshThan(OWM_FORECAST_DEFAULT_CACHE_LIFETIME_IN_MS)
-
-                        if (dataIsFresh) {
+                        if (data.isFresh || data.isNotFresh && !isConnectedToInternet) {
                             emitter.onSuccess(data)
-                        } else if (!isConnectedToInternet) {
-                            emitter.onError(Throwable("Вы не подключены к интернету и в БД устаревшие данные"))
+                        } else if (isConnectedToInternet) {
+                            emitter.onError(Throwable("В БД устаревшие данные. Получите данные с сервера"))
                         }
                     } else {
                         onDataIsNull(
@@ -86,16 +80,33 @@ class OWMForecastRealmService : IForecastDbService<OWMForecastListResponseType> 
                             this::class.java.simpleName
                         )
                     }
+                } else if (!isConnectedToInternet) {
+                    emitter.onError(Throwable("Вы не подключены к интернету и в БД ничего нет"))
+                } else if (isConnectedToInternet) {
+                    emitter.onError(Throwable("В БД ничего нет. Получите данные с сервера"))
                 } else if (!dataExistsInDB) {
                     onProxyDataIsNull(
                         emitter,
                         "getForecastResponse",
                         this::class.java.simpleName
                     )
-                } else if (!isConnectedToInternet) {
-                    emitter.onError(Throwable("Вы не подключены к интернету и в БД ничего нет"))
                 }
             }
+        }
+
+    private val OWMForecastListResponseType.isFresh: Boolean
+        get() {
+            @Suppress("SpellCheckingInspection")
+            val unixtimeInMillis = this.first().dateInUnixtimeUTC
+
+            return unixtimeInMillis.isFresh(
+                OWM_FORECAST_DEFAULT_CACHE_LIFETIME_IN_MS
+            )
+        }
+
+    private val OWMForecastListResponseType.isNotFresh: Boolean
+        get() {
+            return !this.isFresh
         }
 
 }

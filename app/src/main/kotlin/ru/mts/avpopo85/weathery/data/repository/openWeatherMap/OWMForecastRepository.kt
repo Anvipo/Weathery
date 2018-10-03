@@ -12,24 +12,28 @@ import javax.inject.Inject
 
 class OWMForecastRepository
 @Inject constructor(
-    private val owmForecastApiService: IOWMForecastApiService,
+    private val apiService: IOWMForecastApiService,
     private val networkManager: NetworkManager,
-    private val forecastDbService: IForecastDbService<OWMForecastListResponseType>
+    private val dbService: IForecastDbService<OWMForecastListResponseType>
 ) : IForecastRepository<OWMForecastListResponseType> {
 
     override fun getForecast(): Single<OWMForecastListResponseType> {
+        val dbCall = dbService
+            .getForecastResponse(networkManager.isConnectedToInternet)
+
         if (!networkManager.isConnectedToInternet) {
-            return forecastDbService.getForecastResponse(networkManager.isConnectedToInternet)
+            return dbCall
         }
 
-        //TODO как выполнить запрос на сервер, если в БД ничего нет?
-        return Single.ambArray(
-            forecastDbService.getForecastResponse(networkManager.isConnectedToInternet),
-            owmForecastApiService
-                .getForecastById(OWMConstants.KRASNODAR_ID)
-                .map { it.forecastsList }
-                .flatMap { forecastDbService.saveForecastResponse(it) }
-        )
+        return dbCall
+            .onErrorResumeNext { _ ->
+                apiService
+                    .getForecastById(OWMConstants.KRASNODAR_ID)
+                    .map { it.forecastsList }
+                    .flatMap {
+                        dbService.saveForecastResponse(it)
+                    }
+            }
     }
 
 }
