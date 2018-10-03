@@ -4,7 +4,6 @@ import ru.mts.avpopo85.weathery.data.model.base.common.IForecastResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.forecast.YWHourInfoResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.forecast.YWPartsResponse
 
-@Suppress("SpellCheckingInspection")
 interface IYWForecastResponse : IForecastResponse {
 
     override var saveUnixTime: Long

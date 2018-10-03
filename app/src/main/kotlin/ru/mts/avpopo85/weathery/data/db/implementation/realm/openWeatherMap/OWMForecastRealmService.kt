@@ -96,7 +96,6 @@ class OWMForecastRealmService : IForecastDbService<OWMForecastListResponseType> 
 
     private val OWMForecastListResponseType.isFresh: Boolean
         get() {
-            @Suppress("SpellCheckingInspection")
             val unixtimeInMillis = this.first().dateInUnixtimeUTC
 
             return unixtimeInMillis.isFresh(

@@ -6,7 +6,6 @@ import io.realm.RealmObject
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWDayShortResponse
 
 /**Object with a 12-hour forecast for the day or night.*/
-@Suppress("SpellCheckingInspection")
 open class YWDayShortResponse(
 
     @SerializedName("temp")

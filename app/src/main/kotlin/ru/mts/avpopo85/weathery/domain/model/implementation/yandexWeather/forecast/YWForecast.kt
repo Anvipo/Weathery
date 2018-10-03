@@ -4,10 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWForecast
 
-@Suppress("SpellCheckingInspection")
-@Parcelize
-
 /**This object contains weather forecast data.*/
+@Parcelize
 data class YWForecast(
 
     override val date: String,

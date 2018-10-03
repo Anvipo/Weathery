@@ -20,7 +20,7 @@ class YWCurrentWeatherActivity :
     CurrentWeatherContract.View<YWCurrentWeatherType> {
 
     @Inject
-    lateinit var currentWeatherPresenter: CurrentWeatherContract.Presenter<YWCurrentWeatherType>
+    lateinit var presenter: CurrentWeatherContract.Presenter<YWCurrentWeatherType>
 
     override val progressBar: ProgressBar by lazy { yw_current_weather_PB }
 
@@ -36,12 +36,12 @@ class YWCurrentWeatherActivity :
 
         hideLayout()
 
-        currentWeatherPresenter.onBindView(this)
-        currentWeatherPresenter.loadCurrentWeather()
+        presenter.onBindView(this)
+        presenter.loadCurrentWeather()
     }
 
     override fun onDestroy() {
-        currentWeatherPresenter.onUnbindView()
+        presenter.onUnbindView()
         super.onDestroy()
     }
 

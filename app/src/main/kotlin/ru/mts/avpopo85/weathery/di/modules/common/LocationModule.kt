@@ -14,7 +14,6 @@ import ru.mts.avpopo85.weathery.presentation.location.LocationActivity
 import ru.mts.avpopo85.weathery.presentation.location.LocationPresenter
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
 
-@Suppress("SpellCheckingInspection")
 @Module
 class LocationModule(private val context: LocationActivity) {
 
@@ -33,9 +32,9 @@ class LocationModule(private val context: LocationActivity) {
     @Provides
     @LocationScope
     fun providePresenter(
-        createInteractor: ILocationInteractor,
+        interactor: ILocationInteractor,
         schedulerManagerModule: SchedulerManagerModule
     ): LocationContract.Presenter =
-        LocationPresenter(context, createInteractor, schedulerManagerModule)
+        LocationPresenter(context, interactor, schedulerManagerModule)
 
 }

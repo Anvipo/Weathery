@@ -11,14 +11,14 @@ import javax.inject.Inject
 
 class OWMForecastPresenter
 @Inject constructor(
-    private val currentWeatherInteractor: IForecastInteractor<OWMForecastListType>,
+    private val interactor: IForecastInteractor<OWMForecastListType>,
     private val schedulerManagerModule: SchedulerManagerModule,
     private val context: Context
 ) : AbsBasePresenter<ForecastContract.View<OWMForecastListType>>(),
     ForecastContract.Presenter<OWMForecastListType> {
 
     override fun loadForecast() {
-        val task = currentWeatherInteractor.getForecast()
+        val task = interactor.getForecast()
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe {
                 view?.showLoadingProgress()
@@ -31,6 +31,7 @@ class OWMForecastPresenter
                     if (currentWeather != null)
                         view?.showWeatherResponse(currentWeather)
                     else {
+                        //TODO
                         view?.showError("Непредвиденная ошибка в ${this::class.java.simpleName}.onSuccess")
                     }
                 },
@@ -40,6 +41,7 @@ class OWMForecastPresenter
 
                         view?.showError(message)
                     } else {
+                        //TODO
                         view?.showError("Непредвиденная ошибка в ${this::class.java.simpleName}.onError")
                     }
                 }

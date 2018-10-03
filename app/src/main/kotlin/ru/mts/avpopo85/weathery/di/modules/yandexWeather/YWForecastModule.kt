@@ -15,7 +15,6 @@ import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yan
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
 
-@Suppress("SpellCheckingInspection")
 @Module
 class YWForecastModule(private val context: YWForecastActivity) {
 

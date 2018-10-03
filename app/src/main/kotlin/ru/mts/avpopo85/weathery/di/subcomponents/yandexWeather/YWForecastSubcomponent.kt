@@ -5,7 +5,6 @@ import ru.mts.avpopo85.weathery.di.modules.yandexWeather.YWForecastModule
 import ru.mts.avpopo85.weathery.di.scopes.yandexWeather.YWForecastScope
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.YWForecastActivity
 
-@Suppress("SpellCheckingInspection")
 @Subcomponent(modules = [YWForecastModule::class])
 @YWForecastScope
 interface YWForecastSubcomponent {

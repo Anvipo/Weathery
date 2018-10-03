@@ -6,7 +6,6 @@ import io.realm.RealmObject
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWHourInfoResponse
 
 /**Object for the hourly forecast. Contains 24 parts.*/
-@Suppress("SpellCheckingInspection")
 open class YWHourInfoResponse(
 
     @SerializedName("hour")

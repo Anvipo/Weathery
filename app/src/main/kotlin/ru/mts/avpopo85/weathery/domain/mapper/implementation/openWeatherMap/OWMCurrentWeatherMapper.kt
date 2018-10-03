@@ -13,7 +13,7 @@ import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
 import javax.inject.Inject
 
 class OWMCurrentWeatherMapper
-@Inject constructor(val context: Context) :
+@Inject constructor(private val context: Context) :
     ICurrentWeatherMapper<OWMCurrentWeatherResponseType, OWMCurrentWeatherType> {
 
     override fun mapCurrentWeatherResponse(currentWeatherResponseData: OWMCurrentWeatherResponseType): OWMCurrentWeatherType =

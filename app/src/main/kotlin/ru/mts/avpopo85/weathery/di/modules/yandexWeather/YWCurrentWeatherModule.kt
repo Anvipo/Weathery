@@ -15,7 +15,6 @@ import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementati
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 
-@Suppress("SpellCheckingInspection")
 @Module
 class YWCurrentWeatherModule(private val context: YWCurrentWeatherActivity) {
 

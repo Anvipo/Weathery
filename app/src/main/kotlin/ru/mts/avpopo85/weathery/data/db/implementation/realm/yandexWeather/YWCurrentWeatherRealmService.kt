@@ -62,7 +62,6 @@ class YWCurrentWeatherRealmService : ICurrentWeatherDbService<YWCurrentWeatherRe
                         realmInstance.copyFromRealm(proxyData!!)
 
                     if (data != null) {
-                        @Suppress("SpellCheckingInspection")
                         val unixtimeInMillis = data.observationUnixTime * 1000L
 
                         val dataIsFresh = unixtimeInMillis.isFresh(YW_DEFAULT_CACHE_LIFETIME)

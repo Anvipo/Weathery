@@ -10,13 +10,13 @@ import javax.inject.Inject
 
 class YWCurrentWeatherInteractor
 @Inject constructor(
-    private val currentWeatherRepository: ICurrentWeatherRepository<YWCurrentWeatherResponseType>,
-    private val currentWeatherMapper: ICurrentWeatherMapper<YWCurrentWeatherResponseType, YWCurrentWeatherType>
+    private val repository: ICurrentWeatherRepository<YWCurrentWeatherResponseType>,
+    private val mapper: ICurrentWeatherMapper<YWCurrentWeatherResponseType, YWCurrentWeatherType>
 ) : ICurrentWeatherInteractor<YWCurrentWeatherType> {
 
     override fun getCurrentWeather(): Single<YWCurrentWeatherType> =
-        currentWeatherRepository
+        repository
             .getCurrentWeather()
-            .map { currentWeatherMapper.mapCurrentWeatherResponse(it) }
+            .map { mapper.mapCurrentWeatherResponse(it) }
 
 }

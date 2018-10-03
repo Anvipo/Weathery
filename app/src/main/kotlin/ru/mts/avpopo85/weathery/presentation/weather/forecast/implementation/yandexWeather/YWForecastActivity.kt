@@ -19,7 +19,7 @@ class YWForecastActivity : AbsForecastActivity<ViewPager, YWForecastListType>(),
     ForecastContract.View<YWForecastListType> {
 
     @Inject
-    lateinit var forecastPresenter: ForecastContract.Presenter<YWForecastListType>
+    lateinit var presenter: ForecastContract.Presenter<YWForecastListType>
 
     override val progressBar: ProgressBar by lazy { yw_forecast_PB }
 
@@ -37,12 +37,12 @@ class YWForecastActivity : AbsForecastActivity<ViewPager, YWForecastListType>(),
 
         initPager()
 
-        forecastPresenter.onBindView(this)
-        forecastPresenter.loadForecast()
+        presenter.onBindView(this)
+        presenter.loadForecast()
     }
 
     override fun onDestroy() {
-        forecastPresenter.onUnbindView()
+        presenter.onUnbindView()
         super.onDestroy()
     }
 

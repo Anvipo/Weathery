@@ -68,7 +68,6 @@ class YWForecastRealmService : IForecastDbService<YWForecastListResponseType> {
                         realmInstance.copyFromRealm(proxyData)
 
                     if (data != null) {
-                        @Suppress("SpellCheckingInspection")
                         val unixtimeInMillis = data.first().saveUnixTime
 
                         val dataIsFresh = unixtimeInMillis.isFresh(YW_DEFAULT_CACHE_LIFETIME)

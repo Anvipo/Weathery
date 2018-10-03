@@ -209,10 +209,8 @@
     <string name="atmospheric_pressure_on_the_sea_level">Atmospheric pressure on the sea level</string>
     <string name="atmospheric_pressure_on_the_sea_level_value">Atmospheric pressure on the sea level value</string>
 
-    <string name="start_updates">Start updates</string>
-    <string name="stop_updates">Stop updates</string>
-    <string name="location_settings_inadequate_warning">The location settings on the device are not
-        adequate to run this sample. Fix in Settings.</string>
     <string name="google_play_services_unavailable">Google Play Services unavailable</string>
     <string name="this_app_will_not_work">This app will not work</string>
+    <string name="get_current_geolocation">Get current location</string>
+    <string name="geolocation">Geolocation</string>
 </resources>

@@ -1,6 +1,5 @@
 package ru.mts.avpopo85.weathery.domain.interactor.implementation.location
 
-import android.location.Address
 import com.tbruyelle.rxpermissions2.Permission
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -10,7 +9,6 @@ import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
 import ru.mts.avpopo85.weathery.domain.repository.IPermissionsRepository
 import javax.inject.Inject
 
-@Suppress("SpellCheckingInspection")
 class LocationInteractor
 @Inject constructor(
     private val permissionsRepository: IPermissionsRepository,

@@ -10,7 +10,6 @@ import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMWeatherResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather.OWMWindResponse
 
-@Suppress("SpellCheckingInspection")
 open class OWMListItemResponse(
 
     override var saveUnixTime: Long = 0,

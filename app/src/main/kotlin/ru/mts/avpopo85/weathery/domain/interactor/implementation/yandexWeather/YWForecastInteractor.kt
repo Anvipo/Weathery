@@ -11,13 +11,13 @@ import javax.inject.Inject
 
 class YWForecastInteractor
 @Inject constructor(
-    private val forecastRepository: IForecastRepository<YWForecastListResponseType>,
-    private val forecastMapper: IForecastMapper<YWForecastListResponseType, YWForecastListType>
+    private val repository: IForecastRepository<YWForecastListResponseType>,
+    private val mapper: IForecastMapper<YWForecastListResponseType, YWForecastListType>
 ) : IForecastInteractor<YWForecastListType> {
 
     override fun getForecast(): Single<YWForecastListType> =
-        forecastRepository
+        repository
             .getForecast()
-            .map { forecastMapper.mapForecast(it) }
+            .map { mapper.mapForecast(it) }
 
 }

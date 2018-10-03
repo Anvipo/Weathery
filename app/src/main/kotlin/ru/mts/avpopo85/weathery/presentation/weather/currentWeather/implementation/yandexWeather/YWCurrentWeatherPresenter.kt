@@ -9,17 +9,16 @@ import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.Current
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 import javax.inject.Inject
 
-@Suppress("SpellCheckingInspection")
 class YWCurrentWeatherPresenter
 @Inject constructor(
-    private val currentWeatherInteractor: ICurrentWeatherInteractor<YWCurrentWeatherType>,
+    private val interactor: ICurrentWeatherInteractor<YWCurrentWeatherType>,
     private val schedulerManagerModule: SchedulerManagerModule,
     private val context: Context
 ) : AbsBasePresenter<CurrentWeatherContract.View<YWCurrentWeatherType>>(),
     CurrentWeatherContract.Presenter<YWCurrentWeatherType> {
 
     override fun loadCurrentWeather() {
-        val task = currentWeatherInteractor.getCurrentWeather()
+        val task = interactor.getCurrentWeather()
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe {
                 view?.showLoadingProgress()
@@ -32,6 +31,7 @@ class YWCurrentWeatherPresenter
                     if (currentWeather != null)
                         view?.showWeatherResponse(currentWeather)
                     else {
+                        //TODO
                         view?.showError("Непридвиденная ошибка в onSuccess YWCurrentWeatherPresenter")
                     }
                 },
@@ -41,6 +41,7 @@ class YWCurrentWeatherPresenter
 
                         view?.showError(message)
                     } else {
+                        //TODO
                         view?.showError("Непредвиденная ошибка в ${this::class.java.simpleName}.onError")
                     }
                 }

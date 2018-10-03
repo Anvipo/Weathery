@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.forecast.IOWMCityResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMCoordinatesResponse
 
-@Suppress("SpellCheckingInspection")
 data class OWMCityResponse(
 
     @SerializedName("country")

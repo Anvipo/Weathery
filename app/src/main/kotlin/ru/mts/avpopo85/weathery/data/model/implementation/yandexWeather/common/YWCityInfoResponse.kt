@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.common.IYWCityInfoResponse
 
 /**This object contains information about the locality.*/
-@Suppress("SpellCheckingInspection")
 data class YWCityInfoResponse(
 
     @SerializedName("lat")

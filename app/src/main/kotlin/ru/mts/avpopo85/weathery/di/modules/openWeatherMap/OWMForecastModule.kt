@@ -16,7 +16,6 @@ import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
 
 @Module
-@Suppress("SpellCheckingInspection")
 class OWMForecastModule(private val context: OWMForecastActivity) {
 
     @Provides

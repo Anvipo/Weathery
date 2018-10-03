@@ -8,16 +8,15 @@ import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
 import javax.inject.Inject
 
-
 class OWMForecastInteractor
 @Inject constructor(
-    private val forecastRepository: IForecastRepository<OWMForecastListResponseType>,
-    private val forecastMapper: IForecastMapper<OWMForecastListResponseType, OWMForecastListType>
+    private val repository: IForecastRepository<OWMForecastListResponseType>,
+    private val mapper: IForecastMapper<OWMForecastListResponseType, OWMForecastListType>
 ) : IForecastInteractor<OWMForecastListType> {
 
     override fun getForecast(): Single<OWMForecastListType> =
-        forecastRepository
+        repository
             .getForecast()
-            .map { forecastMapper.mapForecast(it) }
+            .map { mapper.mapForecast(it) }
 
 }

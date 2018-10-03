@@ -16,7 +16,6 @@ import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseTy
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
 
 @Module
-@Suppress("SpellCheckingInspection")
 class OWMCurrentWeatherModule(private val context: OWMCurrentWeatherActivity) {
 
     @Provides

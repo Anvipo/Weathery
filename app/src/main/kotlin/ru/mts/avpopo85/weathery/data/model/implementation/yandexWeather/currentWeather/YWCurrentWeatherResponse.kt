@@ -7,7 +7,6 @@ import io.realm.annotations.PrimaryKey
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.currentWeather.IYWCurrentWeatherResponse
 
 /**This object contains information about the current weather.*/
-@Suppress("SpellCheckingInspection")
 open class YWCurrentWeatherResponse(
 
     @SerializedName("temp")

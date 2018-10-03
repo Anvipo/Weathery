@@ -8,7 +8,6 @@ import io.realm.annotations.PrimaryKey
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWForecastResponse
 
 /**This object contains weather forecast data.*/
-@Suppress("SpellCheckingInspection")
 open class YWForecastResponse(
 
     override var saveUnixTime: Long = 0,

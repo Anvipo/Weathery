@@ -10,13 +10,13 @@ import javax.inject.Inject
 
 class OWMCurrentWeatherInteractor
 @Inject constructor(
-    private val currentWeatherRepository: ICurrentWeatherRepository<OWMCurrentWeatherResponseType>,
-    private val currentWeatherMapper: ICurrentWeatherMapper<OWMCurrentWeatherResponseType, OWMCurrentWeatherType>
+    private val repository: ICurrentWeatherRepository<OWMCurrentWeatherResponseType>,
+    private val mapper: ICurrentWeatherMapper<OWMCurrentWeatherResponseType, OWMCurrentWeatherType>
 ) : ICurrentWeatherInteractor<OWMCurrentWeatherType> {
 
     override fun getCurrentWeather(): Single<OWMCurrentWeatherType> =
-        currentWeatherRepository
+        repository
             .getCurrentWeather()
-            .map { currentWeatherMapper.mapCurrentWeatherResponse(it) }
+            .map { mapper.mapCurrentWeatherResponse(it) }
 
 }

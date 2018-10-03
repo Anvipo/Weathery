@@ -19,7 +19,7 @@ class OWMForecastActivity : AbsForecastActivity<ViewPager, OWMForecastListType>(
     ForecastContract.View<OWMForecastListType> {
 
     @Inject
-    lateinit var forecastPresenter: ForecastContract.Presenter<OWMForecastListType>
+    lateinit var presenter: ForecastContract.Presenter<OWMForecastListType>
 
     override val progressBar: ProgressBar by lazy { owm_forecast_PB }
 
@@ -37,12 +37,12 @@ class OWMForecastActivity : AbsForecastActivity<ViewPager, OWMForecastListType>(
 
         initPager()
 
-        forecastPresenter.onBindView(this)
-        forecastPresenter.loadForecast()
+        presenter.onBindView(this)
+        presenter.loadForecast()
     }
 
     override fun onDestroy() {
-        forecastPresenter.onUnbindView()
+        presenter.onUnbindView()
         super.onDestroy()
     }
 

@@ -6,10 +6,8 @@ import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.forecast.IOWMFo
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMWind
 
-@Suppress("SpellCheckingInspection")
-@Parcelize
-
 /**This object contains weather forecast data.*/
+@Parcelize
 data class OWMForecast(
 
     override val date: String,

@@ -9,7 +9,7 @@ import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OWMUnitsFormat
 import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OpenWeatherMapLanguages
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 
-@Suppress("SpellCheckingInspection", "unused")
+@Suppress("unused")
 interface IOWMCurrentWeatherApiService {
 
     @GET("weather")

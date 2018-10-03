@@ -21,7 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
-        tools:targetApi="n">
+        tools:targetApi="n"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".presentation.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +36,7 @@
         <activity android:name=".presentation.weather.forecast.implementation.yandexWeather.YWForecastActivity" />
         <activity android:name=".presentation.weather.currentWeather.implementation.openWeatherMap.OWMCurrentWeatherActivity" />
         <activity android:name=".presentation.weather.forecast.implementation.openWeatherMap.OWMForecastActivity" />
-        <activity android:name=".presentation.location.LocationActivity"></activity>
+        <activity android:name=".presentation.location.LocationActivity" />
     </application>
 
 </manifest>

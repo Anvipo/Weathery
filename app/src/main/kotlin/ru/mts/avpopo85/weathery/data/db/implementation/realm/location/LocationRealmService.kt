@@ -37,7 +37,6 @@ class LocationRealmService : ILocationDbService<UserAddressType> {
             }
         }
 
-    @Suppress("SpellCheckingInspection")
     override fun getLocation(gpsIsEnabled: Boolean): Single<UserAddressType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->

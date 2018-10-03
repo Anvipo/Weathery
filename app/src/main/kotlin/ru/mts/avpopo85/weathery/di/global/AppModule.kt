@@ -31,7 +31,6 @@ import javax.inject.Singleton
 @Module
 class AppModule(private val context: Context) {
 
-    @Suppress("SpellCheckingInspection")
     @Provides
     @Singleton
     fun provideGson(): Gson =

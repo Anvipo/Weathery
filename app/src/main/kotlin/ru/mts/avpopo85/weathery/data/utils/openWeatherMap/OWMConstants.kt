@@ -1,6 +1,6 @@
 package ru.mts.avpopo85.weathery.data.utils.openWeatherMap
 
-@Suppress("SpellCheckingInspection", "unused")
+@Suppress("unused")
 object OWMConstants {
 
     const val BASE_URL: String = "http://api.openweathermap.org/data/2.5/"

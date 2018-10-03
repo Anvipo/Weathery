@@ -1,8 +1,8 @@
 package ru.mts.avpopo85.weathery.presentation.location
 
 import android.content.Intent
-import android.location.Address
 import android.os.Bundle
+import android.view.View
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.android.synthetic.main.activity_location.*
@@ -25,13 +25,6 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
     @Inject
     lateinit var presenter: LocationContract.Presenter
 
-    /*private val lastKnownLocationHelper: LastKnownLocationHelper by lazy {
-        LastKnownLocationHelper(this)
-    }
-    private val locationUpdatesHelper: LocationUpdatesHelper by lazy {
-        LocationUpdatesHelper(this)
-    }*/
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location)
@@ -47,39 +40,12 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
         get_location_LA_B.setOnClickListener {
             presenter.getLocation()
         }
-
-        /*locationUpdatesHelper.initValues()
-
-        if (savedInstanceState != null)
-            locationUpdatesHelper.updateValuesFromBundle(savedInstanceState)
-
-        last_location_LA_B.setOnClickListener {
-            lastKnownLocationHelper.startWork()
-        }
-
-        start_updates_button.setOnClickListener {
-            locationUpdatesHelper.startWork()
-        }
-
-        stop_updates_button.setOnClickListener {
-            // Remove location updates to save battery.
-            locationUpdatesHelper.stopLocationUpdates()
-        }*/
     }
 
     override fun onResume() {
         super.onResume()
 
         checkPlayServicesAvailable()
-
-//        locationUpdatesHelper.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-        // Remove location updates to save battery.
-//        locationUpdatesHelper.stopLocationUpdates()
     }
 
     override fun showLocation(address: UserAddressType) {
@@ -152,7 +118,7 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
                 val message = "${getString(R.string.google_play_services_unavailable)}. " +
                         getString(R.string.this_app_will_not_work)
 
-                indefiniteSnackbar(findViewById(android.R.id.content), message)
+                findViewById<View>(android.R.id.content).indefiniteSnackbar(message)
             }
         }
     }

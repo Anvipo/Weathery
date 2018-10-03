@@ -8,7 +8,6 @@ import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecas
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecast.OWMForecastSysResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecast.OWMRainResponse
 
-@Suppress("SpellCheckingInspection")
 interface IOWMListItemResponse : IForecastResponse {
 
     /**Time of data forecasted, unix, UTC*/

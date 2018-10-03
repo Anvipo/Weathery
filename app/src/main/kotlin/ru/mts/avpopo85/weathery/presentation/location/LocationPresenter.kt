@@ -15,7 +15,6 @@ import javax.inject.Inject
 
 const val PHONE_SETTINGS_REQUEST_CODE = 9000
 
-@Suppress("SpellCheckingInspection")
 class LocationPresenter
 @Inject constructor(
     private var context: LocationActivity?,

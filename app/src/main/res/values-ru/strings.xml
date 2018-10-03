@@ -211,10 +211,8 @@
     <string name="atmospheric_pressure_on_the_sea_level">Атмосферное давление на уровне моря</string>
     <string name="atmospheric_pressure_on_the_sea_level_value">Значение атмосферного давления на уровне моря</string>
 
-    <string name="start_updates">Начать обновления</string>
-    <string name="stop_updates">Закончить обновления</string>
-    <string name="location_settings_inadequate_warning">Настройки геопозиции на устройстве неадекватны
-        для запуска функциональности. Почините в настройках.</string>
-    <string name="google_play_services_unavailable">Google Play Services unavailable</string>
-    <string name="this_app_will_not_work">This app will not work</string>
+    <string name="google_play_services_unavailable">Google Play Services недоступны</string>
+    <string name="this_app_will_not_work">Приложение не будет работать</string>
+    <string name="get_current_geolocation">Узнать текущую геолокацию</string>
+    <string name="geolocation">Геолокация</string>
 </resources>

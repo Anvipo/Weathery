@@ -17,7 +17,6 @@ class YWCurrentWeatherRepository
 ) : ICurrentWeatherRepository<YWCurrentWeatherResponseType> {
 
     override fun getCurrentWeather(): Single<YWCurrentWeatherResponseType> {
-        //TODO починить как в owm
         val dbCall = dbService
             .getCurrentWeatherResponse(networkManager.isConnectedToInternet)
 

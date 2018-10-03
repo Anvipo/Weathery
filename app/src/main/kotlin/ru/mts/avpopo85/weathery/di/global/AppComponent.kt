@@ -13,7 +13,6 @@ import ru.mts.avpopo85.weathery.di.subcomponents.yandexWeather.YWCurrentWeatherS
 import ru.mts.avpopo85.weathery.di.subcomponents.yandexWeather.YWForecastSubcomponent
 import javax.inject.Singleton
 
-@Suppress("SpellCheckingInspection")
 @Component(
     modules = [
         AppModule::class,

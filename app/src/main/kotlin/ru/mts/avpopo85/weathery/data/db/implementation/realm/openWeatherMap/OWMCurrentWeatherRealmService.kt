@@ -90,7 +90,6 @@ class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeather
 
     private val OWMCurrentWeatherResponseType.isFresh: Boolean
         get() {
-            @Suppress("SpellCheckingInspection")
             val unixtimeInMillis = this.timeOfDataCalculationUnixUTC * 1000
 
             return unixtimeInMillis.isFresh(

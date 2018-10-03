@@ -21,7 +21,7 @@ class OWMCurrentWeatherActivity :
     CurrentWeatherContract.View<OWMCurrentWeatherType> {
 
     @Inject
-    lateinit var currentWeatherPresenter: CurrentWeatherContract.Presenter<OWMCurrentWeatherType>
+    lateinit var presenter: CurrentWeatherContract.Presenter<OWMCurrentWeatherType>
 
     override val progressBar: ProgressBar by lazy { owm_current_weather_PB }
 
@@ -37,13 +37,13 @@ class OWMCurrentWeatherActivity :
 
         hideLayout()
 
-        currentWeatherPresenter.onBindView(this)
+        presenter.onBindView(this)
 
-        currentWeatherPresenter.loadCurrentWeather()
+        presenter.loadCurrentWeather()
     }
 
     override fun onDestroy() {
-        currentWeatherPresenter.onUnbindView()
+        presenter.onUnbindView()
         super.onDestroy()
     }
 
