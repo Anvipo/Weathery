@@ -26,8 +26,10 @@ fun Long.toDate(): String {
 }
 
 @Suppress("unused")
-fun Long.toDateTime(): String {
-    val date = Date(this * 1000)
+fun Long.toDateTime(notInMillis: Boolean = true): String {
+    val coefficient = if (notInMillis) 1000 else 1
+
+    val date = Date(this * coefficient)
 
     val simpleDateFormat = SimpleDateFormat(
         "HH:mm dd MMM YYYY",

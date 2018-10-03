@@ -1,12 +1,12 @@
 package ru.mts.avpopo85.weathery.presentation.location
 
 import android.content.Intent
-import android.location.Address
 import android.net.Uri
 import android.provider.Settings
 import com.tbruyelle.rxpermissions2.Permission
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.BuildConfig
+import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.ILocationInteractor
 import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
@@ -103,39 +103,12 @@ class LocationPresenter
     private fun onPermissionSuccess(permission: Permission) {
         @Suppress("CascadeIf")
         if (permission.granted) {
-            /*val task = interactor.getLocation()
-                .compose(schedulerManagerModule.observableTransformer())
-                .onExceptionResumeNext {
-                    val c = 1
-                }
+            val task = interactor.getCurrentAddressOrLastKnown()
+                .compose(schedulerManagerModule.singleTransformer())
                 .subscribe(
-                    { location: Location ->
-                        if (location.provider.isEmpty()) {
-//                            view?.showToast(context!!.getString(R.string.location_empty_error))
-                        } else {
-//                            view?.setLocation(location.latitude, location.longitude)
-                        }
-                    },
-                    { error: Throwable? ->
-                        if (error != null) {
-//                        view?.showToast(errorParserModule.parseError(error))
-                        } else {
-
-                        }
-                    }
-                )
-
-            compositeDisposable.add(task)*/
-
-            val task2 = interactor.kek()
-                .compose(schedulerManagerModule.observableTransformer())
-                .onExceptionResumeNext {
-                    val c = 1
-                }
-                .subscribe(
-                    { address: Address? ->
+                    { address: UserAddressType? ->
                         if (address != null) {
-                            view?.showLocation(address)
+                            view?.showLongToast("Геопозиция успешно получена")
                         } else {
                             //never will happen (maybe)
                             if (BuildConfig.DEBUG) {
@@ -145,7 +118,7 @@ class LocationPresenter
                     },
                     { error: Throwable? ->
                         if (error != null) {
-
+                            view?.showError(error)
                         } else {
                             //never will happen (maybe)
                             if (BuildConfig.DEBUG) {
@@ -155,7 +128,7 @@ class LocationPresenter
                     }
                 )
 
-            compositeDisposable.add(task2)
+            compositeDisposable.add(task)
         } else if (permission.shouldShowRequestPermissionRationale) {
             view?.showRationaleDialog()
         } else {

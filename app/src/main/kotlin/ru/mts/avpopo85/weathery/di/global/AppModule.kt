@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
+import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMCurrentWeatherApiService
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMForecastApiService
@@ -17,6 +18,7 @@ import ru.mts.avpopo85.weathery.data.repository.openWeatherMap.OWMCurrentWeather
 import ru.mts.avpopo85.weathery.data.repository.openWeatherMap.OWMForecastRepository
 import ru.mts.avpopo85.weathery.data.repository.yandexWeather.YWCurrentWeatherRepository
 import ru.mts.avpopo85.weathery.data.repository.yandexWeather.YWForecastRepository
+import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
@@ -45,53 +47,54 @@ class AppModule(private val context: Context) {
     @Provides
     @Singleton
     fun provideYWCurrentWeatherRepository(
-        currentWeatherApiService: IYWCurrentWeatherApiService,
+        apiService: IYWCurrentWeatherApiService,
         networkManager: NetworkManager,
-        currentWeatherDbService: ICurrentWeatherDbService<YWCurrentWeatherResponseType>
+        dbService: ICurrentWeatherDbService<YWCurrentWeatherResponseType>
     ): ICurrentWeatherRepository<YWCurrentWeatherResponseType> = YWCurrentWeatherRepository(
-        currentWeatherApiService,
+        apiService,
         networkManager,
-        currentWeatherDbService
+        dbService
     )
 
     @Provides
     @Singleton
     fun provideOWMCurrentWeatherRepository(
-        currentWeatherApiService: IOWMCurrentWeatherApiService,
+        apiService: IOWMCurrentWeatherApiService,
         networkManager: NetworkManager,
-        currentWeatherDbService: ICurrentWeatherDbService<OWMCurrentWeatherResponseType>
+        dbService: ICurrentWeatherDbService<OWMCurrentWeatherResponseType>
     ): ICurrentWeatherRepository<OWMCurrentWeatherResponseType> = OWMCurrentWeatherRepository(
-        currentWeatherApiService,
+        apiService,
         networkManager,
-        currentWeatherDbService
+        dbService
     )
 
     @Provides
     @Singleton
     fun provideYWForecastRepository(
-        forecastApiService: IYWForecastApiService,
+        apiService: IYWForecastApiService,
         networkManager: NetworkManager,
-        currentWeatherDbService: IForecastDbService<YWForecastListResponseType>
+        dbService: IForecastDbService<YWForecastListResponseType>
     ): IForecastRepository<YWForecastListResponseType> = YWForecastRepository(
-        forecastApiService,
+        apiService,
         networkManager,
-        currentWeatherDbService
+        dbService
     )
 
     @Provides
     @Singleton
     fun provideOWMForecastRepository(
-        forecastApiService: IOWMForecastApiService,
+        apiService: IOWMForecastApiService,
         networkManager: NetworkManager,
-        currentWeatherDbService: IForecastDbService<OWMForecastListResponseType>
+        dbService: IForecastDbService<OWMForecastListResponseType>
     ): IForecastRepository<OWMForecastListResponseType> = OWMForecastRepository(
-        forecastApiService,
+        apiService,
         networkManager,
-        currentWeatherDbService
+        dbService
     )
 
     @Provides
     @Singleton
-    fun provideLocationsRepository(): ILocationRepository = LocationRepository(context)
+    fun provideLocationsRepository(dbService: ILocationDbService<UserAddressType>): ILocationRepository =
+        LocationRepository(context, dbService)
 
 }

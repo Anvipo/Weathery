@@ -1,9 +1,10 @@
 package ru.mts.avpopo85.weathery.domain.interactor.implementation.location
 
 import android.location.Address
-import android.location.Location
 import com.tbruyelle.rxpermissions2.Permission
 import io.reactivex.Observable
+import io.reactivex.Single
+import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.domain.interactor.base.ILocationInteractor
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
 import ru.mts.avpopo85.weathery.domain.repository.IPermissionsRepository
@@ -19,7 +20,7 @@ class LocationInteractor
     override fun requestPermissions(): Observable<Permission> =
         permissionsRepository.requestLocationPermission()
 
-    override fun getLocation(): Observable<Location> = locationRepository.getLocation()
+    override fun getCurrentAddressOrLastKnown(): Single<UserAddressType> =
+        locationRepository.getCurrentAddressOrLastKnown()
 
-    override fun kek(): Observable<Address> = locationRepository.kek()
 }

@@ -4,6 +4,8 @@ import io.reactivex.Single
 import io.realm.Realm
 import io.realm.kotlin.where
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
+import ru.mts.avpopo85.weathery.data.db.util.onDataIsNull
+import ru.mts.avpopo85.weathery.data.db.util.onProxyDataIsNull
 import ru.mts.avpopo85.weathery.data.utils.isFreshThan
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 
@@ -28,15 +30,22 @@ class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeather
                     if (data != null)
                         emitter.onSuccess(data)
                     else {
-                        emitter.onError(Throwable("Не удалось сохранить данные в БД"))
+                        onDataIsNull(
+                            emitter,
+                            "saveCurrentWeatherResponse",
+                            this::class.java.simpleName
+                        )
                     }
                 } else {
-                    emitter.onError(Throwable("Не удалось сохранить данные в БД"))
+                    onProxyDataIsNull(
+                        emitter,
+                        "saveCurrentWeatherResponse",
+                        this::class.java.simpleName
+                    )
                 }
             }
         }
 
-    @Suppress("SpellCheckingInspection")
     override fun getCurrentWeatherResponse(isConnectedToInternet: Boolean):
             Single<OWMCurrentWeatherResponseType> =
         Single.create { emitter ->
@@ -53,27 +62,38 @@ class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeather
                         realmInstance.copyFromRealm(proxyData!!)
 
                     if (data != null) {
-                        val unixtimeInMillis = data.timeOfDataCalculationUnixUTC * 1000L
-
-                        val dataIsFresh =
-                            unixtimeInMillis.isFreshThan(OWM_CURRENT_WEATHER_DEFAULT_CACHE_LIFETIME_IN_MS)
-
-                        if (dataIsFresh) {
+                        if (data.isFresh) {
                             emitter.onSuccess(data)
                         } else if (!isConnectedToInternet) {
                             emitter.onError(Throwable("Вы не подключены к интернету и в БД устаревшие данные"))
-                        } /*else if (isConnectedToInternet) {
-                            emitter.onError(Throwable("Данные устарели. Выполни запрос на сервер"))
-                        }*/
-                    } /*else if (isConnectedToInternet) {
-                        emitter.onError(Throwable("В БД нет таких данных. Выполни запрос на сервер"))
-                    }*/
+                        }
+                    } else {
+                        onDataIsNull(
+                            emitter,
+                            "getCurrentWeatherResponse",
+                            this::class.java.simpleName
+                        )
+                    }
+                } else if (!dataExistsInDB) {
+                    onProxyDataIsNull(
+                        emitter,
+                        "getCurrentWeatherResponse",
+                        this::class.java.simpleName
+                    )
                 } else if (!isConnectedToInternet) {
                     emitter.onError(Throwable("Вы не подключены к интернету и в БД ничего нет"))
-                } /*else if (isConnectedToInternet) {
-                    emitter.onError(Throwable("В БД нет таких данных. Выполни запрос на сервер"))
-                }*/
+                }
             }
+        }
+
+    private val OWMCurrentWeatherResponseType.isFresh: Boolean
+        get() {
+            @Suppress("SpellCheckingInspection")
+            val unixtimeInMillis = this.timeOfDataCalculationUnixUTC * 1000L
+
+            return unixtimeInMillis.isFreshThan(
+                OWM_CURRENT_WEATHER_DEFAULT_CACHE_LIFETIME_IN_MS
+            )
         }
 
 }

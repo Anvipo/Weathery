@@ -1,13 +1,13 @@
 package ru.mts.avpopo85.weathery.presentation.location.base
 
-import android.location.Address
+import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.presentation.base.BaseContract
 
 interface LocationContract : BaseContract {
 
     interface View : BaseContract.View {
 
-        fun showLocation(address: Address)
+        fun showLocation(address: UserAddressType)
 
         fun showRationaleDialog()
 

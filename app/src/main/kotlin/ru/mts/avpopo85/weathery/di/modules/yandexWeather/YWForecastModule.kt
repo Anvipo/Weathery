@@ -22,11 +22,11 @@ class YWForecastModule(private val context: YWForecastActivity) {
     @Provides
     @YWForecastScope
     fun provideYWForecastPresenter(
-        forecastInteractor: IForecastInteractor<YWForecastListType>,
+        interactor: IForecastInteractor<YWForecastListType>,
         schedulerManagerModule: SchedulerManagerModule
     ): ForecastContract.Presenter<YWForecastListType> =
         YWForecastPresenter(
-            forecastInteractor,
+            interactor,
             schedulerManagerModule,
             context
         )
@@ -34,12 +34,12 @@ class YWForecastModule(private val context: YWForecastActivity) {
     @Provides
     @YWForecastScope
     fun provideYWForecastInteractor(
-        forecastRepository: IForecastRepository<YWForecastListResponseType>,
-        forecastMapper: IForecastMapper<YWForecastListResponseType, YWForecastListType>
+        repository: IForecastRepository<YWForecastListResponseType>,
+        mapper: IForecastMapper<YWForecastListResponseType, YWForecastListType>
     ): IForecastInteractor<YWForecastListType> =
         YWForecastInteractor(
-            forecastRepository,
-            forecastMapper
+            repository,
+            mapper
         )
 
     @Provides

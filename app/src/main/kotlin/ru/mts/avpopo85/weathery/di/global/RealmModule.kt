@@ -7,10 +7,13 @@ import io.realm.Realm
 import io.realm.RealmConfiguration
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
+import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.location.LocationRealmService
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.openWeatherMap.OWMCurrentWeatherRealmService
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.openWeatherMap.OWMForecastRealmService
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.yandexWeather.YWCurrentWeatherRealmService
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.yandexWeather.YWForecastRealmService
+import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
@@ -50,5 +53,10 @@ class RealmModule(val context: Context) {
     @Singleton
     fun provideOWMForecastRealmService(): IForecastDbService<OWMForecastListResponseType> =
         OWMForecastRealmService()
+
+    @Provides
+    @Singleton
+    fun provideLocationRealmService(): ILocationDbService<UserAddressType> =
+        LocationRealmService()
 
 }

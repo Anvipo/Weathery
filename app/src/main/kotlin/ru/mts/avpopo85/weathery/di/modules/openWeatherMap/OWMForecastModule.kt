@@ -22,11 +22,11 @@ class OWMForecastModule(private val context: OWMForecastActivity) {
     @Provides
     @OWMForecastScope
     fun provideOWMForecastPresenter(
-        currentWeatherInteractor: IForecastInteractor<OWMForecastListType>,
+        interactor: IForecastInteractor<OWMForecastListType>,
         schedulerManagerModule: SchedulerManagerModule
     ): ForecastContract.Presenter<OWMForecastListType> =
         OWMForecastPresenter(
-            currentWeatherInteractor,
+            interactor,
             schedulerManagerModule,
             context
         )
@@ -34,12 +34,12 @@ class OWMForecastModule(private val context: OWMForecastActivity) {
     @Provides
     @OWMForecastScope
     fun provideOWMForecastInteractor(
-        currentWeatherRepository: IForecastRepository<OWMForecastListResponseType>,
-        currentWeatherMapper: IForecastMapper<OWMForecastListResponseType, OWMForecastListType>
+        repository: IForecastRepository<OWMForecastListResponseType>,
+        mapper: IForecastMapper<OWMForecastListResponseType, OWMForecastListType>
     ): IForecastInteractor<OWMForecastListType> =
         OWMForecastInteractor(
-            currentWeatherRepository,
-            currentWeatherMapper
+            repository,
+            mapper
         )
 
     @Provides

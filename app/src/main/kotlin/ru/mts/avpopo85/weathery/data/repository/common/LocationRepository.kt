@@ -4,23 +4,25 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Address
 import android.location.Location
-import android.location.LocationManager
 import com.google.android.gms.location.LocationRequest
 import com.patloew.rxlocation.RxLocation
-import io.reactivex.Observable
 import io.reactivex.Single
+import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
+import ru.mts.avpopo85.weathery.data.model.implementation.common.UserAddress
+import ru.mts.avpopo85.weathery.data.model.implementation.common.UserLocale
+import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
+import java.util.*
 import javax.inject.Inject
 
 
 class LocationRepository
-@Inject constructor(context: Context) : ILocationRepository {
+@Inject constructor(
+    context: Context,
+    private val dbService: ILocationDbService<UserAddressType>
+) : ILocationRepository {
 
     private val rxLocation by lazy { RxLocation(context) }
-
-    private val locationManager by lazy {
-        context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-    }
 
     private val locationRequest by lazy {
         LocationRequest.create()
@@ -28,68 +30,61 @@ class LocationRepository
             .setInterval(5000)
     }
 
-    override fun kek(): Observable<Address> = rxLocation
+    override fun getCurrentAddressOrLastKnown(): Single<UserAddressType> = rxLocation
         .settings()
         .checkAndHandleResolution(locationRequest)
-        .flatMapObservable(this::getAddressObservable)
-        .take(1)
+        .flatMap(this::getAddress)
 
     @SuppressLint("MissingPermission")
-    private fun getAddressObservable(success: Boolean): Observable<Address> {
-        return if (success) {
-            val c = 1
-
+    private fun getAddress(success: Boolean): Single<UserAddressType> {
+        val gpsCall = if (success) {
             rxLocation.location()
                 .updates(locationRequest)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .doOnNext(view::onLocationUpdate)
-                .flatMap(this::getAddressFromLocation)
+                .firstOrError()
         } else {
-            val c = 1
-//            view.onLocationSettingsUnsuccessful()
-
             rxLocation.location()
                 .lastLocation()
-//                .doOnSuccess(view::onLocationUpdate)
-                .flatMapObservable(this::getAddressFromLocation)
+                .toSingle()
         }
+
+        return gpsCall
+            .flatMap(::getAddressFromLocation)
+            .flatMap {
+                dbService.saveLocation(it)
+            }
+            .onErrorResumeNext {
+                dbService.getLocation()
+            }
     }
 
-    private fun getAddressFromLocation(location: Location): Observable<Address> =
+    private fun getAddressFromLocation(location: Location): Single<UserAddressType> =
         rxLocation.geocoding()
             .fromLocation(location)
-            .toObservable()
+            .map(::mapUserAddress)
+            .toSingle()
 
-    @SuppressLint("MissingPermission")
-    override fun getLocation(): Observable<Location> {
-        val networkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-        val gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-
-        val emptyLoc = Observable.create<Location> { emitter ->
-            if (!networkEnabled || !gpsEnabled) {
-                emitter.onNext(Location(""))
-            }
-        }
-
-        val loc = Observable.merge(
-            rxLocation.location().lastLocation().toObservable(),
-            rxLocation.location().updates(locationRequest).take(1)
-        ).take(1)
-
-        return Observable.merge(loc, emptyLoc)
-    }
-
-    @SuppressLint("MissingPermission")
-    override fun getNewLocation(): Single<Location> {
-        val networkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-        val gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-
-        return if (!networkEnabled || !gpsEnabled) {
-            Single.error(Throwable("Error locations. Providers not enabled"))
-        } else {
-            Single.fromObservable(rxLocation.location().updates(locationRequest).take(1))
-        }
-    }
+    private fun mapUserAddress(it: Address): UserAddress = UserAddress(
+        saveDate = Date().time,
+        adminArea = it.adminArea,
+        countryCode = it.countryCode,
+        countryName = it.countryName,
+        featureName = it.featureName,
+        latitude = it.latitude,
+        longitude = it.longitude,
+        locale = UserLocale(
+            language = it.locale?.language,
+            region = it.locale?.country
+        ),
+        locality = it.locality,
+        postalCode = it.postalCode,
+        subAdminArea = it.subAdminArea,
+        subThoroughfare = it.subThoroughfare,
+        thoroughfare = it.thoroughfare,
+        extras = it.extras?.toString(),
+        phone = it.phone,
+        premises = it.premises,
+        subLocality = it.subLocality,
+        url = it.url
+    )
 
 }

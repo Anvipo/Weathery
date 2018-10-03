@@ -22,11 +22,11 @@ class YWCurrentWeatherModule(private val context: YWCurrentWeatherActivity) {
     @Provides
     @YWCurrentWeatherScope
     fun provideYWCurrentWeatherPresenter(
-        currentWeatherInteractor: ICurrentWeatherInteractor<YWCurrentWeatherType>,
+        interactor: ICurrentWeatherInteractor<YWCurrentWeatherType>,
         schedulerManagerModule: SchedulerManagerModule
     ): CurrentWeatherContract.Presenter<YWCurrentWeatherType> =
         YWCurrentWeatherPresenter(
-            currentWeatherInteractor,
+            interactor,
             schedulerManagerModule,
             context
         )
@@ -34,12 +34,12 @@ class YWCurrentWeatherModule(private val context: YWCurrentWeatherActivity) {
     @Provides
     @YWCurrentWeatherScope
     fun provideYWCurrentWeatherInteractor(
-        currentWeatherRepository: ICurrentWeatherRepository<YWCurrentWeatherResponseType>,
-        currentWeatherMapper: ICurrentWeatherMapper<YWCurrentWeatherResponseType, YWCurrentWeatherType>
+        repository: ICurrentWeatherRepository<YWCurrentWeatherResponseType>,
+        mapper: ICurrentWeatherMapper<YWCurrentWeatherResponseType, YWCurrentWeatherType>
     ): ICurrentWeatherInteractor<YWCurrentWeatherType> =
         YWCurrentWeatherInteractor(
-            currentWeatherRepository,
-            currentWeatherMapper
+            repository,
+            mapper
         )
 
     @Provides

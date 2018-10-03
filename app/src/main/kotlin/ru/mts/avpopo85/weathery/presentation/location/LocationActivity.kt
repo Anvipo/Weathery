@@ -12,6 +12,7 @@ import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
+import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.di.modules.common.LocationModule
 import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
@@ -81,8 +82,8 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
 //        locationUpdatesHelper.stopLocationUpdates()
     }
 
-    override fun showLocation(address: Address) {
-        other_info.text = address.getAddressLine(0)
+    override fun showLocation(address: UserAddressType) {
+        other_info.text = address.toString()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
