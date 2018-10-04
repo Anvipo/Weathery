@@ -6,7 +6,7 @@ interface IOWMCurrentWeatherMain {
     val temperature: String
 
     /**Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa*/
-    val atmosphericPressureInhPa: Double
+    val atmosphericPressureInhPa: String
 
     /**Humidity, %*/
     val humidity: Int

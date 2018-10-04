@@ -30,7 +30,7 @@ class OWMCurrentWeatherMapper
                 main = currentWeatherResponse.main!!.let {
                     OWMCurrentWeatherMain(
                         temperature = it.temperature.roundIfNeeded(),
-                        atmosphericPressureInhPa = it.atmosphericPressureInhPa,
+                        atmosphericPressureInhPa = it.atmosphericPressureInhPa.roundIfNeeded(),
                         humidity = it.humidity
                     )
                 },
