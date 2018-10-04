@@ -1,6 +1,8 @@
 package ru.mts.avpopo85.weathery.presentation.base
 
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.widget.ProgressBar
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 
@@ -21,6 +23,16 @@ abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.Vie
         presenter.onUnbindView()
         super.onDestroy()
     }*/
+
+    protected abstract val progressBar: ProgressBar
+
+    override fun showLoadingProgress() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideLoadingProgress() {
+        progressBar.visibility = View.GONE
+    }
 
     override fun showError(throwable: Throwable) {
         longToast(throwable.message ?: "")

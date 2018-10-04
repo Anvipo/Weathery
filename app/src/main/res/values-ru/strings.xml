@@ -213,6 +213,10 @@
 
     <string name="google_play_services_unavailable">Google Play Services недоступны</string>
     <string name="this_app_will_not_work">Приложение не будет работать</string>
-    <string name="get_current_geolocation">Узнать текущую геолокацию</string>
-    <string name="geolocation">Геолокация</string>
+    <string name="application_need_to_know_your_gelocation">Для работы приложения необходимо узнать Вашу геолокацию</string>
+    <string name="which_geolocation_do_you_want_to_use">Какую геолокацию Вы хотите использовать?</string>
+    <string name="application_need_to_know_your_gelocation_which_geolocation_do_you_want_to_use">
+        Для работы приложения необходимо узнать Вашу геолокацию. Какую геолокацию Вы хотите использовать?</string>
+    <string name="last_known">Последнюю известную</string>
+    <string name="current_by_gps">Текущую с помощью GPS</string>
 </resources>

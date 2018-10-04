@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Address
 import android.location.Location
+import android.location.LocationManager
 import com.google.android.gms.location.LocationRequest
 import com.patloew.rxlocation.RxLocation
 import io.reactivex.Single
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
+import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserAddress
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserLocale
 import ru.mts.avpopo85.weathery.data.utils.UserAddressType
@@ -18,7 +20,7 @@ import javax.inject.Inject
 
 class LocationRepository
 @Inject constructor(
-    context: Context,
+    private val context: Context,
     private val dbService: ILocationDbService<UserAddressType>
 ) : ILocationRepository {
 
@@ -30,10 +32,20 @@ class LocationRepository
             .setInterval(5000)
     }
 
-    override fun getCurrentAddressOrLastKnown(): Single<UserAddressType> = rxLocation
-        .settings()
-        .checkAndHandleResolution(locationRequest)
-        .flatMap(this::getAddress)
+    override fun getCurrentAddress(): Single<UserAddressType> =
+        rxLocation
+            .settings()
+            .checkAndHandleResolution(locationRequest)
+            .flatMap(this::getAddress)
+
+    override fun getLastKnownAddress(): Single<UserAddressType> {
+        val locatoinManager =
+            context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        val gpsIsEnabled = locatoinManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+        return dbService.getLocation(gpsIsEnabled)
+    }
 
     @SuppressLint("MissingPermission")
     private fun getAddress(gpsIsEnabled: Boolean): Single<UserAddressType> {
@@ -69,14 +81,16 @@ class LocationRepository
         countryCode = it.countryCode,
         countryName = it.countryName,
         featureName = it.featureName,
-        latitude = it.latitude,
-        longitude = it.longitude,
+        coords = GeographicCoordinates(
+            latitude = it.latitude,
+            longitude = it.longitude
+        ),
         locale = UserLocale(
             language = it.locale?.language,
             region = it.locale?.country
         ),
         locality = it.locality,
-        postalCode = it.postalCode,
+        postalCode = it.postalCode.toInt(),
         subAdminArea = it.subAdminArea,
         subThoroughfare = it.subThoroughfare,
         thoroughfare = it.thoroughfare,

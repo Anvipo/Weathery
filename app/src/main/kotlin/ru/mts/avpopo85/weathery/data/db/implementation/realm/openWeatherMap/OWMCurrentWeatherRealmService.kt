@@ -65,6 +65,7 @@ class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeather
                         if (data.isFresh || data.isNotFresh && !isConnectedToInternet) {
                             emitter.onSuccess(data)
                         } else if (isConnectedToInternet) {
+                            //TODO
                             emitter.onError(Throwable("В БД устаревшие данные. Получите данные с сервера"))
                         }
                     } else {
@@ -75,8 +76,10 @@ class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeather
                         )
                     }
                 } else if (!isConnectedToInternet) {
+                    //TODO
                     emitter.onError(Throwable("Вы не подключены к интернету и в БД ничего нет"))
                 } else if (isConnectedToInternet) {
+                    //TODO
                     emitter.onError(Throwable("В БД ничего нет. Получите данные с сервера"))
                 } else if (!dataExistsInDB) {
                     onProxyDataIsNull(

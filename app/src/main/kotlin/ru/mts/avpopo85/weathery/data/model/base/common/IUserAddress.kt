@@ -1,5 +1,6 @@
 package ru.mts.avpopo85.weathery.data.model.base.common
 
+import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserLocale
 
 interface IUserAddress {
@@ -16,15 +17,13 @@ interface IUserAddress {
 
     val featureName: String?
 
-    val latitude: Double?
-
-    val longitude: Double?
+    val coords: GeographicCoordinates?
 
     val locale: UserLocale?
 
     val locality: String?
 
-    val postalCode: String?
+    val postalCode: Int?
 
     /**City*/
     val subAdminArea: String?

@@ -44,10 +44,10 @@ interface IOWMForecastApiService {
     @GET("forecast")
     fun getCurrentWeatherByGeographicCoordinates(
         @Query("lat")
-        lat: String,
+        lat: Double,
 
         @Query("lon")
-        lon: String,
+        lon: Double,
 
         @Query("units")
         units: String = OWMUnitsFormat.METRIC._name,

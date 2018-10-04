@@ -6,7 +6,7 @@ data class OWMCurrentWeatherMain(
 
     override val temperature: String,
 
-    override val atmosphericPressureInhPa: Int,
+    override val atmosphericPressureInhPa: Double,
 
     override val humidity: Int
 

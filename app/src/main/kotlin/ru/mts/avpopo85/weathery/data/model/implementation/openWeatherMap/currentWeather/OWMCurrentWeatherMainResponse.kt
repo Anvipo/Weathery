@@ -13,7 +13,7 @@ open class OWMCurrentWeatherMainResponse(
 
     @SerializedName("pressure")
     @Expose
-    override var atmosphericPressureInhPa: Int = 0,
+    override var atmosphericPressureInhPa: Double = 0.0,
 
     @SerializedName("humidity")
     @Expose

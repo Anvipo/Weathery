@@ -69,6 +69,7 @@ class YWCurrentWeatherRealmService : ICurrentWeatherDbService<YWCurrentWeatherRe
                         if (dataIsFresh) {
                             emitter.onSuccess(data)
                         } else if (!isConnectedToInternet) {
+                            //TODO
                             emitter.onError(Throwable("Вы не подключены к интернету и в БД устаревшие данные"))
                         }
                     } else {
@@ -79,8 +80,10 @@ class YWCurrentWeatherRealmService : ICurrentWeatherDbService<YWCurrentWeatherRe
                         )
                     }
                 } else if (!isConnectedToInternet) {
+                    //TODO
                     emitter.onError(Throwable("Вы не подключены к интернету и в БД ничего нет"))
                 } else if (isConnectedToInternet) {
+                    //TODO
                     emitter.onError(Throwable("В БД ничего нет. Получите данные с сервера"))
                 } else if (!dataExistsInDB) {
                     onProxyDataIsNull(

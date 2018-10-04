@@ -5,6 +5,7 @@ import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWForeca
 import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.currentWeather.YWCurrentWeatherParameters
 import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.forecast.YWForecastParameters
 
+@Suppress("unused")
 object YWConstants {
 
     const val BASE_URL: String = "http://api.weather.yandex.ru/v1/"

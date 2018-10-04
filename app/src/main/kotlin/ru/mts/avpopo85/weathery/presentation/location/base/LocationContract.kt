@@ -1,23 +1,24 @@
 package ru.mts.avpopo85.weathery.presentation.location.base
 
-import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.presentation.base.BaseContract
 
 interface LocationContract : BaseContract {
 
     interface View : BaseContract.View {
 
-        fun showLocation(address: UserAddressType)
-
         fun showRationaleDialog()
 
         fun showGoSettingsDialog()
+
+        fun showLocationDialog(city: String?)
 
     }
 
     interface Presenter : BaseContract.Presenter<View> {
 
-        fun getLocation()
+        fun getCurrentGeolocation()
+
+        fun getLastKnownGeolocation()
 
         fun onRationalePositiveClick()
 

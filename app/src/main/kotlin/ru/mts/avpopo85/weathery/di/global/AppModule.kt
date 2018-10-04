@@ -48,11 +48,13 @@ class AppModule(private val context: Context) {
     fun provideYWCurrentWeatherRepository(
         apiService: IYWCurrentWeatherApiService,
         networkManager: NetworkManager,
-        dbService: ICurrentWeatherDbService<YWCurrentWeatherResponseType>
+        currentWeatherDbService: ICurrentWeatherDbService<YWCurrentWeatherResponseType>,
+        locationDbService: ILocationDbService<UserAddressType>
     ): ICurrentWeatherRepository<YWCurrentWeatherResponseType> = YWCurrentWeatherRepository(
         apiService,
         networkManager,
-        dbService
+        currentWeatherDbService,
+        locationDbService
     )
 
     @Provides
@@ -60,11 +62,13 @@ class AppModule(private val context: Context) {
     fun provideOWMCurrentWeatherRepository(
         apiService: IOWMCurrentWeatherApiService,
         networkManager: NetworkManager,
-        dbService: ICurrentWeatherDbService<OWMCurrentWeatherResponseType>
+        currentWeatherDbService: ICurrentWeatherDbService<OWMCurrentWeatherResponseType>,
+        locationDbService: ILocationDbService<UserAddressType>
     ): ICurrentWeatherRepository<OWMCurrentWeatherResponseType> = OWMCurrentWeatherRepository(
         apiService,
         networkManager,
-        dbService
+        currentWeatherDbService,
+        locationDbService
     )
 
     @Provides
@@ -72,11 +76,13 @@ class AppModule(private val context: Context) {
     fun provideYWForecastRepository(
         apiService: IYWForecastApiService,
         networkManager: NetworkManager,
-        dbService: IForecastDbService<YWForecastListResponseType>
+        forecastDbService: IForecastDbService<YWForecastListResponseType>,
+        locationDbService: ILocationDbService<UserAddressType>
     ): IForecastRepository<YWForecastListResponseType> = YWForecastRepository(
         apiService,
         networkManager,
-        dbService
+        forecastDbService,
+        locationDbService
     )
 
     @Provides
@@ -84,11 +90,13 @@ class AppModule(private val context: Context) {
     fun provideOWMForecastRepository(
         apiService: IOWMForecastApiService,
         networkManager: NetworkManager,
-        dbService: IForecastDbService<OWMForecastListResponseType>
+        forecastDbService: IForecastDbService<OWMForecastListResponseType>,
+        locationDbService: ILocationDbService<UserAddressType>
     ): IForecastRepository<OWMForecastListResponseType> = OWMForecastRepository(
         apiService,
         networkManager,
-        dbService
+        forecastDbService,
+        locationDbService
     )
 
     @Provides

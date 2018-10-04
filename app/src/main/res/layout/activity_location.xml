@@ -20,6 +20,17 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </android.support.design.widget.AppBarLayout>
 
+    <ProgressBar
+        android:id="@+id/location_PB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedIds" />
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -31,17 +42,23 @@
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
         <TextView
-            android:id="@+id/other_info"
+            android:id="@+id/info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
-            android:textSize="@dimen/default_text_size" />
+            android:gravity="center"
+            android:text="@string/application_need_to_know_your_gelocation_which_geolocation_do_you_want_to_use" />
 
         <Button
-            android:id="@+id/get_location_LA_B"
+            android:id="@+id/get_last_known_location_LA_B"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/get_current_geolocation" />
+            android:text="@string/last_known" />
+
+        <Button
+            android:id="@+id/get_current_location_by_GPS_LA_B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/current_by_gps" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -3,7 +3,6 @@ package ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.currentWeather.IOWMCurrentWeatherResponse
 import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OWMConstants.API_ID
 import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OWMUnitsFormat
 import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OpenWeatherMapLanguages
@@ -40,7 +39,7 @@ interface IOWMCurrentWeatherApiService {
 
         @Query("appid")
         appId: String = API_ID
-    ): Single<IOWMCurrentWeatherResponse>
+    ): Single<OWMCurrentWeatherResponseType>
 
     @GET("weather")
     fun getCurrentWeatherByCityName(
@@ -55,15 +54,15 @@ interface IOWMCurrentWeatherApiService {
 
         @Query("appid")
         appId: String = API_ID
-    ): Single<IOWMCurrentWeatherResponse>
+    ): Single<OWMCurrentWeatherResponseType>
 
     @GET("weather")
     fun getCurrentWeatherByGeographicCoordinates(
         @Query("lat")
-        lat: String,
+        lat: Double,
 
         @Query("lon")
-        lon: String,
+        lon: Double,
 
         @Query("units")
         units: String = OWMUnitsFormat.METRIC._name,
@@ -73,12 +72,12 @@ interface IOWMCurrentWeatherApiService {
 
         @Query("appid")
         appId: String = API_ID
-    ): Single<IOWMCurrentWeatherResponse>
+    ): Single<OWMCurrentWeatherResponseType>
 
     @GET("weather")
     fun getCurrentWeatherByZipCode(
         @Query("zip")
-        zip: String,
+        zipCode: String,
 
         @Query("units")
         units: String = OWMUnitsFormat.METRIC._name,
@@ -88,6 +87,6 @@ interface IOWMCurrentWeatherApiService {
 
         @Query("appid")
         appId: String = API_ID
-    ): Single<IOWMCurrentWeatherResponse>
+    ): Single<OWMCurrentWeatherResponseType>
 
 }

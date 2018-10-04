@@ -56,18 +56,77 @@ class LocationRealmService : ILocationDbService<UserAddressType> {
                     } else {
                         onDataIsNull(
                             emitter,
-                            "getLocation",
+                            "getCurrentGeolocation",
                             this::class.java.simpleName
                         )
                     }
                 } else if (!gpsIsEnabled) {
+                    //TODO
                     emitter.onError(Throwable("Вы не включили геолокацию и в БД ничего нет"))
+                } else if (gpsIsEnabled) {
+                    //TODO
+                    emitter.onError(Throwable("В БД ничего нет. Получите данные с датчика"))
                 } else if (!dataExistsInDB) {
                     onProxyDataIsNull(
                         emitter,
-                        "getLocation",
+                        "getCurrentGeolocation",
                         this::class.java.simpleName
                     )
+                }
+            }
+        }
+
+    override fun getCityName(): Single<String> =
+        Single.create { emitter ->
+            Realm.getDefaultInstance()?.use { realmInstance ->
+                val proxyData =
+                    realmInstance
+                        .where<UserAddressType>()
+                        .findFirst()
+
+                val dataExistsInDB = proxyData != null
+
+                if (dataExistsInDB) {
+                    val data: UserAddressType? =
+                        realmInstance.copyFromRealm(proxyData!!)
+
+                    if (data != null) {
+                        val cityName = data.locality
+
+                        if (cityName != null) {
+                            emitter.onSuccess(cityName)
+                        } else {
+                            //TODO
+                            emitter.onError(
+                                Throwable(
+                                    "В БД отсутствует название города. " +
+                                            "Необходимо получить вашу текущую геопозицию"
+                                )
+                            )
+                        }
+                    } else {
+                        onDataIsNull(
+                            emitter,
+                            "getCityName",
+                            this::class.java.simpleName
+                        )
+                    }
+                } /*else if (!isConnectedToInternet) {
+                    emitter.onError(Throwable("Вы не подключены к интернету и в БД ничего нет"))
+                } else if (isConnectedToInternet) {
+                    emitter.onError(Throwable("В БД ничего нет. Получите данные с сервера"))
+                } */ else if (!dataExistsInDB) {
+                    emitter.onError(
+                        Throwable(
+                            "В БД ничего нет. " +
+                                    "Необходимо получить вашу текущую геопозицию"
+                        )
+                    )
+                    /*onProxyDataIsNull(
+                        emitter,
+                        "getCurrentWeatherResponse",
+                        this::class.java.simpleName
+                    )*/
                 }
             }
         }

@@ -37,21 +37,49 @@ class LocationPresenter
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
         }
         context!!.startActivityForResult(intent, PHONE_SETTINGS_REQUEST_CODE)
-
-        /*val appSettingsIntent = Intent(
-            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-            Uri.parse("package:${context!!.packageName}")
-        )
-
-        context!!.startActivityForResult(appSettingsIntent, PHONE_SETTINGS_REQUEST_CODE)*/
     }
 
     override fun onGoSettingNegativeClick() {
         showLocationError()
     }
 
-    override fun getLocation() {
+    override fun getCurrentGeolocation() {
         checkPermissions()
+    }
+
+    override fun getLastKnownGeolocation() {
+        val task = interactor.getLastKnownAddress()
+            .compose(schedulerManagerModule.singleTransformer())
+            .doOnSubscribe {
+                view?.showLoadingProgress()
+            }
+            .doAfterTerminate {
+                view?.hideLoadingProgress()
+            }
+            .subscribe(
+                { address: UserAddressType? ->
+                    if (address != null) {
+                        view?.showLocationDialog(address.locality)
+                    } else {
+                        //TODO
+                        if (BuildConfig.DEBUG) {
+                            view?.showError("${this::class.java.simpleName}.getLastKnownGeolocation - address == null")
+                        }
+                    }
+                },
+                { error: Throwable? ->
+                    if (error != null) {
+                        view?.showLocationDialog(null)
+                    } else {
+                        //TODO
+                        if (BuildConfig.DEBUG) {
+                            view?.showError("${this::class.java.simpleName}.getLastKnownGeolocation - error == null")
+                        }
+                    }
+                }
+            )
+
+        compositeDisposable.add(task)
     }
 
     override fun onActivityResult() {
@@ -73,12 +101,18 @@ class LocationPresenter
     private fun checkPermissions() {
         val task: Disposable = interactor.requestPermissions()
             .compose(schedulerManagerModule.observableTransformer())
+            .doOnSubscribe {
+                view?.showLoadingProgress()
+            }
+            .doAfterTerminate {
+                view?.hideLoadingProgress()
+            }
             .subscribe(
                 { permission: Permission? ->
                     if (permission != null) {
                         onPermissionSuccess(permission)
                     } else {
-                        //never will happen (maybe)
+                        //TODO
                         if (BuildConfig.DEBUG) {
                             view?.showError("${this::class.java.simpleName}.checkPermissions - permission == null")
                         }
@@ -88,7 +122,7 @@ class LocationPresenter
                     if (error != null) {
 
                     } else {
-//never will happen (maybe)
+                        //TODO
                         if (BuildConfig.DEBUG) {
                             view?.showError("${this::class.java.simpleName}.checkPermissions - permission == null")
                         }
@@ -102,14 +136,20 @@ class LocationPresenter
     private fun onPermissionSuccess(permission: Permission) {
         @Suppress("CascadeIf")
         if (permission.granted) {
-            val task = interactor.getCurrentAddressOrLastKnown()
+            val task = interactor.getCurrentAddress()
                 .compose(schedulerManagerModule.singleTransformer())
+                .doOnSubscribe {
+                    view?.showLoadingProgress()
+                }
+                .doAfterTerminate {
+                    view?.hideLoadingProgress()
+                }
                 .subscribe(
                     { address: UserAddressType? ->
                         if (address != null) {
-                            view?.showLongToast("Геопозиция успешно получена")
+                            view?.showLocationDialog(address.locality)
                         } else {
-                            //never will happen (maybe)
+                            //TODO
                             if (BuildConfig.DEBUG) {
                                 view?.showError("${this::class.java.simpleName}.checkPermissions - permission == null")
                             }
@@ -117,7 +157,7 @@ class LocationPresenter
                     },
                     { error: Throwable? ->
                         if (error != null) {
-                            view?.showError(error)
+                            view?.showLocationDialog(null)
                         } else {
                             //never will happen (maybe)
                             if (BuildConfig.DEBUG) {

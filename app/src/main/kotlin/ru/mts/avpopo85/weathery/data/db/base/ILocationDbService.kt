@@ -7,6 +7,8 @@ interface ILocationDbService<T : IUserAddress> {
 
     fun saveLocation(address: T): Single<T>
 
-    fun getLocation(gpsIsEnabled: Boolean): Single<T>
+    fun getLocation(gpsIsEnabled: Boolean = false): Single<T>
+
+    fun getCityName(): Single<String>
 
 }

@@ -211,6 +211,10 @@
 
     <string name="google_play_services_unavailable">Google Play Services unavailable</string>
     <string name="this_app_will_not_work">This app will not work</string>
-    <string name="get_current_geolocation">Get current location</string>
-    <string name="geolocation">Geolocation</string>
+    <string name="application_need_to_know_your_gelocation">Application need to know your gelocation</string>
+    <string name="which_geolocation_do_you_want_to_use">Which geolocation do you want to use?</string>
+    <string name="application_need_to_know_your_gelocation_which_geolocation_do_you_want_to_use">
+        Application need to know your gelocation. Which geolocation do you want to use?</string>
+    <string name="last_known">Last known</string>
+    <string name="current_by_gps">Current by GPS</string>
 </resources>

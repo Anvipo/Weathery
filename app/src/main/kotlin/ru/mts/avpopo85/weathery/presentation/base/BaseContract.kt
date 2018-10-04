@@ -4,6 +4,10 @@ interface BaseContract {
 
     interface View {
 
+        fun showLoadingProgress()
+
+        fun hideLoadingProgress()
+
         fun showError(throwable: Throwable)
 
         fun showError(message: String)

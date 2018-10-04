@@ -6,10 +6,6 @@ interface WeatherContract : BaseContract {
 
     interface View : BaseContract.View {
 
-        fun showLoadingProgress()
-
-        fun hideLoadingProgress()
-
         fun hideLayout()
 
         fun showLayout()

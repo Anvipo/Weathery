@@ -9,6 +9,8 @@ interface ILocationInteractor {
 
     fun requestPermissions(): Observable<Permission>
 
-    fun getCurrentAddressOrLastKnown(): Single<UserAddressType>
+    fun getCurrentAddress(): Single<UserAddressType>
+
+    fun getLastKnownAddress(): Single<UserAddressType>
 
 }

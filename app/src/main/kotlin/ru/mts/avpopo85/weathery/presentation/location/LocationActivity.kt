@@ -3,19 +3,21 @@ package ru.mts.avpopo85.weathery.presentation.location
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.android.synthetic.main.activity_location.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.design.indefiniteSnackbar
 import org.jetbrains.anko.noButton
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.yesButton
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
-import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.di.modules.common.LocationModule
 import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
+import ru.mts.avpopo85.weathery.presentation.main.MainActivity
 import javax.inject.Inject
 
 
@@ -24,6 +26,8 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
 
     @Inject
     lateinit var presenter: LocationContract.Presenter
+
+    override val progressBar: ProgressBar by lazy { location_PB }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +41,31 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
 
         presenter.onBindView(this)
 
-        get_location_LA_B.setOnClickListener {
-            presenter.getLocation()
+        get_last_known_location_LA_B.setOnClickListener {
+            presenter.getLastKnownGeolocation()
+        }
+
+        get_current_location_by_GPS_LA_B.setOnClickListener {
+            presenter.getCurrentGeolocation()
+        }
+    }
+
+    override fun showLocationDialog(city: String?) {
+        //TODO
+        if (city != null) {
+            alert(
+                "Ваше текущее местоположение - $city?",
+                "Местоположение"
+            ) {
+                positiveButton("Да") {
+                    startActivity<MainActivity>()
+                    finish()
+                }
+                negativeButton("Нет") {}
+            }.show()
+        } else {
+            //TODO выключать gps
+            showLongToast("Не удалось узнать местоположение")
         }
     }
 
@@ -46,10 +73,6 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
         super.onResume()
 
         checkPlayServicesAvailable()
-    }
-
-    override fun showLocation(address: UserAddressType) {
-        other_info.text = address.toString()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -87,25 +110,6 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
             }
         }.show()
     }
-
-    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            // Check for the integer request code originally supplied to startResolutionForResult().
-            REQUEST_CHECK_SETTINGS -> locationUpdatesHelper.onActivityResult(resultCode)
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            FROM_LOCATION_UPDATES -> locationUpdatesHelper.onRequestPermissionsResult(grantResults)
-            FROM_LAST_KNOWN_LOCATION -> lastKnownLocationHelper
-                .onRequestPermissionsResult(grantResults)
-        }
-    }*/
 
     private fun checkPlayServicesAvailable() {
         val apiAvailability = GoogleApiAvailability.getInstance()

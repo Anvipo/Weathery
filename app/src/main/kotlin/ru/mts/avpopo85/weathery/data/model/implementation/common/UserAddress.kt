@@ -17,15 +17,13 @@ open class UserAddress(
 
     override var featureName: String? = null,
 
-    override var latitude: Double? = null,
-
-    override var longitude: Double? = null,
+    override var coords: GeographicCoordinates? = null,
 
     override var locale: UserLocale? = null,
 
     override var locality: String? = null,
 
-    override var postalCode: String? = null,
+    override var postalCode: Int? = null,
 
     override var subAdminArea: String? = null,
 

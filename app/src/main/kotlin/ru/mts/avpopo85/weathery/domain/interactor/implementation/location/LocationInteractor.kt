@@ -18,7 +18,10 @@ class LocationInteractor
     override fun requestPermissions(): Observable<Permission> =
         permissionsRepository.requestLocationPermission()
 
-    override fun getCurrentAddressOrLastKnown(): Single<UserAddressType> =
-        locationRepository.getCurrentAddressOrLastKnown()
+    override fun getCurrentAddress(): Single<UserAddressType> =
+        locationRepository.getCurrentAddress()
+
+    override fun getLastKnownAddress(): Single<UserAddressType> =
+        locationRepository.getLastKnownAddress()
 
 }
