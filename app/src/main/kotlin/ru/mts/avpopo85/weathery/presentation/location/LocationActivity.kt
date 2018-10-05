@@ -2,13 +2,11 @@ package ru.mts.avpopo85.weathery.presentation.location
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.ProgressBar
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.android.synthetic.main.activity_location.*
 import org.jetbrains.anko.alert
-import org.jetbrains.anko.design.indefiniteSnackbar
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.yesButton
@@ -122,7 +120,7 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
                 val message = "${getString(R.string.google_play_services_unavailable)}. " +
                         getString(R.string.this_app_will_not_work)
 
-                findViewById<View>(android.R.id.content).indefiniteSnackbar(message)
+                showIndefiniteSnackbar(message, findViewById(android.R.id.content))
             }
         }
     }

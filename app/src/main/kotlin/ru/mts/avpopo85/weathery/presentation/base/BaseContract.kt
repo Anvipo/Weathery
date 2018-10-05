@@ -16,6 +16,8 @@ interface BaseContract {
 
         fun showLongToast(message: String)
 
+        fun showIndefiniteSnackbar(message: String, view: android.view.View)
+
     }
 
     interface Presenter<in V : View> {

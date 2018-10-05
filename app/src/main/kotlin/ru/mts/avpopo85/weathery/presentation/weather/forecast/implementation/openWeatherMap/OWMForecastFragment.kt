@@ -2,11 +2,11 @@ package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.op
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.presentation.utils.ARG_FORECAST

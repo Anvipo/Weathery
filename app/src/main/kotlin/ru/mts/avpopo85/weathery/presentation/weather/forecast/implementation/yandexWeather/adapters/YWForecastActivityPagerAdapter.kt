@@ -1,8 +1,8 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.adapters
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 
 class YWForecastActivityPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
     private val items = mutableListOf<Fragment>()

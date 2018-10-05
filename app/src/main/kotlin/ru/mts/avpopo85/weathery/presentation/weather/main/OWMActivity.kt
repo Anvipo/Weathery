@@ -1,7 +1,7 @@
 package ru.mts.avpopo85.weathery.presentation.weather.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_owm.*
 import org.jetbrains.anko.startActivity
 import ru.mts.avpopo85.weathery.R

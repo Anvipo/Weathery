@@ -1,9 +1,9 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap
 
 import android.os.Bundle
-import android.support.v4.view.ViewPager
 import android.view.View.GONE
 import android.widget.ProgressBar
+import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_owm_forecast.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
@@ -15,7 +15,8 @@ import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.ope
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
 import javax.inject.Inject
 
-class OWMForecastActivity : AbsForecastActivity<ViewPager, OWMForecastListType>(),
+class OWMForecastActivity :
+    AbsForecastActivity<ViewPager, OWMForecastListType>(),
     ForecastContract.View<OWMForecastListType> {
 
     @Inject

@@ -1,6 +1,6 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.adapters
 
-import android.support.v7.widget.RecyclerView.Adapter
+import androidx.recyclerview.widget.RecyclerView.Adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import ru.mts.avpopo85.weathery.R

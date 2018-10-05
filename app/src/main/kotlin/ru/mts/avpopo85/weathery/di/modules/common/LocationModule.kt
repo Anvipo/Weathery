@@ -1,5 +1,6 @@
 package ru.mts.avpopo85.weathery.di.modules.common
 
+import androidx.fragment.app.FragmentActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dagger.Module
 import dagger.Provides

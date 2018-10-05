@@ -1,8 +1,10 @@
 package ru.mts.avpopo85.weathery.presentation.base
 
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
+import com.google.android.material.snackbar.Snackbar
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 
@@ -48,5 +50,11 @@ abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.Vie
 
     override fun showLongToast(message: String) {
         longToast(message)
+    }
+
+    override fun showIndefiniteSnackbar(message: String, view: View) {
+        Snackbar
+            .make(view, message, Snackbar.LENGTH_INDEFINITE)
+            .apply { show() }
     }
 }
