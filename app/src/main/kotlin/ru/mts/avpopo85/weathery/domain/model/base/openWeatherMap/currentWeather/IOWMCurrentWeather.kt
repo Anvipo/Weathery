@@ -1,7 +1,9 @@
 package ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.currentWeather
 
 import ru.mts.avpopo85.weathery.domain.model.base.common.ICurrentWeather
-import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.*
+import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.IOWMSys
+import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.IOWMWeather
+import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.IOWMWind
 
 
 interface IOWMCurrentWeather : ICurrentWeather {

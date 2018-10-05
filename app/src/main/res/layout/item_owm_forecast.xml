@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MyMaterialCardView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="false"
-    android:orientation="horizontal"
-    app:cardBackgroundColor="@android:color/transparent"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="2dp"
-    app:cardUseCompatPadding="true">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,21 +15,18 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/MyMaterialSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/daytime"
-                android:gravity="center_horizontal"
-                android:text="@string/daytime"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/daytime" />
 
             <TextView
                 android:id="@+id/day_time_value_OWM_F_TV"
+                style="@style/MyMaterialBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/daytime_value"
-                android:gravity="center_horizontal"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textIsSelectable="true" />
+                android:contentDescription="@string/daytime_value" />
         </LinearLayout>
 
         <LinearLayout
@@ -45,21 +36,18 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/MyMaterialSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/temperature"
-                android:gravity="center_horizontal"
-                android:text="@string/temperature"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/temperature" />
 
             <TextView
                 android:id="@+id/temperature_value_OWM_F_TV"
+                style="@style/MyMaterialBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/temperature_value"
-                android:gravity="center_horizontal"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textIsSelectable="true" />
+                android:contentDescription="@string/temperature_value" />
         </LinearLayout>
 
         <LinearLayout
@@ -69,21 +57,18 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/MyMaterialSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/cloudiness"
-                android:gravity="center_horizontal"
-                android:text="@string/cloudiness"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/cloudiness" />
 
             <TextView
                 android:id="@+id/cloudiness_value_OWM_F_TV"
+                style="@style/MyMaterialBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/cloudiness_value"
-                android:gravity="center_horizontal"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textIsSelectable="true" />
+                android:contentDescription="@string/cloudiness_value" />
         </LinearLayout>
 
         <LinearLayout
@@ -93,21 +78,18 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/MyMaterialSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/humidity"
-                android:gravity="center_horizontal"
-                android:text="@string/humidity"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/humidity" />
 
             <TextView
                 android:id="@+id/humidity_value_OWM_F_TV"
+                style="@style/MyMaterialBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/humidity_value"
-                android:gravity="center_horizontal"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textIsSelectable="true" />
+                android:contentDescription="@string/humidity_value" />
         </LinearLayout>
 
         <LinearLayout
@@ -117,21 +99,18 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/MyMaterialSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/rain_volume_for_last_3_hours"
-                android:gravity="center_horizontal"
-                android:text="@string/rain_volume_for_last_3_hours"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/rain_volume_for_last_3_hours" />
 
             <TextView
                 android:id="@+id/rain_volume_value_OWM_F_TV"
+                style="@style/MyMaterialBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/rain_volume_for_last_3_hours_value"
-                android:gravity="center_horizontal"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textIsSelectable="true" />
+                android:contentDescription="@string/rain_volume_for_last_3_hours_value" />
         </LinearLayout>
 
         <LinearLayout
@@ -141,27 +120,23 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/MyMaterialSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/description"
-                android:gravity="center_horizontal"
-                android:text="@string/description"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/description" />
 
             <TextView
                 android:id="@+id/weather_description_value_OWM_F_TV"
+                style="@style/MyMaterialBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/description_value"
-                android:gravity="center_horizontal"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textIsSelectable="true" />
+                android:contentDescription="@string/description_value" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:background="@drawable/border"
             android:baselineAligned="false"
             android:orientation="horizontal">
@@ -174,23 +149,18 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/wind_speed"
-                    android:gravity="center"
-                    android:text="@string/wind_speed"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/wind_speed" />
 
                 <TextView
                     android:id="@+id/wind_speed_value_OWM_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:contentDescription="@string/wind_speed_value"
-                    android:gravity="center"
-                    android:textAppearance="?attr/textAppearanceListItem"
-                    android:textIsSelectable="true" />
+                    android:contentDescription="@string/wind_speed_value" />
             </LinearLayout>
 
             <LinearLayout
@@ -201,23 +171,18 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/wind_direction"
-                    android:gravity="center"
-                    android:text="@string/wind_direction"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/wind_direction" />
 
                 <TextView
                     android:id="@+id/wind_direction_value_OWM_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:contentDescription="@string/wind_direction_value"
-                    android:gravity="center"
-                    android:textAppearance="?attr/textAppearanceListItem"
-                    android:textIsSelectable="true" />
+                    android:contentDescription="@string/wind_direction_value" />
             </LinearLayout>
         </LinearLayout>
 
@@ -236,22 +201,18 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/atmospheric_pressure_on_the_ground_level"
-                    android:gravity="center"
-                    android:text="@string/atmospheric_pressure_on_the_ground_level"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/atmospheric_pressure_on_the_ground_level" />
 
                 <TextView
                     android:id="@+id/atmospheric_pressure_on_the_ground_level_in_hPa_value_OWM_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/atmospheric_pressure_on_the_ground_level_value"
-                    android:gravity="center"
-                    android:textAppearance="?attr/textAppearanceListItem"
-                    android:textIsSelectable="true" />
+                    android:contentDescription="@string/atmospheric_pressure_on_the_ground_level_value" />
             </LinearLayout>
 
             <LinearLayout
@@ -262,23 +223,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/atmospheric_pressure_on_the_sea_level"
-                    android:gravity="center"
-                    android:text="@string/atmospheric_pressure_on_the_sea_level"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/atmospheric_pressure_on_the_sea_level" />
 
                 <TextView
                     android:id="@+id/atmospheric_pressure_on_the_sea_level_in_hPa_value_OWM_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/atmospheric_pressure_on_the_sea_level_value"
-                    android:gravity="center"
-                    android:textAppearance="?attr/textAppearanceListItem"
-                    android:textIsSelectable="true" />
+                    android:contentDescription="@string/atmospheric_pressure_on_the_sea_level_value" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

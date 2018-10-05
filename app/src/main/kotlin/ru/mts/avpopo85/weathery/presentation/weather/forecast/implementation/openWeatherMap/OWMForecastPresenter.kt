@@ -4,6 +4,7 @@ import android.content.Context
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.IForecastInteractor
 import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
+import ru.mts.avpopo85.weathery.presentation.utils.onParameterIsNull
 import ru.mts.avpopo85.weathery.presentation.utils.parseError
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
@@ -20,34 +21,32 @@ class OWMForecastPresenter
     override fun loadForecast() {
         val task = interactor.getForecast()
             .compose(schedulerManagerModule.singleTransformer())
-            .doOnSubscribe {
-                view?.showLoadingProgress()
-            }
-            .doAfterTerminate {
-                view?.hideLoadingProgress()
-            }
-            .subscribe(
-                { currentWeather: OWMForecastListType? ->
-                    if (currentWeather != null)
-                        view?.showWeatherResponse(currentWeather)
-                    else {
-                        //TODO
-                        view?.showError("Непредвиденная ошибка в ${this::class.java.simpleName}.onSuccess")
-                    }
-                },
-                { throwable: Throwable? ->
-                    if (throwable != null) {
-                        val message = context.parseError(throwable)
-
-                        view?.showError(message)
-                    } else {
-                        //TODO
-                        view?.showError("Непредвиденная ошибка в ${this::class.java.simpleName}.onError")
-                    }
-                }
-            )
+            .doOnSubscribe { view?.showLoadingProgress() }
+            .doAfterTerminate { view?.hideLoadingProgress() }
+            .subscribe(::getForecastOnSuccess, ::getForecastOnError)
 
         compositeDisposable.add(task)
+    }
+
+    private fun getForecastOnSuccess(forecast: OWMForecastListType?) {
+        if (forecast != null) {
+            view?.showWeatherResponse(forecast)
+        } else {
+            onParameterIsNull(
+                view,
+                this::class.java.simpleName,
+                "getForecast",
+                "forecast"
+            )
+        }
+    }
+
+    private fun getForecastOnError(error: Throwable?) {
+        if (error != null) {
+            view?.showError(context.parseError(error))
+        } else {
+            onParameterIsNull(view, this::class.java.simpleName, "getForecast", "error")
+        }
     }
 
 }

@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MyMaterialCardView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="false"
-    android:orientation="horizontal"
-    app:cardBackgroundColor="@android:color/transparent"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="2dp"
-    app:cardUseCompatPadding="true">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,18 +19,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/moon_phase"
-                android:gravity="center_horizontal"
                 android:text="@string/moon_phase"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                style="@style/MyMaterialSubtitle1" />
 
             <TextView
                 android:id="@+id/moon_text_value_YW_F_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/moon_phase_value"
-                android:gravity="center_horizontal"
                 android:text="@string/moon_phase_value"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                style="@style/MyMaterialBody1" />
         </LinearLayout>
 
         <LinearLayout
@@ -56,21 +48,17 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/sunrise_time"
-                    android:gravity="center"
                     android:text="@string/sunrise_time"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    style="@style/MyMaterialSubtitle1" />
 
                 <TextView
                     android:id="@+id/sunrise_time_value_YW_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/sunrise_time_value"
-                    android:gravity="center"
                     android:text="@string/sunrise_time_value"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    style="@style/MyMaterialBody1" />
             </LinearLayout>
 
             <LinearLayout
@@ -82,21 +70,17 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/sunset_time"
-                    android:gravity="center"
                     android:text="@string/sunset_time"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    style="@style/MyMaterialSubtitle1" />
 
                 <TextView
                     android:id="@+id/sunset_time_value_YW_F_TV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/sunset_time_value"
-                    android:gravity="center"
                     android:text="@string/sunset_time_value"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    style="@style/MyMaterialBody1" />
             </LinearLayout>
         </LinearLayout>
 
@@ -124,4 +108,4 @@
                 tools:listitem="@layout/item_yw_hour_forecast" />
         </LinearLayout>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

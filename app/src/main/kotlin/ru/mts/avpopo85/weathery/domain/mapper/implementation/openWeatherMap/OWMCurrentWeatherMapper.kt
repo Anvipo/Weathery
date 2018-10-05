@@ -2,10 +2,10 @@ package ru.mts.avpopo85.weathery.domain.mapper.implementation.openWeatherMap
 
 import android.content.Context
 import ru.mts.avpopo85.weathery.domain.mapper.base.ICurrentWeatherMapper
-import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMSys
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
-import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMWind
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMCurrentWeatherMain
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMSys
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMWind
 import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.utils.toTime
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType

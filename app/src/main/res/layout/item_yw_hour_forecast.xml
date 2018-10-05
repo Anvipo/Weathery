@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MyMaterialCardView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="2dp"
-    app:cardUseCompatPadding="true">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,23 +15,19 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/MyMaterialSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:contentDescription="@string/local_time"
-                android:gravity="center"
-                android:text="@string/local_time"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/local_time" />
 
             <TextView
                 android:id="@+id/hour_in_local_value_YW_F_TV"
+                style="@style/MyMaterialBody1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
                 android:contentDescription="@string/local_time_value"
-                android:gravity="center"
-                android:text="@string/local_time_value"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/local_time_value" />
         </LinearLayout>
 
         <LinearLayout
@@ -52,23 +45,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/temperature"
-                    android:gravity="center"
-                    android:text="@string/temperature"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/temperature" />
 
                 <TextView
                     android:id="@+id/hour_temperature_value_YW_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/temperature_value"
-                    android:gravity="center"
-                    android:text="@string/temperature_value"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/temperature_value" />
             </LinearLayout>
 
             <LinearLayout
@@ -79,23 +68,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/feels_like_temperature"
-                    android:gravity="center"
-                    android:text="@string/feels_like_temperature"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/feels_like_temperature" />
 
                 <TextView
                     android:id="@+id/feels_like_hour_temperature_value_YW_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/feels_like_temperature_value"
-                    android:gravity="center"
-                    android:text="@string/feels_like_temperature_value"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/feels_like_temperature_value" />
             </LinearLayout>
         </LinearLayout>
 
@@ -106,21 +91,19 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/MyMaterialSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/condition"
-                android:gravity="center"
-                android:text="@string/condition"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/condition" />
 
             <TextView
                 android:id="@+id/hour_condition_value_YW_F_TV"
+                style="@style/MyMaterialBody1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/condition_value"
-                android:gravity="center"
-                android:text="@string/condition_value"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/condition_value" />
         </LinearLayout>
 
         <LinearLayout
@@ -138,22 +121,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/wind_speed"
-                    android:gravity="center"
-                    android:text="@string/wind_speed"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/wind_speed" />
 
                 <TextView
                     android:id="@+id/hour_wind_speed_value_YW_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/wind_speed_value"
-                    android:gravity="center"
-                    android:text="@string/wind_speed_value"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/wind_speed_value" />
             </LinearLayout>
 
             <LinearLayout
@@ -164,23 +144,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/wind_gusts_speed"
-                    android:gravity="center"
-                    android:text="@string/wind_gusts_speed"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/wind_gusts_speed" />
 
                 <TextView
                     android:id="@+id/hour_wind_gust_value_YW_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/wind_gusts_speed_value"
-                    android:gravity="center"
-                    android:text="@string/wind_gusts_speed_value"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/wind_gusts_speed_value" />
             </LinearLayout>
 
             <LinearLayout
@@ -191,23 +167,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/wind_direction"
-                    android:gravity="center"
-                    android:text="@string/wind_direction"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/wind_direction" />
 
                 <TextView
                     android:id="@+id/hour_wind_direction_value_YW_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/wind_direction_value"
-                    android:gravity="center"
-                    android:text="@string/wind_direction_value"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/wind_direction_value" />
             </LinearLayout>
         </LinearLayout>
 
@@ -226,23 +198,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/atmospheric_pressure_mm_hg"
-                    android:gravity="center"
-                    android:text="@string/atmospheric_pressure"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/atmospheric_pressure" />
 
                 <TextView
                     android:id="@+id/hour_pressure_in_mm_value_YW_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/atmospheric_pressure_mm_hg_value"
-                    android:gravity="center"
-                    android:text="@string/atmospheric_pressure_value"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/atmospheric_pressure_value" />
             </LinearLayout>
 
             <LinearLayout
@@ -253,23 +221,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/atmospheric_pressure_hPa"
-                    android:gravity="center"
-                    android:text="@string/atmospheric_pressure"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/atmospheric_pressure" />
 
                 <TextView
                     android:id="@+id/hour_pressure_in_hPa_value_YW_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/atmospheric_pressure_hPa_value"
-                    android:gravity="center"
-                    android:text="@string/atmospheric_pressure_value"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/atmospheric_pressure_value" />
             </LinearLayout>
         </LinearLayout>
 
@@ -280,21 +244,19 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/MyMaterialSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/humidity"
-                android:gravity="center"
-                android:text="@string/humidity"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/humidity" />
 
             <TextView
                 android:id="@+id/hour_humidity_in_percents_value_YW_F_TV"
+                style="@style/MyMaterialBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/humidity_value"
-                android:gravity="center"
-                android:text="@string/humidity_value"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/humidity_value" />
         </LinearLayout>
 
         <LinearLayout
@@ -311,23 +273,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/precipitation_type"
-                    android:gravity="center"
-                    android:text="@string/precipitation_type"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/precipitation_type" />
 
                 <TextView
                     android:id="@+id/hour_precipitation_type_value_YW_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/precipitation_type_value"
-                    android:gravity="center"
-                    android:text="@string/precipitation_type_value"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/precipitation_type_value" />
 
             </LinearLayout>
 
@@ -338,23 +296,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/precipitation_strength"
-                    android:gravity="center"
-                    android:text="@string/precipitation_strength"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/precipitation_strength" />
 
                 <TextView
                     android:id="@+id/hour_precipitation_strength_value_YW_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/precipitation_strength_value"
-                    android:gravity="center"
-                    android:text="@string/precipitation_strength_value"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/precipitation_strength_value" />
             </LinearLayout>
         </LinearLayout>
 
@@ -373,23 +327,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/precipitation_in_mm"
-                    android:gravity="center"
-                    android:text="@string/precipitation"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/precipitation" />
 
                 <TextView
                     android:id="@+id/hour_precipitation_in_mm_value_YW_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/precipitation_in_mm_value"
-                    android:gravity="center"
-                    android:text="@string/precipitation_value"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/precipitation_value" />
 
             </LinearLayout>
 
@@ -401,23 +351,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/precipitation_in_minutes"
-                    android:gravity="center"
-                    android:text="@string/precipitation"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/precipitation" />
 
                 <TextView
                     android:id="@+id/hour_precipitation_in_minutes_value_YW_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:contentDescription="@string/precipitation_in_minutes_value"
-                    android:gravity="center"
-                    android:text="@string/precipitation_value"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/precipitation_value" />
             </LinearLayout>
         </LinearLayout>
 
@@ -427,21 +373,19 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/MyMaterialSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/cloudiness"
-                android:gravity="center"
-                android:text="@string/cloudiness"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/cloudiness" />
 
             <TextView
                 android:id="@+id/hour_cloudiness_value_YW_F_TV"
+                style="@style/MyMaterialBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/cloudiness_value"
-                android:gravity="center"
-                android:text="@string/cloudiness_value"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:text="@string/cloudiness_value" />
         </LinearLayout>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

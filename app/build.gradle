@@ -15,7 +15,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
-        versionName "0.36"
+        versionName "0.37"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -67,7 +67,6 @@ android {
     }
 }
 
-//noinspection SpellCheckingInspection
 dependencies {
     implementation 'androidx.multidex:multidex:2.0.0'
 
@@ -111,11 +110,9 @@ dependencies {
     //    implementation "com.google.dagger:dagger-android-support:$dagger2Version"
 
     //RxJava2
-    //noinspection SpellCheckingInspection
     def rxjava2Version = '2.2.2'
     implementation "io.reactivex.rxjava2:rxjava:$rxjava2Version"
 
-    //noinspection SpellCheckingInspection
     def rxjava2AndroidVersion = '2.1.0'
     implementation "io.reactivex.rxjava2:rxandroid:$rxjava2AndroidVersion"
 
@@ -129,7 +126,6 @@ dependencies {
     //    kapt "com.android.databinding:compiler:3.1.4"
 
     //Anko
-    //noinspection SpellCheckingInspection
     def ankoVersion = '0.10.7'
     implementation "org.jetbrains.anko:anko:$ankoVersion"
     implementation "org.jetbrains.anko:anko-commons:$ankoVersion"

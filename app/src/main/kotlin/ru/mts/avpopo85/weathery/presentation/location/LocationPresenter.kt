@@ -11,9 +11,10 @@ import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.ILocationInteractor
 import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
+import ru.mts.avpopo85.weathery.presentation.utils.onParameterIsNull
 import javax.inject.Inject
 
-const val PHONE_SETTINGS_REQUEST_CODE = 9000
+const val APPLICATION_SETTINGS_REQUEST_CODE = 9000
 
 class LocationPresenter
 @Inject constructor(
@@ -34,9 +35,9 @@ class LocationPresenter
         val intent = Intent().apply {
             action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
             data = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
         }
-        context!!.startActivityForResult(intent, PHONE_SETTINGS_REQUEST_CODE)
+
+        context!!.startActivityForResult(intent, APPLICATION_SETTINGS_REQUEST_CODE)
     }
 
     override fun onGoSettingNegativeClick() {
@@ -50,34 +51,9 @@ class LocationPresenter
     override fun getLastKnownGeolocation() {
         val task = interactor.getLastKnownAddress()
             .compose(schedulerManagerModule.singleTransformer())
-            .doOnSubscribe {
-                view?.showLoadingProgress()
-            }
-            .doAfterTerminate {
-                view?.hideLoadingProgress()
-            }
-            .subscribe(
-                { address: UserAddressType? ->
-                    if (address != null) {
-                        view?.showLocationDialog(address.locality)
-                    } else {
-                        //TODO
-                        if (BuildConfig.DEBUG) {
-                            view?.showError("${this::class.java.simpleName}.getLastKnownGeolocation - address == null")
-                        }
-                    }
-                },
-                { error: Throwable? ->
-                    if (error != null) {
-                        view?.showLocationDialog(null)
-                    } else {
-                        //TODO
-                        if (BuildConfig.DEBUG) {
-                            view?.showError("${this::class.java.simpleName}.getLastKnownGeolocation - error == null")
-                        }
-                    }
-                }
-            )
+            .doOnSubscribe { view?.showLoadingProgress() }
+            .doAfterTerminate { view?.hideLoadingProgress() }
+            .subscribe(::getLastKnownAddressOnSuccess, ::getLastKnownAddressOnError)
 
         compositeDisposable.add(task)
     }
@@ -94,6 +70,27 @@ class LocationPresenter
         showLocationError()
     }
 
+    private fun getLastKnownAddressOnSuccess(address: UserAddressType?) {
+        if (address != null) {
+            view?.showLocationDialog(address.locality)
+        } else {
+            onParameterIsNull(
+                view,
+                this::class.java.simpleName,
+                "getLastKnownGeolocation",
+                "address"
+            )
+        }
+    }
+
+    private fun getLastKnownAddressOnError(error: Throwable?) {
+        if (error != null) {
+            view?.showLocationDialog(null)
+        } else {
+            onParameterIsNull(view, this::class.java.simpleName, "getLastKnownGeolocation", "error")
+        }
+    }
+
     private fun showLocationError() {
         view?.showLongToast("Не удалось установить местоположение")
     }
@@ -101,79 +98,61 @@ class LocationPresenter
     private fun checkPermissions() {
         val task: Disposable = interactor.requestPermissions()
             .compose(schedulerManagerModule.observableTransformer())
-            .doOnSubscribe {
-                view?.showLoadingProgress()
-            }
-            .doAfterTerminate {
-                view?.hideLoadingProgress()
-            }
-            .subscribe(
-                { permission: Permission? ->
-                    if (permission != null) {
-                        onPermissionSuccess(permission)
-                    } else {
-                        //TODO
-                        if (BuildConfig.DEBUG) {
-                            view?.showError("${this::class.java.simpleName}.checkPermissions - permission == null")
-                        }
-                    }
-                },
-                { error: Throwable? ->
-                    if (error != null) {
-
-                    } else {
-                        //TODO
-                        if (BuildConfig.DEBUG) {
-                            view?.showError("${this::class.java.simpleName}.checkPermissions - permission == null")
-                        }
-                    }
-                }
-            )
+            .doOnSubscribe { view?.showLoadingProgress() }
+            .doAfterTerminate { view?.hideLoadingProgress() }
+            .subscribe(::requestPermissionsOnSuccess, ::requestPermissionsOnError)
 
         compositeDisposable.add(task)
     }
 
-    private fun onPermissionSuccess(permission: Permission) {
-        @Suppress("CascadeIf")
-        if (permission.granted) {
-            val task = interactor.getCurrentAddress()
-                .compose(schedulerManagerModule.singleTransformer())
-                .doOnSubscribe {
-                    view?.showLoadingProgress()
-                }
-                .doAfterTerminate {
-                    view?.hideLoadingProgress()
-                }
-                .subscribe(
-                    { address: UserAddressType? ->
-                        if (address != null) {
-                            view?.showLocationDialog(address.locality)
-                        } else {
-                            //TODO
-                            if (BuildConfig.DEBUG) {
-                                view?.showError("${this::class.java.simpleName}.checkPermissions - permission == null")
-                            }
-                        }
-                    },
-                    { error: Throwable? ->
-                        if (error != null) {
-                            view?.showLocationDialog(null)
-                        } else {
-                            //never will happen (maybe)
-                            if (BuildConfig.DEBUG) {
-                                view?.showError("${this::class.java.simpleName}.checkPermissions - permission == null")
-                            }
-                        }
-                    }
-                )
-
-            compositeDisposable.add(task)
-        } else if (permission.shouldShowRequestPermissionRationale) {
-            view?.showRationaleDialog()
+    private fun requestPermissionsOnSuccess(permission: Permission?) {
+        if (permission != null) {
+            onPermissionSuccess(permission)
         } else {
-            view?.showGoSettingsDialog()
+            onParameterIsNull(view, this::class.java.simpleName, "checkPermissions", "permission")
         }
     }
 
+    private fun requestPermissionsOnError(error: Throwable?) {
+        if (error != null) {
+            view?.showLocationDialog(null)
+        } else {
+            onParameterIsNull(view, this::class.java.simpleName, "checkPermissions", "error")
+        }
+    }
+
+    private fun onPermissionSuccess(permission: Permission) {
+        when {
+            permission.granted -> {
+                val task = interactor.getCurrentAddress()
+                    .compose(schedulerManagerModule.singleTransformer())
+                    .doOnSubscribe { view?.showLoadingProgress() }
+                    .doAfterTerminate { view?.hideLoadingProgress() }
+                    .subscribe(::getCurrentAddressOnSuccess, ::getCurrentAddressOnError)
+
+                compositeDisposable.add(task)
+            }
+
+            permission.shouldShowRequestPermissionRationale -> view?.showRationaleDialog()
+
+            else -> view?.showGoSettingsDialog()
+        }
+    }
+
+    private fun getCurrentAddressOnSuccess(address: UserAddressType?) {
+        if (address != null) {
+            view?.showLocationDialog(address.locality)
+        } else {
+            onParameterIsNull(view, this::class.java.simpleName, "getCurrentAddress", "address")
+        }
+    }
+
+    private fun getCurrentAddressOnError(error: Throwable?) {
+        if (error != null) {
+            view?.showLocationDialog(null)
+        } else {
+            onParameterIsNull(view, this::class.java.simpleName, "getCurrentAddress", "error")
+        }
+    }
 
 }

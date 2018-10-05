@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".presentation.main.MainActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/MyActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/MyToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Выбор API" />
+    </com.google.android.material.appbar.AppBarLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,18 +30,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/yw_B"
+            style="@style/MyMaterialButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:text="@string/yandex_weather"
+            android:visibility="gone"
             tools:ignore="UnusedIds" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/owm_B"
+            style="@style/MyMaterialButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_weight="1"
             android:text="@string/open_weather_map"
             android:visibility="visible"

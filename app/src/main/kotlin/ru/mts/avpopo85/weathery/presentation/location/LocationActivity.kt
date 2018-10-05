@@ -6,10 +6,7 @@ import android.widget.ProgressBar
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.android.synthetic.main.activity_location.*
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.noButton
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.yesButton
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.common.LocationModule
@@ -19,7 +16,6 @@ import ru.mts.avpopo85.weathery.presentation.main.MainActivity
 import javax.inject.Inject
 
 
-@Suppress("PrivatePropertyName")
 class LocationActivity : AbsBaseActivity(), LocationContract.View {
 
     @Inject
@@ -51,16 +47,14 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
     override fun showLocationDialog(city: String?) {
         //TODO
         if (city != null) {
-            alert(
+            showAlertDialog(
                 "Ваше текущее местоположение - $city?",
-                "Местоположение"
-            ) {
-                positiveButton("Да") {
-                    startActivity<MainActivity>()
-                    finish()
-                }
-                negativeButton("Нет") {}
-            }.show()
+                "Да",
+                "Нет",
+                { startActivity<MainActivity>(); finish() },
+                { },
+                "Найдено предполагаемое местоположение"
+            )
         } else {
             //TODO выключать gps
             showLongToast("Не удалось узнать местоположение")
@@ -76,37 +70,34 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PHONE_SETTINGS_REQUEST_CODE)
+        if (requestCode == APPLICATION_SETTINGS_REQUEST_CODE)
             if (resultCode == 0)
                 presenter.onActivityResult()
     }
 
     override fun showRationaleDialog() {
-        alert(
+        //TODO
+        showAlertDialog(
             "Для установки местоположения приложению необходимы права доступа к геопозиции. Предоставить?",
-            "Внимание"
-        ) {
-            yesButton {
-                presenter.onRationalePositiveClick()
-            }
-            noButton {
-                presenter.onRationaleNegativeClick()
-            }
-        }.show()
+            "Да",
+            "Нет",
+            { presenter.onRationalePositiveClick() },
+            { presenter.onRationaleNegativeClick() },
+            "Продолжение работы невозможно"
+        )
     }
 
     override fun showGoSettingsDialog() {
-        alert(
-            "Для установки местоположения необходимо перейти в настройки и включить разрешение доступа к геопозиции. Перейти?",
-            "Внимание"
-        ) {
-            yesButton {
-                presenter.onGoSettingsPositiveClick()
-            }
-            noButton {
-                presenter.onGoSettingNegativeClick()
-            }
-        }.show()
+        //TODO
+        showAlertDialog(
+            "Для установки местоположения необходимо перейти в настройки " +
+                    "и включить разрешение доступа к геопозиции. Перейти?",
+            "Да",
+            "Нет",
+            { presenter.onGoSettingsPositiveClick() },
+            { presenter.onGoSettingNegativeClick() },
+            "Продолжение работы невозможно"
+        )
     }
 
     private fun checkPlayServicesAvailable() {
