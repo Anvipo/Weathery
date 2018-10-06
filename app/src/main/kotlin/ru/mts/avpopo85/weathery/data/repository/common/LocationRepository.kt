@@ -36,13 +36,13 @@ class LocationRepository
         rxLocation
             .settings()
             .checkAndHandleResolution(locationRequest)
-            .flatMap(this::getAddress)
+            .flatMap(::getAddress)
 
     override fun getLastKnownAddress(): Single<UserAddressType> {
-        val locatoinManager =
+        val locationManager =
             context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-        val gpsIsEnabled = locatoinManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        val gpsIsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
         return dbService.getLocation(gpsIsEnabled)
     }
@@ -61,12 +61,8 @@ class LocationRepository
 
         return gpsCall
             .flatMap(::getAddressFromLocation)
-            .flatMap {
-                dbService.saveLocation(it)
-            }
-            .onErrorResumeNext {
-                dbService.getLocation(gpsIsEnabled)
-            }
+            .flatMap { dbService.saveLocation(it) }
+            .onErrorResumeNext { dbService.getLocation(gpsIsEnabled) }
     }
 
     private fun getAddressFromLocation(location: Location): Single<UserAddressType> =

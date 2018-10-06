@@ -34,8 +34,6 @@ class YWCurrentWeatherActivity :
             .plus(YWCurrentWeatherModule(this))
             .inject(this)
 
-        hideLayout()
-
         presenter.onBindView(this)
         presenter.loadCurrentWeather()
     }
@@ -45,7 +43,6 @@ class YWCurrentWeatherActivity :
         super.onDestroy()
     }
 
-    @SuppressLint("SetTextI18n")
     override fun showWeatherResponse(data: YWCurrentWeatherType) {
         showLayout()
 

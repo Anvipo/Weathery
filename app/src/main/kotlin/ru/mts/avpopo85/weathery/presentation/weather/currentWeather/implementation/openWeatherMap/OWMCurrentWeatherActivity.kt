@@ -35,8 +35,6 @@ class OWMCurrentWeatherActivity :
             .plus(OWMCurrentWeatherModule(this))
             .inject(this)
 
-        hideLayout()
-
         presenter.onBindView(this)
 
         presenter.loadCurrentWeather()

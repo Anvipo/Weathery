@@ -15,7 +15,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
-        versionName "0.37"
+        versionName "0.38"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -74,8 +74,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    androidTestImplementation "androidx.test:runner:1.1.0-beta01"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.0-beta01"
 
     def supportLibraryVersion = '1.0.0'
     implementation "androidx.vectordrawable:vectordrawable:$supportLibraryVersion"

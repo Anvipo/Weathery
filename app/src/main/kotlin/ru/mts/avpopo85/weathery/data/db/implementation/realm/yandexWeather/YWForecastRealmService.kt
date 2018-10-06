@@ -12,7 +12,6 @@ import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastResponseType
 import java.util.*
 
 class YWForecastRealmService : IForecastDbService<YWForecastListResponseType> {
-    //TODO починить как в owm
     override fun saveForecastResponse(forecastResponseList: YWForecastListResponseType): Single<YWForecastListResponseType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
@@ -20,9 +19,7 @@ class YWForecastRealmService : IForecastDbService<YWForecastListResponseType> {
 
                 val nowInMillis = Date().time
 
-                forecastResponseList.map {
-                    it.saveUnixTime = nowInMillis
-                }
+                forecastResponseList.map { it.saveUnixTime = nowInMillis }
 
                 realmInstance.executeTransaction {
                     proxyData = realmInstance.copyToRealmOrUpdate(forecastResponseList)

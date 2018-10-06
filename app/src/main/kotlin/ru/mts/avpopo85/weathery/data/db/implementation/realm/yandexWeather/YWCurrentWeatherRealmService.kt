@@ -12,7 +12,6 @@ import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 const val YW_DEFAULT_CACHE_LIFETIME: Long = 7_200_000 //= 2 hours
 
 class YWCurrentWeatherRealmService : ICurrentWeatherDbService<YWCurrentWeatherResponseType> {
-    //TODO починить как в owm
     override fun saveCurrentWeatherResponse(currentWeatherResponse: YWCurrentWeatherResponseType): Single<YWCurrentWeatherResponseType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
