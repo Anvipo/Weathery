@@ -54,7 +54,8 @@ class AppModule(private val context: Context) {
         apiService,
         networkManager,
         currentWeatherDbService,
-        locationDbService
+        locationDbService,
+        context
     )
 
     @Provides
@@ -68,7 +69,8 @@ class AppModule(private val context: Context) {
         apiService,
         networkManager,
         currentWeatherDbService,
-        locationDbService
+        locationDbService,
+        context
     )
 
     @Provides
@@ -82,7 +84,8 @@ class AppModule(private val context: Context) {
         apiService,
         networkManager,
         forecastDbService,
-        locationDbService
+        locationDbService,
+        context
     )
 
     @Provides
@@ -96,7 +99,8 @@ class AppModule(private val context: Context) {
         apiService,
         networkManager,
         forecastDbService,
-        locationDbService
+        locationDbService,
+        context
     )
 
     @Provides

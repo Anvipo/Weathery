@@ -1,6 +1,8 @@
 package ru.mts.avpopo85.weathery.data.repository.yandexWeather
 
+import android.content.Context
 import io.reactivex.Single
+import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
@@ -18,7 +20,8 @@ class YWForecastRepository
     private val apiService: IYWForecastApiService,
     private val networkManager: NetworkManager,
     private val forecastDbService: IForecastDbService<YWForecastListResponseType>,
-    private val locationDbService: ILocationDbService<UserAddressType>
+    private val locationDbService: ILocationDbService<UserAddressType>,
+    private val context: Context
 ) : IForecastRepository<YWForecastListResponseType> {
 
     override fun getForecast(): Single<YWForecastListResponseType> {
@@ -66,8 +69,7 @@ class YWForecastRepository
     private fun getCurrentAddress(): UserAddressType? = try {
         locationDbService.getLocation().blockingGet()
     } catch (exception: Exception) {
-        //TODO
-        throw Throwable("DB has no location data\n${exception.localizedMessage}")
+        throw Throwable("${context.getString(R.string.db_has_no_location_data)}\n${exception.localizedMessage}")
     }
 
 }

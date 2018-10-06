@@ -1,15 +1,18 @@
 package ru.mts.avpopo85.weathery.data.db.implementation.realm.openWeatherMap
 
+import android.content.Context
 import io.reactivex.Single
 import io.realm.Realm
 import io.realm.kotlin.where
+import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.util.onDataIsNull
 import ru.mts.avpopo85.weathery.data.db.util.onProxyDataIsNull
 import ru.mts.avpopo85.weathery.data.utils.isFresh
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 
-class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeatherResponseType> {
+class OWMCurrentWeatherRealmService(private val context: Context) :
+    ICurrentWeatherDbService<OWMCurrentWeatherResponseType> {
 
     override fun saveCurrentWeatherResponse(currentWeatherResponse: OWMCurrentWeatherResponseType):
             Single<OWMCurrentWeatherResponseType> =
@@ -46,8 +49,7 @@ class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeather
             }
         }
 
-    override fun getCurrentWeatherResponse(isConnectedToInternet: Boolean):
-            Single<OWMCurrentWeatherResponseType> =
+    override fun getCurrentWeatherResponse(isConnectedToInternet: Boolean): Single<OWMCurrentWeatherResponseType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
                 val proxyData =
@@ -65,8 +67,11 @@ class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeather
                         if (data.isFresh || data.isNotFresh && !isConnectedToInternet) {
                             emitter.onSuccess(data)
                         } else if (isConnectedToInternet) {
-                            //TODO
-                            emitter.onError(Throwable("В БД устаревшие данные. Получите данные с сервера"))
+                            val part1 = context.getString(R.string.db_has_outdated_data)
+
+                            val part2 = context.getString(R.string.get_data_from_server)
+
+                            emitter.onError(Throwable("$part1. $part2"))
                         }
                     } else {
                         onDataIsNull(
@@ -76,11 +81,17 @@ class OWMCurrentWeatherRealmService : ICurrentWeatherDbService<OWMCurrentWeather
                         )
                     }
                 } else if (!isConnectedToInternet) {
-                    //TODO
-                    emitter.onError(Throwable("Вы не подключены к интернету и в БД ничего нет"))
+                    val part1 = context.getString(R.string.db_has_nothing)
+
+                    val part2 = context.getString(R.string.you_have_no_internet_connection)
+
+                    emitter.onError(Throwable("$part1. $part2"))
                 } else if (isConnectedToInternet) {
-                    //TODO
-                    emitter.onError(Throwable("В БД ничего нет. Получите данные с сервера"))
+                    val part1 = context.getString(R.string.db_has_nothing)
+
+                    val part2 = context.getString(R.string.get_data_from_server)
+
+                    emitter.onError(Throwable("$part1. $part2"))
                 } else if (!dataExistsInDB) {
                     onProxyDataIsNull(
                         emitter,

@@ -43,6 +43,7 @@ class YWCurrentWeatherActivity :
         super.onDestroy()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun showWeatherResponse(data: YWCurrentWeatherType) {
         showLayout()
 

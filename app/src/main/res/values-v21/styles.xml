@@ -6,7 +6,7 @@
     </style>
 
     <style name="statusBarStyle" parent="@android:style/Theme.DeviceDefault.Light">
-        <item name="android:statusBarColor">@color/textIconsColor</item>
+        <!--<item name="android:statusBarColor">@color/textIconsColor</item>-->
     </style>
 
 </resources>

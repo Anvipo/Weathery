@@ -215,4 +215,20 @@
         Application need to know your gelocation. Which geolocation do you want to use?</string>
     <string name="last_known">Last known</string>
     <string name="current_by_gps">Current by GPS</string>
+    <string name="db_has_nothing">DB has nothing</string>
+    <string name="get_geolocation_by_gps">Get geolocation by GPS</string>
+    <string name="you_dont_turn_on_gps">you do not turn on GPS</string>
+    <string name="db_has_no_your_location_name">DB has no your location name</string>
+    <string name="db_has_outdated_data">DB has outdated data</string>
+    <string name="get_data_from_server">Get data from server</string>
+    <string name="you_have_no_internet_connection">You have no internet connection</string>
+    <string name="db_has_no_location_data">DB has no your location data</string>
+    <string name="is_your_current_geolocation">Is your current geolocation</string>
+    <string name="found_intended_location">Found intended location</string>
+    <string name="could_not_find_your_geolocation">Could not find your geolocation</string>
+    <string name="application_needs_permissions_to_geolocation">To find out your current geolocation, application needs permissions to geolocation</string>
+    <string name="go_to_applications_settings_and_provide_permissions_to_geolocation">To find out your current geolocation, you must go to application\'s settings and provide permissions to geolocation</string>
+    <string name="provide">Provide</string>
+    <string name="impossible_to_continue">Impossible to continue</string>
+    <string name="go_to">Go to</string>
 </resources>

@@ -1,14 +1,16 @@
 package ru.mts.avpopo85.weathery.data.db.implementation.realm.location
 
+import android.content.Context
 import io.reactivex.Single
 import io.realm.Realm
 import io.realm.kotlin.where
+import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.db.util.onDataIsNull
 import ru.mts.avpopo85.weathery.data.db.util.onProxyDataIsNull
 import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 
-class LocationRealmService : ILocationDbService<UserAddressType> {
+class LocationRealmService(private val context: Context) : ILocationDbService<UserAddressType> {
 
     override fun saveLocation(address: UserAddressType):
             Single<UserAddressType> =
@@ -51,7 +53,7 @@ class LocationRealmService : ILocationDbService<UserAddressType> {
                     val data: UserAddressType? = realmInstance.copyFromRealm(proxyData!!)
 
                     if (data != null) {
-                        //TODO проверять данные на устаревание
+                        //TODO наверно нужно проверять данные на устаревание
                         emitter.onSuccess(data)
                     } else {
                         onDataIsNull(
@@ -61,11 +63,15 @@ class LocationRealmService : ILocationDbService<UserAddressType> {
                         )
                     }
                 } else if (!gpsIsEnabled) {
-                    //TODO
-                    emitter.onError(Throwable("Вы не включили геолокацию и в БД ничего нет"))
+                    val part1 = context.getString(R.string.db_has_nothing)
+                    val part2 = context.getString(R.string.you_dont_turn_on_gps)
+
+                    emitter.onError(Throwable("$part1, $part2"))
                 } else if (gpsIsEnabled) {
-                    //TODO
-                    emitter.onError(Throwable("В БД ничего нет. Получите данные с датчика"))
+                    val part1 = context.getString(R.string.db_has_nothing)
+                    val part2 = context.getString(R.string.get_geolocation_by_gps)
+
+                    emitter.onError(Throwable("$part1. $part2"))
                 } else if (!dataExistsInDB) {
                     onProxyDataIsNull(
                         emitter,
@@ -96,13 +102,10 @@ class LocationRealmService : ILocationDbService<UserAddressType> {
                         if (cityName != null) {
                             emitter.onSuccess(cityName)
                         } else {
-                            //TODO
-                            emitter.onError(
-                                Throwable(
-                                    "В БД отсутствует название города. " +
-                                            "Необходимо получить вашу текущую геопозицию"
-                                )
-                            )
+                            val part1 = context.getString(R.string.db_has_no_your_location_name)
+                            val part2 = context.getString(R.string.get_geolocation_by_gps)
+
+                            emitter.onError(Throwable("$part1. $part2"))
                         }
                     } else {
                         onDataIsNull(
@@ -111,22 +114,11 @@ class LocationRealmService : ILocationDbService<UserAddressType> {
                             this::class.java.simpleName
                         )
                     }
-                } /*else if (!isConnectedToInternet) {
-                    emitter.onError(Throwable("Вы не подключены к интернету и в БД ничего нет"))
-                } else if (isConnectedToInternet) {
-                    emitter.onError(Throwable("В БД ничего нет. Получите данные с сервера"))
-                } */ else if (!dataExistsInDB) {
-                    emitter.onError(
-                        Throwable(
-                            "В БД ничего нет. " +
-                                    "Необходимо получить вашу текущую геопозицию"
-                        )
-                    )
-                    /*onProxyDataIsNull(
-                        emitter,
-                        "getCurrentWeatherResponse",
-                        this::class.java.simpleName
-                    )*/
+                } else if (!dataExistsInDB) {
+                    val part1 = context.getString(R.string.db_has_nothing)
+                    val part2 = context.getString(R.string.get_geolocation_by_gps)
+
+                    emitter.onError(Throwable("$part1. $part2"))
                 }
             }
         }

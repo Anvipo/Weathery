@@ -63,7 +63,7 @@ class OWMForecastFragment : Fragment() {
                 windDirectionValueOWMFTV?.text = direction
             }
             it.main.let { (temperature, atmosphericPressureOnTheGroundLevelInhPa, atmosphericPressureOnTheSeaLevelInhPa, humidity) ->
-                //TODO конверция в другие измерения
+                //TODO конвертация в другие измерения
                 atmosphericPressureOnTheGroundLevelInhPaValueOWMFTV?.text =
                         "$atmosphericPressureOnTheGroundLevelInhPa ${getString(R.string.hPa)}"
                 atmosphericPressureOnTheSeaLevelInhPaValueOWMFTV?.text =

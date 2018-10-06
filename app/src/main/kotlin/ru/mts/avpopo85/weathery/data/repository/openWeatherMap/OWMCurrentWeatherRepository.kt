@@ -1,6 +1,8 @@
 package ru.mts.avpopo85.weathery.data.repository.openWeatherMap
 
+import android.content.Context
 import io.reactivex.Single
+import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
@@ -16,7 +18,8 @@ class OWMCurrentWeatherRepository
     private val apiService: IOWMCurrentWeatherApiService,
     private val networkManager: NetworkManager,
     private val currentWeatherDbService: ICurrentWeatherDbService<OWMCurrentWeatherResponseType>,
-    private val locationDbService: ILocationDbService<UserAddressType>
+    private val locationDbService: ILocationDbService<UserAddressType>,
+    private val context: Context
 ) : ICurrentWeatherRepository<OWMCurrentWeatherResponseType> {
 
     override fun getCurrentWeather(): Single<OWMCurrentWeatherResponseType> {
@@ -80,8 +83,7 @@ class OWMCurrentWeatherRepository
     private fun getCurrentAddress(): UserAddressType? = try {
         locationDbService.getLocation().blockingGet()
     } catch (exception: Exception) {
-        //TODO
-        throw Throwable("DB has no location data\n${exception.localizedMessage}")
+        throw Throwable("${context.getString(R.string.db_has_no_location_data)}\n${exception.localizedMessage}")
     }
 
 }

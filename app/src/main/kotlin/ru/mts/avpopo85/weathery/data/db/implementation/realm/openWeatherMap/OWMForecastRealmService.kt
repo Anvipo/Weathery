@@ -1,8 +1,10 @@
 package ru.mts.avpopo85.weathery.data.db.implementation.realm.openWeatherMap
 
+import android.content.Context
 import io.reactivex.Single
 import io.realm.Realm
 import io.realm.kotlin.where
+import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.util.onDataIsNull
 import ru.mts.avpopo85.weathery.data.db.util.onProxyDataIsNull
@@ -11,7 +13,7 @@ import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
 import java.util.*
 
-class OWMForecastRealmService : IForecastDbService<OWMForecastListResponseType> {
+class OWMForecastRealmService(private val context: Context) : IForecastDbService<OWMForecastListResponseType> {
 
     override fun saveForecastResponse(forecastResponseList: OWMForecastListResponseType): Single<OWMForecastListResponseType> =
         Single.create { emitter ->
@@ -71,8 +73,11 @@ class OWMForecastRealmService : IForecastDbService<OWMForecastListResponseType> 
                         if (data.isFresh || data.isNotFresh && !isConnectedToInternet) {
                             emitter.onSuccess(data)
                         } else if (isConnectedToInternet) {
-                            //TODO
-                            emitter.onError(Throwable("В БД устаревшие данные. Получите данные с сервера"))
+                            val part1 = context.getString(R.string.db_has_outdated_data)
+
+                            val part2 = context.getString(R.string.get_data_from_server)
+
+                            emitter.onError(Throwable("$part1. $part2"))
                         }
                     } else {
                         onDataIsNull(
@@ -82,11 +87,17 @@ class OWMForecastRealmService : IForecastDbService<OWMForecastListResponseType> 
                         )
                     }
                 } else if (!isConnectedToInternet) {
-                    //TODO
-                    emitter.onError(Throwable("Вы не подключены к интернету и в БД ничего нет"))
+                    val part1 = context.getString(R.string.db_has_nothing)
+
+                    val part2 = context.getString(R.string.you_have_no_internet_connection)
+
+                    emitter.onError(Throwable("$part1. $part2"))
                 } else if (isConnectedToInternet) {
-                    //TODO
-                    emitter.onError(Throwable("В БД ничего нет. Получите данные с сервера"))
+                    val part1 = context.getString(R.string.db_has_nothing)
+
+                    val part2 = context.getString(R.string.get_data_from_server)
+
+                    emitter.onError(Throwable("$part1. $part2"))
                 } else if (!dataExistsInDB) {
                     onProxyDataIsNull(
                         emitter,

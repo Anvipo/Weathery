@@ -217,4 +217,20 @@
         Для работы приложения необходимо узнать Ваше местоположение. Какое местоположение Вы хотите использовать?</string>
     <string name="last_known">Последнее известное</string>
     <string name="current_by_gps">Текущее, узнав с помощью GPS</string>
+    <string name="db_has_nothing">В БД ничего нет</string>
+    <string name="get_geolocation_by_gps">Получите геопозицию с датчика</string>
+    <string name="you_dont_turn_on_gps">Вы не включили GPS</string>
+    <string name="db_has_no_your_location_name">В БД отсутствует название места, где вы находитесь</string>
+    <string name="db_has_outdated_data">В БД устаревшие данные</string>
+    <string name="get_data_from_server">Получите данные с сервера</string>
+    <string name="you_have_no_internet_connection">Вы не подключены к интернету</string>
+    <string name="db_has_no_location_data">В БД нет вашей геолокации</string>
+    <string name="is_your_current_geolocation">Ваше текущее местоположение</string>
+    <string name="found_intended_location">Найдено предполагаемое местоположение</string>
+    <string name="could_not_find_your_geolocation">Не удалось узнать Ваше местоположение</string>
+    <string name="application_needs_permissions_to_geolocation">Для установки местоположения приложению необходимы права доступа к геопозиции</string>
+    <string name="go_to_applications_settings_and_provide_permissions_to_geolocation">Для установки Вашего местоположения, необходимо перейти в настройки приложения и включить разрешение доступа к геопозиции</string>
+    <string name="provide">Предоставить</string>
+    <string name="impossible_to_continue">Продолжение работы невозможно</string>
+    <string name="go_to">Перейти</string>
 </resources>

@@ -45,19 +45,18 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
     }
 
     override fun showLocationDialog(city: String?) {
-        //TODO
         if (city != null) {
             showAlertDialog(
-                "Ваше текущее местоположение - $city?",
-                "Да",
-                "Нет",
+                "${getString(R.string.is_your_current_geolocation)} - $city?",
+                getString(R.string.yes),
+                getString(R.string.no),
                 { startActivity<MainActivity>(); finish() },
                 { },
-                "Найдено предполагаемое местоположение"
+                getString(R.string.found_intended_location)
             )
         } else {
             //TODO выключать gps
-            showLongToast("Не удалось узнать местоположение")
+            showLongToast(getString(R.string.could_not_find_your_geolocation))
         }
     }
 
@@ -76,27 +75,36 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
     }
 
     override fun showRationaleDialog() {
-        //TODO
+        val part1 = getString(
+            R.string.application_needs_permissions_to_geolocation
+        )
+
+        val part2 = getString(R.string.provide)
+
         showAlertDialog(
-            "Для установки местоположения приложению необходимы права доступа к геопозиции. Предоставить?",
-            "Да",
-            "Нет",
+            "$part1. $part2?",
+            getString(R.string.yes),
+            getString(R.string.no),
             { presenter.onRationalePositiveClick() },
             { presenter.onRationaleNegativeClick() },
-            "Продолжение работы невозможно"
+            getString(R.string.impossible_to_continue)
         )
     }
 
     override fun showGoSettingsDialog() {
-        //TODO
+        val part1 = getString(
+            R.string.go_to_applications_settings_and_provide_permissions_to_geolocation
+        )
+
+        val part2 = getString(R.string.go_to)
+
         showAlertDialog(
-            "Для установки местоположения необходимо перейти в настройки " +
-                    "и включить разрешение доступа к геопозиции. Перейти?",
-            "Да",
-            "Нет",
+            "$part1. $part2?",
+            getString(R.string.yes),
+            getString(R.string.no),
             { presenter.onGoSettingsPositiveClick() },
             { presenter.onGoSettingNegativeClick() },
-            "Продолжение работы невозможно"
+            getString(R.string.impossible_to_continue)
         )
     }
 
