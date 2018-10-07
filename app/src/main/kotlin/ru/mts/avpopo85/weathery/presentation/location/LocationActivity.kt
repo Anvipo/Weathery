@@ -44,20 +44,18 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
         }
     }
 
-    override fun showLocationDialog(city: String?) {
-        if (city != null) {
-            showAlertDialog(
-                "${getString(R.string.is_your_current_geolocation)} - $city?",
-                getString(R.string.yes),
-                getString(R.string.no),
-                { startActivity<MainActivity>(); finish() },
-                { },
-                getString(R.string.found_intended_location)
-            )
-        } else {
-            //TODO выключать gps
-            showLongToast(getString(R.string.could_not_find_your_geolocation))
-        }
+    override fun showLocationDialog(city: String) {
+        showAlertDialog(
+            "${getString(R.string.is_your_current_geolocation)} - $city?",
+            getString(R.string.yes),
+            getString(R.string.no),
+            { startActivity<MainActivity>(); finish() },
+            title = getString(R.string.found_intended_location)
+        )
+    }
+
+    override fun showLocationError() {
+        showLongToast(getString(R.string.could_not_find_your_geolocation))
     }
 
     override fun onResume() {
@@ -106,6 +104,14 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
             { presenter.onGoSettingNegativeClick() },
             getString(R.string.impossible_to_continue)
         )
+    }
+
+    override fun enableGetLastKnownLocationButton() {
+        get_last_known_location_LA_B.isEnabled = true
+    }
+
+    override fun disableGetLastKnownLocationButton() {
+        get_last_known_location_LA_B.isEnabled = false
     }
 
     private fun checkPlayServicesAvailable() {

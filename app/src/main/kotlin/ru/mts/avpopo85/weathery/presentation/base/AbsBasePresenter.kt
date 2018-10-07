@@ -14,10 +14,9 @@ abstract class AbsBasePresenter<V : BaseContract.View> : BaseContract.Presenter<
     }
 
     override fun onUnbindView() {
-        this.view = null
-
         compositeDisposable.clear()
 
+        this.view = null
     }
 
 }

@@ -2,8 +2,8 @@ package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementat
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.LinearLayout
 import android.widget.ProgressBar
+import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.activity_owm_current_weather.*
 import kotlinx.android.synthetic.main.item_owm_current_weather.*
 import org.jetbrains.anko.longToast
@@ -17,7 +17,7 @@ import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
 import javax.inject.Inject
 
 class OWMCurrentWeatherActivity :
-    AbsCurrentWeatherActivity<LinearLayout>(),
+    AbsCurrentWeatherActivity<MaterialCardView>(),
     CurrentWeatherContract.View<OWMCurrentWeatherType> {
 
     @Inject
@@ -25,7 +25,7 @@ class OWMCurrentWeatherActivity :
 
     override val progressBar: ProgressBar by lazy { owm_current_weather_PB }
 
-    override val view: LinearLayout by lazy { item_owm_current_weather }
+    override val view: MaterialCardView by lazy { item_owm_current_weather }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

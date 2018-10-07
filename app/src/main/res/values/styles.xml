@@ -24,7 +24,7 @@
 
     <style name="MyActionBar" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-    <style name="MyPopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+    <!--<style name="MyPopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />-->
 
     <style name="MyToolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
@@ -46,12 +46,12 @@
         <item name="android:visibility">gone</item>
     </style>
 
-    <style name="MyColoredTabLayout" parent="Widget.MaterialComponents.TabLayout.Colored" >
+    <!--<style name="MyColoredTabLayout" parent="Widget.MaterialComponents.TabLayout.Colored" >-->
         <!--<item name="tabRippleColor">@color/dividerColor</item>-->
         <!--<item name="tabIndicatorColor">@color/dividerColor</item>-->
         <!--<item name="tabSelectedTextColor">@color/dividerColor</item>-->
         <!--<item name="tabTextColor">@color/dividerColor</item>-->
-    </style>
+    <!--</style>-->
 
     <style name="MyMaterialHeadline5" parent="TextAppearance.MaterialComponents.Headline5">
         <!--<item name="textAllCaps">true</item>-->
@@ -74,20 +74,20 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="MyMaterialBody2" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="android:textColor">@color/secondaryTextColor</item>
-        <item name="android:gravity">center</item>
-    </style>
+    <!--<style name="MyMaterialBody2" parent="TextAppearance.MaterialComponents.Body2">-->
+        <!--<item name="android:textColor">@color/secondaryTextColor</item>-->
+        <!--<item name="android:gravity">center</item>-->
+    <!--</style>-->
 
     <style name="MyMaterialBody1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="MyMaterialOutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:layout_gravity">center</item>
-        <item name="cornerRadius">8dp</item>
-    </style>
+    <!--<style name="MyMaterialOutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">-->
+        <!--<item name="android:layout_gravity">center</item>-->
+        <!--<item name="cornerRadius">8dp</item>-->
+    <!--</style>-->
 
     <style name="MyMaterialButton" parent="Widget.MaterialComponents.Button">
         <item name="android:layout_gravity">center</item>

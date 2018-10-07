@@ -219,7 +219,7 @@
     <string name="current_by_gps">Текущее, узнав с помощью GPS</string>
     <string name="db_has_nothing">В БД ничего нет</string>
     <string name="get_geolocation_by_gps">Получите геопозицию с датчика</string>
-    <string name="you_dont_turn_on_gps">Вы не включили GPS</string>
+    <string name="you_didnt_turn_on_gps">Вы не включили GPS</string>
     <string name="db_has_no_your_location_name">В БД отсутствует название места, где вы находитесь</string>
     <string name="db_has_outdated_data">В БД устаревшие данные</string>
     <string name="get_data_from_server">Получите данные с сервера</string>
@@ -233,4 +233,10 @@
     <string name="provide">Предоставить</string>
     <string name="impossible_to_continue">Продолжение работы невозможно</string>
     <string name="go_to">Перейти</string>
+    <string name="find_out_your_current_location_in_one_of_the_suggested_ways">Узнайте Ваше текущее местоположение одним из предложенных способов</string>
+    <string name="your_previous_location_is_unknown">Ваше предыдущее местоположение неизвестно</string>
+    <string name="for_example_by_gps">например, с помощью GPS</string>
+    <string name="you_must_enable_it">Вы должны включить его</string>
+    <string name="there_is_something_wrong_with_your_gps_adapter">С Вашим GPS адаптером что-то не так</string>
+    <string name="try_restarting_the_device">Попробуйте перезапустить устройство</string>
 </resources>

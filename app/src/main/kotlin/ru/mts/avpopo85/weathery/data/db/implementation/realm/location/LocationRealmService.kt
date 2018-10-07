@@ -9,6 +9,7 @@ import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.db.util.onDataIsNull
 import ru.mts.avpopo85.weathery.data.db.util.onProxyDataIsNull
 import ru.mts.avpopo85.weathery.data.utils.UserAddressType
+import ru.mts.avpopo85.weathery.utils.common.MyRealmException.*
 
 class LocationRealmService(private val context: Context) : ILocationDbService<UserAddressType> {
 
@@ -63,15 +64,19 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                         )
                     }
                 } else if (!gpsIsEnabled) {
-                    val part1 = context.getString(R.string.db_has_nothing)
-                    val part2 = context.getString(R.string.you_dont_turn_on_gps)
+                    val part1 = context.getString(R.string.your_previous_location_is_unknown)
+                    val part2 =
+                        context.getString(R.string.find_out_your_current_location_in_one_of_the_suggested_ways)
+                    val part3 = context.getString(R.string.for_example_by_gps)
+                    val part4 = context.getString(R.string.you_must_enable_it)
 
-                    emitter.onError(Throwable("$part1, $part2"))
+                    emitter.onError(DBHasNothingAndGPSOffException("$part1. $part2, $part3. ($part4)"))
                 } else if (gpsIsEnabled) {
-                    val part1 = context.getString(R.string.db_has_nothing)
-                    val part2 = context.getString(R.string.get_geolocation_by_gps)
-
-                    emitter.onError(Throwable("$part1. $part2"))
+                    val part1 = context.getString(R.string.your_previous_location_is_unknown)
+                    val part2 =
+                        context.getString(R.string.find_out_your_current_location_in_one_of_the_suggested_ways)
+                    val part3 = context.getString(R.string.for_example_by_gps)
+                    emitter.onError(DBHasNothingAndGPSOffException("$part1. $part2, $part3"))
                 } else if (!dataExistsInDB) {
                     onProxyDataIsNull(
                         emitter,
@@ -105,7 +110,7 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                             val part1 = context.getString(R.string.db_has_no_your_location_name)
                             val part2 = context.getString(R.string.get_geolocation_by_gps)
 
-                            emitter.onError(Throwable("$part1. $part2"))
+                            emitter.onError(DBHasNoFieldAndGetGeolocationException("$part1. $part2"))
                         }
                     } else {
                         onDataIsNull(
@@ -118,7 +123,7 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                     val part1 = context.getString(R.string.db_has_nothing)
                     val part2 = context.getString(R.string.get_geolocation_by_gps)
 
-                    emitter.onError(Throwable("$part1. $part2"))
+                    emitter.onError(DBHasNothingAndGetGeolocationException("$part1. $part2"))
                 }
             }
         }

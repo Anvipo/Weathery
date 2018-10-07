@@ -217,7 +217,7 @@
     <string name="current_by_gps">Current by GPS</string>
     <string name="db_has_nothing">DB has nothing</string>
     <string name="get_geolocation_by_gps">Get geolocation by GPS</string>
-    <string name="you_dont_turn_on_gps">you do not turn on GPS</string>
+    <string name="you_didnt_turn_on_gps">you did not turn on GPS</string>
     <string name="db_has_no_your_location_name">DB has no your location name</string>
     <string name="db_has_outdated_data">DB has outdated data</string>
     <string name="get_data_from_server">Get data from server</string>
@@ -231,4 +231,10 @@
     <string name="provide">Provide</string>
     <string name="impossible_to_continue">Impossible to continue</string>
     <string name="go_to">Go to</string>
+    <string name="find_out_your_current_location_in_one_of_the_suggested_ways">Find out your current location in one of the suggested ways</string>
+    <string name="your_previous_location_is_unknown">Your previous location is unknown</string>
+    <string name="for_example_by_gps">for example, by GPS</string>
+    <string name="you_must_enable_it">you must enable it</string>
+    <string name="there_is_something_wrong_with_your_gps_adapter">There is something wrong with your GPS adapter</string>
+    <string name="try_restarting_the_device">Попробуйте перезапустить устройство</string>
 </resources>

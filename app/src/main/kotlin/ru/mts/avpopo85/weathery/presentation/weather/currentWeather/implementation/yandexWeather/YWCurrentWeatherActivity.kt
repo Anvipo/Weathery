@@ -2,8 +2,8 @@ package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementat
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.LinearLayout
 import android.widget.ProgressBar
+import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.activity_yw_current_weather.*
 import kotlinx.android.synthetic.main.item_yw_current_weather.*
 import ru.mts.avpopo85.weathery.R
@@ -16,7 +16,7 @@ import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 import javax.inject.Inject
 
 class YWCurrentWeatherActivity :
-    AbsCurrentWeatherActivity<LinearLayout>(),
+    AbsCurrentWeatherActivity<MaterialCardView>(),
     CurrentWeatherContract.View<YWCurrentWeatherType> {
 
     @Inject
@@ -24,7 +24,7 @@ class YWCurrentWeatherActivity :
 
     override val progressBar: ProgressBar by lazy { yw_current_weather_PB }
 
-    override val view: LinearLayout by lazy { item_yw_current_weather }
+    override val view: MaterialCardView by lazy { item_yw_current_weather }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

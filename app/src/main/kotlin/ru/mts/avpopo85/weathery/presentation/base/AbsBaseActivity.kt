@@ -1,5 +1,6 @@
 package ru.mts.avpopo85.weathery.presentation.base
 
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
@@ -37,8 +38,17 @@ abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.Vie
         progressBar.visibility = View.GONE
     }
 
+    override fun isLoadingProgressShown(): Boolean = progressBar.isShown
+
     override fun showError(throwable: Throwable) {
-        longToast(throwable.message ?: "")
+        throwable.printStackTrace()
+
+        val message =
+            throwable.localizedMessage ?: throwable.message ?: getString(R.string.unknown_error)
+
+        sendErrorLog(message)
+
+        longToast(message)
     }
 
     override fun showError(message: String) {
@@ -53,10 +63,12 @@ abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.Vie
         longToast(message)
     }
 
-    override fun showIndefiniteSnackbar(message: String, view: View) {
-        Snackbar
-            .make(view, message, Snackbar.LENGTH_INDEFINITE)
-            .apply { show() }
+    override fun showIndefiniteSnackbar(message: String?, view: View?) {
+        if (message != null && view != null) {
+            Snackbar
+                .make(view, message, Snackbar.LENGTH_INDEFINITE)
+                .apply { show() }
+        }
     }
 
     override fun showAlertDialog(
@@ -78,4 +90,13 @@ abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.Vie
             setPositiveButton(positiveButtonText) { _, _ -> onClickedPositiveButton() }
         }.create().show()
     }
+
+    override fun sendErrorLog(message: String, tag: String?) {
+        if (tag != null) {
+            Log.e(tag, message)
+        } else {
+            Log.e("APP", message)
+        }
+    }
+
 }

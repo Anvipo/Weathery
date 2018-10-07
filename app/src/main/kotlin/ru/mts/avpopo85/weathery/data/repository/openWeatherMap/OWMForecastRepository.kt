@@ -61,7 +61,9 @@ class OWMForecastRepository
 
                 else -> Single.error(Throwable("Текущее местоположение неизвестно"))
             }
-        } else Single.error(Throwable("Текущее местоположение неизвестно"))
+        } else {
+            Single.error(Throwable("Текущее местоположение неизвестно"))
+        }
     }
 
     private fun GeographicCoordinates?.areNotNull(): Boolean =

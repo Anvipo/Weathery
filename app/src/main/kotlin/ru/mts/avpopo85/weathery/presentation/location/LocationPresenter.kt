@@ -12,6 +12,7 @@ import ru.mts.avpopo85.weathery.domain.interactor.base.ILocationInteractor
 import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
 import ru.mts.avpopo85.weathery.presentation.utils.onParameterIsNull
+import ru.mts.avpopo85.weathery.utils.common.MyRealmException
 import javax.inject.Inject
 
 const val APPLICATION_SETTINGS_REQUEST_CODE = 9000
@@ -41,7 +42,7 @@ class LocationPresenter
     }
 
     override fun onGoSettingNegativeClick() {
-        showLocationError()
+        view?.showLocationError()
     }
 
     override fun getCurrentGeolocation() {
@@ -67,12 +68,16 @@ class LocationPresenter
     }
 
     override fun onRationaleNegativeClick() {
-        showLocationError()
+        view?.showLocationError()
     }
 
     private fun getLastKnownAddressOnSuccess(address: UserAddressType?) {
         if (address != null) {
-            view?.showLocationDialog(address.locality)
+            if (address.locality != null) {
+                view?.showLocationDialog(address.locality!!)
+            } else {
+                view?.showLocationError()
+            }
         } else {
             onParameterIsNull(
                 view,
@@ -85,21 +90,28 @@ class LocationPresenter
 
     private fun getLastKnownAddressOnError(error: Throwable?) {
         if (error != null) {
-            view?.showLocationDialog(null)
+            if (error is MyRealmException.DBHasNothingAndGPSOnException ||
+                error is MyRealmException.DBHasNothingAndGPSOffException
+            ) {
+                view?.disableGetLastKnownLocationButton()
+                view?.showError(error)
+            } else {
+                view?.showLocationError()
+            }
         } else {
-            onParameterIsNull(view, this::class.java.simpleName, "getLastKnownGeolocation", "error")
+            onParameterIsNull(
+                view,
+                this::class.java.simpleName,
+                "getLastKnownGeolocation",
+                "error"
+            )
         }
-    }
-
-    private fun showLocationError() {
-        view?.showLongToast("Не удалось установить местоположение")
     }
 
     private fun checkPermissions() {
         val task: Disposable = interactor.requestPermissions()
             .compose(schedulerManagerModule.observableTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
-            .doAfterTerminate { view?.hideLoadingProgress() }
             .subscribe(::requestPermissionsOnSuccess, ::requestPermissionsOnError)
 
         compositeDisposable.add(task)
@@ -109,15 +121,29 @@ class LocationPresenter
         if (permission != null) {
             onPermissionSuccess(permission)
         } else {
-            onParameterIsNull(view, this::class.java.simpleName, "checkPermissions", "permission")
+            view?.hideLoadingProgress()
+
+            onParameterIsNull(
+                view,
+                this::class.java.simpleName,
+                "checkPermissions",
+                "permission"
+            )
         }
     }
 
     private fun requestPermissionsOnError(error: Throwable?) {
+        view?.hideLoadingProgress()
+
         if (error != null) {
-            view?.showLocationDialog(null)
+            view?.showError(error)
         } else {
-            onParameterIsNull(view, this::class.java.simpleName, "checkPermissions", "error")
+            onParameterIsNull(
+                view,
+                this::class.java.simpleName,
+                "checkPermissions",
+                "error"
+            )
         }
     }
 
@@ -126,30 +152,47 @@ class LocationPresenter
             permission.granted -> {
                 val task = interactor.getCurrentAddress()
                     .compose(schedulerManagerModule.singleTransformer())
-                    .doOnSubscribe { view?.showLoadingProgress() }
                     .doAfterTerminate { view?.hideLoadingProgress() }
                     .subscribe(::getCurrentAddressOnSuccess, ::getCurrentAddressOnError)
 
                 compositeDisposable.add(task)
             }
 
-            permission.shouldShowRequestPermissionRationale -> view?.showRationaleDialog()
+            permission.shouldShowRequestPermissionRationale -> {
+                view?.hideLoadingProgress()
 
-            else -> view?.showGoSettingsDialog()
+                view?.showRationaleDialog()
+            }
+
+            else -> {
+                view?.hideLoadingProgress()
+
+                view?.showGoSettingsDialog()
+            }
         }
     }
 
     private fun getCurrentAddressOnSuccess(address: UserAddressType?) {
         if (address != null) {
-            view?.showLocationDialog(address.locality)
+            if (address.locality != null) {
+                view?.showLocationDialog(address.locality!!)
+                view?.enableGetLastKnownLocationButton()
+            } else {
+                view?.showLocationError()
+            }
         } else {
-            onParameterIsNull(view, this::class.java.simpleName, "getCurrentAddress", "address")
+            onParameterIsNull(
+                view,
+                this::class.java.simpleName,
+                "getCurrentAddress",
+                "address"
+            )
         }
     }
 
     private fun getCurrentAddressOnError(error: Throwable?) {
         if (error != null) {
-            view?.showLocationDialog(null)
+            view?.showError(error)
         } else {
             onParameterIsNull(view, this::class.java.simpleName, "getCurrentAddress", "error")
         }

@@ -6,9 +6,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--for location updates-->
+    <!-- for location updates -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!--for last know location-->
+    <!-- for last know location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application

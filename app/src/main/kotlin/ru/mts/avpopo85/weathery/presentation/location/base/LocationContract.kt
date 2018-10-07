@@ -10,8 +10,13 @@ interface LocationContract : BaseContract {
 
         fun showGoSettingsDialog()
 
-        fun showLocationDialog(city: String?)
+        fun showLocationDialog(city: String)
 
+        fun showLocationError()
+
+        fun enableGetLastKnownLocationButton()
+
+        fun disableGetLastKnownLocationButton()
     }
 
     interface Presenter : BaseContract.Presenter<View> {

@@ -5,8 +5,8 @@
         <!--<item name="android:colorForeground">@android:color/background_dark</item>-->
     </style>
 
-    <style name="statusBarStyle" parent="@android:style/Theme.DeviceDefault.Light">
+    <!--<style name="statusBarStyle" parent="@android:style/Theme.DeviceDefault.Light">-->
         <!--<item name="android:statusBarColor">@color/textIconsColor</item>-->
-    </style>
+    <!--</style>-->
 
 </resources>

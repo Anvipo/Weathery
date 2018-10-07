@@ -18,23 +18,20 @@ fun Long.toDate(): String {
     val date = Date(this * 1000)
 
     val simpleDateFormat = SimpleDateFormat(
-        "dd MMM YYYY (E)",
+        "dd MMM y (E)",
         Locale.getDefault()
     )
 
     return simpleDateFormat.format(date)
 }
 
-@Suppress("unused")
 fun Long.toDateTime(notInMillis: Boolean = true): String {
     val coefficient = if (notInMillis) 1000 else 1
 
     val date = Date(this * coefficient)
 
-    val simpleDateFormat = SimpleDateFormat(
-        "HH:mm dd MMM YYYY",
-        Locale.getDefault()
-    )
+    val simpleDateFormat =
+        SimpleDateFormat("HH:mm dd MMM y", Locale.getDefault())
 
     return simpleDateFormat.format(date)
 }
@@ -43,10 +40,7 @@ fun Long.toDateTime(notInMillis: Boolean = true): String {
 fun Long.toFullDateTime(): String {
     val date = Date(this * 1000)
 
-    val simpleDateFormat = SimpleDateFormat(
-        "HH:mm:ss dd MMM YYYY",
-        Locale.getDefault()
-    )
+    val simpleDateFormat = SimpleDateFormat("HH:mm:ss dd MMM y", Locale.getDefault())
 
     return simpleDateFormat.format(date)
 }

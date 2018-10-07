@@ -8,12 +8,14 @@ import android.location.LocationManager
 import com.google.android.gms.location.LocationRequest
 import com.patloew.rxlocation.RxLocation
 import io.reactivex.Single
+import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserAddress
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserLocale
 import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
+import java.io.IOException
 import java.util.*
 import javax.inject.Inject
 
@@ -50,6 +52,7 @@ class LocationRepository
     @SuppressLint("MissingPermission")
     private fun getAddress(gpsIsEnabled: Boolean): Single<UserAddressType> {
         val gpsCall = if (gpsIsEnabled) {
+            //TODO может не получить координаты, если отсутствует интернет-соединение
             rxLocation.location()
                 .updates(locationRequest)
                 .firstOrError()
@@ -62,7 +65,24 @@ class LocationRepository
         return gpsCall
             .flatMap(::getAddressFromLocation)
             .flatMap { dbService.saveLocation(it) }
-            .onErrorResumeNext { dbService.getLocation(gpsIsEnabled) }
+            .onErrorResumeNext {
+                when (it) {
+                    is IOException -> {
+                        //TODO получение address другим путём
+                        val part1 = context.getString(R.string.there_is_something_wrong_with_your_gps_adapter)
+                        val part2 = context.getString(R.string.try_restarting_the_device)
+
+                        val throwable = Throwable("$part1. $part2")
+
+                        Single.error(throwable)
+                    }
+                    is NoSuchElementException -> {
+                        //last location is unknown
+                        dbService.getLocation(gpsIsEnabled)
+                    }
+                    else -> dbService.getLocation(gpsIsEnabled)
+                }
+            }
     }
 
     private fun getAddressFromLocation(location: Location): Single<UserAddressType> =

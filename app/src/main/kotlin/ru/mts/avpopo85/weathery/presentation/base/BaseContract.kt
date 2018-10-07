@@ -4,6 +4,8 @@ interface BaseContract {
 
     interface View {
 
+        fun isLoadingProgressShown(): Boolean
+
         fun showLoadingProgress()
 
         fun hideLoadingProgress()
@@ -16,16 +18,18 @@ interface BaseContract {
 
         fun showLongToast(message: String)
 
-        fun showIndefiniteSnackbar(message: String, view: android.view.View)
+        fun showIndefiniteSnackbar(message: String?, view: android.view.View?)
 
         fun showAlertDialog(
             message: String,
             positiveButtonText: String,
             negativeButtonText: String,
-            onClickedPositiveButton: () -> Unit,
-            onClickedNegativeButton: () -> Unit,
-            title: String?
+            onClickedPositiveButton: () -> Unit = {},
+            onClickedNegativeButton: () -> Unit = {},
+            title: String? = null
         )
+
+        fun sendErrorLog(message: String, tag: String? = null)
 
     }
 
