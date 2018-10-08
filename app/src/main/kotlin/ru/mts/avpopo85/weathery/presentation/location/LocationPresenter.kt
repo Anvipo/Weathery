@@ -74,7 +74,7 @@ class LocationPresenter
     private fun getLastKnownAddressOnSuccess(address: UserAddressType?) {
         if (address != null) {
             if (address.locality != null) {
-                view?.showLocationDialog(address.locality!!)
+                view?.showCityDialog(address.locality!!)
             } else {
                 view?.showLocationError()
             }
@@ -174,11 +174,22 @@ class LocationPresenter
 
     private fun getCurrentAddressOnSuccess(address: UserAddressType?) {
         if (address != null) {
-            if (address.locality != null) {
-                view?.showLocationDialog(address.locality!!)
-                view?.enableGetLastKnownLocationButton()
-            } else {
-                view?.showLocationError()
+            when {
+                address.locality != null -> {
+                    view?.showCityDialog(address.locality!!)
+                    view?.enableGetLastKnownLocationButton()
+                }
+                address.coords != null -> {
+                    //TODO
+                    view?.showCoordinatesDialog(address.coords!!)
+                    view?.enableGetLastKnownLocationButton()
+                }
+                address.postalCode != null -> {
+                    //TODO
+                    view?.showZipcodeDialog(address.postalCode!!)
+                    view?.enableGetLastKnownLocationButton()
+                }
+                else -> view?.showLocationError()
             }
         } else {
             onParameterIsNull(

@@ -238,5 +238,6 @@
     <string name="for_example_by_gps">например, с помощью GPS</string>
     <string name="you_must_enable_it">Вы должны включить его</string>
     <string name="there_is_something_wrong_with_your_gps_adapter">С Вашим GPS адаптером что-то не так</string>
-    <string name="try_restarting_the_device">Попробуйте перезапустить устройство</string>
+    <string name="try_to_restart_the_device">Попробуйте перезапустить устройство</string>
+    <string name="application_needs_internet_connection">Приложению необходимо интернет-соединение</string>
 </resources>

@@ -16,6 +16,7 @@ import ru.mts.avpopo85.weathery.data.model.implementation.common.UserLocale
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
+import ru.mts.avpopo85.weathery.utils.common.MyRealmException.*
 import java.io.IOException
 import java.util.*
 import javax.inject.Inject
@@ -44,17 +45,18 @@ class LocationRepository
             .flatMap(::getAddress)
 
     override fun getLastKnownAddress(): Single<UserAddressType> =
-        dbService.getAddress(networkManager.isGpsEnabled)
+        dbService.getAddress(networkManager.isGpsProviderEnabled)
 
-    private fun getAddress(isGpsEnabled: Boolean): Single<UserAddressType> =
-        makeGpsCall(isGpsEnabled)
+    private fun getAddress(isGpsProviderEnabled: Boolean): Single<UserAddressType> =
+        makeGpsCall(isGpsProviderEnabled)
             .flatMap { makeAddressFromLocation(it) }
             .flatMap { dbService.saveAddress(it) }
-            .onErrorResumeNext { handleGpsCallError(it, isGpsEnabled) }
+            .onErrorResumeNext { handleGpsCallError(it, isGpsProviderEnabled) }
 
     @SuppressLint("MissingPermission")
-    private fun makeGpsCall(isGpsEnabled: Boolean): Single<Location> =
-        if (isGpsEnabled) {
+    private fun makeGpsCall(isGpsAndNetworkProvidersAreEnabled: Boolean): Single<Location> =
+        if (isGpsAndNetworkProvidersAreEnabled /*&& networkManager.isConnectedToInternet*/) {
+            //TODO
             rxLocation.location()
                 .updates(locationRequest)
                 .firstOrError()
@@ -65,9 +67,11 @@ class LocationRepository
         }
 
     private fun makeAddressFromLocation(location: Location): Single<UserAddressType> =
-        if (networkManager.isNetworkEnabled) {
+        if (networkManager.isConnectedToInternet) {
             getAddressFromLocation(location)
-        } else {
+        } /*else if (networkManager.isNetworkProviderEnabled) {
+            getAddressFromLocation(location)
+        }*/ else {
             val coords = getGeographicCoordinates(location)
 
             Single.just(UserAddressType(coords = coords))
@@ -87,23 +91,24 @@ class LocationRepository
 
     private fun handleGpsCallError(
         it: Throwable,
-        gpsIsEnabled: Boolean
+        isGpsProviderEnabled: Boolean
     ): SingleSource<UserAddressType> = when (it) {
         is IOException -> {
-            //TODO получение address другим путём
-            val part1 =
-                context.getString(R.string.there_is_something_wrong_with_your_gps_adapter)
-            val part2 = context.getString(R.string.try_restarting_the_device)
+            //todo
+            makeGpsCall(isGpsProviderEnabled)
+                .flatMap {
+                    val coords = getGeographicCoordinates(it)
 
-            val throwable = Throwable("$part1. $part2")
-
-            Single.error(throwable)
+                    Single.just(UserAddressType(coords = coords))
+                }
+                .flatMap { dbService.saveAddress(it) }
+                .onErrorResumeNext { dbService.getAddress(isGpsProviderEnabled) }
         }
         is NoSuchElementException -> {
             //last location is unknown
-            dbService.getAddress(gpsIsEnabled)
+            dbService.getAddress(isGpsProviderEnabled)
         }
-        else -> dbService.getAddress(gpsIsEnabled)
+        else -> dbService.getAddress(isGpsProviderEnabled)
     }
 
     private fun mapUserAddress(it: Address): UserAddress = UserAddress(

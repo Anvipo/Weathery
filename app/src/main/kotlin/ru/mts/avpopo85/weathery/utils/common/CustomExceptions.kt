@@ -9,4 +9,5 @@ sealed class MyRealmException(cause: String) : Throwable() {
     class DBHasNothingAndGetGeolocationException(cause: String) : MyRealmException(cause)
     class DBHasOutdatedData(cause: String, val isConnectedToInternet: Boolean) : MyRealmException(cause)
     class DBHasNothing(cause: String, val isConnectedToInternet: Boolean) : MyRealmException(cause)
+    class InternetConncetionIsRequired(cause: String) : MyRealmException(cause)
 }

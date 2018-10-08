@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_location.*
 import org.jetbrains.anko.startActivity
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
+import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.di.modules.common.LocationModule
 import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
@@ -44,7 +45,7 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
         }
     }
 
-    override fun showLocationDialog(city: String) {
+    override fun showCityDialog(city: String) {
         showAlertDialog(
             "${getString(R.string.is_your_current_geolocation)} - $city?",
             getString(R.string.yes),
@@ -52,6 +53,16 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
             { startActivity<MainActivity>(); finish() },
             title = getString(R.string.found_intended_location)
         )
+    }
+
+    override fun showCoordinatesDialog(coordinates: GeographicCoordinates) {
+        //todo
+        showLongToast("showCoordinatesDialog not implemented")
+    }
+
+    override fun showZipcodeDialog(zipcode: Int) {
+        //todo
+        showLongToast("showZipcodeDialog not implemented")
     }
 
     override fun showLocationError() {

@@ -23,10 +23,10 @@ class NetworkManager
             return networkInfo != null && networkInfo.isConnected
         }
 
-    val isNetworkEnabled: Boolean
+    val isNetworkProviderEnabled: Boolean
         get() = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
-    val isGpsEnabled: Boolean
+    val isGpsProviderEnabled: Boolean
         get() = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
 }

@@ -21,11 +21,11 @@ interface IUserAddress {
 
     val locale: UserLocale?
 
+    /**City*/
     val locality: String?
 
     val postalCode: Int?
 
-    /**City*/
     val subAdminArea: String?
 
     /**Building*/
