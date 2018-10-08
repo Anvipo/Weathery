@@ -31,10 +31,13 @@ class YWForecastPresenter
         if (forecast != null) {
             view?.showWeatherResponse(forecast)
         } else {
+            val methodName =
+                object : Any() {}.javaClass.enclosingMethod?.name ?: "getForecastOnSuccess"
+
             onParameterIsNull(
                 view,
                 this::class.java.simpleName,
-                "getForecast",
+                methodName,
                 "forecast"
             )
         }
@@ -44,7 +47,10 @@ class YWForecastPresenter
         if (error != null) {
             view?.showError(context.parseError(error))
         } else {
-            onParameterIsNull(view, this::class.java.simpleName, "getForecast", "error")
+            val methodName =
+                object : Any() {}.javaClass.enclosingMethod?.name ?: "getForecastOnError"
+
+            onParameterIsNull(view, this::class.java.simpleName, methodName, "error")
         }
     }
 

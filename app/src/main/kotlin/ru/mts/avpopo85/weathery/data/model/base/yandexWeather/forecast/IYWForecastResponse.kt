@@ -1,10 +1,10 @@
 package ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast
 
-import ru.mts.avpopo85.weathery.data.model.base.common.IForecastResponse
+import ru.mts.avpopo85.weathery.data.model.base.common.IForecastRealmResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.forecast.YWHourInfoResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.forecast.YWPartsResponse
 
-interface IYWForecastResponse : IForecastResponse {
+interface IYWForecastResponse : IForecastRealmResponse {
 
     override var saveUnixTime: Long
 

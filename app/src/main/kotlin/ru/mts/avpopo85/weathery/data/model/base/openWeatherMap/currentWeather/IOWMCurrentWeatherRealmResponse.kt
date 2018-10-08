@@ -1,13 +1,13 @@
 package ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.currentWeather
 
-import ru.mts.avpopo85.weathery.data.model.base.common.ICurrentWeatherResponse
+import ru.mts.avpopo85.weathery.data.model.base.common.ICurrentWeatherRealmResponse
 import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.common.IOWMCloudsResponse
 import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.common.IOWMCoordinatesResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMWeatherResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather.OWMCurrentWeatherMainResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather.OWMSysResponse
 
-interface IOWMCurrentWeatherResponse : ICurrentWeatherResponse {
+interface IOWMCurrentWeatherRealmResponse : ICurrentWeatherRealmResponse {
 
     val coordinates: IOWMCoordinatesResponse?
 

@@ -14,18 +14,20 @@ import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMForecas
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWCurrentWeatherApiService
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
 import ru.mts.avpopo85.weathery.data.repository.common.LocationRepository
-import ru.mts.avpopo85.weathery.data.repository.openWeatherMap.OWMCurrentWeatherRepository
-import ru.mts.avpopo85.weathery.data.repository.openWeatherMap.OWMForecastRepository
-import ru.mts.avpopo85.weathery.data.repository.yandexWeather.YWCurrentWeatherRepository
-import ru.mts.avpopo85.weathery.data.repository.yandexWeather.YWForecastRepository
+import ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap.OWMCurrentWeatherRepository
+import ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap.OWMForecastRepository
+import ru.mts.avpopo85.weathery.data.repository.weather.yandexWeather.YWCurrentWeatherRepository
+import ru.mts.avpopo85.weathery.data.repository.weather.yandexWeather.YWForecastRepository
 import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastResponseType
 import javax.inject.Singleton
 
 @Module
@@ -78,7 +80,7 @@ class AppModule(private val context: Context) {
     fun provideYWForecastRepository(
         apiService: IYWForecastApiService,
         networkManager: NetworkManager,
-        forecastDbService: IForecastDbService<YWForecastListResponseType>,
+        forecastDbService: IForecastDbService<YWForecastResponseType>,
         locationDbService: ILocationDbService<UserAddressType>
     ): IForecastRepository<YWForecastListResponseType> = YWForecastRepository(
         apiService,
@@ -93,7 +95,7 @@ class AppModule(private val context: Context) {
     fun provideOWMForecastRepository(
         apiService: IOWMForecastApiService,
         networkManager: NetworkManager,
-        forecastDbService: IForecastDbService<OWMForecastListResponseType>,
+        forecastDbService: IForecastDbService<OWMForecastResponseType>,
         locationDbService: ILocationDbService<UserAddressType>
     ): IForecastRepository<OWMForecastListResponseType> = OWMForecastRepository(
         apiService,
@@ -105,7 +107,10 @@ class AppModule(private val context: Context) {
 
     @Provides
     @Singleton
-    fun provideLocationsRepository(dbService: ILocationDbService<UserAddressType>): ILocationRepository =
-        LocationRepository(context, dbService)
+    fun provideLocationsRepository(
+        dbService: ILocationDbService<UserAddressType>,
+        networkManager: NetworkManager
+    ): ILocationRepository =
+        LocationRepository(context, dbService, networkManager)
 
 }

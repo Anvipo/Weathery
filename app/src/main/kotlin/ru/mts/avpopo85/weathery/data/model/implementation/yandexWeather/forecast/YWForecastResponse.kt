@@ -49,5 +49,4 @@ open class YWForecastResponse(
     @Expose
     override var hours: RealmList<YWHourInfoResponse> = RealmList()
 
-) : RealmObject(),
-    IYWForecastResponse
+) : RealmObject(), IYWForecastResponse

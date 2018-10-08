@@ -9,15 +9,15 @@ import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.location.LocationRealmService
-import ru.mts.avpopo85.weathery.data.db.implementation.realm.openWeatherMap.OWMCurrentWeatherRealmService
-import ru.mts.avpopo85.weathery.data.db.implementation.realm.openWeatherMap.OWMForecastRealmService
-import ru.mts.avpopo85.weathery.data.db.implementation.realm.yandexWeather.YWCurrentWeatherRealmService
-import ru.mts.avpopo85.weathery.data.db.implementation.realm.yandexWeather.YWForecastRealmService
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.openWeatherMap.OWMCurrentWeatherRealmService
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.openWeatherMap.OWMForecastRealmService
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.yandexWeather.YWCurrentWeatherRealmService
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.yandexWeather.YWForecastRealmService
 import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
-import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
-import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastResponseType
 import javax.inject.Singleton
 
 @Module
@@ -36,8 +36,8 @@ class RealmModule(val context: Context) {
 
     @Provides
     @Singleton
-    fun provideYWForecastRealmService(): IForecastDbService<YWForecastListResponseType> =
-        YWForecastRealmService()
+    fun provideYWForecastRealmService(): IForecastDbService<YWForecastResponseType> =
+        YWForecastRealmService(context)
 
     @Provides
     @Singleton
@@ -51,7 +51,7 @@ class RealmModule(val context: Context) {
 
     @Provides
     @Singleton
-    fun provideOWMForecastRealmService(): IForecastDbService<OWMForecastListResponseType> =
+    fun provideOWMForecastRealmService(): IForecastDbService<OWMForecastResponseType> =
         OWMForecastRealmService(context)
 
     @Provides

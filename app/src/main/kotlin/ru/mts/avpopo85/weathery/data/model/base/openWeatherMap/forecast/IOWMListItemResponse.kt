@@ -1,6 +1,6 @@
 package ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.forecast
 
-import ru.mts.avpopo85.weathery.data.model.base.common.IForecastResponse
+import ru.mts.avpopo85.weathery.data.model.base.common.IForecastRealmResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMCloudsResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMWeatherResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather.OWMWindResponse
@@ -8,7 +8,7 @@ import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecas
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecast.OWMForecastSysResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecast.OWMRainResponse
 
-interface IOWMListItemResponse : IForecastResponse {
+interface IOWMListItemResponse : IForecastRealmResponse {
 
     /**Time of data forecasted, unix, UTC*/
     override val dateInUnixtimeUTC: Long

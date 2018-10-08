@@ -2,9 +2,8 @@ package ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.current
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
-import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.currentWeather.IYWCurrentWeatherResponse
+import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.currentWeather.IYWCurrentWeatherRealmResponse
 
 /**This object contains information about the current weather.*/
 open class YWCurrentWeatherResponse(
@@ -82,5 +81,4 @@ open class YWCurrentWeatherResponse(
     @Expose
     override var cloudiness: Double = 0.0
 
-) : RealmObject(),
-    IYWCurrentWeatherResponse
+) : IYWCurrentWeatherRealmResponse

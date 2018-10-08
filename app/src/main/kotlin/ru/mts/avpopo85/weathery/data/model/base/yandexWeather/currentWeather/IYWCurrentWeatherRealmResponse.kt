@@ -1,8 +1,8 @@
 package ru.mts.avpopo85.weathery.data.model.base.yandexWeather.currentWeather
 
-import ru.mts.avpopo85.weathery.data.model.base.common.ICurrentWeatherResponse
+import ru.mts.avpopo85.weathery.data.model.base.common.ICurrentWeatherRealmResponse
 
-interface IYWCurrentWeatherResponse : ICurrentWeatherResponse {
+interface IYWCurrentWeatherRealmResponse : ICurrentWeatherRealmResponse {
 
     /**Temperature (°С).*/
     val temperature: Double

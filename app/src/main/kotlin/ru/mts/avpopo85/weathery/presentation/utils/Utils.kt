@@ -16,7 +16,11 @@ fun onParameterIsNull(
     parameterName: String
 ) {
     if (BuildConfig.DEBUG) {
-        view?.showError("$className.$methodName - $parameterName == null")
+        val message = "$className.$methodName - $parameterName == null"
+
+        view?.sendErrorLog(message)
+
+        view?.showError(message)
     }
 }
 

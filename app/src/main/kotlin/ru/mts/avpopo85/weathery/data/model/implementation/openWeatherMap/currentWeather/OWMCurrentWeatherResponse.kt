@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
-import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.currentWeather.IOWMCurrentWeatherResponse
+import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.currentWeather.IOWMCurrentWeatherRealmResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMCloudsResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMCoordinatesResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMWeatherResponse
@@ -61,4 +61,4 @@ open class OWMCurrentWeatherResponse(
     @Expose
     override var code: Int = 0
 
-) : RealmObject(), IOWMCurrentWeatherResponse
+) : RealmObject(), IOWMCurrentWeatherRealmResponse

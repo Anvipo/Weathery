@@ -5,9 +5,9 @@ import ru.mts.avpopo85.weathery.data.model.base.common.IUserAddress
 
 interface ILocationDbService<T : IUserAddress> {
 
-    fun saveLocation(address: T): Single<T>
+    fun saveAddress(address: T): Single<T>
 
-    fun getLocation(gpsIsEnabled: Boolean = false): Single<T>
+    fun getAddress(gpsIsEnabled: Boolean = false): Single<T>
 
     fun getCityName(): Single<String>
 

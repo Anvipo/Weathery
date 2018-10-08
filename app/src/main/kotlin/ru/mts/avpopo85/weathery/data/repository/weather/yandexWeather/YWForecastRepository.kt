@@ -1,41 +1,44 @@
-package ru.mts.avpopo85.weathery.data.repository.yandexWeather
+package ru.mts.avpopo85.weathery.data.repository.weather.yandexWeather
 
 import android.content.Context
 import io.reactivex.Single
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
+import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
-import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWCurrentWeatherApiService
+import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
 import ru.mts.avpopo85.weathery.data.utils.UserAddressType
-import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
-import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
+import ru.mts.avpopo85.weathery.data.utils.yandexWeather.YWConstants.YW_FORECAST_PARAMETERS
+import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastResponseType
 import javax.inject.Inject
 
-class YWCurrentWeatherRepository
+
+class YWForecastRepository
 @Inject constructor(
-    private val apiService: IYWCurrentWeatherApiService,
+    private val apiService: IYWForecastApiService,
     private val networkManager: NetworkManager,
-    private val currentWeatherDbService: ICurrentWeatherDbService<YWCurrentWeatherResponseType>,
+    private val forecastDbService: IForecastDbService<YWForecastResponseType>,
     private val locationDbService: ILocationDbService<UserAddressType>,
     private val context: Context
-) : ICurrentWeatherRepository<YWCurrentWeatherResponseType> {
+) : IForecastRepository<YWForecastListResponseType> {
 
-    override fun getCurrentWeather(): Single<YWCurrentWeatherResponseType> {
+    override fun getForecast(): Single<YWForecastListResponseType> {
         val dbCall =
-            currentWeatherDbService.getCurrentWeatherResponse(networkManager.isConnectedToInternet)
+            forecastDbService.getForecastResponse(networkManager.isConnectedToInternet)
 
         if (!networkManager.isConnectedToInternet) {
             return dbCall
         }
 
         return dbCall.onErrorResumeNext { _ ->
-            apiCall().flatMap { currentWeatherDbService.saveCurrentWeatherResponse(it) }
+            apiCall().flatMap { forecastDbService.saveForecastResponse(it) }
         }
     }
 
-    private fun apiCall(): Single<out YWCurrentWeatherResponseType> {
+    private fun apiCall(): Single<out YWForecastListResponseType> {
         val currentAddress: UserAddressType? = getCurrentAddress()
 
         return if (currentAddress != null) {
@@ -55,14 +58,17 @@ class YWCurrentWeatherRepository
     private fun getCurrentWeather(
         coords: GeographicCoordinates,
         countryCode: String
-    ): Single<YWCurrentWeatherResponseType> = apiService.getCurrentWeather(
+    ): Single<YWForecastListResponseType> = apiService.getForecast(
         coords.latitude!!,
         coords.longitude!!,
-        countryCode.decapitalize()
+        countryCode.decapitalize(),
+        YW_FORECAST_PARAMETERS.dayNumberInForecast,
+        YW_FORECAST_PARAMETERS.withForecastForHours,
+        YW_FORECAST_PARAMETERS.withExtraInformation
     )
 
     private fun getCurrentAddress(): UserAddressType? = try {
-        locationDbService.getLocation().blockingGet()
+        locationDbService.getAddress().blockingGet()
     } catch (exception: Exception) {
         throw Throwable("${context.getString(R.string.db_has_no_location_data)}\n${exception.localizedMessage}")
     }

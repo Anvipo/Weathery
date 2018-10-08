@@ -13,7 +13,7 @@ import ru.mts.avpopo85.weathery.utils.common.MyRealmException.*
 
 class LocationRealmService(private val context: Context) : ILocationDbService<UserAddressType> {
 
-    override fun saveLocation(address: UserAddressType):
+    override fun saveAddress(address: UserAddressType):
             Single<UserAddressType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
@@ -32,15 +32,22 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                     if (data != null) {
                         emitter.onSuccess(data)
                     } else {
-                        onDataIsNull(emitter, "saveLocation", this::class.java.simpleName)
+                        //todo
+                        val methodName =
+                            object : Any() {}.javaClass.enclosingMethod?.name ?: "saveAddress"
+
+                        onDataIsNull(emitter, methodName, this::class.java.simpleName)
                     }
                 } else {
-                    onProxyDataIsNull(emitter, "saveLocation", this::class.java.simpleName)
+                    val methodName =
+                        object : Any() {}.javaClass.enclosingMethod?.name ?: "saveAddress"
+
+                    onProxyDataIsNull(emitter, methodName, this::class.java.simpleName)
                 }
             }
         }
 
-    override fun getLocation(gpsIsEnabled: Boolean): Single<UserAddressType> =
+    override fun getAddress(gpsIsEnabled: Boolean): Single<UserAddressType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
                 val proxyData =
@@ -57,9 +64,12 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                         //TODO наверно нужно проверять данные на устаревание
                         emitter.onSuccess(data)
                     } else {
+                        val methodName =
+                            object : Any() {}.javaClass.enclosingMethod?.name ?: "getAddress"
+
                         onDataIsNull(
                             emitter,
-                            "getCurrentGeolocation",
+                            methodName,
                             this::class.java.simpleName
                         )
                     }
@@ -78,9 +88,12 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                     val part3 = context.getString(R.string.for_example_by_gps)
                     emitter.onError(DBHasNothingAndGPSOffException("$part1. $part2, $part3"))
                 } else if (!dataExistsInDB) {
+                    val methodName =
+                        object : Any() {}.javaClass.enclosingMethod?.name ?: "getAddress"
+
                     onProxyDataIsNull(
                         emitter,
-                        "getCurrentGeolocation",
+                        methodName,
                         this::class.java.simpleName
                     )
                 }
@@ -113,9 +126,12 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                             emitter.onError(DBHasNoFieldAndGetGeolocationException("$part1. $part2"))
                         }
                     } else {
+                        val methodName =
+                            object : Any() {}.javaClass.enclosingMethod?.name ?: "getCityName"
+
                         onDataIsNull(
                             emitter,
-                            "getCityName",
+                            methodName,
                             this::class.java.simpleName
                         )
                     }

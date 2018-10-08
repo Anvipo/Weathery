@@ -32,12 +32,10 @@ class OWMForecastPresenter
         if (forecast != null) {
             view?.showWeatherResponse(forecast)
         } else {
-            onParameterIsNull(
-                view,
-                this::class.java.simpleName,
-                "getForecast",
-                "forecast"
-            )
+            val methodName =
+                object : Any() {}.javaClass.enclosingMethod?.name ?: "getForecastOnSuccess"
+
+            onParameterIsNull(view, this::class.java.simpleName, methodName, "forecast")
         }
     }
 
@@ -45,7 +43,10 @@ class OWMForecastPresenter
         if (error != null) {
             view?.showError(context.parseError(error))
         } else {
-            onParameterIsNull(view, this::class.java.simpleName, "getForecast", "error")
+            val methodName =
+                object : Any() {}.javaClass.enclosingMethod?.name ?: "getForecastOnError"
+
+            onParameterIsNull(view, this::class.java.simpleName, methodName, "error")
         }
     }
 

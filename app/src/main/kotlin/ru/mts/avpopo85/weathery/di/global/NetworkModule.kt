@@ -8,12 +8,12 @@ import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import javax.inject.Singleton
 
 @Module
-class NetworkModule(val context: Context) {
+class NetworkModule(private val context: Context) {
 
     @Provides
     @Singleton
     fun provideNetworkManager(connectivityManager: ConnectivityManager): NetworkManager =
-        NetworkManager(connectivityManager)
+        NetworkManager(connectivityManager, context)
 
     @Provides
     @Singleton

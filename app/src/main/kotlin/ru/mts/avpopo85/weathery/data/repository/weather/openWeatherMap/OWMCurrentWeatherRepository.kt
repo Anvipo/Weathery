@@ -1,13 +1,13 @@
-package ru.mts.avpopo85.weathery.data.repository.openWeatherMap
+package ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap
 
 import android.content.Context
 import io.reactivex.Single
-import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMCurrentWeatherApiService
+import ru.mts.avpopo85.weathery.data.repository.weather.common.AbsCurrentWeatherRepository
 import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
@@ -16,26 +16,20 @@ import javax.inject.Inject
 class OWMCurrentWeatherRepository
 @Inject constructor(
     private val apiService: IOWMCurrentWeatherApiService,
-    private val networkManager: NetworkManager,
-    private val currentWeatherDbService: ICurrentWeatherDbService<OWMCurrentWeatherResponseType>,
-    private val locationDbService: ILocationDbService<UserAddressType>,
-    private val context: Context
-) : ICurrentWeatherRepository<OWMCurrentWeatherResponseType> {
+    networkManager: NetworkManager,
+    currentWeatherDbService: ICurrentWeatherDbService<OWMCurrentWeatherResponseType>,
+    locationDbService: ILocationDbService<UserAddressType>,
+    context: Context
+) :
+    AbsCurrentWeatherRepository<OWMCurrentWeatherResponseType>(
+        currentWeatherDbService, locationDbService, context, networkManager
+    ),
+    ICurrentWeatherRepository<OWMCurrentWeatherResponseType> {
 
-    override fun getCurrentWeather(): Single<OWMCurrentWeatherResponseType> {
-        val dbCall =
-            currentWeatherDbService.getCurrentWeatherResponse(networkManager.isConnectedToInternet)
+    override fun getCurrentWeather(): Single<OWMCurrentWeatherResponseType> =
+        getCurrentWeatherHelper()
 
-        if (!networkManager.isConnectedToInternet) {
-            return dbCall
-        }
-
-        return dbCall.onErrorResumeNext { _ ->
-            apiCall().flatMap { currentWeatherDbService.saveCurrentWeatherResponse(it) }
-        }
-    }
-
-    private fun apiCall(): Single<out OWMCurrentWeatherResponseType> {
+    override fun makeApiCall(): Single<OWMCurrentWeatherResponseType> {
         val currentAddress: UserAddressType? = getCurrentAddress()
 
         return if (currentAddress != null) {
@@ -55,13 +49,13 @@ class OWMCurrentWeatherRepository
                     currentAddress.countryCode
                 )
 
+                //TODO
                 else -> Single.error(Throwable("Текущее местоположение неизвестно"))
             }
-        } else Single.error(Throwable("Текущее местоположение неизвестно"))
+        } else {
+            Single.error(Throwable("Текущее местоположение неизвестно"))
+        }
     }
-
-    private fun GeographicCoordinates?.areNotNull(): Boolean =
-        this != null && this.latitudeAndLongitudeAreNotNull()
 
     private fun getCurrentWeatherByZipCode(
         zipCode: Int,
@@ -79,11 +73,5 @@ class OWMCurrentWeatherRepository
 
     private fun getCurrentWeatherByCityName(cityName: String): Single<OWMCurrentWeatherResponseType> =
         apiService.getCurrentWeatherByCityName(cityName)
-
-    private fun getCurrentAddress(): UserAddressType? = try {
-        locationDbService.getLocation().blockingGet()
-    } catch (exception: Exception) {
-        throw Throwable("${context.getString(R.string.db_has_no_location_data)}\n${exception.localizedMessage}")
-    }
 
 }
