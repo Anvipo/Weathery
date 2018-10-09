@@ -37,14 +37,14 @@ class OWMForecastRepository
     override fun getForecast(): Single<OWMForecastListResponseType> = getForecastHelper()
 
     override fun makeApiCall(): Single<OWMForecastListResponseType> {
-        val currentAddress = getCurrentAddress()
+        val lastKnownAddress = getLastKnownAddress()
 
-        return if (currentAddress != null) {
-            val cityName = currentAddress.locality
+        return if (lastKnownAddress != null) {
+            val cityName = lastKnownAddress.locality
 
-            val coords = currentAddress.coords
+            val coords = lastKnownAddress.coords
 
-            val postalCode = currentAddress.postalCode
+            val postalCode = lastKnownAddress.postalCode
 
             val apiCall = when {
                 cityName != null -> getCurrentWeatherByCityName(cityName)
@@ -53,10 +53,9 @@ class OWMForecastRepository
 
                 postalCode != null -> getCurrentWeatherByZipCode(
                     postalCode,
-                    currentAddress.countryCode
+                    lastKnownAddress.countryCode
                 )
 
-                //TODO
                 else -> {
                     val error =
                         LocationUnknown(context.getString(R.string.current_location_unknown))

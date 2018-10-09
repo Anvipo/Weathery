@@ -32,7 +32,7 @@ class YWCurrentWeatherRepository
         getCurrentWeatherHelper()
 
     override fun makeApiCall(): Single<YWCurrentWeatherResponseType> {
-        val currentAddress: UserAddressType? = getCurrentAddress()
+        val currentAddress: UserAddressType? = getLastKnownAddress()
 
         return if (currentAddress != null) {
             val coords = currentAddress.coords
@@ -40,7 +40,6 @@ class YWCurrentWeatherRepository
             when {
                 coords.areNotNull() -> getCurrentWeather(coords!!, currentAddress.countryCode!!)
 
-                //TODO
                 else -> {
                     val error =
                         LocationUnknown(context.getString(R.string.current_location_unknown))

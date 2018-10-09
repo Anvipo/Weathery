@@ -29,8 +29,8 @@ abstract class AbsCurrentWeatherRepository<T : ICurrentWeatherRealmResponse>(
             makeDBCall().onErrorResumeNext(::onDbCallError)
         }
 
-    protected fun getCurrentAddress(): UserAddressType? = try {
-        locationDbService.getAddress(
+    protected fun getLastKnownAddress(): UserAddressType? = try {
+        locationDbService.getLastKnownAddress(
             isGpsProviderEnabled = networkManager.isGpsProviderEnabled,
             isNetworkProviderEnabled = networkManager.isNetworkProviderEnabled,
             isConnectedToInternet = networkManager.isConnectedToInternet

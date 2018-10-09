@@ -2,7 +2,6 @@ package ru.mts.avpopo85.weathery.data.db.util
 
 import android.content.Context
 import io.reactivex.SingleEmitter
-import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasNothing
 import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasOutdatedData
@@ -15,17 +14,15 @@ fun <T> onProxyDataIsNull(
     methodName: String,
     className: String
 ) {
-    if (BuildConfig.DEBUG) {
-        val error =
-            Throwable(
-                "$className.$methodName " +
-                        "- proxyData == null"
-            )
+    val error =
+        Throwable(
+            "$className.$methodName " +
+                    "- proxyData == null"
+        )
 
-        error.printStackTrace()
+    error.printStackTrace()
 
-        emitter.onError(error)
-    }
+    emitter.onError(error)
 }
 
 fun <T> onDataIsNull(
@@ -33,17 +30,15 @@ fun <T> onDataIsNull(
     methodName: String,
     className: String
 ) {
-    if (BuildConfig.DEBUG) {
-        val error =
-            Throwable(
-                "$className.$methodName " +
-                        "- data == null"
-            )
+    val error =
+        Throwable(
+            "$className.$methodName " +
+                    "- data == null"
+        )
 
-        error.printStackTrace()
+    error.printStackTrace()
 
-        emitter.onError(error)
-    }
+    emitter.onError(error)
 }
 
 fun <T> Context.onDbHasNothing(

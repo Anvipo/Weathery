@@ -4,6 +4,7 @@ import android.content.Context
 import io.reactivex.Single
 import io.realm.Realm
 import io.realm.RealmResults
+import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.util.onDataIsNull
 import ru.mts.avpopo85.weathery.data.db.util.onDbHasNothing
@@ -37,25 +38,30 @@ constructor(private val context: Context) : IForecastDbService<T> {
                     if (data != null && data.isNotEmpty())
                         emitter.onSuccess(data)
                     else {
+                        if (BuildConfig.DEBUG) {
+                            val methodName =
+                                object : Any() {}.javaClass.enclosingMethod?.name
+                                    ?: "saveForecastResponse"
+
+                            onDataIsNull(
+                                emitter,
+                                methodName,
+                                this::class.java.simpleName
+                            )
+                        }
+                    }
+                } else {
+                    if (BuildConfig.DEBUG) {
                         val methodName =
                             object : Any() {}.javaClass.enclosingMethod?.name
                                 ?: "saveForecastResponse"
 
-                        onDataIsNull(
+                        onProxyDataIsNull(
                             emitter,
                             methodName,
                             this::class.java.simpleName
                         )
                     }
-                } else {
-                    val methodName =
-                        object : Any() {}.javaClass.enclosingMethod?.name ?: "saveForecastResponse"
-
-                    onProxyDataIsNull(
-                        emitter,
-                        methodName,
-                        this::class.java.simpleName
-                    )
                 }
             }
         }
@@ -80,27 +86,32 @@ constructor(private val context: Context) : IForecastDbService<T> {
                             context.onDbOutdatedData(emitter, isConnectedToInternet)
                         }
                     } else {
+                        if (BuildConfig.DEBUG) {
+                            val methodName =
+                                object : Any() {}.javaClass.enclosingMethod?.name
+                                    ?: "getForecastResponse"
+
+                            onDataIsNull(
+                                emitter,
+                                methodName,
+                                this::class.java.simpleName
+                            )
+                        }
+                    }
+                } else if (isConnectedToInternet || !isConnectedToInternet) {
+                    context.onDbHasNothing(isConnectedToInternet, emitter)
+                } else if (!dataExistsInDB) {
+                    if (BuildConfig.DEBUG) {
                         val methodName =
                             object : Any() {}.javaClass.enclosingMethod?.name
                                 ?: "getForecastResponse"
 
-                        onDataIsNull(
+                        onProxyDataIsNull(
                             emitter,
                             methodName,
                             this::class.java.simpleName
                         )
                     }
-                } else if (isConnectedToInternet || !isConnectedToInternet) {
-                    context.onDbHasNothing(isConnectedToInternet, emitter)
-                } else if (!dataExistsInDB) {
-                    val methodName =
-                        object : Any() {}.javaClass.enclosingMethod?.name ?: "getForecastResponse"
-
-                    onProxyDataIsNull(
-                        emitter,
-                        methodName,
-                        this::class.java.simpleName
-                    )
                 }
             }
         }

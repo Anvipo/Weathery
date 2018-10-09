@@ -8,6 +8,8 @@ import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
+import ru.mts.avpopo85.weathery.data.repository.weather.common.AbsForecastRepository
+import ru.mts.avpopo85.weathery.data.utils.LocationUnknown
 import ru.mts.avpopo85.weathery.data.utils.yandexWeather.YWConstants.YW_FORECAST_PARAMETERS
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
@@ -19,41 +21,44 @@ import javax.inject.Inject
 class YWForecastRepository
 @Inject constructor(
     private val apiService: IYWForecastApiService,
-    private val networkManager: NetworkManager,
-    private val forecastDbService: IForecastDbService<YWForecastResponseType>,
-    private val locationDbService: ILocationDbService<UserAddressType>,
+    networkManager: NetworkManager,
+    forecastDbService: IForecastDbService<YWForecastResponseType>,
+    locationDbService: ILocationDbService<UserAddressType>,
     private val context: Context
-) : IForecastRepository<YWForecastListResponseType> {
+) :
+    AbsForecastRepository<YWForecastResponseType>(
+        networkManager,
+        forecastDbService,
+        locationDbService,
+        context
+    ),
+    IForecastRepository<YWForecastListResponseType> {
 
-    override fun getForecast(): Single<YWForecastListResponseType> {
-        val dbCall =
-            forecastDbService.getForecastResponse(networkManager.isConnectedToInternet)
+    override fun getForecast(): Single<YWForecastListResponseType> = getForecastHelper()
 
-        if (!networkManager.isConnectedToInternet) {
-            return dbCall
-        }
+    override fun makeApiCall(): Single<YWForecastListResponseType> {
+        val lastKnownAddress: UserAddressType? = getLastKnownAddress()
 
-        return dbCall.onErrorResumeNext { _ ->
-            apiCall().flatMap { forecastDbService.saveForecastResponse(it) }
-        }
-    }
-
-    private fun apiCall(): Single<out YWForecastListResponseType> {
-        val currentAddress: UserAddressType? = getCurrentAddress()
-
-        return if (currentAddress != null) {
-            val coords = currentAddress.coords
+        return if (lastKnownAddress != null) {
+            val coords = lastKnownAddress.coords
 
             when {
-                coords.areNotNull() -> getCurrentWeather(coords!!, currentAddress.countryCode!!)
+                coords.areNotNull() -> getCurrentWeather(coords!!, lastKnownAddress.countryCode!!)
 
-                else -> Single.error(Throwable("Текущее местоположение неизвестно"))
+                else -> {
+                    val error =
+                        LocationUnknown(context.getString(R.string.current_location_unknown))
+
+                    Single.error(error)
+                }
             }
-        } else Single.error(Throwable("Текущее местоположение неизвестно"))
-    }
+        } else {
+            val error =
+                LocationUnknown(context.getString(R.string.current_location_unknown))
 
-    private fun GeographicCoordinates?.areNotNull(): Boolean =
-        this != null && this.latitudeAndLongitudeAreNotNull()
+            Single.error(error)
+        }
+    }
 
     private fun getCurrentWeather(
         coords: GeographicCoordinates,
@@ -66,15 +71,5 @@ class YWForecastRepository
         YW_FORECAST_PARAMETERS.withForecastForHours,
         YW_FORECAST_PARAMETERS.withExtraInformation
     )
-
-    private fun getCurrentAddress(): UserAddressType? = try {
-        locationDbService.getAddress(
-            isGpsProviderEnabled = networkManager.isGpsProviderEnabled,
-            isNetworkProviderEnabled = networkManager.isNetworkProviderEnabled,
-            isConnectedToInternet = networkManager.isConnectedToInternet
-        ).blockingGet()
-    } catch (exception: Exception) {
-        throw Throwable("${context.getString(R.string.db_has_no_location_data)}\n${exception.localizedMessage}")
-    }
 
 }

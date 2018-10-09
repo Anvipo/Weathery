@@ -3,6 +3,7 @@ package ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.common
 import android.content.Context
 import io.reactivex.Single
 import io.realm.Realm
+import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.util.onDataIsNull
 import ru.mts.avpopo85.weathery.data.db.util.onDbHasNothing
@@ -32,26 +33,30 @@ constructor(private val context: Context) : ICurrentWeatherDbService<T> {
                     if (data != null) {
                         emitter.onSuccess(data)
                     } else {
+                        if (BuildConfig.DEBUG) {
+                            val methodName =
+                                object : Any() {}.javaClass.enclosingMethod?.name
+                                    ?: "saveCurrentWeatherResponse"
+
+                            onDataIsNull(
+                                emitter,
+                                methodName,
+                                this::javaClass.name
+                            )
+                        }
+                    }
+                } else {
+                    if (BuildConfig.DEBUG) {
                         val methodName =
                             object : Any() {}.javaClass.enclosingMethod?.name
                                 ?: "saveCurrentWeatherResponse"
 
-                        onDataIsNull(
+                        onProxyDataIsNull(
                             emitter,
                             methodName,
-                            this::javaClass.name
+                            this::class.java.simpleName
                         )
                     }
-                } else {
-                    val methodName =
-                        object : Any() {}.javaClass.enclosingMethod?.name
-                            ?: "saveCurrentWeatherResponse"
-
-                    onProxyDataIsNull(
-                        emitter,
-                        methodName,
-                        this::class.java.simpleName
-                    )
                 }
             }
         }
@@ -77,28 +82,32 @@ constructor(private val context: Context) : ICurrentWeatherDbService<T> {
                             context.onDbOutdatedData(emitter, isConnectedToInternet)
                         }
                     } else {
+                        if (BuildConfig.DEBUG) {
+                            val methodName =
+                                object : Any() {}.javaClass.enclosingMethod?.name
+                                    ?: "getCurrentWeatherResponse"
+
+                            onDataIsNull(
+                                emitter,
+                                methodName,
+                                this::class.java.simpleName
+                            )
+                        }
+                    }
+                } else if (isConnectedToInternet || !isConnectedToInternet) {
+                    context.onDbHasNothing(isConnectedToInternet, emitter)
+                } else if (!dataExistsInDB) {
+                    if (BuildConfig.DEBUG) {
                         val methodName =
                             object : Any() {}.javaClass.enclosingMethod?.name
                                 ?: "getCurrentWeatherResponse"
 
-                        onDataIsNull(
+                        onProxyDataIsNull(
                             emitter,
                             methodName,
                             this::class.java.simpleName
                         )
                     }
-                } else if (isConnectedToInternet || !isConnectedToInternet) {
-                    context.onDbHasNothing(isConnectedToInternet, emitter)
-                } else if (!dataExistsInDB) {
-                    val methodName =
-                        object : Any() {}.javaClass.enclosingMethod?.name
-                            ?: "getCurrentWeatherResponse"
-
-                    onProxyDataIsNull(
-                        emitter,
-                        methodName,
-                        this::class.java.simpleName
-                    )
                 }
             }
         }

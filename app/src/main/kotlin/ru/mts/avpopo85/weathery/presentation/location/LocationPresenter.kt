@@ -178,7 +178,7 @@ class LocationPresenter
             onParameterIsNull(
                 view,
                 this::class.java.simpleName,
-                "getCurrentAddress",
+                "getLastKnownAddress",
                 "address"
             )
         }
@@ -188,7 +188,7 @@ class LocationPresenter
         if (error != null) {
             view?.showError(error)
         } else {
-            onParameterIsNull(view, this::class.java.simpleName, "getCurrentAddress", "error")
+            onParameterIsNull(view, this::class.java.simpleName, "getLastKnownAddress", "error")
         }
     }
 

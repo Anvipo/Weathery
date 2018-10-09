@@ -37,7 +37,7 @@ class LocationRepository
             .flatMap(::getAddress)
 
     override fun getLastKnownAddress(): Single<UserAddressType> =
-        dbService.getAddress(
+        dbService.getLastKnownAddress(
             networkManager.isGpsProviderEnabled,
             networkManager.isNetworkProviderEnabled,
             networkManager.isConnectedToInternet
@@ -55,7 +55,7 @@ class LocationRepository
     private fun getAddress(success: Boolean): Single<UserAddressType> =
         makeGpsCall(success)
             .flatMap { makeAddressFromLocation(it) }
-            .flatMap { dbService.saveAddress(it) }
+            .flatMap { dbService.saveCurrentAddress(it) }
             .onErrorResumeNext { handleGpsCallError(it) }
 
     @SuppressLint("MissingPermission")
@@ -98,13 +98,13 @@ class LocationRepository
             }
             is NoSuchElementException -> {
                 //last location is unknown
-                dbService.getAddress(
+                dbService.getLastKnownAddress(
                     networkManager.isGpsProviderEnabled,
                     networkManager.isNetworkProviderEnabled,
                     networkManager.isConnectedToInternet
                 )
             }
-            else -> dbService.getAddress(
+            else -> dbService.getLastKnownAddress(
                 networkManager.isGpsProviderEnabled,
                 networkManager.isNetworkProviderEnabled,
                 networkManager.isConnectedToInternet

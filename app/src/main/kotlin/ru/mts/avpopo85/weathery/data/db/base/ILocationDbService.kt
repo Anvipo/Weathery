@@ -5,14 +5,14 @@ import ru.mts.avpopo85.weathery.data.model.base.common.IUserAddress
 
 interface ILocationDbService<T : IUserAddress> {
 
-    fun saveAddress(address: T): Single<T>
+    fun saveCurrentAddress(address: T): Single<T>
 
-    fun getAddress(
+    fun getLastKnownAddress(
         isGpsProviderEnabled: Boolean,
         isNetworkProviderEnabled: Boolean,
         isConnectedToInternet: Boolean
     ): Single<T>
 
-    fun getCityName(): Single<String>
+    fun getLastKnownCityName(): Single<String>
 
 }

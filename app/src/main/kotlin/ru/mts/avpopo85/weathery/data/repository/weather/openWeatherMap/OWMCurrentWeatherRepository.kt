@@ -32,7 +32,7 @@ class OWMCurrentWeatherRepository
         getCurrentWeatherHelper()
 
     override fun makeApiCall(): Single<OWMCurrentWeatherResponseType> {
-        val currentAddress: UserAddressType? = getCurrentAddress()
+        val currentAddress: UserAddressType? = getLastKnownAddress()
 
         return if (currentAddress != null) {
             val cityName = currentAddress.locality
