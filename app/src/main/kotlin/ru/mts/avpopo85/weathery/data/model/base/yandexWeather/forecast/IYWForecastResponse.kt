@@ -12,7 +12,7 @@ interface IYWForecastResponse : IForecastRealmResponse {
     override val dateUTC: String
 
     /**The date of the forecast in Unix time.*/
-    override val dateInUnixtimeUTC: Long
+    override val dateInUnixUTCInSeconds: Long
 
     /**Week number.*/
     val weekSerialNumber: Int

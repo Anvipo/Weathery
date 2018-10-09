@@ -15,7 +15,7 @@ class OWMForecastRealmService(context: Context) :
 
     override val OWMForecastListResponseType.isFresh: Boolean
         get() {
-            val unixtimeInMillis = this.first().dateInUnixtimeUTC
+            val unixtimeInMillis = this.first().dateInUnixUTCInSeconds * 1000
 
             return unixtimeInMillis.isFresh(OWM_FORECAST_DEFAULT_CACHE_LIFETIME_IN_MS)
         }

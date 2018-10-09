@@ -17,7 +17,7 @@ open class OWMListItemResponse(
     @PrimaryKey
     @SerializedName("dt")
     @Expose
-    override var dateInUnixtimeUTC: Long = 0,
+    override var dateInUnixUTCInSeconds: Long = 0,
 
     @SerializedName("rain")
     @Expose

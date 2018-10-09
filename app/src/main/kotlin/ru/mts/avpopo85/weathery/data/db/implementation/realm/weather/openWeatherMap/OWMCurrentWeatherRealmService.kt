@@ -14,7 +14,7 @@ class OWMCurrentWeatherRealmService(context: Context) :
 
     override val OWMCurrentWeatherResponseType.isFresh: Boolean
         get() {
-            val unixtimeInMillis = this.timeOfDataCalculationUnixUTC * 1000
+            val unixtimeInMillis = this.timeOfDataCalculationUnixUTCInSeconds * 1000
 
             return unixtimeInMillis.isFresh(OWM_CURRENT_WEATHER_CACHE_LIFETIME_IN_MS)
         }

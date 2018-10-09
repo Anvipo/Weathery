@@ -11,7 +11,7 @@ class YWForecastRealmService(context: Context) :
 
     override val List<YWForecastResponseType>.isFresh: Boolean
         get() {
-            val unixtimeInMillis = this.first().dateInUnixtimeUTC
+            val unixtimeInMillis = this.first().dateInUnixUTCInSeconds
 
             return unixtimeInMillis.isFresh(OWM_FORECAST_DEFAULT_CACHE_LIFETIME_IN_MS)
         }

@@ -21,7 +21,7 @@ class OWMForecastMapper
     override fun mapForecast(forecastListResponse: OWMForecastListResponseType): OWMForecastListType =
         forecastListResponse.map { forecastResponse: OWMForecastResponseType ->
             OWMForecastType(
-                date = forecastResponse.dateInUnixtimeUTC.toDateTime(),
+                date = forecastResponse.dateInUnixUTCInSeconds.toDateTime(),
                 cloudiness = forecastResponse.clouds!!.cloudiness,
                 wind = forecastResponse.wind!!.let {
                     OWMWind(

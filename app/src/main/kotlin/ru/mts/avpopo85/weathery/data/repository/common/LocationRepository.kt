@@ -54,9 +54,9 @@ class LocationRepository
 
     private fun getAddress(success: Boolean): Single<UserAddressType> =
         makeGpsCall(success)
-            .flatMap { makeAddressFromLocation(it) }
-            .flatMap { dbService.saveCurrentAddress(it) }
-            .onErrorResumeNext { handleGpsCallError(it) }
+            .flatMap(::makeAddressFromLocation)
+            .flatMap(dbService::saveCurrentAddress)
+            .onErrorResumeNext(::handleGpsCallError)
 
     @SuppressLint("MissingPermission")
     private fun makeGpsCall(success: Boolean): Single<Location> =

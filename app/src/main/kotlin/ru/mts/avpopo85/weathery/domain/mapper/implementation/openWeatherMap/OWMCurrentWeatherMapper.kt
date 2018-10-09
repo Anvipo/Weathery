@@ -42,7 +42,7 @@ class OWMCurrentWeatherMapper
                     )
                 },
                 cloudiness = currentWeatherResponse.clouds!!.cloudiness,
-                timeOfDataCalculation = currentWeatherResponse.timeOfDataCalculationUnixUTC.toTime(),
+                timeOfDataCalculation = currentWeatherResponse.timeOfDataCalculationUnixUTCInSeconds.toTime(),
                 sys = currentWeatherResponse.sys!!.let {
                     OWMSys(
                         sunrise = it.sunrise.toTime(),

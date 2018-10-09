@@ -26,7 +26,7 @@ class YWForecastMapper
         forecastListResponse.map {
             YWForecastType(
                 date = it.dateUTC,
-                dateInUnixtime = it.dateInUnixtimeUTC.toDate(),
+                dateInUnixtime = it.dateInUnixUTCInSeconds.toDate(),
                 weekSerialNumber = it.weekSerialNumber,
                 sunriseInLocalTime = it.sunriseInLocalTime,
                 sunsetInLocalTime = it.sunsetInLocalTime,

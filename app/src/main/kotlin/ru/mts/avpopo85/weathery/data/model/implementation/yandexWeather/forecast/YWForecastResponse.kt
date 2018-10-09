@@ -19,7 +19,7 @@ open class YWForecastResponse(
     @PrimaryKey
     @SerializedName("date_ts")
     @Expose
-    override var dateInUnixtimeUTC: Long = 0,
+    override var dateInUnixUTCInSeconds: Long = 0,
 
     @SerializedName("week")
     @Expose

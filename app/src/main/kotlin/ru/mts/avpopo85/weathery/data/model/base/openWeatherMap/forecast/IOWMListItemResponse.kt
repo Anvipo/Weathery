@@ -11,7 +11,7 @@ import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecas
 interface IOWMListItemResponse : IForecastRealmResponse {
 
     /**Time of data forecasted, unix, UTC*/
-    override val dateInUnixtimeUTC: Long
+    override val dateInUnixUTCInSeconds: Long
 
     val rain: OWMRainResponse?
 

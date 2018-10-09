@@ -8,6 +8,6 @@ interface IForecastResponse {
     val dateUTC: String
 
     /**The date of the forecast in Unix time.*/
-    val dateInUnixtimeUTC: Long
+    val dateInUnixUTCInSeconds: Long
 
 }
