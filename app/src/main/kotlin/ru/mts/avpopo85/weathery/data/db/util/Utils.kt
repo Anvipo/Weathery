@@ -6,6 +6,9 @@ import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasNothing
 import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasOutdatedData
+import java.util.*
+
+fun Long.isFresh(cacheLifetime: Long): Boolean = Date().time - this < cacheLifetime
 
 fun <T> onProxyDataIsNull(
     emitter: SingleEmitter<T>,

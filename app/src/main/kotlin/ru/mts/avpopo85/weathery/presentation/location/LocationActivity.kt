@@ -9,11 +9,11 @@ import kotlinx.android.synthetic.main.activity_location.*
 import org.jetbrains.anko.startActivity
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
-import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.di.modules.common.LocationModule
 import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
 import ru.mts.avpopo85.weathery.presentation.main.MainActivity
+import ru.mts.avpopo85.weathery.presentation.utils.APPLICATION_SETTINGS_REQUEST_CODE
 import javax.inject.Inject
 
 
@@ -55,24 +55,24 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
         )
     }
 
-    override fun showCoordinatesDialog(coordinates: GeographicCoordinates) {
-        //todo
-        showLongToast("showCoordinatesDialog not implemented")
-    }
-
-    override fun showZipcodeDialog(zipcode: Int) {
-        //todo
-        showLongToast("showZipcodeDialog not implemented")
-    }
-
     override fun showLocationError() {
-        showLongToast(getString(R.string.could_not_find_your_geolocation))
+        showError(getString(R.string.could_not_find_your_geolocation))
+    }
+
+    override fun showLastKnownLocationError() {
+        showError(getString(R.string.previous_location_unknown))
     }
 
     override fun onResume() {
         super.onResume()
 
         checkPlayServicesAvailable()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        presenter.onUnbindView()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -84,9 +84,7 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
     }
 
     override fun showRationaleDialog() {
-        val part1 = getString(
-            R.string.application_needs_permissions_to_geolocation
-        )
+        val part1 = getString(R.string.application_needs_permissions_to_geolocation)
 
         val part2 = getString(R.string.provide)
 
@@ -101,9 +99,8 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
     }
 
     override fun showGoSettingsDialog() {
-        val part1 = getString(
-            R.string.go_to_applications_settings_and_provide_permissions_to_geolocation
-        )
+        val part1 =
+            getString(R.string.go_to_applications_settings_and_provide_permissions_to_geolocation)
 
         val part2 = getString(R.string.go_to)
 

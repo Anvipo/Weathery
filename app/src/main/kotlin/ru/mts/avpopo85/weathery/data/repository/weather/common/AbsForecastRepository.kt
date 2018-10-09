@@ -10,8 +10,8 @@ import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.base.common.IForecastResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
-import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.utils.common.MyRealmException
+import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 
 abstract class AbsForecastRepository<T : IForecastResponse>(
     private val networkManager: NetworkManager,
@@ -30,7 +30,11 @@ abstract class AbsForecastRepository<T : IForecastResponse>(
         }
 
     protected fun getCurrentAddress(): UserAddressType? = try {
-        locationDbService.getAddress().blockingGet()
+        locationDbService.getAddress(
+            isGpsProviderEnabled = networkManager.isGpsProviderEnabled,
+            isNetworkProviderEnabled = networkManager.isNetworkProviderEnabled,
+            isConnectedToInternet = networkManager.isConnectedToInternet
+        ).blockingGet()
     } catch (exception: Exception) {
         throw Throwable("${context.getString(R.string.db_has_no_location_data)}\n${exception.localizedMessage}")
     }

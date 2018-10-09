@@ -12,10 +12,6 @@ class NetworkManager
     private val context: Context
 ) {
 
-    private val locationManager: LocationManager by lazy {
-        context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-    }
-
     val isConnectedToInternet: Boolean
         get() {
             val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
@@ -28,5 +24,9 @@ class NetworkManager
 
     val isGpsProviderEnabled: Boolean
         get() = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+    private val locationManager: LocationManager by lazy {
+        context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    }
 
 }

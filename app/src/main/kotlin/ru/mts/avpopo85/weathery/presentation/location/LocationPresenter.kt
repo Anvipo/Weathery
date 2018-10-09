@@ -6,16 +6,14 @@ import android.provider.Settings
 import com.tbruyelle.rxpermissions2.Permission
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.BuildConfig
-import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.ILocationInteractor
 import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
+import ru.mts.avpopo85.weathery.presentation.utils.APPLICATION_SETTINGS_REQUEST_CODE
 import ru.mts.avpopo85.weathery.presentation.utils.onParameterIsNull
-import ru.mts.avpopo85.weathery.utils.common.MyRealmException
+import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import javax.inject.Inject
-
-const val APPLICATION_SETTINGS_REQUEST_CODE = 9000
 
 class LocationPresenter
 @Inject constructor(
@@ -76,7 +74,8 @@ class LocationPresenter
             if (address.locality != null) {
                 view?.showCityDialog(address.locality!!)
             } else {
-                view?.showLocationError()
+                view?.disableGetLastKnownLocationButton()
+                view?.showLastKnownLocationError()
             }
         } else {
             onParameterIsNull(
@@ -90,14 +89,8 @@ class LocationPresenter
 
     private fun getLastKnownAddressOnError(error: Throwable?) {
         if (error != null) {
-            if (error is MyRealmException.DBHasNothingAndGPSOnException ||
-                error is MyRealmException.DBHasNothingAndGPSOffException
-            ) {
-                view?.disableGetLastKnownLocationButton()
-                view?.showError(error)
-            } else {
-                view?.showLocationError()
-            }
+            view?.disableGetLastKnownLocationButton()
+            view?.showLastKnownLocationError()
         } else {
             onParameterIsNull(
                 view,
@@ -177,16 +170,6 @@ class LocationPresenter
             when {
                 address.locality != null -> {
                     view?.showCityDialog(address.locality!!)
-                    view?.enableGetLastKnownLocationButton()
-                }
-                address.coords != null -> {
-                    //TODO
-                    view?.showCoordinatesDialog(address.coords!!)
-                    view?.enableGetLastKnownLocationButton()
-                }
-                address.postalCode != null -> {
-                    //TODO
-                    view?.showZipcodeDialog(address.postalCode!!)
                     view?.enableGetLastKnownLocationButton()
                 }
                 else -> view?.showLocationError()

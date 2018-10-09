@@ -16,12 +16,6 @@ import java.util.*
 abstract class AbsForecastRealmService<T : IForecastRealmResponse>
 constructor(private val context: Context) : IForecastDbService<T> {
 
-    abstract val responseClassType: Class<T>
-
-    abstract val List<T>.isFresh: Boolean
-
-    abstract val List<T>.isNotFresh: Boolean
-
     override fun saveForecastResponse(forecastResponseList: List<T>): Single<List<T>> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
@@ -110,6 +104,12 @@ constructor(private val context: Context) : IForecastDbService<T> {
                 }
             }
         }
+
+    abstract val responseClassType: Class<T>
+
+    abstract val List<T>.isFresh: Boolean
+
+    abstract val List<T>.isNotFresh: Boolean
 
     private fun dataExistsInDB(proxyData: RealmResults<T>?) =
         proxyData != null && proxyData.isNotEmpty()

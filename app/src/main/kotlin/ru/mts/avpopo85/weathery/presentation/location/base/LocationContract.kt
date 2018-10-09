@@ -13,11 +13,9 @@ interface LocationContract : BaseContract {
 
         fun showCityDialog(city: String)
 
-        fun showCoordinatesDialog(coordinates: GeographicCoordinates)
-
-        fun showZipcodeDialog(zipcode: Int)
-
         fun showLocationError()
+
+        fun showLastKnownLocationError()
 
         fun enableGetLastKnownLocationButton()
 

@@ -2,6 +2,7 @@ package ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap
 
 import android.content.Context
 import io.reactivex.Single
+import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
@@ -9,8 +10,9 @@ import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecas
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMForecastApiService
 import ru.mts.avpopo85.weathery.data.repository.weather.common.AbsForecastRepository
-import ru.mts.avpopo85.weathery.data.utils.UserAddressType
+import ru.mts.avpopo85.weathery.data.utils.LocationUnknown
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
+import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
 import javax.inject.Inject
@@ -22,7 +24,7 @@ class OWMForecastRepository
     networkManager: NetworkManager,
     forecastDbService: IForecastDbService<OWMForecastResponseType>,
     locationDbService: ILocationDbService<UserAddressType>,
-    context: Context
+    private val context: Context
 ) :
     AbsForecastRepository<OWMForecastResponseType>(
         networkManager,
@@ -55,12 +57,20 @@ class OWMForecastRepository
                 )
 
                 //TODO
-                else -> Single.error(Throwable("Текущее местоположение неизвестно"))
+                else -> {
+                    val error =
+                        LocationUnknown(context.getString(R.string.current_location_unknown))
+
+                    Single.error(error)
+                }
             }
 
             apiCall.map { it.forecastsList }
         } else {
-            Single.error(Throwable("Текущее местоположение неизвестно"))
+            val error =
+                LocationUnknown(context.getString(R.string.current_location_unknown))
+
+            Single.error(error)
         }
     }
 
@@ -80,26 +90,5 @@ class OWMForecastRepository
 
     private fun getCurrentWeatherByCityName(cityName: String): Single<OWMForecastResponse> =
         apiService.getCurrentWeatherByCityName(cityName)
-
-    /*override fun getForecast(): Single<OWMForecastListResponseType> {
-        val dbCall = forecastDbService
-            .getForecastResponse(networkManager.isConnectedToInternet)
-
-        if (!networkManager.isConnectedToInternet) {
-            return dbCall
-        }
-
-        return dbCall.onErrorResumeNext { _ ->
-            apiCall()
-                ?.map { it.forecastsList }
-                ?.flatMap { forecastDbService.saveForecastResponse(it) }
-        }
-    }
-
-
-    private fun GeographicCoordinates?.areNotNull(): Boolean =
-        this != null && this.latitudeAndLongitudeAreNotNull()
-
-    */
 
 }

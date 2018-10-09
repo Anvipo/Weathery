@@ -13,7 +13,7 @@ import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.openWeather
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.openWeatherMap.OWMForecastRealmService
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.yandexWeather.YWCurrentWeatherRealmService
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.yandexWeather.YWForecastRealmService
-import ru.mts.avpopo85.weathery.data.utils.UserAddressType
+import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType

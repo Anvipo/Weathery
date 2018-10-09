@@ -2,14 +2,16 @@ package ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap
 
 import android.content.Context
 import io.reactivex.Single
+import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMCurrentWeatherApiService
 import ru.mts.avpopo85.weathery.data.repository.weather.common.AbsCurrentWeatherRepository
-import ru.mts.avpopo85.weathery.data.utils.UserAddressType
+import ru.mts.avpopo85.weathery.data.utils.LocationUnknown
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
+import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import javax.inject.Inject
 
@@ -19,7 +21,7 @@ class OWMCurrentWeatherRepository
     networkManager: NetworkManager,
     currentWeatherDbService: ICurrentWeatherDbService<OWMCurrentWeatherResponseType>,
     locationDbService: ILocationDbService<UserAddressType>,
-    context: Context
+    private val context: Context
 ) :
     AbsCurrentWeatherRepository<OWMCurrentWeatherResponseType>(
         currentWeatherDbService, locationDbService, context, networkManager
@@ -49,11 +51,18 @@ class OWMCurrentWeatherRepository
                     currentAddress.countryCode
                 )
 
-                //TODO
-                else -> Single.error(Throwable("Текущее местоположение неизвестно"))
+                else -> {
+                    val error =
+                        LocationUnknown(context.getString(R.string.current_location_unknown))
+
+                    Single.error(error)
+                }
             }
         } else {
-            Single.error(Throwable("Текущее местоположение неизвестно"))
+            val error =
+                LocationUnknown(context.getString(R.string.current_location_unknown))
+
+            Single.error(error)
         }
     }
 

@@ -7,7 +7,11 @@ interface ILocationDbService<T : IUserAddress> {
 
     fun saveAddress(address: T): Single<T>
 
-    fun getAddress(gpsIsEnabled: Boolean = false): Single<T>
+    fun getAddress(
+        isGpsProviderEnabled: Boolean,
+        isNetworkProviderEnabled: Boolean,
+        isConnectedToInternet: Boolean
+    ): Single<T>
 
     fun getCityName(): Single<String>
 

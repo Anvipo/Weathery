@@ -8,9 +8,9 @@ import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
-import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.data.utils.yandexWeather.YWConstants.YW_FORECAST_PARAMETERS
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
+import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastResponseType
 import javax.inject.Inject
@@ -68,7 +68,11 @@ class YWForecastRepository
     )
 
     private fun getCurrentAddress(): UserAddressType? = try {
-        locationDbService.getAddress().blockingGet()
+        locationDbService.getAddress(
+            isGpsProviderEnabled = networkManager.isGpsProviderEnabled,
+            isNetworkProviderEnabled = networkManager.isNetworkProviderEnabled,
+            isConnectedToInternet = networkManager.isConnectedToInternet
+        ).blockingGet()
     } catch (exception: Exception) {
         throw Throwable("${context.getString(R.string.db_has_no_location_data)}\n${exception.localizedMessage}")
     }

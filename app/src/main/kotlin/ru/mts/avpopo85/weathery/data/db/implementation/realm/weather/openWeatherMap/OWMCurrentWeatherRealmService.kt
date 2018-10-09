@@ -3,7 +3,7 @@ package ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.openWeathe
 import android.content.Context
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.common.AbsCurrentWeatherRealmService
 import ru.mts.avpopo85.weathery.data.db.util.OWM_CURRENT_WEATHER_CACHE_LIFETIME_IN_MS
-import ru.mts.avpopo85.weathery.data.utils.isFresh
+import ru.mts.avpopo85.weathery.data.db.util.isFresh
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 
 class OWMCurrentWeatherRealmService(context: Context) :

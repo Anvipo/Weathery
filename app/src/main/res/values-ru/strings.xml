@@ -240,4 +240,9 @@
     <string name="there_is_something_wrong_with_your_gps_adapter">С Вашим GPS адаптером что-то не так</string>
     <string name="try_to_restart_the_device">Попробуйте перезапустить устройство</string>
     <string name="application_needs_internet_connection">Приложению необходимо интернет-соединение</string>
+    <string name="previous_location_unknown">Предыдущее местоположение неизвестно</string>
+    <string name="internet_connection_required">Необходимо интернет соединение</string>
+    <string name="gps_required">Необходимо включить GPS</string>
+    <string name="internet_conncetion_and_GPS_required">Необходимы включённые интернет соединение и GPS</string>
+    <string name="current_location_unknown">Текущее местоположение неизвестно</string>
 </resources>

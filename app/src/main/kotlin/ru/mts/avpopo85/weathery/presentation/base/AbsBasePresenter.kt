@@ -15,6 +15,7 @@ abstract class AbsBasePresenter<V : BaseContract.View> : BaseContract.Presenter<
 
     override fun onUnbindView() {
         compositeDisposable.clear()
+        view?.hideLoadingProgress()
 
         this.view = null
     }

@@ -18,10 +18,10 @@ import ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap.OWMCurren
 import ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap.OWMForecastRepository
 import ru.mts.avpopo85.weathery.data.repository.weather.yandexWeather.YWCurrentWeatherRepository
 import ru.mts.avpopo85.weathery.data.repository.weather.yandexWeather.YWForecastRepository
-import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
+import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType

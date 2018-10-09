@@ -14,12 +14,6 @@ import ru.mts.avpopo85.weathery.data.model.base.common.ICurrentWeatherRealmRespo
 abstract class AbsCurrentWeatherRealmService<T : ICurrentWeatherRealmResponse>
 constructor(private val context: Context) : ICurrentWeatherDbService<T> {
 
-    abstract val responseClassType: Class<T>
-
-    abstract val T.isFresh: Boolean
-
-    abstract val T.isNotFresh: Boolean
-
     override fun saveCurrentWeatherResponse(currentWeatherResponse: T): Single<T> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
@@ -108,5 +102,11 @@ constructor(private val context: Context) : ICurrentWeatherDbService<T> {
                 }
             }
         }
+
+    abstract val responseClassType: Class<T>
+
+    abstract val T.isFresh: Boolean
+
+    abstract val T.isNotFresh: Boolean
 
 }

@@ -3,7 +3,7 @@ package ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.yandexWeat
 import android.content.Context
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.common.AbsCurrentWeatherRealmService
 import ru.mts.avpopo85.weathery.data.db.util.YW_DEFAULT_CACHE_LIFETIME
-import ru.mts.avpopo85.weathery.data.utils.isFresh
+import ru.mts.avpopo85.weathery.data.db.util.isFresh
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 
 class YWCurrentWeatherRealmService(context: Context) :

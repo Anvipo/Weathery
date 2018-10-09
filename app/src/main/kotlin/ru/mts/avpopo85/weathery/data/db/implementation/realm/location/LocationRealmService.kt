@@ -8,8 +8,8 @@ import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.db.util.onDataIsNull
 import ru.mts.avpopo85.weathery.data.db.util.onProxyDataIsNull
-import ru.mts.avpopo85.weathery.data.utils.UserAddressType
 import ru.mts.avpopo85.weathery.utils.common.MyRealmException.*
+import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 
 class LocationRealmService(private val context: Context) : ILocationDbService<UserAddressType> {
 
@@ -32,7 +32,6 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                     if (data != null) {
                         emitter.onSuccess(data)
                     } else {
-                        //todo
                         val methodName =
                             object : Any() {}.javaClass.enclosingMethod?.name ?: "saveAddress"
 
@@ -47,7 +46,11 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
             }
         }
 
-    override fun getAddress(gpsIsEnabled: Boolean): Single<UserAddressType> =
+    override fun getAddress(
+        isGpsProviderEnabled: Boolean,
+        isNetworkProviderEnabled: Boolean,
+        isConnectedToInternet: Boolean
+    ): Single<UserAddressType> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
                 val proxyData =
@@ -73,7 +76,13 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                             this::class.java.simpleName
                         )
                     }
-                } else if (!gpsIsEnabled) {
+                } else if (!isConnectedToInternet && isGpsProviderEnabled) {
+                    emitter.onError(InternetConnectionIsRequired(context.getString(R.string.internet_connection_required)))
+                } else if (!isConnectedToInternet && !isGpsProviderEnabled) {
+                    val message = context.getString(R.string.internet_conncetion_and_GPS_required)
+
+                    emitter.onError(InternetConnectionIsRequired(message))
+                } else if (!isGpsProviderEnabled) {
                     val part1 = context.getString(R.string.your_previous_location_is_unknown)
                     val part2 =
                         context.getString(R.string.find_out_your_current_location_in_one_of_the_suggested_ways)
@@ -81,7 +90,7 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                     val part4 = context.getString(R.string.you_must_enable_it)
 
                     emitter.onError(DBHasNothingAndGPSOffException("$part1. $part2, $part3. ($part4)"))
-                } else if (gpsIsEnabled) {
+                } else if (isGpsProviderEnabled) {
                     val part1 = context.getString(R.string.your_previous_location_is_unknown)
                     val part2 =
                         context.getString(R.string.find_out_your_current_location_in_one_of_the_suggested_ways)

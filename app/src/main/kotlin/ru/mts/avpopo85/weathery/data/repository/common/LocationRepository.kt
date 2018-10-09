@@ -14,9 +14,10 @@ import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoord
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserAddress
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserLocale
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
-import ru.mts.avpopo85.weathery.data.utils.UserAddressType
+import ru.mts.avpopo85.weathery.data.repository.utils.ONE_SECOND_IN_MILLIS
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
-import ru.mts.avpopo85.weathery.utils.common.MyRealmException.*
+import ru.mts.avpopo85.weathery.utils.common.MyRealmException.InternetConnectionIsRequired
+import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import java.io.IOException
 import java.util.*
 import javax.inject.Inject
@@ -29,15 +30,6 @@ class LocationRepository
     private val networkManager: NetworkManager
 ) : ILocationRepository {
 
-    private val rxLocation by lazy { RxLocation(context) }
-
-    private val locationRequest by lazy {
-        LocationRequest.create()
-            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-            .setInterval(10_000)
-            .setFastestInterval(5_000)
-    }
-
     override fun getCurrentAddress(): Single<UserAddressType> =
         rxLocation
             .settings()
@@ -45,18 +37,30 @@ class LocationRepository
             .flatMap(::getAddress)
 
     override fun getLastKnownAddress(): Single<UserAddressType> =
-        dbService.getAddress(networkManager.isGpsProviderEnabled)
+        dbService.getAddress(
+            networkManager.isGpsProviderEnabled,
+            networkManager.isNetworkProviderEnabled,
+            networkManager.isConnectedToInternet
+        )
 
-    private fun getAddress(isGpsProviderEnabled: Boolean): Single<UserAddressType> =
-        makeGpsCall(isGpsProviderEnabled)
+    private val rxLocation by lazy { RxLocation(context) }
+
+    private val locationRequest by lazy {
+        LocationRequest.create()
+            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+            .setInterval(10L * ONE_SECOND_IN_MILLIS)
+            .setFastestInterval(5L * ONE_SECOND_IN_MILLIS)
+    }
+
+    private fun getAddress(success: Boolean): Single<UserAddressType> =
+        makeGpsCall(success)
             .flatMap { makeAddressFromLocation(it) }
             .flatMap { dbService.saveAddress(it) }
-            .onErrorResumeNext { handleGpsCallError(it, isGpsProviderEnabled) }
+            .onErrorResumeNext { handleGpsCallError(it) }
 
     @SuppressLint("MissingPermission")
-    private fun makeGpsCall(isGpsAndNetworkProvidersAreEnabled: Boolean): Single<Location> =
-        if (isGpsAndNetworkProvidersAreEnabled /*&& networkManager.isConnectedToInternet*/) {
-            //TODO
+    private fun makeGpsCall(success: Boolean): Single<Location> =
+        if (success && networkManager.isConnectedToInternet) {
             rxLocation.location()
                 .updates(locationRequest)
                 .firstOrError()
@@ -69,9 +73,7 @@ class LocationRepository
     private fun makeAddressFromLocation(location: Location): Single<UserAddressType> =
         if (networkManager.isConnectedToInternet) {
             getAddressFromLocation(location)
-        } /*else if (networkManager.isNetworkProviderEnabled) {
-            getAddressFromLocation(location)
-        }*/ else {
+        } else {
             val coords = getGeographicCoordinates(location)
 
             Single.just(UserAddressType(coords = coords))
@@ -89,52 +91,51 @@ class LocationRepository
             .map(::mapUserAddress)
             .toSingle()
 
-    private fun handleGpsCallError(
-        it: Throwable,
-        isGpsProviderEnabled: Boolean
-    ): SingleSource<UserAddressType> = when (it) {
-        is IOException -> {
-            //todo
-            makeGpsCall(isGpsProviderEnabled)
-                .flatMap {
-                    val coords = getGeographicCoordinates(it)
-
-                    Single.just(UserAddressType(coords = coords))
-                }
-                .flatMap { dbService.saveAddress(it) }
-                .onErrorResumeNext { dbService.getAddress(isGpsProviderEnabled) }
+    private fun handleGpsCallError(error: Throwable): SingleSource<UserAddressType> =
+        when (error) {
+            is IOException -> {
+                Single.error(InternetConnectionIsRequired(context.getString(R.string.internet_connection_required)))
+            }
+            is NoSuchElementException -> {
+                //last location is unknown
+                dbService.getAddress(
+                    networkManager.isGpsProviderEnabled,
+                    networkManager.isNetworkProviderEnabled,
+                    networkManager.isConnectedToInternet
+                )
+            }
+            else -> dbService.getAddress(
+                networkManager.isGpsProviderEnabled,
+                networkManager.isNetworkProviderEnabled,
+                networkManager.isConnectedToInternet
+            )
         }
-        is NoSuchElementException -> {
-            //last location is unknown
-            dbService.getAddress(isGpsProviderEnabled)
-        }
-        else -> dbService.getAddress(isGpsProviderEnabled)
-    }
 
-    private fun mapUserAddress(it: Address): UserAddress = UserAddress(
-        saveDate = Date().time,
-        adminArea = it.adminArea,
-        countryCode = it.countryCode,
-        countryName = it.countryName,
-        featureName = it.featureName,
-        coords = GeographicCoordinates(
-            latitude = it.latitude,
-            longitude = it.longitude
-        ),
-        locale = UserLocale(
-            language = it.locale?.language,
-            region = it.locale?.country
-        ),
-        locality = it.locality,
-        postalCode = it.postalCode.toInt(),
-        subAdminArea = it.subAdminArea,
-        subThoroughfare = it.subThoroughfare,
-        thoroughfare = it.thoroughfare,
-        extras = it.extras?.toString(),
-        phone = it.phone,
-        premises = it.premises,
-        subLocality = it.subLocality,
-        url = it.url
-    )
+    private fun mapUserAddress(it: Address): UserAddress =
+        UserAddress(
+            saveDate = Date().time,
+            adminArea = it.adminArea,
+            countryCode = it.countryCode,
+            countryName = it.countryName,
+            featureName = it.featureName,
+            coords = GeographicCoordinates(
+                latitude = it.latitude,
+                longitude = it.longitude
+            ),
+            locale = UserLocale(
+                language = it.locale?.language,
+                region = it.locale?.country
+            ),
+            locality = it.locality,
+            postalCode = it.postalCode.toInt(),
+            subAdminArea = it.subAdminArea,
+            subThoroughfare = it.subThoroughfare,
+            thoroughfare = it.thoroughfare,
+            extras = it.extras?.toString(),
+            phone = it.phone,
+            premises = it.premises,
+            subLocality = it.subLocality,
+            url = it.url
+        )
 
 }
