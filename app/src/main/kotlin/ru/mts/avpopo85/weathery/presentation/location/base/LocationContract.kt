@@ -1,11 +1,12 @@
 package ru.mts.avpopo85.weathery.presentation.location.base
 
-import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
+import com.google.android.gms.maps.model.LatLng
 import ru.mts.avpopo85.weathery.presentation.base.BaseContract
+import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.HasProgressBar
 
 interface LocationContract : BaseContract {
 
-    interface View : BaseContract.View {
+    interface View : BaseContract.View, HasProgressBar {
 
         fun showRationaleDialog()
 
@@ -20,6 +21,8 @@ interface LocationContract : BaseContract {
         fun enableGetLastKnownLocationButton()
 
         fun disableGetLastKnownLocationButton()
+
+        fun showGetAddressFromCoordinatesError()
     }
 
     interface Presenter : BaseContract.Presenter<View> {
@@ -37,6 +40,8 @@ interface LocationContract : BaseContract {
         fun onGoSettingNegativeClick()
 
         fun onActivityResult()
+
+        fun getAddressFromCoordinates(coordinates: LatLng)
 
     }
 

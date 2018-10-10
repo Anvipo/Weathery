@@ -1,5 +1,6 @@
 package ru.mts.avpopo85.weathery.domain.interactor.implementation.location
 
+import com.google.android.gms.maps.model.LatLng
 import com.tbruyelle.rxpermissions2.Permission
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -23,5 +24,8 @@ class LocationInteractor
 
     override fun getLastKnownAddress(): Single<UserAddressType> =
         locationRepository.getLastKnownAddress()
+
+    override fun getAddressFromCoordinates(coordinates: LatLng): Single<UserAddressType> =
+        locationRepository.getAddressFromCoordinates(coordinates)
 
 }

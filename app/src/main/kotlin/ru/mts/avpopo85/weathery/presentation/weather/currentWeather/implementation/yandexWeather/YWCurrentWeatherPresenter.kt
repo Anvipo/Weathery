@@ -1,6 +1,7 @@
 package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.yandexWeather
 
 import android.content.Context
+import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.ICurrentWeatherInteractor
 import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
@@ -32,10 +33,13 @@ class YWCurrentWeatherPresenter
         if (currentWeather != null) {
             view?.showWeatherResponse(currentWeather)
         } else {
-            val methodName =
-                object : Any() {}.javaClass.enclosingMethod?.name ?: "getCurrentWeatherOnSuccess"
+            if (BuildConfig.DEBUG) {
+                val methodName =
+                    object : Any() {}.javaClass.enclosingMethod?.name
+                        ?: "getCurrentWeatherOnSuccess"
 
-            onParameterIsNull(view, this::class.java.simpleName, methodName, "currentWeather")
+                onParameterIsNull(view, this::class.java.simpleName, methodName, "currentWeather")
+            }
         }
     }
 
@@ -43,10 +47,13 @@ class YWCurrentWeatherPresenter
         if (error != null) {
             view?.showError(context.parseError(error))
         } else {
-            val methodName =
-                object : Any() {}.javaClass.enclosingMethod?.name ?: "getCurrentWeatherOnSuccess"
+            if (BuildConfig.DEBUG) {
+                val methodName =
+                    object : Any() {}.javaClass.enclosingMethod?.name
+                        ?: "getCurrentWeatherOnError"
 
-            onParameterIsNull(view, this::class.java.simpleName, methodName, "error")
+                onParameterIsNull(view, this::class.java.simpleName, methodName, "error")
+            }
         }
     }
 

@@ -2,7 +2,6 @@ package ru.mts.avpopo85.weathery.presentation.base
 
 import android.util.Log
 import android.view.View
-import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
@@ -27,18 +26,6 @@ abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.Vie
         presenter.onUnbindView()
         super.onDestroy()
     }*/
-
-    protected abstract val progressBar: ProgressBar
-
-    override fun showLoadingProgress() {
-        progressBar.visibility = View.VISIBLE
-    }
-
-    override fun hideLoadingProgress() {
-        progressBar.visibility = View.GONE
-    }
-
-    override fun isLoadingProgressShown(): Boolean = progressBar.isShown
 
     override fun showError(throwable: Throwable) {
         throwable.printStackTrace()

@@ -15,7 +15,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
-        versionName "0.45"
+        versionName "0.46"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -70,18 +70,19 @@ dependencies {
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation "androidx.test:runner:1.1.0-beta01"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.1.0-beta01"
 
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation "androidx.vectordrawable:vectordrawable:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.appcompat:appcompat:1.0.0"
     implementation "com.google.android.material:material:1.0.0"
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation "androidx.recyclerview:recyclerview:1.0.0"
+    implementation 'androidx.core:core-ktx:1.0.0'
 
     //retrofit2
     implementation "com.squareup.retrofit2:retrofit:2.4.0"

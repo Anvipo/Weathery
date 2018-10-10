@@ -2,7 +2,6 @@ package ru.mts.avpopo85.weathery.presentation.utils
 
 import android.content.Context
 import retrofit2.HttpException
-import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.BaseContract
 import java.net.ConnectException
@@ -15,13 +14,11 @@ fun onParameterIsNull(
     methodName: String,
     parameterName: String
 ) {
-    if (BuildConfig.DEBUG) {
-        val message = "$className.$methodName - $parameterName == null"
+    val message = "$className.$methodName - $parameterName == null"
 
-        view?.sendErrorLog(message)
+    view?.sendErrorLog(message)
 
-        view?.showError(message)
-    }
+    view?.showError(message)
 }
 
 fun Context.parseError(throwable: Throwable): String {

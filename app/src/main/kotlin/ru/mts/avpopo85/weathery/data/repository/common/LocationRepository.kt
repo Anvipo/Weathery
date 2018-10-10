@@ -5,6 +5,7 @@ import android.content.Context
 import android.location.Address
 import android.location.Location
 import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.maps.model.LatLng
 import com.patloew.rxlocation.RxLocation
 import io.reactivex.Single
 import io.reactivex.SingleSource
@@ -16,6 +17,7 @@ import ru.mts.avpopo85.weathery.data.model.implementation.common.UserLocale
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.repository.utils.ONE_SECOND_IN_MILLIS
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
+import ru.mts.avpopo85.weathery.utils.common.MyRealmException
 import ru.mts.avpopo85.weathery.utils.common.MyRealmException.InternetConnectionIsRequired
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import java.io.IOException
@@ -42,6 +44,15 @@ class LocationRepository
             networkManager.isNetworkProviderEnabled,
             networkManager.isConnectedToInternet
         )
+
+    override fun getAddressFromCoordinates(coordinates: LatLng): Single<UserAddressType> {
+        val location = Location(coordinates.toString()).apply {
+            latitude = coordinates.latitude
+            longitude = coordinates.longitude
+        }
+
+        return makeAddressFromLocation(location).flatMap(dbService::saveCurrentAddress)
+    }
 
     private val rxLocation by lazy { RxLocation(context) }
 
@@ -74,16 +85,8 @@ class LocationRepository
         if (networkManager.isConnectedToInternet) {
             getAddressFromLocation(location)
         } else {
-            val coords = getGeographicCoordinates(location)
-
-            Single.just(UserAddressType(coords = coords))
+            Single.error<UserAddressType>(MyRealmException.InternetConnectionIsRequired("Необходимо интернет подключение"))
         }
-
-    private fun getGeographicCoordinates(location: Location): GeographicCoordinates =
-        GeographicCoordinates(
-            latitude = location.latitude,
-            longitude = location.longitude
-        )
 
     private fun getAddressFromLocation(location: Location): Single<UserAddressType> =
         rxLocation.geocoding()
@@ -111,31 +114,33 @@ class LocationRepository
             )
         }
 
-    private fun mapUserAddress(it: Address): UserAddress =
-        UserAddress(
-            saveDate = Date().time,
-            adminArea = it.adminArea,
-            countryCode = it.countryCode,
-            countryName = it.countryName,
-            featureName = it.featureName,
-            coords = GeographicCoordinates(
-                latitude = it.latitude,
-                longitude = it.longitude
-            ),
-            locale = UserLocale(
-                language = it.locale?.language,
-                region = it.locale?.country
-            ),
-            locality = it.locality,
-            postalCode = it.postalCode.toInt(),
-            subAdminArea = it.subAdminArea,
-            subThoroughfare = it.subThoroughfare,
-            thoroughfare = it.thoroughfare,
-            extras = it.extras?.toString(),
-            phone = it.phone,
-            premises = it.premises,
-            subLocality = it.subLocality,
-            url = it.url
-        )
+    private fun mapUserAddress(address: Address): UserAddress =
+        address.let {
+            UserAddress(
+                saveDate = Date().time,
+                adminArea = it.adminArea,
+                countryCode = it.countryCode,
+                countryName = it.countryName,
+                featureName = it.featureName,
+                coords = GeographicCoordinates(
+                    latitude = it.latitude,
+                    longitude = it.longitude
+                ),
+                locale = UserLocale(
+                    language = it.locale?.language,
+                    region = it.locale?.country
+                ),
+                locality = it.locality,
+                postalCode = it.postalCode?.toInt(),
+                subAdminArea = it.subAdminArea,
+                subThoroughfare = it.subThoroughfare,
+                thoroughfare = it.thoroughfare,
+                extras = it.extras?.toString(),
+                phone = it.phone,
+                premises = it.premises,
+                subLocality = it.subLocality,
+                url = it.url
+            )
+        }
 
 }

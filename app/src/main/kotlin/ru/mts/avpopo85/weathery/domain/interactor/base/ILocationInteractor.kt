@@ -1,5 +1,6 @@
 package ru.mts.avpopo85.weathery.domain.interactor.base
 
+import com.google.android.gms.maps.model.LatLng
 import com.tbruyelle.rxpermissions2.Permission
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -12,5 +13,7 @@ interface ILocationInteractor {
     fun getCurrentAddress(): Single<UserAddressType>
 
     fun getLastKnownAddress(): Single<UserAddressType>
+
+    fun getAddressFromCoordinates(coordinates: LatLng): Single<UserAddressType>
 
 }

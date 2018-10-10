@@ -1,6 +1,7 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap
 
 import android.content.Context
+import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.IForecastInteractor
 import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
@@ -32,10 +33,12 @@ class OWMForecastPresenter
         if (forecast != null) {
             view?.showWeatherResponse(forecast)
         } else {
-            val methodName =
-                object : Any() {}.javaClass.enclosingMethod?.name ?: "getForecastOnSuccess"
+            if (BuildConfig.DEBUG) {
+                val methodName =
+                    object : Any() {}.javaClass.enclosingMethod?.name ?: "getForecastOnSuccess"
 
-            onParameterIsNull(view, this::class.java.simpleName, methodName, "forecast")
+                onParameterIsNull(view, this::class.java.simpleName, methodName, "forecast")
+            }
         }
     }
 
@@ -43,10 +46,12 @@ class OWMForecastPresenter
         if (error != null) {
             view?.showError(context.parseError(error))
         } else {
-            val methodName =
-                object : Any() {}.javaClass.enclosingMethod?.name ?: "getForecastOnError"
+            if (BuildConfig.DEBUG) {
+                val methodName =
+                    object : Any() {}.javaClass.enclosingMethod?.name ?: "getForecastOnError"
 
-            onParameterIsNull(view, this::class.java.simpleName, methodName, "error")
+                onParameterIsNull(view, this::class.java.simpleName, methodName, "error")
+            }
         }
     }
 

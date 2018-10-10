@@ -3,6 +3,7 @@ package ru.mts.avpopo85.weathery.presentation.location
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import com.google.android.gms.maps.model.LatLng
 import com.tbruyelle.rxpermissions2.Permission
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.BuildConfig
@@ -69,6 +70,58 @@ class LocationPresenter
         view?.showLocationError()
     }
 
+    override fun getAddressFromCoordinates(coordinates: LatLng) {
+        val task = interactor.getAddressFromCoordinates(coordinates)
+            .compose(schedulerManagerModule.singleTransformer())
+            .doOnSubscribe { view?.showLoadingProgress() }
+            .doAfterTerminate { view?.hideLoadingProgress() }
+            .subscribe(::getAddressFromCoordinatesOnSuccess, ::getAddressFromCoordinatesOnError)
+
+        compositeDisposable.add(task)
+    }
+
+    private fun getAddressFromCoordinatesOnSuccess(address: UserAddressType?) {
+        if (address != null) {
+            if (address.locality != null) {
+                view?.showCityDialog(address.locality!!)
+            } else {
+                view?.showGetAddressFromCoordinatesError()
+            }
+        } else {
+            if (BuildConfig.DEBUG) {
+                val methodName =
+                    object : Any() {}.javaClass.enclosingMethod?.name
+                        ?: "getAddressFromCoordinatesOnSuccess"
+
+                onParameterIsNull(
+                    view,
+                    this::class.java.simpleName,
+                    methodName,
+                    "address"
+                )
+            }
+        }
+    }
+
+    private fun getAddressFromCoordinatesOnError(error: Throwable?) {
+        if (error != null) {
+            view?.showGetAddressFromCoordinatesError()
+        } else {
+            if (BuildConfig.DEBUG) {
+                val methodName =
+                    object : Any() {}.javaClass.enclosingMethod?.name
+                        ?: "getAddressFromCoordinatesOnError"
+
+                onParameterIsNull(
+                    view,
+                    this::class.java.simpleName,
+                    methodName,
+                    "error"
+                )
+            }
+        }
+    }
+
     private fun getLastKnownAddressOnSuccess(address: UserAddressType?) {
         if (address != null) {
             if (address.locality != null) {
@@ -78,12 +131,19 @@ class LocationPresenter
                 view?.showLastKnownLocationError()
             }
         } else {
-            onParameterIsNull(
-                view,
-                this::class.java.simpleName,
-                "getLastKnownGeolocation",
-                "address"
-            )
+            if (BuildConfig.DEBUG) {
+                val methodName =
+                    object : Any() {}.javaClass.enclosingMethod?.name
+                        ?: "getLastKnownAddressOnSuccess"
+
+                onParameterIsNull(
+                    view,
+                    this::class.java.simpleName,
+                    methodName,
+                    "address"
+                )
+
+            }
         }
     }
 
@@ -92,12 +152,18 @@ class LocationPresenter
             view?.disableGetLastKnownLocationButton()
             view?.showLastKnownLocationError()
         } else {
-            onParameterIsNull(
-                view,
-                this::class.java.simpleName,
-                "getLastKnownGeolocation",
-                "error"
-            )
+            if (BuildConfig.DEBUG) {
+                val methodName =
+                    object : Any() {}.javaClass.enclosingMethod?.name
+                        ?: "getLastKnownAddressOnError"
+
+                onParameterIsNull(
+                    view,
+                    this::class.java.simpleName,
+                    methodName,
+                    "error"
+                )
+            }
         }
     }
 
@@ -116,12 +182,18 @@ class LocationPresenter
         } else {
             view?.hideLoadingProgress()
 
-            onParameterIsNull(
-                view,
-                this::class.java.simpleName,
-                "checkPermissions",
-                "permission"
-            )
+            if (BuildConfig.DEBUG) {
+                val methodName =
+                    object : Any() {}.javaClass.enclosingMethod?.name
+                        ?: "requestPermissionsOnSuccess"
+
+                onParameterIsNull(
+                    view,
+                    this::class.java.simpleName,
+                    methodName,
+                    "permission"
+                )
+            }
         }
     }
 
@@ -131,12 +203,18 @@ class LocationPresenter
         if (error != null) {
             view?.showError(error)
         } else {
-            onParameterIsNull(
-                view,
-                this::class.java.simpleName,
-                "checkPermissions",
-                "error"
-            )
+            if (BuildConfig.DEBUG) {
+                val methodName =
+                    object : Any() {}.javaClass.enclosingMethod?.name
+                        ?: "requestPermissionsOnError"
+
+                onParameterIsNull(
+                    view,
+                    this::class.java.simpleName,
+                    methodName,
+                    "error"
+                )
+            }
         }
     }
 
@@ -175,12 +253,18 @@ class LocationPresenter
                 else -> view?.showLocationError()
             }
         } else {
-            onParameterIsNull(
-                view,
-                this::class.java.simpleName,
-                "getLastKnownAddress",
-                "address"
-            )
+            if (BuildConfig.DEBUG) {
+                val methodName =
+                    object : Any() {}.javaClass.enclosingMethod?.name
+                        ?: "getCurrentAddressOnSuccess"
+
+                onParameterIsNull(
+                    view,
+                    this::class.java.simpleName,
+                    methodName,
+                    "address"
+                )
+            }
         }
     }
 
@@ -188,7 +272,13 @@ class LocationPresenter
         if (error != null) {
             view?.showError(error)
         } else {
-            onParameterIsNull(view, this::class.java.simpleName, "getLastKnownAddress", "error")
+            if (BuildConfig.DEBUG) {
+                val methodName =
+                    object : Any() {}.javaClass.enclosingMethod?.name
+                        ?: "getCurrentAddressOnError"
+
+                onParameterIsNull(view, this::class.java.simpleName, methodName, "error")
+            }
         }
     }
 

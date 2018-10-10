@@ -5,19 +5,24 @@ import android.os.Bundle
 import android.widget.ProgressBar
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_location.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.startActivityForResult
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.common.LocationModule
-import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
+import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.AbsProgressBarActivity
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
+import ru.mts.avpopo85.weathery.presentation.location.map.google.MapsActivity
+import ru.mts.avpopo85.weathery.presentation.location.utils.COORDINATES_TAG
 import ru.mts.avpopo85.weathery.presentation.main.MainActivity
 import ru.mts.avpopo85.weathery.presentation.utils.APPLICATION_SETTINGS_REQUEST_CODE
+import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_BY_MAPS_REQUEST_CODE
 import javax.inject.Inject
 
 
-class LocationActivity : AbsBaseActivity(), LocationContract.View {
+class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
     @Inject
     lateinit var presenter: LocationContract.Presenter
@@ -34,14 +39,16 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
             .plus(LocationModule(this))
             .inject(this)
 
-        presenter.onBindView(this)
-
         get_last_known_location_LA_B.setOnClickListener {
             presenter.getLastKnownGeolocation()
         }
 
         get_current_location_by_GPS_LA_B.setOnClickListener {
             presenter.getCurrentGeolocation()
+        }
+
+        get_current_location_by_map_LA_B.setOnClickListener {
+            startActivityForResult<MapsActivity>(LOCATION_BY_MAPS_REQUEST_CODE)
         }
     }
 
@@ -69,6 +76,12 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
         checkPlayServicesAvailable()
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        presenter.onBindView(this)
+    }
+
     override fun onStop() {
         super.onStop()
 
@@ -78,14 +91,38 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == APPLICATION_SETTINGS_REQUEST_CODE)
-            if (resultCode == 0)
+        if (requestCode == APPLICATION_SETTINGS_REQUEST_CODE) {
+            if (resultCode == 0) {
                 presenter.onActivityResult()
+            }
+        } else if (requestCode == LOCATION_BY_MAPS_REQUEST_CODE) {
+            if (resultCode == 0) {
+                if (data != null) {
+                    val coordinates = data.getParcelableExtra<LatLng>(COORDINATES_TAG)
+
+                    if (coordinates != null) {
+                        presenter.getAddressFromCoordinates(coordinates)
+                    }
+                }
+            }
+        }
+    }
+
+    override fun showGetAddressFromCoordinatesError() {
+        val part1 = getString(R.string.invalid_location)
+        val part2 = getString(R.string.specify_the_location_on_the_map_again)
+
+        showAlertDialog(
+            "$part1. $part2?",
+            getString(R.string.yes),
+            getString(R.string.no),
+            { startActivityForResult<MapsActivity>(LOCATION_BY_MAPS_REQUEST_CODE) },
+            title = getString(R.string.error)
+        )
     }
 
     override fun showRationaleDialog() {
         val part1 = getString(R.string.application_needs_permissions_to_geolocation)
-
         val part2 = getString(R.string.provide)
 
         showAlertDialog(
@@ -101,7 +138,6 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
     override fun showGoSettingsDialog() {
         val part1 =
             getString(R.string.go_to_applications_settings_and_provide_permissions_to_geolocation)
-
         val part2 = getString(R.string.go_to)
 
         showAlertDialog(
@@ -124,11 +160,11 @@ class LocationActivity : AbsBaseActivity(), LocationContract.View {
 
     private fun checkPlayServicesAvailable() {
         val apiAvailability = GoogleApiAvailability.getInstance()
-        val status = apiAvailability.isGooglePlayServicesAvailable(this)
+        val resultCode = apiAvailability.isGooglePlayServicesAvailable(this)
 
-        if (status != ConnectionResult.SUCCESS) {
-            if (apiAvailability.isUserResolvableError(status)) {
-                apiAvailability.getErrorDialog(this, status, 1).show()
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, 1).show()
             } else {
                 val message = "${getString(R.string.google_play_services_unavailable)}. " +
                         getString(R.string.this_app_will_not_work)

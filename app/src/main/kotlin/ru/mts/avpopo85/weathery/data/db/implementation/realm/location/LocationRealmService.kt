@@ -24,9 +24,9 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                     proxyData = realmInstance.copyToRealmOrUpdate(address)
                 }
 
-                val dataExistsInDB = proxyData != null
+                val dataSavedInDB = proxyData != null
 
-                if (dataExistsInDB) {
+                if (dataSavedInDB) {
                     val data: UserAddressType? =
                         realmInstance.copyFromRealm(proxyData!!)
 
@@ -35,7 +35,8 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                     } else {
                         if (BuildConfig.DEBUG) {
                             val methodName =
-                                object : Any() {}.javaClass.enclosingMethod?.name ?: "saveCurrentAddress"
+                                object : Any() {}.javaClass.enclosingMethod?.name
+                                    ?: "saveCurrentAddress"
 
                             onDataIsNull(emitter, methodName, this::class.java.simpleName)
                         }
@@ -43,7 +44,8 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                 } else {
                     if (BuildConfig.DEBUG) {
                         val methodName =
-                            object : Any() {}.javaClass.enclosingMethod?.name ?: "saveCurrentAddress"
+                            object : Any() {}.javaClass.enclosingMethod?.name
+                                ?: "saveCurrentAddress"
 
                         onProxyDataIsNull(emitter, methodName, this::class.java.simpleName)
                     }
@@ -73,7 +75,8 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                     } else {
                         if (BuildConfig.DEBUG) {
                             val methodName =
-                                object : Any() {}.javaClass.enclosingMethod?.name ?: "getLastKnownAddress"
+                                object : Any() {}.javaClass.enclosingMethod?.name
+                                    ?: "getLastKnownAddress"
 
                             onDataIsNull(
                                 emitter,
@@ -101,11 +104,12 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                     val part2 =
                         context.getString(R.string.find_out_your_current_location_in_one_of_the_suggested_ways)
                     val part3 = context.getString(R.string.for_example_by_gps)
-                    emitter.onError(DBHasNothingAndGPSOffException("$part1. $part2, $part3"))
+                    emitter.onError(DBHasNothingAndGPSOnException("$part1. $part2, $part3"))
                 } else if (!dataExistsInDB) {
                     if (BuildConfig.DEBUG) {
                         val methodName =
-                            object : Any() {}.javaClass.enclosingMethod?.name ?: "getLastKnownAddress"
+                            object : Any() {}.javaClass.enclosingMethod?.name
+                                ?: "getLastKnownAddress"
 
                         onProxyDataIsNull(
                             emitter,
@@ -145,7 +149,8 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
                     } else {
                         if (BuildConfig.DEBUG) {
                             val methodName =
-                                object : Any() {}.javaClass.enclosingMethod?.name ?: "getLastKnownCityName"
+                                object : Any() {}.javaClass.enclosingMethod?.name
+                                    ?: "getLastKnownCityName"
 
                             onDataIsNull(
                                 emitter,

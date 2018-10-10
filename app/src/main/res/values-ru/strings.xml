@@ -216,7 +216,7 @@
     <string name="application_need_to_know_your_gelocation_which_geolocation_do_you_want_to_use">
         Для работы приложения необходимо узнать Ваше местоположение. Какое местоположение Вы хотите использовать?</string>
     <string name="last_known">Последнее известное</string>
-    <string name="current_by_gps">Текущее, узнав с помощью GPS</string>
+    <string name="by_gps">С помощью GPS</string>
     <string name="db_has_nothing">В БД ничего нет</string>
     <string name="get_geolocation_by_gps">Получите геопозицию с датчика</string>
     <string name="you_didnt_turn_on_gps">Вы не включили GPS</string>
@@ -245,4 +245,11 @@
     <string name="gps_required">Необходимо включить GPS</string>
     <string name="internet_conncetion_and_GPS_required">Необходимы включённые интернет соединение и GPS</string>
     <string name="current_location_unknown">Текущее местоположение неизвестно</string>
+    <string name="title_activity_maps">Google Maps</string>
+    <string name="is_this_your_location">Это Ваше местоположение?</string>
+    <string name="error">Ошибка</string>
+    <string name="invalid_location">Неверное местоположение</string>
+    <string name="specify_the_location_on_the_map_again">Указать местоположение на карте ещё раз</string>
+    <string name="by_map">С помощью карты</string>
+    <string name="specify_current_location">Указать текущее местоположение</string>
 </resources>
