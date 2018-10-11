@@ -6,7 +6,7 @@ import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 
 interface ILocationRepository {
 
-    fun getCurrentAddress(): Single<UserAddressType>
+    fun getCurrentAddressByGPS(): Single<UserAddressType>
 
     fun getLastKnownAddress(): Single<UserAddressType>
 

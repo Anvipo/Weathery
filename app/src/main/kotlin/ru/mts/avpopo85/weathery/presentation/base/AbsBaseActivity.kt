@@ -1,6 +1,5 @@
 package ru.mts.avpopo85.weathery.presentation.base
 
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.utils.common.sendErrorLog
 
 //TODO как это реализовать, чтобы прокинуть это всё к наследникам?
 abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.View>>*/ :
@@ -76,14 +76,6 @@ abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.Vie
 
             setPositiveButton(positiveButtonText) { _, _ -> onClickedPositiveButton() }
         }.create().show()
-    }
-
-    override fun sendErrorLog(message: String, tag: String?) {
-        if (tag != null) {
-            Log.e(tag, message)
-        } else {
-            Log.e("APP", message)
-        }
     }
 
 }

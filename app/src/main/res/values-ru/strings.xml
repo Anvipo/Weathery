@@ -218,9 +218,6 @@
     <string name="last_known">Последнее известное</string>
     <string name="by_gps">С помощью GPS</string>
     <string name="db_has_nothing">В БД ничего нет</string>
-    <string name="get_geolocation_by_gps">Получите геопозицию с датчика</string>
-    <string name="you_didnt_turn_on_gps">Вы не включили GPS</string>
-    <string name="db_has_no_your_location_name">В БД отсутствует название места, где вы находитесь</string>
     <string name="db_has_outdated_data">В БД устаревшие данные</string>
     <string name="get_data_from_server">Получите данные с сервера</string>
     <string name="you_have_no_internet_connection">Вы не подключены к интернету</string>
@@ -234,16 +231,9 @@
     <string name="impossible_to_continue">Продолжение работы невозможно</string>
     <string name="go_to">Перейти</string>
     <string name="find_out_your_current_location_in_one_of_the_suggested_ways">Узнайте Ваше текущее местоположение одним из предложенных способов</string>
-    <string name="your_previous_location_is_unknown">Ваше предыдущее местоположение неизвестно</string>
-    <string name="for_example_by_gps">например, с помощью GPS</string>
-    <string name="you_must_enable_it">Вы должны включить его</string>
-    <string name="there_is_something_wrong_with_your_gps_adapter">С Вашим GPS адаптером что-то не так</string>
-    <string name="try_to_restart_the_device">Попробуйте перезапустить устройство</string>
-    <string name="application_needs_internet_connection">Приложению необходимо интернет-соединение</string>
     <string name="previous_location_unknown">Предыдущее местоположение неизвестно</string>
     <string name="internet_connection_required">Необходимо интернет соединение</string>
-    <string name="gps_required">Необходимо включить GPS</string>
-    <string name="internet_conncetion_and_GPS_required">Необходимы включённые интернет соединение и GPS</string>
+    <string name="internet_connection_and_GPS_required">Необходимы включённые интернет соединение и GPS</string>
     <string name="current_location_unknown">Текущее местоположение неизвестно</string>
     <string name="title_activity_maps">Google Maps</string>
     <string name="is_this_your_location">Это Ваше местоположение?</string>
@@ -252,4 +242,5 @@
     <string name="specify_the_location_on_the_map_again">Указать местоположение на карте ещё раз</string>
     <string name="by_map">С помощью карты</string>
     <string name="specify_current_location">Указать текущее местоположение</string>
+    <string name="your_current_location_has_changed_from_the_previous_one">Ваше текущее местоположение изменилось по сравнению с предыдущим</string>
 </resources>

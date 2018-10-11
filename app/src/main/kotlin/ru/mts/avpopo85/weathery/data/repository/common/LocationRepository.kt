@@ -7,8 +7,8 @@ import android.location.Location
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.maps.model.LatLng
 import com.patloew.rxlocation.RxLocation
+import io.reactivex.Maybe
 import io.reactivex.Single
-import io.reactivex.SingleSource
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
@@ -17,10 +17,8 @@ import ru.mts.avpopo85.weathery.data.model.implementation.common.UserLocale
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.repository.utils.ONE_SECOND_IN_MILLIS
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
-import ru.mts.avpopo85.weathery.utils.common.MyRealmException
-import ru.mts.avpopo85.weathery.utils.common.MyRealmException.InternetConnectionIsRequired
+import ru.mts.avpopo85.weathery.utils.common.MyRealmException.InternetConnectionIsRequiredException
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
-import java.io.IOException
 import java.util.*
 import javax.inject.Inject
 
@@ -32,11 +30,11 @@ class LocationRepository
     private val networkManager: NetworkManager
 ) : ILocationRepository {
 
-    override fun getCurrentAddress(): Single<UserAddressType> =
+    override fun getCurrentAddressByGPS(): Single<UserAddressType> =
         rxLocation
             .settings()
             .checkAndHandleResolution(locationRequest)
-            .flatMap(::getAddress)
+            .flatMap(::getCurrentAddressByGPS)
 
     override fun getLastKnownAddress(): Single<UserAddressType> =
         dbService.getLastKnownAddress(
@@ -63,11 +61,10 @@ class LocationRepository
             .setFastestInterval(5L * ONE_SECOND_IN_MILLIS)
     }
 
-    private fun getAddress(success: Boolean): Single<UserAddressType> =
+    private fun getCurrentAddressByGPS(success: Boolean): Single<UserAddressType> =
         makeGpsCall(success)
             .flatMap(::makeAddressFromLocation)
             .flatMap(dbService::saveCurrentAddress)
-            .onErrorResumeNext(::handleGpsCallError)
 
     @SuppressLint("MissingPermission")
     private fun makeGpsCall(success: Boolean): Single<Location> =
@@ -85,34 +82,39 @@ class LocationRepository
         if (networkManager.isConnectedToInternet) {
             getAddressFromLocation(location)
         } else {
-            Single.error<UserAddressType>(MyRealmException.InternetConnectionIsRequired("Необходимо интернет подключение"))
+            val message = context.getString(R.string.internet_connection_required)
+            val error = InternetConnectionIsRequiredException(message)
+
+            Single.error(error)
         }
 
     private fun getAddressFromLocation(location: Location): Single<UserAddressType> =
         rxLocation.geocoding()
             .fromLocation(location)
             .map(::mapUserAddress)
-            .toSingle()
+            .flatMap {
+                if (it.locality == null) {
+                    val extractAddressException =
+                        ExtractAddressException("Невозможно узнать адрес указанного местоположения")
 
-    private fun handleGpsCallError(error: Throwable): SingleSource<UserAddressType> =
-        when (error) {
-            is IOException -> {
-                Single.error(InternetConnectionIsRequired(context.getString(R.string.internet_connection_required)))
+                    Maybe.error<UserAddressType>(extractAddressException)
+                } else {
+                    Maybe.just(it)
+                }
             }
-            is NoSuchElementException -> {
-                //last location is unknown
-                dbService.getLastKnownAddress(
-                    networkManager.isGpsProviderEnabled,
-                    networkManager.isNetworkProviderEnabled,
-                    networkManager.isConnectedToInternet
-                )
+            .toSingle()
+            .onErrorResumeNext { error: Throwable ->
+                if (error is NoSuchElementException) {
+                    val extractAddressException =
+                        ExtractAddressException("Невозможно узнать адрес указанного местоположения")
+
+                    Single.error(extractAddressException)
+                } else {
+                    Single.error(error)
+                }
             }
-            else -> dbService.getLastKnownAddress(
-                networkManager.isGpsProviderEnabled,
-                networkManager.isNetworkProviderEnabled,
-                networkManager.isConnectedToInternet
-            )
-        }
+
+    class ExtractAddressException(message: String) : Throwable(message)
 
     private fun mapUserAddress(address: Address): UserAddress =
         address.let {

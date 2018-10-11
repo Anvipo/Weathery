@@ -20,7 +20,7 @@ class OWMCurrentWeatherRepository
     private val apiService: IOWMCurrentWeatherApiService,
     networkManager: NetworkManager,
     currentWeatherDbService: ICurrentWeatherDbService<OWMCurrentWeatherResponseType>,
-    locationDbService: ILocationDbService<UserAddressType>,
+    private val locationDbService: ILocationDbService<UserAddressType>,
     private val context: Context
 ) :
     AbsCurrentWeatherRepository<OWMCurrentWeatherResponseType>(
@@ -33,7 +33,8 @@ class OWMCurrentWeatherRepository
 
     override fun makeApiCall(): Single<OWMCurrentWeatherResponseType> {
         val currentAddress: UserAddressType? = getLastKnownAddress()
-
+        val s = locationDbService.getLastKnownCityName().blockingGet()
+        
         return if (currentAddress != null) {
             val cityName = currentAddress.locality
 
@@ -59,8 +60,7 @@ class OWMCurrentWeatherRepository
                 }
             }
         } else {
-            val error =
-                LocationUnknown(context.getString(R.string.current_location_unknown))
+            val error = LocationUnknown(context.getString(R.string.current_location_unknown))
 
             Single.error(error)
         }

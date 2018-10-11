@@ -6,7 +6,6 @@ import ru.mts.avpopo85.weathery.data.model.base.common.IUserAddress
 
 open class UserAddress(
 
-    @PrimaryKey
     override var saveDate: Long = 0,
 
     override var adminArea: String? = null,
@@ -21,6 +20,7 @@ open class UserAddress(
 
     override var locale: UserLocale? = null,
 
+    @PrimaryKey
     override var locality: String? = null,
 
     override var postalCode: Int? = null,

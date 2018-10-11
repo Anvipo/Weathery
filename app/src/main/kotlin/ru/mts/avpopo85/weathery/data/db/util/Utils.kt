@@ -3,45 +3,12 @@ package ru.mts.avpopo85.weathery.data.db.util
 import android.content.Context
 import io.reactivex.SingleEmitter
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasNothing
-import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasOutdatedData
+import ru.mts.avpopo85.weathery.utils.common.MyRealmException.*
 import java.util.*
 
 fun Long.isFresh(cacheLifetime: Long): Boolean = Date().time - this < cacheLifetime
 
-fun <T> onProxyDataIsNull(
-    emitter: SingleEmitter<T>,
-    methodName: String,
-    className: String
-) {
-    val error =
-        Throwable(
-            "$className.$methodName " +
-                    "- proxyData == null"
-        )
-
-    error.printStackTrace()
-
-    emitter.onError(error)
-}
-
-fun <T> onDataIsNull(
-    emitter: SingleEmitter<T>,
-    methodName: String,
-    className: String
-) {
-    val error =
-        Throwable(
-            "$className.$methodName " +
-                    "- data == null"
-        )
-
-    error.printStackTrace()
-
-    emitter.onError(error)
-}
-
-fun <T> Context.onDbHasNothing(
+fun <T> Context.onDbHasNoWeatherResponse(
     isConnectedToInternet: Boolean,
     emitter: SingleEmitter<T>
 ) {
@@ -60,12 +27,12 @@ fun <T> Context.onDbHasNothing(
             "$part1. $part2"
         }
 
-    val error = DBHasNothing(message, isConnectedToInternet)
+    val error = DBHasNoWeatherResponseException(message, isConnectedToInternet)
 
     emitter.onError(error)
 }
 
-fun <T> Context.onDbOutdatedData(
+fun <T> Context.onDbOutdatedWeatherData(
     emitter: SingleEmitter<T>,
     isConnectedToInternet: Boolean
 ) {
@@ -84,7 +51,7 @@ fun <T> Context.onDbOutdatedData(
             "$part1. $part2"
         }
 
-    val error = DBHasOutdatedData(message, isConnectedToInternet)
+    val error = DBHasOutdatedWeatherDataException(message, isConnectedToInternet)
 
     emitter.onError(error)
 }

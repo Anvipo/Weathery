@@ -23,8 +23,6 @@ interface BaseContract {
             title: String? = null
         )
 
-        fun sendErrorLog(message: String, tag: String? = null)
-
     }
 
     interface Presenter<in V : View> {

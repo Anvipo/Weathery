@@ -9,7 +9,7 @@ import javax.inject.Inject
 class PermissionsRepository
 @Inject constructor(private val rxPermissions: RxPermissions) : IPermissionsRepository {
 
-    override fun requestLocationPermission(): Observable<Permission> =
+    override fun requestLocationPermissions(): Observable<Permission> =
         rxPermissions.requestEachCombined(
             android.Manifest.permission.ACCESS_FINE_LOCATION,
             android.Manifest.permission.ACCESS_COARSE_LOCATION

@@ -216,9 +216,6 @@
     <string name="last_known">Last known</string>
     <string name="by_gps">By GPS</string>
     <string name="db_has_nothing">DB has nothing</string>
-    <string name="get_geolocation_by_gps">Get geolocation by GPS</string>
-    <string name="you_didnt_turn_on_gps">you did not turn on GPS</string>
-    <string name="db_has_no_your_location_name">DB has no your location name</string>
     <string name="db_has_outdated_data">DB has outdated data</string>
     <string name="get_data_from_server">Get data from server</string>
     <string name="you_have_no_internet_connection">You have no internet connection</string>
@@ -232,16 +229,9 @@
     <string name="impossible_to_continue">Impossible to continue</string>
     <string name="go_to">Go to</string>
     <string name="find_out_your_current_location_in_one_of_the_suggested_ways">Find out your current location in one of the suggested ways</string>
-    <string name="your_previous_location_is_unknown">Your previous location is unknown</string>
-    <string name="for_example_by_gps">for example, by GPS</string>
-    <string name="you_must_enable_it">you must enable it</string>
-    <string name="there_is_something_wrong_with_your_gps_adapter">There is something wrong with your GPS adapter</string>
-    <string name="try_to_restart_the_device">Try to restart the device</string>
-    <string name="application_needs_internet_connection">Application needs internet connection</string>
     <string name="previous_location_unknown">Previous location unknown</string>
     <string name="internet_connection_required">Internet connection required</string>
-    <string name="gps_required">GPS required</string>
-    <string name="internet_conncetion_and_GPS_required">Internet conncetion and GPS required</string>
+    <string name="internet_connection_and_GPS_required">Internet conncetion and GPS required</string>
     <string name="current_location_unknown">Current location unknown</string>
     <string name="title_activity_maps">Google Map</string>
     <string name="is_this_your_location">Is this your location?</string>
@@ -250,4 +240,5 @@
     <string name="specify_the_location_on_the_map_again">Specify the location on the map again</string>
     <string name="by_map">By map</string>
     <string name="specify_current_location">Specify current location</string>
+    <string name="your_current_location_has_changed_from_the_previous_one">Your current location has changed from the previous one</string>
 </resources>

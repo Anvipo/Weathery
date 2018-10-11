@@ -5,6 +5,6 @@ import io.reactivex.Observable
 
 interface IPermissionsRepository {
 
-    fun requestLocationPermission(): Observable<Permission>
+    fun requestLocationPermissions(): Observable<Permission>
 
 }

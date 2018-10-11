@@ -7,12 +7,13 @@ import com.google.android.gms.maps.model.LatLng
 import com.tbruyelle.rxpermissions2.Permission
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.BuildConfig
+import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.data.repository.common.LocationRepository.ExtractAddressException
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.ILocationInteractor
 import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
 import ru.mts.avpopo85.weathery.presentation.utils.APPLICATION_SETTINGS_REQUEST_CODE
-import ru.mts.avpopo85.weathery.presentation.utils.onParameterIsNull
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import javax.inject.Inject
 
@@ -45,7 +46,7 @@ class LocationPresenter
     }
 
     override fun getCurrentGeolocation() {
-        checkPermissions()
+        checkLocationPermissions()
     }
 
     override fun getLastKnownGeolocation() {
@@ -53,17 +54,17 @@ class LocationPresenter
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
             .doAfterTerminate { view?.hideLoadingProgress() }
-            .subscribe(::getLastKnownAddressOnSuccess, ::getLastKnownAddressOnError)
+            .subscribe(::onSuccessGetLastKnownAddress, ::onErrorGetLastKnownAddress)
 
         compositeDisposable.add(task)
     }
 
     override fun onActivityResult() {
-        checkPermissions()
+        checkLocationPermissions()
     }
 
     override fun onRationalePositiveClick() {
-        checkPermissions()
+        checkLocationPermissions()
     }
 
     override fun onRationaleNegativeClick() {
@@ -75,167 +76,74 @@ class LocationPresenter
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
             .doAfterTerminate { view?.hideLoadingProgress() }
-            .subscribe(::getAddressFromCoordinatesOnSuccess, ::getAddressFromCoordinatesOnError)
+            .subscribe(::onSuccessGetAddressFromCoordinates, ::onErrorGetAddressFromCoordinates)
 
         compositeDisposable.add(task)
     }
 
-    private fun getAddressFromCoordinatesOnSuccess(address: UserAddressType?) {
-        if (address != null) {
-            if (address.locality != null) {
-                view?.showCityDialog(address.locality!!)
-            } else {
-                view?.showGetAddressFromCoordinatesError()
-            }
+    private fun onSuccessGetLastKnownAddress(address: UserAddressType) {
+        if (address.locality != null) {
+            view?.showCityDialog(address.locality!!)
         } else {
-            if (BuildConfig.DEBUG) {
-                val methodName =
-                    object : Any() {}.javaClass.enclosingMethod?.name
-                        ?: "getAddressFromCoordinatesOnSuccess"
-
-                onParameterIsNull(
-                    view,
-                    this::class.java.simpleName,
-                    methodName,
-                    "address"
-                )
-            }
-        }
-    }
-
-    private fun getAddressFromCoordinatesOnError(error: Throwable?) {
-        if (error != null) {
-            view?.showGetAddressFromCoordinatesError()
-        } else {
-            if (BuildConfig.DEBUG) {
-                val methodName =
-                    object : Any() {}.javaClass.enclosingMethod?.name
-                        ?: "getAddressFromCoordinatesOnError"
-
-                onParameterIsNull(
-                    view,
-                    this::class.java.simpleName,
-                    methodName,
-                    "error"
-                )
-            }
-        }
-    }
-
-    private fun getLastKnownAddressOnSuccess(address: UserAddressType?) {
-        if (address != null) {
-            if (address.locality != null) {
-                view?.showCityDialog(address.locality!!)
-            } else {
-                view?.disableGetLastKnownLocationButton()
-                view?.showLastKnownLocationError()
-            }
-        } else {
-            if (BuildConfig.DEBUG) {
-                val methodName =
-                    object : Any() {}.javaClass.enclosingMethod?.name
-                        ?: "getLastKnownAddressOnSuccess"
-
-                onParameterIsNull(
-                    view,
-                    this::class.java.simpleName,
-                    methodName,
-                    "address"
-                )
-
-            }
-        }
-    }
-
-    private fun getLastKnownAddressOnError(error: Throwable?) {
-        if (error != null) {
             view?.disableGetLastKnownLocationButton()
             view?.showLastKnownLocationError()
-        } else {
-            if (BuildConfig.DEBUG) {
-                val methodName =
-                    object : Any() {}.javaClass.enclosingMethod?.name
-                        ?: "getLastKnownAddressOnError"
-
-                onParameterIsNull(
-                    view,
-                    this::class.java.simpleName,
-                    methodName,
-                    "error"
-                )
-            }
         }
     }
 
-    private fun checkPermissions() {
-        val task: Disposable = interactor.requestPermissions()
+    private fun onErrorGetLastKnownAddress(error: Throwable) {
+        view?.disableGetLastKnownLocationButton()
+        view?.showLastKnownLocationError()
+    }
+
+    private fun onSuccessGetAddressFromCoordinates(address: UserAddressType) {
+        if (address.locality != null) {
+            view?.showCityDialog(address.locality!!)
+        } else {
+            val error = ExtractAddressException("Невозможно узнать адрес указанного местоположения")
+
+            view?.showGetAddressFromCoordinatesError(error)
+        }
+    }
+
+    private fun onErrorGetAddressFromCoordinates(error: Throwable) {
+        view?.showGetAddressFromCoordinatesError(error)
+    }
+
+    private fun checkLocationPermissions() {
+        val task: Disposable = interactor.requestLocationPermissions()
             .compose(schedulerManagerModule.observableTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
-            .subscribe(::requestPermissionsOnSuccess, ::requestPermissionsOnError)
+            .subscribe(::onSuccessRequestLocationPermissions, ::onErrorRequestLocationPermissions)
 
         compositeDisposable.add(task)
     }
 
-    private fun requestPermissionsOnSuccess(permission: Permission?) {
-        if (permission != null) {
-            onPermissionSuccess(permission)
-        } else {
-            view?.hideLoadingProgress()
-
-            if (BuildConfig.DEBUG) {
-                val methodName =
-                    object : Any() {}.javaClass.enclosingMethod?.name
-                        ?: "requestPermissionsOnSuccess"
-
-                onParameterIsNull(
-                    view,
-                    this::class.java.simpleName,
-                    methodName,
-                    "permission"
-                )
-            }
-        }
-    }
-
-    private fun requestPermissionsOnError(error: Throwable?) {
+    private fun onErrorRequestLocationPermissions(error: Throwable) {
         view?.hideLoadingProgress()
 
-        if (error != null) {
-            view?.showError(error)
-        } else {
-            if (BuildConfig.DEBUG) {
-                val methodName =
-                    object : Any() {}.javaClass.enclosingMethod?.name
-                        ?: "requestPermissionsOnError"
-
-                onParameterIsNull(
-                    view,
-                    this::class.java.simpleName,
-                    methodName,
-                    "error"
-                )
-            }
-        }
+        view?.showError(error)
     }
 
-    private fun onPermissionSuccess(permission: Permission) {
+    private fun onSuccessRequestLocationPermissions(permission: Permission) {
         when {
             permission.granted -> {
-                val task = interactor.getCurrentAddress()
+                val task = interactor.getCurrentAddressByGPS()
                     .compose(schedulerManagerModule.singleTransformer())
                     .doAfterTerminate { view?.hideLoadingProgress() }
-                    .subscribe(::getCurrentAddressOnSuccess, ::getCurrentAddressOnError)
+                    .subscribe(::onSuccessGetCurrentAddressByGPS, ::onErrorGetCurrentAddressByGPS)
 
                 compositeDisposable.add(task)
             }
 
             permission.shouldShowRequestPermissionRationale -> {
+                //user denied permission, but dont tap "dont ask"
                 view?.hideLoadingProgress()
 
                 view?.showRationaleDialog()
             }
 
             else -> {
+                //user denied permission with tap on "dont ask"
                 view?.hideLoadingProgress()
 
                 view?.showGoSettingsDialog()
@@ -243,43 +151,19 @@ class LocationPresenter
         }
     }
 
-    private fun getCurrentAddressOnSuccess(address: UserAddressType?) {
-        if (address != null) {
-            when {
-                address.locality != null -> {
-                    view?.showCityDialog(address.locality!!)
-                    view?.enableGetLastKnownLocationButton()
-                }
-                else -> view?.showLocationError()
+    private fun onSuccessGetCurrentAddressByGPS(address: UserAddressType) {
+        when {
+            address.locality != null -> {
+                view?.showCityDialog(address.locality!!)
+                view?.enableGetLastKnownLocationButton()
             }
-        } else {
-            if (BuildConfig.DEBUG) {
-                val methodName =
-                    object : Any() {}.javaClass.enclosingMethod?.name
-                        ?: "getCurrentAddressOnSuccess"
-
-                onParameterIsNull(
-                    view,
-                    this::class.java.simpleName,
-                    methodName,
-                    "address"
-                )
-            }
+            else -> view?.showLocationError()
         }
     }
 
-    private fun getCurrentAddressOnError(error: Throwable?) {
-        if (error != null) {
-            view?.showError(error)
-        } else {
-            if (BuildConfig.DEBUG) {
-                val methodName =
-                    object : Any() {}.javaClass.enclosingMethod?.name
-                        ?: "getCurrentAddressOnError"
-
-                onParameterIsNull(view, this::class.java.simpleName, methodName, "error")
-            }
-        }
+    private fun onErrorGetCurrentAddressByGPS(error: Throwable) {
+        val message = context!!.getString(R.string.internet_connection_and_GPS_required)
+        view?.showError(message)
     }
 
 }

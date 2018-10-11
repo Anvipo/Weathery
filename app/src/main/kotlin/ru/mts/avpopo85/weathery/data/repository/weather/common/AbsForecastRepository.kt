@@ -46,8 +46,8 @@ abstract class AbsForecastRepository<T : IForecastResponse>(
         forecastDbService.getForecastResponse(networkManager.isConnectedToInternet)
 
     private fun onDbCallError(error: Throwable): Single<List<T>> =
-        if (error is MyRealmException.DBHasNothing ||
-            error is MyRealmException.DBHasOutdatedData
+        if (error is MyRealmException.DBHasNoWeatherResponseException ||
+            error is MyRealmException.DBHasOutdatedWeatherDataException
         ) {
             makeApiCall().flatMap(::saveInDB)
         } else {

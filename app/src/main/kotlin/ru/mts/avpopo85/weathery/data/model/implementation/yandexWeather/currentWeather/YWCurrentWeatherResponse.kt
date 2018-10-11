@@ -79,6 +79,8 @@ open class YWCurrentWeatherResponse(
 
     @SerializedName("cloudness")
     @Expose
-    override var cloudiness: Double = 0.0
+    override var cloudiness: Double = 0.0,
+
+    override val cityName: String
 
 ) : IYWCurrentWeatherRealmResponse

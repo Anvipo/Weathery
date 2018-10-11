@@ -22,7 +22,7 @@ interface LocationContract : BaseContract {
 
         fun disableGetLastKnownLocationButton()
 
-        fun showGetAddressFromCoordinatesError()
+        fun showGetAddressFromCoordinatesError(error: Throwable? = null)
     }
 
     interface Presenter : BaseContract.Presenter<View> {

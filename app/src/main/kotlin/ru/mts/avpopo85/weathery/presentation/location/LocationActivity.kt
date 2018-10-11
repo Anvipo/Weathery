@@ -35,21 +35,9 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
         setSupportActionBar(toolbar)
 
-        App.appComponent
-            .plus(LocationModule(this))
-            .inject(this)
+        injectDependencies()
 
-        get_last_known_location_LA_B.setOnClickListener {
-            presenter.getLastKnownGeolocation()
-        }
-
-        get_current_location_by_GPS_LA_B.setOnClickListener {
-            presenter.getCurrentGeolocation()
-        }
-
-        get_current_location_by_map_LA_B.setOnClickListener {
-            startActivityForResult<MapsActivity>(LOCATION_BY_MAPS_REQUEST_CODE)
-        }
+        initButtonListeners()
     }
 
     override fun showCityDialog(city: String) {
@@ -93,27 +81,44 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
         if (requestCode == APPLICATION_SETTINGS_REQUEST_CODE) {
             if (resultCode == 0) {
+                injectDependencies()
                 presenter.onActivityResult()
             }
         } else if (requestCode == LOCATION_BY_MAPS_REQUEST_CODE) {
             if (resultCode == 0) {
                 if (data != null) {
+                    showLoadingProgress()
+
                     val coordinates = data.getParcelableExtra<LatLng>(COORDINATES_TAG)
 
                     if (coordinates != null) {
+                        injectDependencies()
                         presenter.getAddressFromCoordinates(coordinates)
+                    } else {
+                        showLocationError()
+                        hideLoadingProgress()
                     }
                 }
             }
         }
     }
 
-    override fun showGetAddressFromCoordinatesError() {
-        val part1 = getString(R.string.invalid_location)
-        val part2 = getString(R.string.specify_the_location_on_the_map_again)
+    override fun showGetAddressFromCoordinatesError(error: Throwable?) {
+        val message =
+            if (error == null) {
+                val part1 = getString(R.string.invalid_location)
+                val part2 = getString(R.string.specify_the_location_on_the_map_again)
+
+                "$part1. $part2?"
+            } else {
+                val part1 = error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)
+                val part2 = getString(R.string.specify_the_location_on_the_map_again)
+
+                "$part1. $part2?"
+            }
 
         showAlertDialog(
-            "$part1. $part2?",
+            message,
             getString(R.string.yes),
             getString(R.string.no),
             { startActivityForResult<MapsActivity>(LOCATION_BY_MAPS_REQUEST_CODE) },
@@ -156,6 +161,28 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
     override fun disableGetLastKnownLocationButton() {
         get_last_known_location_LA_B.isEnabled = false
+    }
+
+    private fun initButtonListeners() {
+        get_last_known_location_LA_B.setOnClickListener {
+            presenter.getLastKnownGeolocation()
+        }
+
+        get_current_location_by_GPS_LA_B.setOnClickListener {
+            presenter.getCurrentGeolocation()
+        }
+
+        get_current_location_by_map_LA_B.setOnClickListener {
+            startActivityForResult<MapsActivity>(LOCATION_BY_MAPS_REQUEST_CODE)
+        }
+    }
+
+    private fun injectDependencies() {
+        App.appComponent
+            .plus(LocationModule(this))
+            .inject(this)
+
+        presenter.onBindView(this)
     }
 
     private fun checkPlayServicesAvailable() {

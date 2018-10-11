@@ -6,17 +6,17 @@ import io.realm.Realm
 import io.realm.RealmResults
 import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
-import ru.mts.avpopo85.weathery.data.db.util.onDataIsNull
-import ru.mts.avpopo85.weathery.data.db.util.onDbHasNothing
-import ru.mts.avpopo85.weathery.data.db.util.onDbOutdatedData
-import ru.mts.avpopo85.weathery.data.db.util.onProxyDataIsNull
+import ru.mts.avpopo85.weathery.data.db.util.onDbHasNoWeatherResponse
+import ru.mts.avpopo85.weathery.data.db.util.onDbOutdatedWeatherData
 import ru.mts.avpopo85.weathery.data.model.base.common.IForecastRealmResponse
+import ru.mts.avpopo85.weathery.utils.common.onParameterIsNull
 import java.util.*
 
 
 abstract class AbsForecastRealmService<T : IForecastRealmResponse>
 constructor(private val context: Context) : IForecastDbService<T> {
 
+    //todo
     override fun saveForecastResponse(forecastResponseList: List<T>): Single<List<T>> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
@@ -43,10 +43,11 @@ constructor(private val context: Context) : IForecastDbService<T> {
                                 object : Any() {}.javaClass.enclosingMethod?.name
                                     ?: "saveForecastResponse"
 
-                            onDataIsNull(
+                            onParameterIsNull(
                                 emitter,
+                                this::class.java.simpleName,
                                 methodName,
-                                this::class.java.simpleName
+                                "data"
                             )
                         }
                     }
@@ -56,10 +57,11 @@ constructor(private val context: Context) : IForecastDbService<T> {
                             object : Any() {}.javaClass.enclosingMethod?.name
                                 ?: "saveForecastResponse"
 
-                        onProxyDataIsNull(
+                        onParameterIsNull(
                             emitter,
+                            this::class.java.simpleName,
                             methodName,
-                            this::class.java.simpleName
+                            "proxyData"
                         )
                     }
                 }
@@ -83,7 +85,7 @@ constructor(private val context: Context) : IForecastDbService<T> {
                         if (data.isFresh || data.isNotFresh && !isConnectedToInternet) {
                             emitter.onSuccess(data)
                         } else if (isConnectedToInternet) {
-                            context.onDbOutdatedData(emitter, isConnectedToInternet)
+                            context.onDbOutdatedWeatherData(emitter, isConnectedToInternet)
                         }
                     } else {
                         if (BuildConfig.DEBUG) {
@@ -91,25 +93,27 @@ constructor(private val context: Context) : IForecastDbService<T> {
                                 object : Any() {}.javaClass.enclosingMethod?.name
                                     ?: "getForecastResponse"
 
-                            onDataIsNull(
+                            onParameterIsNull(
                                 emitter,
+                                this::class.java.simpleName,
                                 methodName,
-                                this::class.java.simpleName
+                                "data"
                             )
                         }
                     }
                 } else if (isConnectedToInternet || !isConnectedToInternet) {
-                    context.onDbHasNothing(isConnectedToInternet, emitter)
+                    context.onDbHasNoWeatherResponse(isConnectedToInternet, emitter)
                 } else if (!dataExistsInDB) {
                     if (BuildConfig.DEBUG) {
                         val methodName =
                             object : Any() {}.javaClass.enclosingMethod?.name
                                 ?: "getForecastResponse"
 
-                        onProxyDataIsNull(
+                        onParameterIsNull(
                             emitter,
+                            this::class.java.simpleName,
                             methodName,
-                            this::class.java.simpleName
+                            "proxyData"
                         )
                     }
                 }

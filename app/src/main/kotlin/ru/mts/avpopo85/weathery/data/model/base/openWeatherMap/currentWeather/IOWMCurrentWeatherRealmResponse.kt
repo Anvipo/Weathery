@@ -32,9 +32,6 @@ interface IOWMCurrentWeatherRealmResponse : ICurrentWeatherRealmResponse {
     /**City ID*/
     val cityID: Int
 
-    /**City name*/
-    val cityName: String
-
     /**Internal parameter*/
     val code: Int
 

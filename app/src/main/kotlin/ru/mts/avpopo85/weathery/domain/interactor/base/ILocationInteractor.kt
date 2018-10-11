@@ -8,9 +8,9 @@ import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 
 interface ILocationInteractor {
 
-    fun requestPermissions(): Observable<Permission>
+    fun requestLocationPermissions(): Observable<Permission>
 
-    fun getCurrentAddress(): Single<UserAddressType>
+    fun getCurrentAddressByGPS(): Single<UserAddressType>
 
     fun getLastKnownAddress(): Single<UserAddressType>
 

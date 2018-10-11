@@ -16,11 +16,11 @@ class LocationInteractor
     private val locationRepository: ILocationRepository
 ) : ILocationInteractor {
 
-    override fun requestPermissions(): Observable<Permission> =
-        permissionsRepository.requestLocationPermission()
+    override fun requestLocationPermissions(): Observable<Permission> =
+        permissionsRepository.requestLocationPermissions()
 
-    override fun getCurrentAddress(): Single<UserAddressType> =
-        locationRepository.getCurrentAddress()
+    override fun getCurrentAddressByGPS(): Single<UserAddressType> =
+        locationRepository.getCurrentAddressByGPS()
 
     override fun getLastKnownAddress(): Single<UserAddressType> =
         locationRepository.getLastKnownAddress()

@@ -23,10 +23,22 @@ abstract class AbsCurrentWeatherRepository<T : ICurrentWeatherRealmResponse>(
     protected abstract fun makeApiCall(): Single<T>
 
     protected fun getCurrentWeatherHelper(): Single<T> =
-        if (!networkManager.isConnectedToInternet) {
+        if (networkManager.isConnectedToInternet) {
             makeDBCall()
+                .flatMap {
+                    val c = locationDbService.getLastKnownCityName().blockingGet()
+                    val ok = it.cityName == c
+
+                    Single.just(it)
+                }
+                .onErrorResumeNext(::onDbCallError)
         } else {
-            makeDBCall().onErrorResumeNext(::onDbCallError)
+            makeDBCall()
+                .flatMap {
+                    val c = 1
+
+                    Single.just(it)
+                }
         }
 
     protected fun getLastKnownAddress(): UserAddressType? = try {
@@ -46,8 +58,8 @@ abstract class AbsCurrentWeatherRepository<T : ICurrentWeatherRealmResponse>(
         currentWeatherDbService.getCurrentWeatherResponse(networkManager.isConnectedToInternet)
 
     private fun onDbCallError(error: Throwable): Single<T> =
-        if (error is MyRealmException.DBHasNothing ||
-            error is MyRealmException.DBHasOutdatedData
+        if (error is MyRealmException.DBHasNoWeatherResponseException ||
+            error is MyRealmException.DBHasOutdatedWeatherDataException
         ) {
             makeApiCall().flatMap(::saveInDB)
         } else {
