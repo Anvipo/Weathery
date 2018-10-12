@@ -21,12 +21,6 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
-        debug {
-//            minifyEnabled true
-//            useProguard false
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'),
-//                    'proguard-rules.pro'
-        }
         release {
             shrinkResources true
             minifyEnabled true
@@ -48,11 +42,11 @@ android {
             universalApk true //generate an additional APK that contains all the ABIs
         }
     }
-//    bundle {
-//        language {
-//            enableSplit = true
-//        }
-//    }
+    bundle {
+        language {
+            enableSplit = true
+        }
+    }
     sourceSets {
         main.java.srcDirs = ['src/main/kotlin']
         test.java.srcDirs = ['src/test/kotlin']
