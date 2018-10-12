@@ -8,7 +8,7 @@ import com.tbruyelle.rxpermissions2.Permission
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.data.repository.common.LocationRepository.ExtractAddressException
+import ru.mts.avpopo85.weathery.data.utils.ExtractAddressException
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.ILocationInteractor
 import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
@@ -90,6 +90,7 @@ class LocationPresenter
         }
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onErrorGetLastKnownAddress(error: Throwable) {
         view?.disableGetLastKnownLocationButton()
         view?.showLastKnownLocationError()
@@ -162,7 +163,9 @@ class LocationPresenter
     }
 
     private fun onErrorGetCurrentAddressByGPS(error: Throwable) {
-        val message = context!!.getString(R.string.internet_connection_and_GPS_required)
+        val message: String =
+            error.localizedMessage ?: error.message ?: context!!.getString(R.string.unknown_error)
+
         view?.showError(message)
     }
 

@@ -10,7 +10,7 @@ import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecas
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMForecastApiService
 import ru.mts.avpopo85.weathery.data.repository.weather.common.AbsForecastRepository
-import ru.mts.avpopo85.weathery.data.utils.LocationUnknown
+import ru.mts.avpopo85.weathery.data.utils.UnknownLocationException
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
@@ -58,7 +58,7 @@ class OWMForecastRepository
 
                 else -> {
                     val error =
-                        LocationUnknown(context.getString(R.string.current_location_unknown))
+                        UnknownLocationException(context.getString(R.string.current_location_unknown))
 
                     Single.error(error)
                 }
@@ -67,7 +67,7 @@ class OWMForecastRepository
             apiCall.map { it.forecastsList }
         } else {
             val error =
-                LocationUnknown(context.getString(R.string.current_location_unknown))
+                UnknownLocationException(context.getString(R.string.current_location_unknown))
 
             Single.error(error)
         }

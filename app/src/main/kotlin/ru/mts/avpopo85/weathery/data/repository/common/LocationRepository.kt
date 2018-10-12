@@ -16,8 +16,9 @@ import ru.mts.avpopo85.weathery.data.model.implementation.common.UserAddress
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserLocale
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.repository.utils.ONE_SECOND_IN_MILLIS
+import ru.mts.avpopo85.weathery.data.utils.ExtractAddressException
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
-import ru.mts.avpopo85.weathery.utils.common.MyRealmException.InternetConnectionIsRequiredException
+import ru.mts.avpopo85.weathery.utils.common.GpsCallException.*
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import java.util.*
 import javax.inject.Inject
@@ -66,27 +67,65 @@ class LocationRepository
             .flatMap(::makeAddressFromLocation)
             .flatMap(dbService::saveCurrentAddress)
 
-    @SuppressLint("MissingPermission")
     private fun makeGpsCall(success: Boolean): Single<Location> =
-        if (success && networkManager.isConnectedToInternet) {
-            rxLocation.location()
-                .updates(locationRequest)
-                .firstOrError()
-        } else {
-            rxLocation.location()
-                .lastLocation()
-                .toSingle()
+        when {
+            success && networkManager.isConnectedToInternet -> getCurrentLocation()
+            success && !networkManager.isConnectedToInternet -> onHaveSuccessAndDeviceIsNotConnectedToInternet()
+            !success && networkManager.isConnectedToInternet -> onHaveNotSuccessAndDeviceIsConnectedToInternet()
+            !success && !networkManager.isConnectedToInternet -> onHaveNotSuccessAndDeviceIsNotConnectedToInternet()
+            else -> onUnknownError()
         }
+
+    private fun onUnknownError(): Single<Location> {
+        val message: String = context.getString(R.string.unknown_error)
+        val error = UnknownErrorException(message)
+
+        return Single.error(error)
+    }
+
+    private fun onHaveNotSuccessAndDeviceIsConnectedToInternet(): Single<Location> {
+        val message: String = context.getString(R.string.gps_is_required)
+        val error = HaveNotSuccessAndDeviceIsConnectedToInternet(message)
+
+        return Single.error(error)
+    }
+
+    private fun onHaveNotSuccessAndDeviceIsNotConnectedToInternet(): Single<Location> {
+        val message: String = context.getString(R.string.internet_connection_and_GPS_required)
+        val error = HaveNotSuccessAndDeviceIsNotConnectedToInternet(message)
+
+        return Single.error(error)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getCurrentLocation(): Single<Location> =
+        rxLocation.location()
+            .updates(locationRequest)
+            .firstOrError()
 
     private fun makeAddressFromLocation(location: Location): Single<UserAddressType> =
         if (networkManager.isConnectedToInternet) {
             getAddressFromLocation(location)
         } else {
-            val message = context.getString(R.string.internet_connection_required)
-            val error = InternetConnectionIsRequiredException(message)
-
-            Single.error(error)
+            onDeviceIsNotConnectedToInternet()
         }
+
+    private fun onDeviceIsNotConnectedToInternet(): Single<UserAddressType> {
+        val message: String = context.getString(R.string.internet_connection_required)
+        val error = DeviceIsNotConnectedToInternetException(message)
+
+        return Single.error(error)
+    }
+
+    private fun <T> onHaveSuccessAndDeviceIsNotConnectedToInternet(): Single<T> {
+        val message: String = context.getString(R.string.internet_connection_required)
+        val error = HaveSuccessAndDeviceIsNotConnectedException(message)
+
+        return Single.error(error)
+    }
+
+    private val extractAddressException =
+        ExtractAddressException("Невозможно узнать адрес указанного местоположения")
 
     private fun getAddressFromLocation(location: Location): Single<UserAddressType> =
         rxLocation.geocoding()
@@ -94,10 +133,7 @@ class LocationRepository
             .map(::mapUserAddress)
             .flatMap {
                 if (it.locality == null) {
-                    val extractAddressException =
-                        ExtractAddressException("Невозможно узнать адрес указанного местоположения")
-
-                    Maybe.error<UserAddressType>(extractAddressException)
+                    Maybe.error(extractAddressException)
                 } else {
                     Maybe.just(it)
                 }
@@ -105,16 +141,11 @@ class LocationRepository
             .toSingle()
             .onErrorResumeNext { error: Throwable ->
                 if (error is NoSuchElementException) {
-                    val extractAddressException =
-                        ExtractAddressException("Невозможно узнать адрес указанного местоположения")
-
                     Single.error(extractAddressException)
                 } else {
                     Single.error(error)
                 }
             }
-
-    class ExtractAddressException(message: String) : Throwable(message)
 
     private fun mapUserAddress(address: Address): UserAddress =
         address.let {

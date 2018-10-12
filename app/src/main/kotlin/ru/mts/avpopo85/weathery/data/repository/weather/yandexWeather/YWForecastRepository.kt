@@ -9,7 +9,7 @@ import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoord
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
 import ru.mts.avpopo85.weathery.data.repository.weather.common.AbsForecastRepository
-import ru.mts.avpopo85.weathery.data.utils.LocationUnknown
+import ru.mts.avpopo85.weathery.data.utils.UnknownLocationException
 import ru.mts.avpopo85.weathery.data.utils.yandexWeather.YWConstants.YW_FORECAST_PARAMETERS
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
@@ -47,14 +47,14 @@ class YWForecastRepository
 
                 else -> {
                     val error =
-                        LocationUnknown(context.getString(R.string.current_location_unknown))
+                        UnknownLocationException(context.getString(R.string.current_location_unknown))
 
                     Single.error(error)
                 }
             }
         } else {
             val error =
-                LocationUnknown(context.getString(R.string.current_location_unknown))
+                UnknownLocationException(context.getString(R.string.current_location_unknown))
 
             Single.error(error)
         }

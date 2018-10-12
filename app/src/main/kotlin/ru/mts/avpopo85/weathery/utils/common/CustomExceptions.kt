@@ -1,17 +1,27 @@
 package ru.mts.avpopo85.weathery.utils.common
 
-sealed class MyRealmException(cause: String) : Throwable() {
-    override val message: String = cause
+sealed class MyRealmException(message: String) : Throwable(message) {
 
-    class DBHasNothingAndGetGeolocationException(cause: String) : MyRealmException(cause)
+    class DBHasNothingAndGetGeolocationException(message: String) : MyRealmException(message)
 
-    class DBHasOutdatedWeatherDataException(cause: String, val isConnectedToInternet: Boolean) :
-        MyRealmException(cause)
+    class DBHasOutdatedWeatherDataException(message: String, val isConnectedToInternet: Boolean) :
+        MyRealmException(message)
 
-    class DBHasNoWeatherResponseException(cause: String, val isConnectedToInternet: Boolean) :
-        MyRealmException(cause)
+    class DBHasNoWeatherResponseException(message: String, val isConnectedToInternet: Boolean) :
+        MyRealmException(message)
 
-    class InternetConnectionIsRequiredException(cause: String) : MyRealmException(cause)
+}
 
-    class WrongCityException(cause: String) : MyRealmException(cause)
+sealed class GpsCallException(message: String) : Throwable(message) {
+
+    class DeviceIsNotConnectedToInternetException(message: String) : GpsCallException(message)
+
+    class HaveSuccessAndDeviceIsNotConnectedException(message: String) : GpsCallException(message)
+
+    class HaveNotSuccessAndDeviceIsConnectedToInternet(message: String) : GpsCallException(message)
+
+    class HaveNotSuccessAndDeviceIsNotConnectedToInternet(message: String) : GpsCallException(message)
+
+    class UnknownErrorException(message: String) : GpsCallException(message)
+
 }

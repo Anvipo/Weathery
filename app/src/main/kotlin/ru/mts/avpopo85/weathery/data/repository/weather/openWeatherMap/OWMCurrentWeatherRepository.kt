@@ -9,7 +9,7 @@ import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoord
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMCurrentWeatherApiService
 import ru.mts.avpopo85.weathery.data.repository.weather.common.AbsCurrentWeatherRepository
-import ru.mts.avpopo85.weathery.data.utils.LocationUnknown
+import ru.mts.avpopo85.weathery.data.utils.UnknownLocationException
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
@@ -20,7 +20,7 @@ class OWMCurrentWeatherRepository
     private val apiService: IOWMCurrentWeatherApiService,
     networkManager: NetworkManager,
     currentWeatherDbService: ICurrentWeatherDbService<OWMCurrentWeatherResponseType>,
-    private val locationDbService: ILocationDbService<UserAddressType>,
+    locationDbService: ILocationDbService<UserAddressType>,
     private val context: Context
 ) :
     AbsCurrentWeatherRepository<OWMCurrentWeatherResponseType>(
@@ -32,37 +32,28 @@ class OWMCurrentWeatherRepository
         getCurrentWeatherHelper()
 
     override fun makeApiCall(): Single<OWMCurrentWeatherResponseType> {
-        val currentAddress: UserAddressType? = getLastKnownAddress()
-        val s = locationDbService.getLastKnownCityName().blockingGet()
-        
-        return if (currentAddress != null) {
-            val cityName = currentAddress.locality
+        val currentAddress: UserAddressType = getLastKnownAddress()
 
-            val coords = currentAddress.coords
+        val cityName: String? = currentAddress.locality
 
-            val postalCode = currentAddress.postalCode
+        val coords: GeographicCoordinates? = currentAddress.coords
 
-            when {
-                cityName != null -> getCurrentWeatherByCityName(cityName)
+        val postalCode: Int? = currentAddress.postalCode
 
-                coords.areNotNull() -> getCurrentWeatherByGeographicCoordinates(coords!!)
+        return when {
+            cityName != null -> getCurrentWeatherByCityName(cityName)
 
-                postalCode != null -> getCurrentWeatherByZipCode(
-                    postalCode,
-                    currentAddress.countryCode
-                )
+            coords.areNotNull() -> getCurrentWeatherByGeographicCoordinates(coords!!)
 
-                else -> {
-                    val error =
-                        LocationUnknown(context.getString(R.string.current_location_unknown))
+            postalCode != null ->
+                getCurrentWeatherByZipCode(postalCode, currentAddress.countryCode)
 
-                    Single.error(error)
-                }
+            else -> {
+                val message: String = context.getString(R.string.current_location_unknown)
+                val error = UnknownLocationException(message)
+
+                Single.error(error)
             }
-        } else {
-            val error = LocationUnknown(context.getString(R.string.current_location_unknown))
-
-            Single.error(error)
         }
     }
 
@@ -70,7 +61,7 @@ class OWMCurrentWeatherRepository
         zipCode: Int,
         countryCode: String?
     ): Single<OWMCurrentWeatherResponseType> {
-        val zip = if (countryCode != null) "$zipCode,$countryCode" else "$zipCode"
+        val zip: String = if (countryCode != null) "$zipCode,$countryCode" else "$zipCode"
 
         return apiService.getCurrentWeatherByZipCode(zip)
     }

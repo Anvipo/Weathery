@@ -16,13 +16,13 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
     override fun saveCurrentAddress(address: UserAddressType): Single<UserAddressType> =
         Single.create { emitter ->
             Realm.getDefaultInstance().use { realmInstance ->
-                var proxyData = UserAddressType()
+                var proxyData: UserAddressType? = null
 
                 realmInstance.executeTransaction {
                     proxyData = realmInstance.copyToRealmOrUpdate(address)
                 }
 
-                val currentAddress: UserAddressType = realmInstance.copyFromRealm(proxyData)
+                val currentAddress: UserAddressType = realmInstance.copyFromRealm(proxyData!!)
 
                 emitter.onSuccess(currentAddress)
             }
@@ -42,23 +42,10 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
 
                 val dataExistsInDB: Boolean = proxyData.isNotEmpty()
 
-                when {
-                    dataExistsInDB -> onDataExistsInDB(proxyData, realmInstance, emitter)
-//                    !isConnectedToInternet -> {
-//                        val part1 = context.getString(R.string.internet_connection_required)
-//                        val part2 = context.getString(R.string.and)
-//                        val part3 = context.getString(R.string.your_previous_location_is_unknown)
-//
-//                        val message = "$part1 $part2 $part3"
-//                        val error =
-//                            DBHasNothingAndInternetConnectionRequiredException(
-//                                message,
-//                                isConnectedToInternet
-//                            )
-//
-//                        emitter.onError(error)
-//                    }
-                    else -> context.onDbHasNoCurrentAddress(emitter)
+                if (dataExistsInDB) {
+                    onDataExistsInDB(proxyData, realmInstance, emitter)
+                } else {
+                    context.onDbHasNoCurrentAddress(emitter)
                 }
             }
         }
@@ -73,9 +60,10 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
 
                 val citiesExistInDB: Boolean = proxyData.isNotEmpty()
 
-                when {
-                    citiesExistInDB -> onCitiesExistInDBInDB(realmInstance, proxyData, emitter)
-                    !citiesExistInDB -> context.onDbHasNoCurrentAddress(emitter)
+                if (citiesExistInDB) {
+                    onCitiesExistInDBInDB(realmInstance, proxyData, emitter)
+                } else if (!citiesExistInDB) {
+                    context.onDbHasNoCurrentAddress(emitter)
                 }
             }
         }
@@ -87,14 +75,13 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
     ) {
         val proxyLastKnownAddress: UserAddressType? = proxyData.last()
 
-        when {
-            proxyLastKnownAddress != null -> {
-                val lastKnownAddress: UserAddressType =
-                    realmInstance.copyFromRealm(proxyLastKnownAddress)
+        if (proxyLastKnownAddress != null) {
+            val lastKnownAddress: UserAddressType =
+                realmInstance.copyFromRealm(proxyLastKnownAddress)
 
-                emitter.onSuccess(lastKnownAddress)
-            }
-            else -> context.onDbHasNoCurrentAddress(emitter)
+            emitter.onSuccess(lastKnownAddress)
+        } else {
+            context.onDbHasNoCurrentAddress(emitter)
         }
     }
 
@@ -105,25 +92,23 @@ class LocationRealmService(private val context: Context) : ILocationDbService<Us
     ) {
         val proxyLastKnownAddress: UserAddressType? = proxyData.last()
 
-        when {
-            proxyLastKnownAddress != null -> {
-                val lastKnownAddress: UserAddressType =
-                    realmInstance.copyFromRealm(proxyLastKnownAddress)
+        if (proxyLastKnownAddress != null) {
+            val lastKnownAddress: UserAddressType =
+                realmInstance.copyFromRealm(proxyLastKnownAddress)
 
-                val cityName: String? = lastKnownAddress.locality
+            val cityName: String? = lastKnownAddress.locality
 
-                when {
-                    cityName != null -> emitter.onSuccess(cityName)
-                    else -> context.onDbHasNoCurrentAddress(emitter)
-                }
+            if (cityName != null) {
+                emitter.onSuccess(cityName)
+            } else {
+                context.onDbHasNoCurrentAddress(emitter)
             }
-            else -> context.onDbHasNoCurrentAddress(emitter)
+        } else {
+            context.onDbHasNoCurrentAddress(emitter)
         }
     }
 
-    private fun <T> Context.onDbHasNoCurrentAddress(
-        emitter: SingleEmitter<T>
-    ) {
+    private fun <T> Context.onDbHasNoCurrentAddress(emitter: SingleEmitter<T>) {
         val part1 = getString(R.string.db_has_nothing)
 
         val part2 = getString(R.string.find_out_your_current_location_in_one_of_the_suggested_ways)
