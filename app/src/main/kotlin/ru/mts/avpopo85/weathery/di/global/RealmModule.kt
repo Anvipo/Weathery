@@ -41,13 +41,13 @@ class RealmModule(val context: Context) {
 
     @Provides
     @Singleton
-    fun provideYWCurrentWeatherRealmService(locationDbService: ILocationDbService<UserAddressType>): ICurrentWeatherDbService<YWCurrentWeatherResponseType> =
-        YWCurrentWeatherRealmService(context, locationDbService)
+    fun provideYWCurrentWeatherRealmService(): ICurrentWeatherDbService<YWCurrentWeatherResponseType> =
+        YWCurrentWeatherRealmService(context)
 
     @Provides
     @Singleton
-    fun provideOWMCurrentWeatherRealmService(locationDbService: ILocationDbService<UserAddressType>): ICurrentWeatherDbService<OWMCurrentWeatherResponseType> =
-        OWMCurrentWeatherRealmService(context, locationDbService)
+    fun provideOWMCurrentWeatherRealmService(): ICurrentWeatherDbService<OWMCurrentWeatherResponseType> =
+        OWMCurrentWeatherRealmService(context)
 
     @Provides
     @Singleton

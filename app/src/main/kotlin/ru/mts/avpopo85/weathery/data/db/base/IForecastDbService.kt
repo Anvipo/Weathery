@@ -7,6 +7,6 @@ interface IForecastDbService<T : IForecastResponse> {
 
     fun saveForecastResponse(forecastResponseList: List<T>): Single<List<T>>
 
-    fun getForecastResponse(isConnectedToInternet: Boolean = true): Single<List<T>>
+    fun getForecastResponse(isConnectedToInternet: Boolean): Single<List<T>>
 
 }

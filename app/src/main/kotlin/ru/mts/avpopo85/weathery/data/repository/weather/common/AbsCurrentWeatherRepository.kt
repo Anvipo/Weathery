@@ -47,6 +47,7 @@ abstract class AbsCurrentWeatherRepository<T : ICurrentWeatherRealmResponse>(
     private fun makeDBCall(): Single<T> =
         currentWeatherDbService.getCurrentWeatherResponse(networkManager.isConnectedToInternet)
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onDbCallError(error: Throwable): Single<T> =
         makeApiCall().flatMap(::saveInDB)
 

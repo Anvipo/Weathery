@@ -6,18 +6,13 @@ import io.reactivex.SingleEmitter
 import io.realm.Realm
 import io.realm.RealmResults
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
-import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.db.util.onDbHasNoWeatherResponse
-import ru.mts.avpopo85.weathery.data.db.util.onDbOutdatedWeatherData
+import ru.mts.avpopo85.weathery.data.db.util.onDbHasOutdatedWeatherResponse
 import ru.mts.avpopo85.weathery.data.model.base.common.ICurrentWeatherRealmResponse
-import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 
 
 abstract class AbsCurrentWeatherRealmService<T : ICurrentWeatherRealmResponse>
-constructor(
-    private val context: Context,
-    private val locationDbService: ILocationDbService<UserAddressType>
-) : ICurrentWeatherDbService<T> {
+constructor(private val context: Context) : ICurrentWeatherDbService<T> {
 
     override fun saveCurrentWeatherResponse(currentWeatherResponse: T): Single<T> =
         Single.create { emitter ->
@@ -77,7 +72,7 @@ constructor(
         if (data.isFresh || (data.isNotFresh && !isConnectedToInternet)) {
             emitter.onSuccess(data)
         } else if (isConnectedToInternet) {
-            context.onDbOutdatedWeatherData(emitter, isConnectedToInternet)
+            context.onDbHasOutdatedWeatherResponse(emitter, isConnectedToInternet)
         }
     }
 

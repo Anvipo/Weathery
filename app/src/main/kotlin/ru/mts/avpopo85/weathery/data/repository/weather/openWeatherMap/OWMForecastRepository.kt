@@ -2,7 +2,6 @@ package ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap
 
 import android.content.Context
 import io.reactivex.Single
-import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
@@ -10,7 +9,7 @@ import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecas
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMForecastApiService
 import ru.mts.avpopo85.weathery.data.repository.weather.common.AbsForecastRepository
-import ru.mts.avpopo85.weathery.data.utils.UnknownLocationException
+import ru.mts.avpopo85.weathery.data.repository.weather.utils.onUnknownCurrentLocation
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
@@ -40,13 +39,13 @@ class OWMForecastRepository
         val lastKnownAddress = getLastKnownAddress()
 
         return if (lastKnownAddress != null) {
-            val cityName = lastKnownAddress.locality
+            val cityName: String? = lastKnownAddress.locality
 
-            val coords = lastKnownAddress.coords
+            val coords: GeographicCoordinates? = lastKnownAddress.coords
 
-            val postalCode = lastKnownAddress.postalCode
+            val postalCode: Int? = lastKnownAddress.postalCode
 
-            val apiCall = when {
+            val apiCall: Single<OWMForecastResponse> = when {
                 cityName != null -> getCurrentWeatherByCityName(cityName)
 
                 coords.areNotNull() -> getCurrentWeatherByGeographicCoordinates(coords!!)
@@ -56,20 +55,12 @@ class OWMForecastRepository
                     lastKnownAddress.countryCode
                 )
 
-                else -> {
-                    val error =
-                        UnknownLocationException(context.getString(R.string.current_location_unknown))
-
-                    Single.error(error)
-                }
+                else -> context.onUnknownCurrentLocation()
             }
 
             apiCall.map { it.forecastsList }
         } else {
-            val error =
-                UnknownLocationException(context.getString(R.string.current_location_unknown))
-
-            Single.error(error)
+            context.onUnknownCurrentLocation()
         }
     }
 

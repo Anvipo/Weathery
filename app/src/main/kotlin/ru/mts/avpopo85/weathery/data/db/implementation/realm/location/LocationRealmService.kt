@@ -10,8 +10,10 @@ import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasNothingAndGetGeolocationException
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
+import javax.inject.Inject
 
-class LocationRealmService(private val context: Context) : ILocationDbService<UserAddressType> {
+class LocationRealmService
+@Inject constructor(private val context: Context) : ILocationDbService<UserAddressType> {
 
     override fun saveCurrentAddress(address: UserAddressType): Single<UserAddressType> =
         Single.create { emitter ->

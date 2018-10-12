@@ -50,7 +50,7 @@ class LocationPresenter
     }
 
     override fun getLastKnownGeolocation() {
-        val task = interactor.getLastKnownAddress()
+        val task: Disposable = interactor.getLastKnownAddress()
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
             .doAfterTerminate { view?.hideLoadingProgress() }
@@ -72,7 +72,7 @@ class LocationPresenter
     }
 
     override fun getAddressFromCoordinates(coordinates: LatLng) {
-        val task = interactor.getAddressFromCoordinates(coordinates)
+        val task: Disposable = interactor.getAddressFromCoordinates(coordinates)
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
             .doAfterTerminate { view?.hideLoadingProgress() }
@@ -100,6 +100,7 @@ class LocationPresenter
         if (address.locality != null) {
             view?.showCityDialog(address.locality!!)
         } else {
+            //todo
             val error = ExtractAddressException("Невозможно узнать адрес указанного местоположения")
 
             view?.showGetAddressFromCoordinatesError(error)
@@ -128,7 +129,7 @@ class LocationPresenter
     private fun onSuccessRequestLocationPermissions(permission: Permission) {
         when {
             permission.granted -> {
-                val task = interactor.getCurrentAddressByGPS()
+                val task: Disposable = interactor.getCurrentAddressByGPS()
                     .compose(schedulerManagerModule.singleTransformer())
                     .doAfterTerminate { view?.hideLoadingProgress() }
                     .subscribe(::onSuccessGetCurrentAddressByGPS, ::onErrorGetCurrentAddressByGPS)

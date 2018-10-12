@@ -2,14 +2,13 @@ package ru.mts.avpopo85.weathery.data.repository.weather.yandexWeather
 
 import android.content.Context
 import io.reactivex.Single
-import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWCurrentWeatherApiService
 import ru.mts.avpopo85.weathery.data.repository.weather.common.AbsCurrentWeatherRepository
-import ru.mts.avpopo85.weathery.data.utils.UnknownLocationException
+import ru.mts.avpopo85.weathery.data.repository.weather.utils.onUnknownCurrentLocation
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
@@ -35,22 +34,15 @@ class YWCurrentWeatherRepository
         val currentAddress: UserAddressType? = getLastKnownAddress()
 
         return if (currentAddress != null) {
-            val coords = currentAddress.coords
+            val coords: GeographicCoordinates? = currentAddress.coords
 
-            when {
-                coords.areNotNull() -> getCurrentWeather(coords!!, currentAddress.countryCode!!)
-
-                else -> {
-                    val error =
-                        UnknownLocationException(context.getString(R.string.current_location_unknown))
-
-                    Single.error(error)
-                }
+            if (coords.areNotNull()) {
+                getCurrentWeather(coords!!, currentAddress.countryCode!!)
+            } else {
+                context.onUnknownCurrentLocation()
             }
         } else {
-            val error = UnknownLocationException(context.getString(R.string.current_location_unknown))
-
-            Single.error(error)
+            context.onUnknownCurrentLocation()
         }
     }
 

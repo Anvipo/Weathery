@@ -7,6 +7,6 @@ interface ICurrentWeatherDbService<T : ICurrentWeatherRealmResponse> {
 
     fun saveCurrentWeatherResponse(currentWeatherResponse: T): Single<T>
 
-    fun getCurrentWeatherResponse(isConnectedToInternet: Boolean = true): Single<T>
+    fun getCurrentWeatherResponse(isConnectedToInternet: Boolean): Single<T>
 
 }
