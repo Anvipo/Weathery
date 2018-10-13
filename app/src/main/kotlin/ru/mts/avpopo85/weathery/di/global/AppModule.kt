@@ -8,11 +8,12 @@ import dagger.Provides
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
-import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMCurrentWeatherApiService
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMForecastApiService
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWCurrentWeatherApiService
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
+import ru.mts.avpopo85.weathery.data.network.utils.IGeocoder
+import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import ru.mts.avpopo85.weathery.data.repository.common.LocationRepository
 import ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap.OWMCurrentWeatherRepository
 import ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap.OWMForecastRepository
@@ -97,20 +98,21 @@ class AppModule(private val context: Context) {
         networkManager: NetworkManager,
         forecastDbService: IForecastDbService<OWMForecastResponseType>,
         locationDbService: ILocationDbService<UserAddressType>
-    ): IForecastRepository<OWMForecastListResponseType> = OWMForecastRepository(
-        apiService,
-        networkManager,
-        forecastDbService,
-        locationDbService,
-        context
-    )
+    ): IForecastRepository<OWMForecastListResponseType> =
+        OWMForecastRepository(
+            apiService,
+            networkManager,
+            forecastDbService,
+            locationDbService,
+            context
+        )
 
     @Provides
     @Singleton
     fun provideLocationsRepository(
         dbService: ILocationDbService<UserAddressType>,
-        networkManager: NetworkManager
-    ): ILocationRepository =
-        LocationRepository(context, dbService, networkManager)
+        networkManager: NetworkManager,
+        geocoder: IGeocoder
+    ): ILocationRepository = LocationRepository(context, dbService, networkManager, geocoder)
 
 }

@@ -14,12 +14,14 @@ import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserAddress
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserLocale
-import ru.mts.avpopo85.weathery.data.network.NetworkManager
+import ru.mts.avpopo85.weathery.data.network.utils.IGeocoder
+import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import ru.mts.avpopo85.weathery.data.repository.common.utils.ONE_SECOND_IN_MILLIS
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
 import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
 import ru.mts.avpopo85.weathery.utils.common.GpsCallException.*
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
+import java.io.IOException
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -29,7 +31,8 @@ class LocationRepository
 @Inject constructor(
     private val context: Context,
     private val dbService: ILocationDbService<UserAddressType>,
-    private val networkManager: NetworkManager
+    private val networkManager: NetworkManager,
+    private val geocoder: IGeocoder
 ) : ILocationRepository {
 
     override fun getCurrentAddressByGPS(): Single<UserAddressType> =
@@ -91,6 +94,74 @@ class LocationRepository
             onDeviceIsNotConnectedToInternet()
         }
 
+    private val message =
+        context.getString(R.string.unable_to_find_the_address_of_the_specified_location)
+
+    private val extractAddressException =
+        ExtractAddressException(message)
+
+    private fun getAddressFromLocation(location: Location): Single<UserAddressType> =
+        rxLocation.geocoding()
+            .fromLocation(location)
+            .map(::mapUserAddress)
+            .flatMap(::checkLocalityOnNull)
+            .toSingle()
+            .onErrorResumeNext { onGeocodeError(it, location) }
+
+    private fun onGeocodeError(
+        error: Throwable,
+        location: Location
+    ): Single<UserAddressType> = when (error) {
+        is NoSuchElementException -> Single.error(extractAddressException)
+        is IOException -> onServiceIsNotAvailable(location, error)
+        else -> Single.error(error)
+    }
+
+    private fun checkLocalityOnNull(it: UserAddressType): Maybe<UserAddressType> =
+        if (it.locality == null) {
+            Maybe.error(extractAddressException)
+        } else {
+            Maybe.just(it)
+        }
+
+    private fun onServiceIsNotAvailable(
+        location: Location,
+        error: IOException
+    ): Single<UserAddressType> {
+        error.printStackTrace()
+
+        return geocoder.geocodeLocation(location)
+    }
+
+    private fun mapUserAddress(address: Address): UserAddressType =
+        address.let {
+            UserAddress(
+                saveDate = Date().time,
+                adminArea = it.adminArea,
+                countryCode = it.countryCode,
+                countryName = it.countryName,
+                featureName = it.featureName,
+                coords = GeographicCoordinates(
+                    latitude = it.latitude,
+                    longitude = it.longitude
+                ),
+                locale = UserLocale(
+                    language = it.locale?.language,
+                    region = it.locale?.country
+                ),
+                locality = it.locality,
+                postalCode = it.postalCode?.toInt(),
+                subAdminArea = it.subAdminArea,
+                subThoroughfare = it.subThoroughfare,
+                thoroughfare = it.thoroughfare,
+                extras = it.extras?.toString(),
+                phone = it.phone,
+                premises = it.premises,
+                subLocality = it.subLocality,
+                url = it.url
+            )
+        }
+
     private fun onDeviceIsNotConnectedToInternet(): Single<UserAddressType> {
         val message = context.getString(R.string.internet_connection_required)
         val error = DeviceIsNotConnectedToInternetException(message)
@@ -125,57 +196,5 @@ class LocationRepository
 
         return Single.error(error)
     }
-
-    private val extractAddressException =
-        ExtractAddressException("Невозможно узнать адрес указанного местоположения")
-
-    private fun getAddressFromLocation(location: Location): Single<UserAddressType> =
-        rxLocation.geocoding()
-            .fromLocation(location)
-            .map(::mapUserAddress)
-            .flatMap {
-                if (it.locality == null) {
-                    Maybe.error(extractAddressException)
-                } else {
-                    Maybe.just(it)
-                }
-            }
-            .toSingle()
-            .onErrorResumeNext { error: Throwable ->
-                if (error is NoSuchElementException) {
-                    Single.error(extractAddressException)
-                } else {
-                    Single.error(error)
-                }
-            }
-
-    private fun mapUserAddress(address: Address): UserAddress =
-        address.let {
-            UserAddress(
-                saveDate = Date().time,
-                adminArea = it.adminArea,
-                countryCode = it.countryCode,
-                countryName = it.countryName,
-                featureName = it.featureName,
-                coords = GeographicCoordinates(
-                    latitude = it.latitude,
-                    longitude = it.longitude
-                ),
-                locale = UserLocale(
-                    language = it.locale?.language,
-                    region = it.locale?.country
-                ),
-                locality = it.locality,
-                postalCode = it.postalCode?.toInt(),
-                subAdminArea = it.subAdminArea,
-                subThoroughfare = it.subThoroughfare,
-                thoroughfare = it.thoroughfare,
-                extras = it.extras?.toString(),
-                phone = it.phone,
-                premises = it.premises,
-                subLocality = it.subLocality,
-                url = it.url
-            )
-        }
 
 }

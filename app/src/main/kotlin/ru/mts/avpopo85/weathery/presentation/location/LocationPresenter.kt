@@ -14,6 +14,7 @@ import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
 import ru.mts.avpopo85.weathery.presentation.utils.APPLICATION_SETTINGS_REQUEST_CODE
 import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
+import ru.mts.avpopo85.weathery.utils.common.GoogleGeocodeException
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import java.util.concurrent.TimeoutException
 import javax.inject.Inject
@@ -101,9 +102,9 @@ class LocationPresenter
         if (address.locality != null) {
             view?.showCityDialog(address.locality!!)
         } else {
-            //todo
-            val error =
-                ExtractAddressException("Невозможно узнать адрес указанного местоположения")
+            val message =
+                context!!.getString(R.string.unable_to_find_the_address_of_the_specified_location)
+            val error = ExtractAddressException(message)
 
             view?.showGetAddressFromCoordinatesError(error)
         }
@@ -165,10 +166,17 @@ class LocationPresenter
     }
 
     private fun onErrorGetCurrentAddressByGPS(error: Throwable) {
-        val message: String = if (error is TimeoutException) {
-            "Время ожидания истекло. Попробуйте позже"
-        } else {
-            error.localizedMessage ?: error.message ?: context!!.getString(R.string.unknown_error)
+        val message: String = when (error) {
+            is TimeoutException -> {
+                val part1 = context!!.getString(R.string.request_timeout)
+                val part2 = context!!.getString(R.string.please_try_later)
+                "$part1. $part2"
+            }
+            is GoogleGeocodeException -> context!!.getString(R.string.could_not_find_address_of_your_current_location)
+            else -> {
+                error.localizedMessage ?: error.message
+                ?: context!!.getString(R.string.unknown_error)
+            }
         }
 
         view?.showError(message)

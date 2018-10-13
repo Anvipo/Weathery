@@ -239,5 +239,7 @@
     <string name="specify_the_location_on_the_map_again">Specify the location on the map again</string>
     <string name="by_map">By map</string>
     <string name="specify_current_location">Specify current location</string>
-    <string name="gps_is_required">Необходимо включить GPS</string>
+    <string name="gps_is_required">GPS is required</string>
+    <string name="unable_to_find_the_address_of_the_specified_location">Unable to find the address of the specified location</string>
+    <string name="could_not_find_address_of_your_current_location">Сould not find the address of your current location</string>
 </resources>

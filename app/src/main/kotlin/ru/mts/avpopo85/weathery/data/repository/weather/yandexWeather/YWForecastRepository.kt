@@ -5,7 +5,7 @@ import io.reactivex.Single
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
-import ru.mts.avpopo85.weathery.data.network.NetworkManager
+import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
 import ru.mts.avpopo85.weathery.data.repository.weather.common.AbsForecastRepository
 import ru.mts.avpopo85.weathery.data.repository.weather.utils.onUnknownCurrentLocation

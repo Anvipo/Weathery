@@ -7,7 +7,7 @@ import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.base.common.ICurrentWeatherRealmResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
-import ru.mts.avpopo85.weathery.data.network.NetworkManager
+import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 
 abstract class AbsCurrentWeatherRepository<T : ICurrentWeatherRealmResponse>(

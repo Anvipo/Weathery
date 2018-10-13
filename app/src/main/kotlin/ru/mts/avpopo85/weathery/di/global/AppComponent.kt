@@ -19,6 +19,7 @@ import javax.inject.Singleton
         SchedulerManagerModule::class,
         OWMRetrofitModule::class,
         YWRetrofitModule::class,
+        GeocoderRetrofitModule::class,
         NetworkModule::class,
         RealmModule::class
     ]

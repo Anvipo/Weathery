@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.data.network
+package ru.mts.avpopo85.weathery.data.network.utils
 
 import android.content.Context
 import android.location.LocationManager

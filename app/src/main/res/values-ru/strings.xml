@@ -152,7 +152,7 @@
     <string name="method_not_allowed">Метод не поддерживается</string>
     <string name="not_acceptable">Неприемлемо</string>
     <string name="proxy_authentication_required">Необходима аутентификация прокси</string>
-    <string name="request_timeout">Истекло время ожидания</string>
+    <string name="request_timeout">Время ожидания истекло</string>
     <string name="conflict">Конфликт</string>
     <string name="gone">Удалён (ресурс раньше был по указанному URL, но был удалён и теперь недоступен)</string>
     <string name="length_required">Необходима длина</string>
@@ -242,4 +242,6 @@
     <string name="by_map">С помощью карты</string>
     <string name="specify_current_location">Указать текущее местоположение</string>
     <string name="gps_is_required">Необходимо включить GPS</string>
+    <string name="unable_to_find_the_address_of_the_specified_location">Невозможно узнать адрес указанного местоположения</string>
+    <string name="could_not_find_address_of_your_current_location">Не удалось узнать адрес Вашего текущего местоположения</string>
 </resources>
