@@ -3,8 +3,8 @@ package ru.mts.avpopo85.weathery.application
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
-import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OWMConstants
-import ru.mts.avpopo85.weathery.data.utils.yandexWeather.YWConstants
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMConstants
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWConstants
 import ru.mts.avpopo85.weathery.di.global.*
 
 

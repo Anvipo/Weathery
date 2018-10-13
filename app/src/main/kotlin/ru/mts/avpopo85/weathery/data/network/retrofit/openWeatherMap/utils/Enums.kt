@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.data.utils.openWeatherMap
+package ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.utils
 
 enum class OpenWeatherMapLanguages(val lang_code: String) {
     ARABIC("ar"),

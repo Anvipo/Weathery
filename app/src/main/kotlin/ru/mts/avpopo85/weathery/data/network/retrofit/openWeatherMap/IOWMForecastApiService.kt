@@ -4,9 +4,9 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecast.OWMForecastResponse
-import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OWMConstants
-import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OWMUnitsFormat
-import ru.mts.avpopo85.weathery.data.utils.openWeatherMap.OpenWeatherMapLanguages
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMConstants
+import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.utils.OWMUnitsFormat
+import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.utils.OpenWeatherMapLanguages
 
 @Suppress("unused")
 interface IOWMForecastApiService {

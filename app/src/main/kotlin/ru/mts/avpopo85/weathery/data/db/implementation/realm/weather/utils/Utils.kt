@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.data.db.util
+package ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.utils
 
 import android.content.Context
 import io.reactivex.SingleEmitter
@@ -15,15 +15,15 @@ fun <T> Context.onDbHasNoWeatherResponse(
 ) {
     val message: String =
         if (isConnectedToInternet) {
-            val part1: String = getString(R.string.db_has_nothing)
+            val part1: String = getString(R.string.no_previous_weather_data)
 
             val part2: String = getString(R.string.get_data_from_server)
 
             "$part1. $part2"
         } else {
-            val part1: String = getString(R.string.db_has_nothing)
+            val part1: String = getString(R.string.no_previous_weather_data)
 
-            val part2: String = getString(R.string.you_have_no_internet_connection)
+            val part2: String = getString(R.string.internet_connection_required)
 
             "$part1. $part2"
         }
@@ -39,15 +39,15 @@ fun <T> Context.onDbHasOutdatedWeatherResponse(
 ) {
     val message: String =
         if (isConnectedToInternet) {
-            val part1: String = getString(R.string.db_has_outdated_data)
+            val part1: String = getString(R.string.the_forecast_is_outdated)
 
             val part2: String = getString(R.string.get_data_from_server)
 
             "$part1. $part2"
         } else {
-            val part1: String = getString(R.string.db_has_outdated_data)
+            val part1: String = getString(R.string.the_forecast_is_outdated)
 
-            val part2: String = getString(R.string.you_have_no_internet_connection)
+            val part2: String = getString(R.string.internet_connection_required)
 
             "$part1. $part2"
         }

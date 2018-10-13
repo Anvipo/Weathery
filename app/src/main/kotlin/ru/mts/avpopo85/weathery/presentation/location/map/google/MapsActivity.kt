@@ -53,7 +53,7 @@ class MapsActivity :
         if (coordinates != null) {
             map.clear()
 
-            val markerOptions = MarkerOptions().position(coordinates).draggable(true)
+            val markerOptions: MarkerOptions = MarkerOptions().position(coordinates).draggable(true)
 
             map.addMarker(markerOptions)
 
@@ -61,15 +61,13 @@ class MapsActivity :
         }
     }
 
-    override fun onMarkerClick(marker: Marker?): Boolean =
+    override fun onMarkerClick(marker: Marker?): Boolean {
         if (marker != null) {
             showConfirmation(marker.position)
-            //default behaviour should occur
-            false
-        } else {
-            //default behaviour should occur
-            false
         }
+        //default behaviour should occur
+        return false
+    }
 
     private fun showConfirmation(coordinates: LatLng) {
         showAlertDialog(

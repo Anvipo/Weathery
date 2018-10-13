@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.data.utils.yandexWeather
+package ru.mts.avpopo85.weathery.utils.yandexWeather
 
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.currentWeather.IYWCurrentWeatherParameters
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWForecastParameters

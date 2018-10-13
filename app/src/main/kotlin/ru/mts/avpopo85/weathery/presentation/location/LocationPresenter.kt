@@ -8,13 +8,14 @@ import com.tbruyelle.rxpermissions2.Permission
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.data.utils.ExtractAddressException
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.ILocationInteractor
 import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
 import ru.mts.avpopo85.weathery.presentation.utils.APPLICATION_SETTINGS_REQUEST_CODE
+import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
+import java.util.concurrent.TimeoutException
 import javax.inject.Inject
 
 class LocationPresenter
@@ -101,7 +102,8 @@ class LocationPresenter
             view?.showCityDialog(address.locality!!)
         } else {
             //todo
-            val error = ExtractAddressException("Невозможно узнать адрес указанного местоположения")
+            val error =
+                ExtractAddressException("Невозможно узнать адрес указанного местоположения")
 
             view?.showGetAddressFromCoordinatesError(error)
         }
@@ -154,18 +156,20 @@ class LocationPresenter
     }
 
     private fun onSuccessGetCurrentAddressByGPS(address: UserAddressType) {
-        when {
-            address.locality != null -> {
-                view?.showCityDialog(address.locality!!)
-                view?.enableGetLastKnownLocationButton()
-            }
-            else -> view?.showLocationError()
+        if (address.locality != null) {
+            view?.showCityDialog(address.locality!!)
+            view?.enableGetLastKnownLocationButton()
+        } else {
+            view?.showLocationError()
         }
     }
 
     private fun onErrorGetCurrentAddressByGPS(error: Throwable) {
-        val message: String =
+        val message: String = if (error is TimeoutException) {
+            "Время ожидания истекло. Попробуйте позже"
+        } else {
             error.localizedMessage ?: error.message ?: context!!.getString(R.string.unknown_error)
+        }
 
         view?.showError(message)
     }

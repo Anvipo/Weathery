@@ -3,24 +3,9 @@ package ru.mts.avpopo85.weathery.presentation.utils
 import android.content.Context
 import retrofit2.HttpException
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.presentation.base.BaseContract
-import ru.mts.avpopo85.weathery.utils.common.sendErrorLog
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
-
-fun onParameterIsNull(
-    view: BaseContract.View?,
-    className: String,
-    methodName: String,
-    parameterName: String
-) {
-    val message = "$className.$methodName - $parameterName == null"
-
-    sendErrorLog(message)
-
-    view?.showError(message)
-}
 
 fun Context.parseError(throwable: Throwable): String {
     val msg = when (throwable) {

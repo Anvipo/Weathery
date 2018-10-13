@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.domain.utils
+package ru.mts.avpopo85.weathery.domain.mapper.implementation.utils
 
 import java.text.SimpleDateFormat
 import java.util.*

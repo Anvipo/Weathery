@@ -11,8 +11,8 @@ import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.foreca
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWDayTime
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWHourInfo
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWParts
-import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
-import ru.mts.avpopo85.weathery.domain.utils.toDate
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.toDate
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastType

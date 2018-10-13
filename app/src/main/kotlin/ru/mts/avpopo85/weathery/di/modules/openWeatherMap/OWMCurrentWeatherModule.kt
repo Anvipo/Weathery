@@ -43,8 +43,7 @@ class OWMCurrentWeatherModule(private val context: OWMCurrentWeatherActivity) {
 
     @Provides
     @OWMCurrentWeatherScope
-    fun provideOWMCurrentWeatherMapper():
-            ICurrentWeatherMapper<OWMCurrentWeatherResponseType, OWMCurrentWeatherType> =
+    fun provideOWMCurrentWeatherMapper(): ICurrentWeatherMapper<OWMCurrentWeatherResponseType, OWMCurrentWeatherType> =
         OWMCurrentWeatherMapper(context)
 
 }

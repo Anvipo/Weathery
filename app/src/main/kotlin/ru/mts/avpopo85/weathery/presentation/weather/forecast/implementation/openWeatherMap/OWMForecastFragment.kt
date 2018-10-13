@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.presentation.utils.ARG_FORECAST
 import ru.mts.avpopo85.weathery.presentation.utils.CELSIUS_DEGREE
 import ru.mts.avpopo85.weathery.presentation.utils.PERCENT_SIGN

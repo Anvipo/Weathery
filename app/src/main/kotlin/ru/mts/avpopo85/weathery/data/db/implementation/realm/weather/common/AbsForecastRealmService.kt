@@ -5,8 +5,8 @@ import io.reactivex.Single
 import io.realm.Realm
 import io.realm.RealmResults
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
-import ru.mts.avpopo85.weathery.data.db.util.onDbHasNoWeatherResponse
-import ru.mts.avpopo85.weathery.data.db.util.onDbHasOutdatedWeatherResponse
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.utils.onDbHasNoWeatherResponse
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.utils.onDbHasOutdatedWeatherResponse
 import ru.mts.avpopo85.weathery.data.model.base.common.IForecastRealmResponse
 import java.util.*
 
@@ -38,12 +38,12 @@ constructor(private val context: Context) : IForecastDbService<T> {
     override fun getForecastResponse(isConnectedToInternet: Boolean): Single<List<T>> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
-                val proxyData: RealmResults<T>? =
+                val proxyData: RealmResults<T> =
                     realmInstance
                         .where(responseClassType)
                         .findAll()
 
-                val data: List<T> = realmInstance.copyFromRealm(proxyData!!)
+                val data: List<T> = realmInstance.copyFromRealm(proxyData)
 
                 if (data.isNotEmpty()) {
                     if (data.isFresh || data.isNotFresh && !isConnectedToInternet) {

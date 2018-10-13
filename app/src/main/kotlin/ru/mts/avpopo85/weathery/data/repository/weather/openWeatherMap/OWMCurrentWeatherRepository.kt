@@ -57,7 +57,7 @@ class OWMCurrentWeatherRepository
         zipCode: Int,
         countryCode: String?
     ): Single<OWMCurrentWeatherResponseType> {
-        val zip: String = if (countryCode != null) "$zipCode,$countryCode" else "$zipCode"
+        val zip = if (countryCode != null) "$zipCode,$countryCode" else "$zipCode"
 
         return apiService.getCurrentWeatherByZipCode(zip)
     }

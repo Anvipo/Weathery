@@ -2,8 +2,8 @@ package ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather
 
 import android.content.Context
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.domain.utils.MyParsingException.*
-import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.MyParsingException.*
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
 
 fun Context.getCloudinessString(cloudiness: Double): String = when (cloudiness) {
     0.0 -> getString(R.string.clear)

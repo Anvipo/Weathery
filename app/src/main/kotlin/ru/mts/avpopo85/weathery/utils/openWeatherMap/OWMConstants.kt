@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.data.utils.openWeatherMap
+package ru.mts.avpopo85.weathery.utils.openWeatherMap
 
 @Suppress("unused")
 object OWMConstants {

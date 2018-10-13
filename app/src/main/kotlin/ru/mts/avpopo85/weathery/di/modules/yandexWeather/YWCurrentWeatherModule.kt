@@ -43,8 +43,7 @@ class YWCurrentWeatherModule(private val context: YWCurrentWeatherActivity) {
 
     @Provides
     @YWCurrentWeatherScope
-    fun provideYWCurrentWeatherMapper():
-            ICurrentWeatherMapper<YWCurrentWeatherResponseType, YWCurrentWeatherType> =
+    fun provideYWCurrentWeatherMapper(): ICurrentWeatherMapper<YWCurrentWeatherResponseType, YWCurrentWeatherType> =
         YWCurrentWeatherMapper(context)
 
 }

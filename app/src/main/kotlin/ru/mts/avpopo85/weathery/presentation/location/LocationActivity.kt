@@ -111,7 +111,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
                 "$part1. $part2?"
             } else {
-                val part1 = error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)
+                val part1: String = error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)
                 val part2 = getString(R.string.specify_the_location_on_the_map_again)
 
                 "$part1. $part2?"
@@ -186,7 +186,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
     }
 
     private fun checkPlayServicesAvailable() {
-        val apiAvailability = GoogleApiAvailability.getInstance()
+        val apiAvailability: GoogleApiAvailability = GoogleApiAvailability.getInstance()
         val resultCode = apiAvailability.isGooglePlayServicesAvailable(this)
 
         if (resultCode != ConnectionResult.SUCCESS) {

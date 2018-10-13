@@ -5,12 +5,12 @@ import io.reactivex.Single
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
-import ru.mts.avpopo85.weathery.data.model.base.common.IForecastResponse
+import ru.mts.avpopo85.weathery.data.model.base.common.IForecastRealmResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 
-abstract class AbsForecastRepository<T : IForecastResponse>(
+abstract class AbsForecastRepository<T : IForecastRealmResponse>(
     private val networkManager: NetworkManager,
     private val forecastDbService: IForecastDbService<T>,
     private val locationDbService: ILocationDbService<UserAddressType>,

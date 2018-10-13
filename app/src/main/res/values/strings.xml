@@ -215,10 +215,9 @@
         Application need to know your gelocation. Which geolocation do you want to use?</string>
     <string name="last_known">Last known</string>
     <string name="by_gps">By GPS</string>
-    <string name="db_has_nothing">DB has nothing</string>
-    <string name="db_has_outdated_data">DB has outdated data</string>
+    <string name="no_previous_weather_data">No previous weather data</string>
+    <string name="the_forecast_is_outdated">The forecast is outdated</string>
     <string name="get_data_from_server">Get data from server</string>
-    <string name="you_have_no_internet_connection">You have no internet connection</string>
     <string name="db_has_no_location_data">DB has no your location data</string>
     <string name="is_your_current_geolocation">Is your current geolocation</string>
     <string name="found_intended_location">Found intended location</string>
@@ -231,7 +230,7 @@
     <string name="find_out_your_current_location_in_one_of_the_suggested_ways">Find out your current location in one of the suggested ways</string>
     <string name="previous_location_unknown">Previous location unknown</string>
     <string name="internet_connection_required">Internet connection required</string>
-    <string name="internet_connection_and_GPS_required">Internet conncetion and GPS required</string>
+    <string name="internet_connection_and_GPS_required">Internet connection and GPS required</string>
     <string name="current_location_unknown">Current location unknown</string>
     <string name="title_activity_maps">Google Map</string>
     <string name="is_this_your_location">Is this your location?</string>

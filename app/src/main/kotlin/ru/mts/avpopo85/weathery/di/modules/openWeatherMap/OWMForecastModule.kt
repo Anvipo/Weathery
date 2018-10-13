@@ -43,8 +43,7 @@ class OWMForecastModule(private val context: OWMForecastActivity) {
 
     @Provides
     @OWMForecastScope
-    fun provideOWMForecastMapper():
-            IForecastMapper<OWMForecastListResponseType, OWMForecastListType> =
+    fun provideOWMForecastMapper(): IForecastMapper<OWMForecastListResponseType, OWMForecastListType> =
         OWMForecastMapper(context)
 
 }

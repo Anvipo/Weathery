@@ -25,3 +25,5 @@ sealed class GpsCallException(message: String) : Throwable(message) {
     class UnknownErrorException(message: String) : GpsCallException(message)
 
 }
+
+class ExtractAddressException(message: String) : Throwable(message)

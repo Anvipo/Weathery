@@ -4,8 +4,8 @@ import android.content.Context
 import ru.mts.avpopo85.weathery.domain.mapper.base.ICurrentWeatherMapper
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.getDaytimeString
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather.YandexWeatherMapper.getWaterTemperatureString
-import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
-import ru.mts.avpopo85.weathery.domain.utils.toDate
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.toDate
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 import javax.inject.Inject

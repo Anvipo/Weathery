@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.domain.utils
+package ru.mts.avpopo85.weathery.domain.mapper.implementation.utils
 
 sealed class MyParsingException(cause: String) : Throwable() {
     override val message: String = cause

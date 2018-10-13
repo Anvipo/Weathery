@@ -6,8 +6,8 @@ import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.commo
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMCurrentWeatherMain
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMSys
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMWind
-import ru.mts.avpopo85.weathery.domain.utils.roundIfNeeded
-import ru.mts.avpopo85.weathery.domain.utils.toTime
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.toTime
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
 import javax.inject.Inject
@@ -53,5 +53,3 @@ class OWMCurrentWeatherMapper
         }
 
 }
-
-

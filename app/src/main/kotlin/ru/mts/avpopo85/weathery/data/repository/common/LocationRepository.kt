@@ -15,12 +15,13 @@ import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoord
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserAddress
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserLocale
 import ru.mts.avpopo85.weathery.data.network.NetworkManager
-import ru.mts.avpopo85.weathery.data.repository.utils.ONE_SECOND_IN_MILLIS
-import ru.mts.avpopo85.weathery.data.utils.ExtractAddressException
+import ru.mts.avpopo85.weathery.data.repository.common.utils.ONE_SECOND_IN_MILLIS
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
+import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
 import ru.mts.avpopo85.weathery.utils.common.GpsCallException.*
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -76,31 +77,11 @@ class LocationRepository
             else -> onUnknownError()
         }
 
-    private fun onUnknownError(): Single<Location> {
-        val message: String = context.getString(R.string.unknown_error)
-        val error = UnknownErrorException(message)
-
-        return Single.error(error)
-    }
-
-    private fun onHaveNotSuccessAndDeviceIsConnectedToInternet(): Single<Location> {
-        val message: String = context.getString(R.string.gps_is_required)
-        val error = HaveNotSuccessAndDeviceIsConnectedToInternet(message)
-
-        return Single.error(error)
-    }
-
-    private fun onHaveNotSuccessAndDeviceIsNotConnectedToInternet(): Single<Location> {
-        val message: String = context.getString(R.string.internet_connection_and_GPS_required)
-        val error = HaveNotSuccessAndDeviceIsNotConnectedToInternet(message)
-
-        return Single.error(error)
-    }
-
     @SuppressLint("MissingPermission")
     private fun getCurrentLocation(): Single<Location> =
         rxLocation.location()
             .updates(locationRequest)
+            .timeout(10, TimeUnit.SECONDS)
             .firstOrError()
 
     private fun makeAddressFromLocation(location: Location): Single<UserAddressType> =
@@ -111,15 +92,36 @@ class LocationRepository
         }
 
     private fun onDeviceIsNotConnectedToInternet(): Single<UserAddressType> {
-        val message: String = context.getString(R.string.internet_connection_required)
+        val message = context.getString(R.string.internet_connection_required)
         val error = DeviceIsNotConnectedToInternetException(message)
 
         return Single.error(error)
     }
 
     private fun <T> onHaveSuccessAndDeviceIsNotConnectedToInternet(): Single<T> {
-        val message: String = context.getString(R.string.internet_connection_required)
+        val message = context.getString(R.string.internet_connection_required)
         val error = HaveSuccessAndDeviceIsNotConnectedException(message)
+
+        return Single.error(error)
+    }
+
+    private fun onUnknownError(): Single<Location> {
+        val message = context.getString(R.string.unknown_error)
+        val error = UnknownErrorException(message)
+
+        return Single.error(error)
+    }
+
+    private fun onHaveNotSuccessAndDeviceIsConnectedToInternet(): Single<Location> {
+        val message = context.getString(R.string.gps_is_required)
+        val error = HaveNotSuccessAndDeviceIsConnectedToInternet(message)
+
+        return Single.error(error)
+    }
+
+    private fun onHaveNotSuccessAndDeviceIsNotConnectedToInternet(): Single<Location> {
+        val message = context.getString(R.string.internet_connection_and_GPS_required)
+        val error = HaveNotSuccessAndDeviceIsNotConnectedToInternet(message)
 
         return Single.error(error)
     }

@@ -6,8 +6,8 @@ import io.reactivex.SingleEmitter
 import io.realm.Realm
 import io.realm.RealmResults
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
-import ru.mts.avpopo85.weathery.data.db.util.onDbHasNoWeatherResponse
-import ru.mts.avpopo85.weathery.data.db.util.onDbHasOutdatedWeatherResponse
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.utils.onDbHasNoWeatherResponse
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.utils.onDbHasOutdatedWeatherResponse
 import ru.mts.avpopo85.weathery.data.model.base.common.ICurrentWeatherRealmResponse
 
 
