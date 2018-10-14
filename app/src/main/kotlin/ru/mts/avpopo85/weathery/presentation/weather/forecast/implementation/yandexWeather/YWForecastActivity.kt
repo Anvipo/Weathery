@@ -67,6 +67,10 @@ class YWForecastActivity :
         }
     }
 
+    override fun changeTitle(title: String) {
+        toolbar.title = title
+    }
+
     private fun initPager() {
         pagerAdapter = YWForecastActivityPagerAdapter(supportFragmentManager)
         yw_forecast_pager.adapter = pagerAdapter

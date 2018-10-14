@@ -25,7 +25,7 @@ import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
-import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMListItemResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastResponseType
@@ -96,7 +96,7 @@ class AppModule(private val context: Context) {
     fun provideOWMForecastRepository(
         apiService: IOWMForecastApiService,
         networkManager: NetworkManager,
-        forecastDbService: IForecastDbService<OWMForecastResponseType>,
+        forecastDbService: IForecastDbService<OWMListItemResponseType>,
         locationDbService: ILocationDbService<UserAddressType>
     ): IForecastRepository<OWMForecastListResponseType> =
         OWMForecastRepository(

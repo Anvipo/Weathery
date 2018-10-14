@@ -25,6 +25,7 @@ class YWForecastMapper
     override fun mapForecast(forecastListResponse: YWForecastListResponseType): YWForecastListType =
         forecastListResponse.map {
             YWForecastType(
+                cityName = it.cityName,
                 date = it.dateUTC,
                 dateInUnixtime = it.dateInUnixUTCInSeconds.toDate(),
                 weekSerialNumber = it.weekSerialNumber,

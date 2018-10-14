@@ -27,7 +27,7 @@ interface IOWMForecastApiService {
     ): Single<OWMForecastResponse>
 
     @GET("forecast")
-    fun getCurrentWeatherByCityName(
+    fun getForecastByCityName(
         @Query("q")
         cityName: String,
 
@@ -42,7 +42,7 @@ interface IOWMForecastApiService {
     ): Single<OWMForecastResponse>
 
     @GET("forecast")
-    fun getCurrentWeatherByGeographicCoordinates(
+    fun getForecastByGeographicCoordinates(
         @Query("lat")
         lat: Double,
 
@@ -60,7 +60,7 @@ interface IOWMForecastApiService {
     ): Single<OWMForecastResponse>
 
     @GET("forecast")
-    fun getCurrentWeatherByZipCode(
+    fun getForecastByZipCode(
         @Query("zip")
         zip: String,
 

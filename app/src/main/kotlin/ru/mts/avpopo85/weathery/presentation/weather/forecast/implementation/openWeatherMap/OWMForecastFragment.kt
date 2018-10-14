@@ -57,11 +57,9 @@ class OWMForecastFragment : Fragment() {
             rainVolumeValueOWMFTV?.text =
                     "${it.rainVolumeMm.roundIfNeeded()} ${getString(R.string.mm)}"
             weatherDescriptionValueOWMFTV?.text = it.weather.description
-            it.wind.let { (speedInUnits, direction) ->
-                //TODO единицы измерения как в запросе
-                windSpeedValueOWMFTV?.text = "$speedInUnits м/c"
-                windDirectionValueOWMFTV?.text = direction
-            }
+            //TODO единицы измерения как в запросе
+            windSpeedValueOWMFTV?.text = "${it.windSpeed} м/c"
+            windDirectionValueOWMFTV?.text = it.windDirection
             it.main.let { (temperature, atmosphericPressureOnTheGroundLevelInhPa, atmosphericPressureOnTheSeaLevelInhPa, humidity) ->
                 //TODO конвертация в другие измерения
                 atmosphericPressureOnTheGroundLevelInhPaValueOWMFTV?.text =

@@ -22,12 +22,19 @@ class OWMForecastPresenter
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
             .doAfterTerminate { view?.hideLoadingProgress() }
-            .subscribe(
-                { view?.showWeatherResponse(it) },
-                { view?.showError(context.parseError(it)) }
-            )
+            .subscribe(::onSuccess, ::onError)
 
         compositeDisposable.add(task)
+    }
+
+    private fun onSuccess(response: OWMForecastListType) {
+        view?.changeTitle(response.first().cityName)
+
+        view?.showWeatherResponse(response)
+    }
+
+    private fun onError(error: Throwable) {
+        view?.showError(context.parseError(error))
     }
 
 }

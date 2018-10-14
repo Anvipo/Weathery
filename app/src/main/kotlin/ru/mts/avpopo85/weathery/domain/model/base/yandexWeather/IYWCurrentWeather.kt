@@ -4,9 +4,6 @@ import ru.mts.avpopo85.weathery.domain.model.base.common.ICurrentWeather
 
 interface IYWCurrentWeather : ICurrentWeather {
 
-    /**Temperature (°С).*/
-    val temperature: String
-
     /**What the temperature feels like (°С).*/
     val feelsLikeTemperature: String
 
@@ -23,23 +20,11 @@ interface IYWCurrentWeather : ICurrentWeather {
     /**Weather description.*/
     val weatherDescription: String
 
-    /**Wind speed (meters per second).*/
-    val windSpeed: String
-
     /**Speed of wind gusts (meters per second).*/
     val windGustsSpeed: String
 
-    /**Wind direction.*/
-    val windDirection: String
-
     /**Atmospheric pressure (mm Hg).*/
     val atmosphericPressureInMmHg: String
-
-    /**Atmospheric pressure (hPa).*/
-    val atmosphericPressureInhPa: String
-
-    /**Humidity (percent).*/
-    val humidity: String
 
     /**Light or dark time of the day.*/
     val daytime: String
@@ -50,16 +35,10 @@ interface IYWCurrentWeather : ICurrentWeather {
     /**Time of year in this locality.*/
     val season: String
 
-    /**The time when weather data was measured, in Unix time.*/
-    val observationUnixTime: String
-
     /**Type of precipitation.*/
     val precipitationType: String
 
     /**Intensity of precipitation.*/
     val precipitationStrength: String
-
-    /**Cloud cover.*/
-    val cloudiness: String
 
 }

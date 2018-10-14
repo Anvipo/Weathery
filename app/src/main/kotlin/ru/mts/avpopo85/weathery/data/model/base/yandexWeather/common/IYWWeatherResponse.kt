@@ -1,10 +1,9 @@
 package ru.mts.avpopo85.weathery.data.model.base.yandexWeather.common
 
-import ru.mts.avpopo85.weathery.data.model.base.common.IWeatherResponse
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 
-interface IYWWeatherResponse : IWeatherResponse {
+interface IYWWeatherResponse {
 
     /**The time on the server in Unix time.*/
     val serverInUnix: Int

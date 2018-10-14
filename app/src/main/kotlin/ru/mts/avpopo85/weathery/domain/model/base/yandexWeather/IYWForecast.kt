@@ -5,9 +5,6 @@ import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.foreca
 
 interface IYWForecast : IForecast {
 
-    /**Date of the forecast, in the format YYYY-MM-DD.*/
-    override val date: String
-
     /**The date of the forecast in Unix time.*/
     val dateInUnixtime: String
 

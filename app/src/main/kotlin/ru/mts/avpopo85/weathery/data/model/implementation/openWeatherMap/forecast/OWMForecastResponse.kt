@@ -12,7 +12,7 @@ data class OWMForecastResponse(
 
     @SerializedName("cnt")
     @Expose
-    override val numberOfLines: Double,
+    override val numberOfLines: Int,
 
     @SerializedName("cod")
     @Expose

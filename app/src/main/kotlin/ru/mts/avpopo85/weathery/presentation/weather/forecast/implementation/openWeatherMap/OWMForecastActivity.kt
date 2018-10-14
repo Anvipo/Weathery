@@ -69,6 +69,10 @@ class OWMForecastActivity :
         pagerAdapter.notifyDataSetChanged()
     }
 
+    override fun changeTitle(title: String) {
+        toolbar.title = title
+    }
+
     private fun initPager() {
         pagerAdapter = OWMForecastActivityPagerAdapter(supportFragmentManager)
         owm_forecast_pager.adapter = pagerAdapter

@@ -10,6 +10,8 @@ import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWForeca
 /**This object contains weather forecast data.*/
 open class YWForecastResponse(
 
+    override var cityName: String = "",
+
     override var saveUnixTime: Long = 0,
 
     @SerializedName("date")

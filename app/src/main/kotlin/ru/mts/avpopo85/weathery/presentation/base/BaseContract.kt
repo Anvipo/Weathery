@@ -23,6 +23,8 @@ interface BaseContract {
             title: String? = null
         )
 
+        fun changeTitle(title: String)
+
     }
 
     interface Presenter<in V : View> {

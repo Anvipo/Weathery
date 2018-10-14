@@ -2,15 +2,17 @@ package ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.forecast
 
 import ru.mts.avpopo85.weathery.domain.model.base.common.IForecast
 import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.IOWMWeather
-import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.IOWMWind
 
 interface IOWMForecast : IForecast {
 
-    override val date: String
-
     val cloudiness: Int
 
-    val wind: IOWMWind
+    /**Wind speed.
+     *
+     *Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.*/
+    val windSpeed: String
+
+    val windDirection: String
 
     val weather: IOWMWeather
 

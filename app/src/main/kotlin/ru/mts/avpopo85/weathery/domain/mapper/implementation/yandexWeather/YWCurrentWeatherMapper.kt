@@ -3,9 +3,9 @@ package ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather
 import android.content.Context
 import ru.mts.avpopo85.weathery.domain.mapper.base.ICurrentWeatherMapper
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.getDaytimeString
-import ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather.YandexWeatherMapper.getWaterTemperatureString
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.toDate
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather.YandexWeatherMapper.getWaterTemperatureString
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 import javax.inject.Inject
@@ -22,7 +22,7 @@ class YWCurrentWeatherMapper
                 feelsLikeTemperature = it.feelsLikeTemperature.roundIfNeeded(),
                 humidity = it.humidity.roundIfNeeded(),
                 iconUrl = "https://yastatic.net/weather/i/icons/blueye/color/svg/${it.iconId}.svg",
-                observationUnixTime = it.observationUnixTime.toDate(),
+                timeOfDataCalculation = it.observationUnixTime.toDate(),
                 polar = context.getPolarString(it.polar),
                 precipitationStrength = context.getPrecipitationStrengthString(it.precipitationStrength),
                 precipitationType = context.getPrecipitationTypeString(it.precipitationType),
@@ -34,7 +34,8 @@ class YWCurrentWeatherMapper
                 weatherDescription = context.getWeatherDescriptionString(it.weatherDescription),
                 windDirection = context.getWindDirectionString(it.windDirection),
                 windGustsSpeed = it.windGustsSpeed.roundIfNeeded(),
-                windSpeed = it.windSpeed.roundIfNeeded()
+                windSpeed = it.windSpeed.roundIfNeeded(),
+                cityName = it.cityName
             )
         }
 

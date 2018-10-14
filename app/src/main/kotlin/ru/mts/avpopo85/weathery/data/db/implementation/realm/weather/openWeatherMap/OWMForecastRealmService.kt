@@ -5,15 +5,15 @@ import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.common.AbsF
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.openWeatherMap.utils.OWM_FORECAST_DEFAULT_CACHE_LIFETIME_IN_MS
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.utils.isFresh
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
-import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMListItemResponseType
 import javax.inject.Inject
 
 class OWMForecastRealmService
 @Inject constructor(context: Context) :
-    AbsForecastRealmService<OWMForecastResponseType>(context) {
+    AbsForecastRealmService<OWMListItemResponseType>(context) {
 
-    override val responseClassType: Class<OWMForecastResponseType>
-            by lazy { OWMForecastResponseType::class.java }
+    override val responseClassType: Class<OWMListItemResponseType>
+            by lazy { OWMListItemResponseType::class.java }
 
     override val OWMForecastListResponseType.isFresh: Boolean
         get() {

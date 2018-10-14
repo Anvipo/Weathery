@@ -220,7 +220,6 @@
     <string name="no_previous_weather_data">Предыдущих данных о погоде нет</string>
     <string name="the_forecast_is_outdated">Прогноз устарел</string>
     <string name="get_data_from_server">Получите данные с сервера</string>
-    <string name="db_has_no_location_data">В БД нет вашей геолокации</string>
     <string name="is_your_current_geolocation">Ваше текущее местоположение</string>
     <string name="found_intended_location">Найдено предполагаемое местоположение</string>
     <string name="could_not_find_your_geolocation">Не удалось узнать Ваше местоположение</string>

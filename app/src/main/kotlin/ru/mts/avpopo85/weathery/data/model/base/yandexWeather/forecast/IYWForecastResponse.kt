@@ -6,14 +6,6 @@ import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.forecast
 
 interface IYWForecastResponse : IForecastRealmResponse {
 
-    override var saveUnixTime: Long
-
-    /**Date of the forecast, in the format YYYY-MM-DD.*/
-    override val dateUTC: String
-
-    /**The date of the forecast in Unix time.*/
-    override val dateInUnixUTCInSeconds: Long
-
     /**Week number.*/
     val weekSerialNumber: Int
 

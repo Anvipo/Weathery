@@ -15,7 +15,7 @@ import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.yandexWeath
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.yandexWeather.YWForecastRealmService
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
-import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMListItemResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastResponseType
 import javax.inject.Singleton
@@ -51,7 +51,7 @@ class RealmModule(val context: Context) {
 
     @Provides
     @Singleton
-    fun provideOWMForecastRealmService(): IForecastDbService<OWMForecastResponseType> =
+    fun provideOWMForecastRealmService(): IForecastDbService<OWMListItemResponseType> =
         OWMForecastRealmService(context)
 
     @Provides

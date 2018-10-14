@@ -4,17 +4,16 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.forecast.IOWMForecast
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
-import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.currentWeather.OWMWind
 
 /**This object contains weather forecast data.*/
 @Parcelize
 data class OWMForecast(
 
+    override val cityName: String,
+
     override val date: String,
 
     override val cloudiness: Int,
-
-    override val wind: OWMWind,
 
     override val weather: OWMWeather,
 
@@ -22,6 +21,10 @@ data class OWMForecast(
 
     override val rainVolumeMm: Double,
 
-    override val main: OWMForecastMain
+    override val main: OWMForecastMain,
+
+    override val windSpeed: String,
+
+    override val windDirection: String
 
 ) : Parcelable, IOWMForecast

@@ -17,7 +17,7 @@ open class OWMCurrentWeatherMainResponse(
 
     @SerializedName("humidity")
     @Expose
-    override var humidity: Int = 0,
+    override var humidity: Double = 0.0,
 
     @SerializedName("temp_min")
     @Expose

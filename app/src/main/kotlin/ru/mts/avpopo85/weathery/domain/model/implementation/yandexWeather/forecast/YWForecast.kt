@@ -8,6 +8,8 @@ import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWForecast
 @Parcelize
 data class YWForecast(
 
+    override val cityName: String,
+
     override val date: String,
 
     override val dateInUnixtime: String,

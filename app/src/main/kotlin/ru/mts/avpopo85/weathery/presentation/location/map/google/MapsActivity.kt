@@ -69,6 +69,8 @@ class MapsActivity :
         return false
     }
 
+    override fun changeTitle(title: String) = Unit
+
     private fun showConfirmation(coordinates: LatLng) {
         showAlertDialog(
             getString(R.string.is_this_your_location),

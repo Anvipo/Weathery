@@ -67,8 +67,12 @@ class YWCurrentWeatherActivity :
             daytime_value_YW_CW_TV.text = it.daytime
             polar_value_YW_CW_TV.text = it.polar
             season_value_YW_CW_TV.text = it.season
-            observation_unix_time_value_YW_CW_TV.text = it.observationUnixTime
+            observation_unix_time_value_YW_CW_TV.text = it.timeOfDataCalculation
         }
+    }
+
+    override fun changeTitle(title: String) {
+        toolbar.title = title
     }
 
 }

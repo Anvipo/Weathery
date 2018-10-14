@@ -10,7 +10,7 @@ interface IOWMCurrentWeatherMainResponse {
     val atmosphericPressureInhPa: Double
 
     /**Humidity, %*/
-    val humidity: Int
+    val humidity: Double
 
     /**Minimum temperature at the moment.
      *

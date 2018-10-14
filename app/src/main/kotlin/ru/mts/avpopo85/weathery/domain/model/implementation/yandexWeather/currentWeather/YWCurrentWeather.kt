@@ -33,12 +33,14 @@ data class YWCurrentWeather(
 
     override val season: String,
 
-    override val observationUnixTime: String,
-
     override val precipitationType: String,
 
     override val precipitationStrength: String,
 
-    override val cloudiness: String
+    override val cloudiness: String,
+
+    override val cityName: String,
+
+    override val timeOfDataCalculation: String
 
 ) : IYWCurrentWeather

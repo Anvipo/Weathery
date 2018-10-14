@@ -12,6 +12,8 @@ import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.current
 
 open class OWMListItemResponse(
 
+    override var cityName: String = "",
+
     override var saveUnixTime: Long = 0,
 
     @PrimaryKey

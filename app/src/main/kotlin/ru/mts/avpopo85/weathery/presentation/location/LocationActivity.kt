@@ -163,6 +163,10 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         get_last_known_location_LA_B.isEnabled = false
     }
 
+    override fun changeTitle(title: String) {
+        toolbar.title = title
+    }
+
     private fun initButtonListeners() {
         get_last_known_location_LA_B.setOnClickListener {
             presenter.getLastKnownGeolocation()
