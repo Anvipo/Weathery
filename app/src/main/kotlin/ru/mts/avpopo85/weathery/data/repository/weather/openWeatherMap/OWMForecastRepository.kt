@@ -5,7 +5,6 @@ import io.reactivex.Single
 import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
-import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.forecast.OWMForecastResponse
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMForecastApiService
 import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import ru.mts.avpopo85.weathery.data.repository.weather.common.AbsForecastRepository
@@ -17,6 +16,8 @@ import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMListItemResponseType
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 
@@ -60,8 +61,8 @@ class OWMForecastRepository
         val postalCode: Int? = currentAddress.postalCode
 
         val geoCoordsApiCall = makeGeoCoordsApiCall(coords)
-        val cityNameApiCall = makeCityNameApiCall(cityName, countryCode)
         val postalCodeApiCall = makePostalCodeApiCall(postalCode, countryCode)
+        val cityNameApiCall = makeCityNameApiCall(cityName, countryCode)
 
         return TripleOfOWMApiCalls(geoCoordsApiCall, postalCodeApiCall, cityNameApiCall)
     }
@@ -83,10 +84,46 @@ class OWMForecastRepository
             else -> onUnknownLocation()
         }
 
+    override fun firstApiCallWithErrorCatching(
+        first: Single<OWMForecastResponseType>,
+        second: Single<OWMForecastResponseType>?,
+        third: Single<OWMForecastResponseType>?
+    ): Single<OWMForecastResponseType> =
+        first.onErrorResumeNext {
+            when {
+                it is UnknownHostException || it is SocketTimeoutException -> Single.error(it)
+                second != null ->
+                    secondApiCallWithErrorCatching(second, third)
+                third != null -> thirdApiCallWithErrorCatching(third)
+                else -> onUnknownLocation()
+            }
+        }
+
+    override fun secondApiCallWithErrorCatching(
+        second: Single<OWMForecastResponseType>,
+        third: Single<OWMForecastResponseType>?
+    ): Single<OWMForecastResponseType> =
+        second.onErrorResumeNext {
+            when {
+                it is UnknownHostException || it is SocketTimeoutException -> Single.error(it)
+                third != null -> thirdApiCallWithErrorCatching(third)
+                else -> onUnknownLocation()
+            }
+        }
+
+    override fun thirdApiCallWithErrorCatching(third: Single<OWMForecastResponseType>)
+            : Single<OWMForecastResponseType> =
+        third.onErrorResumeNext {
+            when (it) {
+                is UnknownHostException, is SocketTimeoutException -> Single.error(it)
+                else -> onUnknownLocation()
+            }
+        }
+
     override fun makePostalCodeApiCall(
         postalCode: Int?,
         countryCode: String?
-    ): Single<OWMForecastResponse>? =
+    ): Single<OWMForecastResponseType>? =
         if (postalCode != null) {
             getWeatherDataByZipCode(postalCode, countryCode)
         } else {
@@ -96,7 +133,7 @@ class OWMForecastRepository
     override fun makeCityNameApiCall(
         cityName: String?,
         countryCode: String?
-    ): Single<OWMForecastResponse>? =
+    ): Single<OWMForecastResponseType>? =
         if (cityName != null) {
             getWeatherDataByCityName(cityName, countryCode)
         } else {
@@ -132,35 +169,6 @@ class OWMForecastRepository
 
         return apiService.getForecastByCityName(cityNameRequest)
     }
-
-    override fun firstApiCallWithErrorCatching(
-        first: Single<OWMForecastResponseType>,
-        second: Single<OWMForecastResponseType>?,
-        third: Single<OWMForecastResponseType>?
-    ): Single<OWMForecastResponseType> =
-        first.onErrorResumeNext {
-            when {
-                second != null ->
-                    secondApiCallWithErrorCatching(second, third)
-                third != null -> thirdApiCallWithErrorCatching(third)
-                else -> onUnknownLocation()
-            }
-        }
-
-    override fun secondApiCallWithErrorCatching(
-        second: Single<OWMForecastResponseType>,
-        third: Single<OWMForecastResponseType>?
-    ): Single<OWMForecastResponseType> =
-        second.onErrorResumeNext {
-            if (third != null) {
-                thirdApiCallWithErrorCatching(third)
-            } else {
-                onUnknownLocation()
-            }
-        }
-
-    override fun thirdApiCallWithErrorCatching(third: Single<OWMForecastResponseType>)
-            : Single<OWMForecastResponseType> = third.onErrorResumeNext { onUnknownLocation() }
 
     override fun onUnknownLocation(): Single<OWMForecastResponseType> =
         context.onUnknownCurrentLocation()

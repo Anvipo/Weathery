@@ -34,7 +34,10 @@ fun Context.parseError(throwable: Throwable): String {
         is ConnectException -> getString(R.string.authorisation_error)
         is SocketTimeoutException -> "${getString(R.string.response_timeout)}. " +
                 getString(R.string.make_sure_your_device_has_a_network_connection)
-        else -> throwable.message!!
+        else -> {
+            throwable.localizedMessage ?: throwable.message
+            ?: applicationContext.getString(R.string.unknown_error)
+        }
     }
 
     return if (throwable.message != null && msg.contains(throwable.message!!))

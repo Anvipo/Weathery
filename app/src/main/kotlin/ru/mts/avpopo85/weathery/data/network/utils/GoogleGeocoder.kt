@@ -7,6 +7,7 @@ import io.reactivex.SingleEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.model.implementation.common.googleGeocode.GoogleGeocoderResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.common.googleGeocode.utils.GoogleGeocodeStatus.*
 import ru.mts.avpopo85.weathery.data.network.retrofit.location.IGoogleGeocoderApiService
@@ -41,9 +42,35 @@ class GoogleGeocoder
         emitter: SingleEmitter<UserAddressType>
     ) = when (response.status) {
         OK -> {
-            val res = response.results
+            val userAddress = UserAddressType()
 
-            val oops = 1
+            var success = false
+
+            response.results?.let { results ->
+                results.forEach { result ->
+                    result?.let {
+                        success = true
+
+                        val c = it
+
+                        val location = it.geometry?.location
+                        val geographicCoordinates = GeographicCoordinates(
+                            latitude = location?.lat,
+                            longitude = location?.lng
+                        )
+
+                        userAddress.coords = geographicCoordinates
+
+                        val o = 1
+                    }
+                }
+            }
+
+            if (success) {
+                emitter.onSuccess(userAddress)
+            } else {
+                emitter.onError(Throwable(""))
+            }
         }
         UNKNOWN_ERROR,
         INVALID_REQUEST,

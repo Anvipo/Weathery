@@ -7,31 +7,32 @@ interface IUserAddress {
 
     val saveDate: Long
 
-    /**Region*/
+    /**E.g. region of country*/
     val adminArea: String?
 
     val countryCode: String?
 
-    /**Building*/
     val countryName: String?
 
+    /**E.g. building*/
     val featureName: String?
 
     val coords: GeographicCoordinates?
 
     val locale: UserLocale?
 
-    /**City*/
+    /**E.g. district of city*/
     val locality: String?
 
     val postalCode: Int?
 
+    /**E.g. city*/
     val subAdminArea: String?
 
-    /**Building*/
+    /**E.g. building*/
     val subThoroughfare: String?
 
-    /**Street*/
+    /**E.g. street*/
     val thoroughfare: String?
 
     val extras: String?

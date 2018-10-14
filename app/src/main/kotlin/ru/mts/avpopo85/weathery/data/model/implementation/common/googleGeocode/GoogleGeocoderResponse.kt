@@ -6,16 +6,20 @@ import ru.mts.avpopo85.weathery.data.model.implementation.common.googleGeocode.u
 
 data class GoogleGeocoderResponse(
 
-	@SerializedName("error_message")
-	@Expose
-	val errorMessage: String?,
+    @SerializedName("plus_code")
+    @Expose
+    val plusCode: PlusCode?,
 
-	@SerializedName("results")
-	@Expose
-	val results: List<Any>,
+    @SerializedName("error_message")
+    @Expose
+    val errorMessage: String?,
 
-	@SerializedName("status")
-	@Expose
-	val status: GoogleGeocodeStatus
+    @SerializedName("results")
+    @Expose
+    val results: List<ResultsItem?>?,
+
+    @SerializedName("status")
+    @Expose
+    val status: GoogleGeocodeStatus
 
 )

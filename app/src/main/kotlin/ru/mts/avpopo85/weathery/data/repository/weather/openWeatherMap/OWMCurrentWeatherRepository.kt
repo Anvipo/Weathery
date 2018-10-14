@@ -14,6 +14,8 @@ import ru.mts.avpopo85.weathery.data.repository.weather.utils.onUnknownCurrentLo
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class OWMCurrentWeatherRepository
@@ -52,8 +54,8 @@ class OWMCurrentWeatherRepository
         val postalCode: Int? = currentAddress.postalCode
 
         val geoCoordsApiCall = makeGeoCoordsApiCall(coords)
-        val cityNameApiCall = makeCityNameApiCall(cityName, countryCode)
         val postalCodeApiCall = makePostalCodeApiCall(postalCode, countryCode)
+        val cityNameApiCall = makeCityNameApiCall(cityName, countryCode)
 
         return TripleOfOWMApiCalls(geoCoordsApiCall, postalCodeApiCall, cityNameApiCall)
     }
@@ -82,6 +84,7 @@ class OWMCurrentWeatherRepository
     ): Single<OWMCurrentWeatherResponseType> =
         first.onErrorResumeNext {
             when {
+                it is UnknownHostException || it is SocketTimeoutException -> Single.error(it)
                 second != null ->
                     secondApiCallWithErrorCatching(second, third)
                 third != null -> thirdApiCallWithErrorCatching(third)
@@ -94,16 +97,21 @@ class OWMCurrentWeatherRepository
         third: Single<OWMCurrentWeatherResponseType>?
     ): Single<OWMCurrentWeatherResponseType> =
         second.onErrorResumeNext {
-            if (third != null) {
-                thirdApiCallWithErrorCatching(third)
-            } else {
-                onUnknownLocation()
+            when {
+                it is UnknownHostException || it is SocketTimeoutException -> Single.error(it)
+                third != null -> thirdApiCallWithErrorCatching(third)
+                else -> onUnknownLocation()
             }
         }
 
     override fun thirdApiCallWithErrorCatching(third: Single<OWMCurrentWeatherResponseType>)
             : Single<OWMCurrentWeatherResponseType> =
-        third.onErrorResumeNext { onUnknownLocation() }
+        third.onErrorResumeNext {
+            when (it) {
+                is UnknownHostException, is SocketTimeoutException -> Single.error(it)
+                else -> onUnknownLocation()
+            }
+        }
 
     override fun makePostalCodeApiCall(
         postalCode: Int?,
