@@ -1,6 +1,7 @@
 package ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather
 
 import android.content.Context
+import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.yandexWeather.utils.YW_DEFAULT_CACHE_LIFETIME
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWDayShortResponse
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWDayTimeResponse
@@ -71,30 +72,29 @@ class YWForecastMapper
 
     private fun mapPartsResponse(YWPartsResponse: YWPartsResponse): YWParts =
         YWPartsResponse.let {
-            //todo
             YWParts(
                 nightForecast = mapDayTime(
-                    "Прогноз на ночь",
+                    context.getString(R.string.night_forecast),
                     it.nightForecastResponse!!
                 ),
                 morningForecast = mapDayTime(
-                    "Прогноз на утро",
+                    context.getString(R.string.morning_forecast),
                     it.morningForecastResponse!!
                 ),
                 dayForecast = mapDayTime(
-                    "Прогноз на день",
+                    context.getString(R.string.day_forecast),
                     it.dayForecastResponse!!
                 ),
                 eveningForecast = mapDayTime(
-                    "Прогноз на вечер",
+                    context.getString(R.string.evening_forecast),
                     it.eveningForecastResponse!!
                 ),
-                _12HoursDayForecast = map12HoursForecast(
-                    "12 часовой прогноз на день",
+                _12HourForecastForDay = map12HoursForecast(
+                    context.getString(R.string._12_hour_forecast_for_day),
                     it._12HoursDayForecastResponse!!
                 ),
-                _12HoursNightForecast = map12HoursForecast(
-                    "12 часовой прогноз на ночь",
+                _12HourForecastForNight = map12HoursForecast(
+                    context.getString(R.string._12_hour_forecast_for_night),
                     it._12HoursNightForecastResponse!!
                 )
             )

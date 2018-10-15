@@ -16,8 +16,8 @@ data class YWParts(
 
     override val eveningForecast: YWDayTime,
 
-    override val _12HoursDayForecast: YWDayShort,
+    override val _12HourForecastForDay: YWDayShort,
 
-    override val _12HoursNightForecast: YWDayShort
+    override val _12HourForecastForNight: YWDayShort
 
 ) : Parcelable, IYWParts

@@ -1,6 +1,7 @@
 package ru.mts.avpopo85.weathery.presentation.weather.base
 
 import android.view.View
+import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.AbsProgressBarActivity
 
 abstract class AbsWeatherActivity<V : View>/*<out P : WeatherContract.Presenter<WeatherContract.View>>*/ :
@@ -26,8 +27,12 @@ abstract class AbsWeatherActivity<V : View>/*<out P : WeatherContract.Presenter<
     }
 
     override fun onNotFreshWeatherData() {
-        //todo
-        showLongToast("")
+        val part1 = getString(R.string.the_forecast_is_outdated)
+        val part2 = getString(R.string.internet_connection_required)
+
+        val message = "$part1. $part2"
+
+        showLongToast(message)
     }
 
 }

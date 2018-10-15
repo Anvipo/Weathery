@@ -244,4 +244,10 @@
     <string name="could_not_find_address_of_your_current_location">Не удалось узнать адрес Вашего текущего местоположения</string>
     <string name="there_are_problems_geocoding">Возникли проблемы геокодирования</string>
     <string name="your_location_has_changed">Ваше местоположение изменилось</string>
+    <string name="night_forecast">Прогноз на ночь</string>
+    <string name="morning_forecast">Прогноз на утро</string>
+    <string name="day_forecast">Прогноз на день</string>
+    <string name="evening_forecast">Прогноз на вечер</string>
+    <string name="_12_hour_forecast_for_day">12 часовой прогноз на день</string>
+    <string name="_12_hour_forecast_for_night">12 часовой прогноз на ночь</string>
 </resources>

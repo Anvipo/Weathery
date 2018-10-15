@@ -16,9 +16,9 @@ interface IYWParts {
     val eveningForecast: IYWDayTime
 
     /**12-hour forecast for the day.*/
-    val _12HoursDayForecast: IYWDayShort
+    val _12HourForecastForDay: IYWDayShort
 
     /**12-hour forecast for the upcoming night.*/
-    val _12HoursNightForecast: IYWDayShort
+    val _12HourForecastForNight: IYWDayShort
 
 }
