@@ -41,4 +41,4 @@ open class UserAddress(
 
     override var url: String? = null
 
-) : IUserAddress, RealmObject()
+) : RealmObject(), IUserAddress

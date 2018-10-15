@@ -54,6 +54,7 @@ class LocationRepository
             longitude = coordinates.longitude
         }
 
+        //todo
 //      return  onServiceIsNotAvailable(location, IOException(""))
 
         return makeAddressFromLocation(location).flatMap(dbService::saveCurrentAddress)

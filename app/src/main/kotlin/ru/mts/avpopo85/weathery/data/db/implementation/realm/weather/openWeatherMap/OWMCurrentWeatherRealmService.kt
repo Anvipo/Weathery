@@ -16,6 +16,3 @@ class OWMCurrentWeatherRealmService
     override val cacheLifeTimeInMs: Long = OWM_CURRENT_WEATHER_CACHE_LIFETIME_IN_MS
 
 }
-
-
-

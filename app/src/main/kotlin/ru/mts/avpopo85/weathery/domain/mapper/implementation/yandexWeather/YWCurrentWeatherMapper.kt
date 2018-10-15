@@ -47,5 +47,3 @@ class YWCurrentWeatherMapper
     override val cacheLifeTimeInMs: Long = YW_DEFAULT_CACHE_LIFETIME
 
 }
-
-

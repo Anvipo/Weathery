@@ -9,6 +9,10 @@ import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoord
 /**This object contains information about the current weather.*/
 open class YWCurrentWeatherResponse(
 
+    override var cityName: String = "",
+
+    override var coordinates: GeographicCoordinates? = null,
+
     @SerializedName("temp")
     @Expose
     override var temperature: Double = 0.0,
@@ -80,10 +84,6 @@ open class YWCurrentWeatherResponse(
 
     @SerializedName("cloudness")
     @Expose
-    override var cloudiness: Double = 0.0,
-
-    override var cityName: String = "",
-
-    override var coordinates: GeographicCoordinates? = null
+    override var cloudiness: Double = 0.0
 
 ) : IYWCurrentWeatherRealmResponse

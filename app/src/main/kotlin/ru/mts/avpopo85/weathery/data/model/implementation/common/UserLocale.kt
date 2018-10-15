@@ -9,4 +9,4 @@ open class UserLocale(
 
     override var region: String? = null
 
-) : IUserLocale, RealmObject()
+) : RealmObject(), IUserLocale

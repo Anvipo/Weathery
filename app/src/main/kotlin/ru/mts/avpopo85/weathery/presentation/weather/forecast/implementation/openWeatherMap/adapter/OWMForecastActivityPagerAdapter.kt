@@ -5,7 +5,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 
 class OWMForecastActivityPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+
     private val items = mutableListOf<Fragment>()
+
     private val tabTitles = mutableListOf<String>()
 
     override fun getItem(position: Int): Fragment = items[position]
@@ -18,4 +20,5 @@ class OWMForecastActivityPagerAdapter(fm: FragmentManager) : FragmentStatePagerA
         items.add(fragment)
         tabTitles.add(title)
     }
+
 }

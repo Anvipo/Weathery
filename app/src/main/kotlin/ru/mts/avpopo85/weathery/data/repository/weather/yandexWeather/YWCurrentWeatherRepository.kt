@@ -5,8 +5,8 @@ import io.reactivex.Single
 import ru.mts.avpopo85.weathery.data.db.base.ICurrentWeatherDbService
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
-import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWCurrentWeatherApiService
+import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import ru.mts.avpopo85.weathery.data.repository.weather.common.AbsCurrentWeatherRepository
 import ru.mts.avpopo85.weathery.data.repository.weather.utils.onUnknownCurrentLocation
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
@@ -23,7 +23,7 @@ class YWCurrentWeatherRepository
     private val context: Context
 ) :
     AbsCurrentWeatherRepository<YWCurrentWeatherResponseType>(
-        currentWeatherDbService, locationDbService, context, networkManager
+        currentWeatherDbService, networkManager, locationDbService, context
     ),
     ICurrentWeatherRepository<YWCurrentWeatherResponseType> {
 

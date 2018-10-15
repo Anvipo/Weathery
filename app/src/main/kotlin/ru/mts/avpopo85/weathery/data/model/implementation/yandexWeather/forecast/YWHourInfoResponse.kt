@@ -76,5 +76,4 @@ open class YWHourInfoResponse(
     @Expose
     override var cloudiness: Double = 0.0
 
-) : RealmObject(),
-    IYWHourInfoResponse
+) : RealmObject(), IYWHourInfoResponse

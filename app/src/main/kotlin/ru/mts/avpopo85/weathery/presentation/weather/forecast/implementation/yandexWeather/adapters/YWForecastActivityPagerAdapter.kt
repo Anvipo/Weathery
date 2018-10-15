@@ -5,7 +5,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 
 class YWForecastActivityPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+
     private val items = mutableListOf<Fragment>()
+
     private val tabTitles = mutableListOf<String>()
 
     override fun getItem(position: Int): Fragment = items[position]
@@ -19,4 +21,5 @@ class YWForecastActivityPagerAdapter(fm: FragmentManager) : FragmentStatePagerAd
         tabTitles.add(title)
         notifyDataSetChanged()
     }
+
 }

@@ -20,6 +20,7 @@ import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastType
 
 
 class YWForecastFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -84,4 +85,5 @@ class YWForecastFragment : Fragment() {
         sunriseTimeValueTV?.text = YWYWForecast.sunriseInLocalTime
         sunsetTimeValueTV?.text = YWYWForecast.sunsetInLocalTime
     }
+
 }

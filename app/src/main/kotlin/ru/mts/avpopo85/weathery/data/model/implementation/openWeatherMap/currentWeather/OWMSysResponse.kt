@@ -31,5 +31,4 @@ open class OWMSysResponse(
     @Expose
     override var sunset: Long = 0
 
-) : RealmObject(),
-    IOWMSysResponse
+) : RealmObject(), IOWMSysResponse

@@ -30,7 +30,7 @@ class OWMForecastRepository
     private val context: Context
 ) :
     AbsForecastRepository<OWMListItemResponseType>(
-        networkManager, forecastDbService, locationDbService, context
+        forecastDbService, networkManager, locationDbService, context
     ),
     IForecastRepository<OWMForecastListResponseType>,
     IOWMRepository<OWMForecastResponseType> {
@@ -47,7 +47,18 @@ class OWMForecastRepository
         return makeApiCall(firstApiCall, secondApiCall, thirdApiCall)
             .map { forecastResponse ->
                 forecastResponse.forecastsList.map {
-                    it.apply { cityName = forecastResponse.city.name }
+                    it.apply {
+                        cityName = forecastResponse.city.name
+
+                        val currentCoords = forecastResponse.city.coordinates
+
+                        val coords = GeographicCoordinates(
+                            latitude = currentCoords.latitude,
+                            longitude = currentCoords.longitude
+                        )
+
+                        coordinates = coords
+                    }
                 }
             }
     }

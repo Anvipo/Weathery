@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 data class Location(
 
-	@SerializedName("lng")
-	@Expose
-	val lng: Double?,
+    @SerializedName("lng")
+    @Expose
+    val lng: Double?,
 
-	@SerializedName("lat")
-	val lat: Double?
+    @SerializedName("lat")
+    val lat: Double?
 
 )

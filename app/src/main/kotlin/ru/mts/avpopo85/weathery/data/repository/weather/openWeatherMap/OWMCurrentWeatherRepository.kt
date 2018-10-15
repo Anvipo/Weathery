@@ -27,7 +27,7 @@ class OWMCurrentWeatherRepository
     private val context: Context
 ) :
     AbsCurrentWeatherRepository<OWMCurrentWeatherResponseType>(
-        currentWeatherDbService, locationDbService, context, networkManager
+        currentWeatherDbService, networkManager, locationDbService, context
     ),
     ICurrentWeatherRepository<OWMCurrentWeatherResponseType>,
     IOWMRepository<OWMCurrentWeatherResponseType> {

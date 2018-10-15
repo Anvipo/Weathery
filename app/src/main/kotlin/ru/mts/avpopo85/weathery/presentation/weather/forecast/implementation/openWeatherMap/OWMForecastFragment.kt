@@ -16,6 +16,7 @@ import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 
 
 class OWMForecastFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,4 +74,5 @@ class OWMForecastFragment : Fragment() {
 
         }
     }
+
 }

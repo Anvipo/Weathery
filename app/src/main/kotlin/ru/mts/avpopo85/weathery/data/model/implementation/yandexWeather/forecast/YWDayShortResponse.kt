@@ -60,6 +60,4 @@ open class YWDayShortResponse(
     @Expose
     override var cloudiness: Double = 0.0
 
-) : RealmObject(),
-    IYWDayShortResponse
-
+) : RealmObject(), IYWDayShortResponse

@@ -8,7 +8,6 @@ import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMConstants
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWConstants
 import ru.mts.avpopo85.weathery.di.global.*
 
-
 class App : Application() {
 
     override fun attachBaseContext(base: Context) {

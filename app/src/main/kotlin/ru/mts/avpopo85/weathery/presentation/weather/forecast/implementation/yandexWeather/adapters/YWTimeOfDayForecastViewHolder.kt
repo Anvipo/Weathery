@@ -9,8 +9,8 @@ import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWDayTime
 import ru.mts.avpopo85.weathery.presentation.utils.CELSIUS_DEGREE
 
 class YWTimeOfDayForecastViewHolder(private val view: View) : ViewHolder(view) {
-    @SuppressLint("SetTextI18n")
 
+    @SuppressLint("SetTextI18n")
     fun bind(YWDayTime: IYWDayTime) {
         val minimumTemperatureValueToDTV =
             view.findViewById<TextView>(R.id.minimum_temperature_value_YW_ToD_TV)
