@@ -1,25 +1,30 @@
 package ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather
 
 import android.content.Context
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.yandexWeather.utils.YW_DEFAULT_CACHE_LIFETIME
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWDayShortResponse
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWDayTimeResponse
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWHourInfoResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.yandexWeather.forecast.YWPartsResponse
 import ru.mts.avpopo85.weathery.domain.mapper.base.IForecastMapper
-import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.getDaytimeString
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.AbsWeatherMapper
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.utils.getDaytimeString
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.toDate
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather.utils.*
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWDayShort
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWDayTime
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWHourInfo
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWParts
-import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
-import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.toDate
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastType
 import javax.inject.Inject
 
 class YWForecastMapper
 @Inject constructor(private val context: Context) :
+    AbsWeatherMapper<YWForecastResponseType>(),
     IForecastMapper<YWForecastListResponseType, YWForecastListType> {
 
     override fun mapForecast(forecastListResponse: YWForecastListResponseType): YWForecastListType =
@@ -27,16 +32,19 @@ class YWForecastMapper
             YWForecastType(
                 cityName = it.cityName,
                 date = it.dateUTC,
-                dateInUnixtime = it.dateInUnixUTCInSeconds.toDate(),
+                dateInUnixtime = it.timeOfDataCalculationUnixUTCInSeconds.toDate(),
                 weekSerialNumber = it.weekSerialNumber,
                 sunriseInLocalTime = it.sunriseInLocalTime,
                 sunsetInLocalTime = it.sunsetInLocalTime,
                 moonCode = context.getMoonCodeString(it.moonCode),
                 moonText = context.getMoonTextString(it.moonText),
                 parts = mapPartsResponse(it.partsResponse!!),
-                hours = mapHoursResponse(it.hours)
+                hours = mapHoursResponse(it.hours),
+                isFresh = it.isFresh
             )
         }
+
+    override val cacheLifeTimeInMs: Long = YW_DEFAULT_CACHE_LIFETIME
 
     private fun mapHoursResponse(YWHourInfoResponse: List<IYWHourInfoResponse>?): List<YWHourInfo>? =
         YWHourInfoResponse?.map {
@@ -63,6 +71,7 @@ class YWForecastMapper
 
     private fun mapPartsResponse(YWPartsResponse: YWPartsResponse): YWParts =
         YWPartsResponse.let {
+            //todo
             YWParts(
                 nightForecast = mapDayTime(
                     "Прогноз на ночь",

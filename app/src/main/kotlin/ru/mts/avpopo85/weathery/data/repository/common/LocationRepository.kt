@@ -54,6 +54,8 @@ class LocationRepository
             longitude = coordinates.longitude
         }
 
+//      return  onServiceIsNotAvailable(location, IOException(""))
+
         return makeAddressFromLocation(location).flatMap(dbService::saveCurrentAddress)
     }
 
@@ -94,12 +96,6 @@ class LocationRepository
             onDeviceIsNotConnectedToInternet()
         }
 
-    private val message =
-        context.getString(R.string.unable_to_find_the_address_of_the_specified_location)
-
-    private val extractAddressException =
-        ExtractAddressException(message)
-
     private fun getAddressFromLocation(location: Location): Single<UserAddressType> =
         rxLocation.geocoding()
             .fromLocation(location)
@@ -111,15 +107,25 @@ class LocationRepository
     private fun onGeocodeError(
         error: Throwable,
         location: Location
-    ): Single<UserAddressType> = when (error) {
-        is NoSuchElementException -> Single.error(extractAddressException)
-        is IOException -> onServiceIsNotAvailable(location, error)
-        else -> Single.error(error)
+    ): Single<UserAddressType> =
+        when (error) {
+            is NoSuchElementException -> onNoSuchElementException()
+            is IOException -> onServiceIsNotAvailable(location, error)
+            else -> Single.error(error)
+        }
+
+    private fun onNoSuchElementException(): Single<UserAddressType> {
+        //on unknown address
+        val error = ExtractAddressException("NoSuchElement")
+
+        return Single.error(error)
     }
 
     private fun checkLocalityOnNull(it: UserAddressType): Maybe<UserAddressType> =
         if (it.locality == null) {
-            Maybe.error(extractAddressException)
+            val error = ExtractAddressException("Locality is null")
+
+            Maybe.error(error)
         } else {
             Maybe.just(it)
         }
@@ -130,7 +136,7 @@ class LocationRepository
     ): Single<UserAddressType> {
         error.printStackTrace()
 
-        return geocoder.geocodeLocation(location)
+        return geocoder.geocodeLocation(location).flatMap(dbService::saveCurrentAddress)
     }
 
     private fun mapUserAddress(address: Address): UserAddressType =

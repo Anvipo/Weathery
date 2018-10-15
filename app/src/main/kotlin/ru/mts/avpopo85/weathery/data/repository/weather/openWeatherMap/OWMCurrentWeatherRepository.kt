@@ -57,6 +57,7 @@ class OWMCurrentWeatherRepository
         val postalCodeApiCall = makePostalCodeApiCall(postalCode, countryCode)
         val cityNameApiCall = makeCityNameApiCall(cityName, countryCode)
 
+        //CHANGE ORDER ONLY HERE
         return TripleOfOWMApiCalls(geoCoordsApiCall, postalCodeApiCall, cityNameApiCall)
     }
 
@@ -68,7 +69,7 @@ class OWMCurrentWeatherRepository
         when {
             //Priority order
             //The order is important
-            //DONT CHANGE ANY ORDER
+            //DONT CHANGE ANY ORDER (CHANGE ORDER ONLY IN make3ApiCalls)
             firstApiCall != null ->
                 firstApiCallWithErrorCatching(firstApiCall, secondApiCall, thirdApiCall)
             secondApiCall != null ->

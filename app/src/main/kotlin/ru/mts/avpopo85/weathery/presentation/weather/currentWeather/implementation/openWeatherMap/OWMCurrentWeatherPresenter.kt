@@ -1,11 +1,9 @@
 package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.openWeatherMap
 
-import android.content.Context
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.ICurrentWeatherInteractor
 import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.AbsProgressBarPresenter
-import ru.mts.avpopo85.weathery.presentation.utils.parseError
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
 import javax.inject.Inject
@@ -13,8 +11,7 @@ import javax.inject.Inject
 class OWMCurrentWeatherPresenter
 @Inject constructor(
     private val interactor: ICurrentWeatherInteractor<OWMCurrentWeatherType>,
-    private val schedulerManagerModule: SchedulerManagerModule,
-    private val context: Context
+    private val schedulerManagerModule: SchedulerManagerModule
 ) : AbsProgressBarPresenter<CurrentWeatherContract.View<OWMCurrentWeatherType>>(),
     CurrentWeatherContract.Presenter<OWMCurrentWeatherType> {
 
@@ -28,14 +25,18 @@ class OWMCurrentWeatherPresenter
         compositeDisposable.add(task)
     }
 
-    private fun onSuccess(response: OWMCurrentWeatherType) {
-        view?.changeTitle(response.cityName)
+    private fun onSuccess(weatherData: OWMCurrentWeatherType) {
+        view?.changeTitle(weatherData.cityName)
 
-        view?.showWeatherResponse(response)
+        if (!weatherData.isFresh) {
+            view?.onNotFreshWeatherData()
+        }
+
+        view?.showWeatherResponse(weatherData)
     }
 
     private fun onError(error: Throwable) {
-        view?.showError(context.parseError(error))
+        view?.showError(error)
     }
 
 }

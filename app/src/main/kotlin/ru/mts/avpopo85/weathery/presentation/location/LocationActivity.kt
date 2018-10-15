@@ -19,6 +19,8 @@ import ru.mts.avpopo85.weathery.presentation.location.utils.COORDINATES_TAG
 import ru.mts.avpopo85.weathery.presentation.main.MainActivity
 import ru.mts.avpopo85.weathery.presentation.utils.APPLICATION_SETTINGS_REQUEST_CODE
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_BY_MAPS_REQUEST_CODE
+import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
+import ru.mts.avpopo85.weathery.utils.common.GoogleGeocodeException
 import javax.inject.Inject
 
 
@@ -80,42 +82,23 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == APPLICATION_SETTINGS_REQUEST_CODE) {
-            if (resultCode == 0) {
-                injectDependencies()
-                presenter.onActivityResult()
-            }
+            onApplicationSettingsRequestCode(resultCode)
         } else if (requestCode == LOCATION_BY_MAPS_REQUEST_CODE) {
-            if (resultCode == 0) {
-                if (data != null) {
-                    showLoadingProgress()
-
-                    val coordinates = data.getParcelableExtra<LatLng>(COORDINATES_TAG)
-
-                    if (coordinates != null) {
-                        injectDependencies()
-                        presenter.getAddressFromCoordinates(coordinates)
-                    } else {
-                        showLocationError()
-                        hideLoadingProgress()
-                    }
-                }
-            }
+            onLocationByMapsRequestCode(resultCode, data)
         }
     }
 
-    override fun showGetAddressFromCoordinatesError(error: Throwable?) {
-        val message =
-            if (error == null) {
-                val part1 = getString(R.string.invalid_location)
-                val part2 = getString(R.string.specify_the_location_on_the_map_again)
-
-                "$part1. $part2?"
+    override fun showGetAddressFromCoordinatesError(error: Throwable) {
+        val part1: String =
+            if (error is ExtractAddressException) {
+                getString(R.string.unable_to_find_the_address_of_the_specified_location)
             } else {
-                val part1: String = error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)
-                val part2 = getString(R.string.specify_the_location_on_the_map_again)
-
-                "$part1. $part2?"
+                getErrorMessageOrDefault(error)
             }
+
+        val part2 = getString(R.string.specify_the_location_on_the_map_again)
+
+        val message = "$part1. $part2?"
 
         showAlertDialog(
             message,
@@ -124,6 +107,12 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
             { startActivityForResult<MapsActivity>(LOCATION_BY_MAPS_REQUEST_CODE) },
             title = getString(R.string.error)
         )
+    }
+
+    override fun onGoogleGeocodeException(error: GoogleGeocodeException) {
+        val message = getErrorMessageOrDefault(error)
+
+        showLongToast(message)
     }
 
     override fun showRationaleDialog() {
@@ -202,6 +191,31 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
                 showIndefiniteSnackbar(message, findViewById(android.R.id.content))
             }
+        }
+    }
+
+    private fun onLocationByMapsRequestCode(resultCode: Int, data: Intent?) {
+        if (resultCode == 0) {
+            if (data != null) {
+                showLoadingProgress()
+
+                val coordinates: LatLng? = data.getParcelableExtra(COORDINATES_TAG)
+
+                if (coordinates != null) {
+                    injectDependencies()
+                    presenter.getAddressFromCoordinates(coordinates)
+                } else {
+                    showLocationError()
+                    hideLoadingProgress()
+                }
+            }
+        }
+    }
+
+    private fun onApplicationSettingsRequestCode(resultCode: Int) {
+        if (resultCode == 0) {
+            injectDependencies()
+            presenter.onActivityResult()
         }
     }
 

@@ -54,9 +54,6 @@ interface IYWCurrentWeatherRealmResponse : ICurrentWeatherRealmResponse {
     /**Time of year in this locality.*/
     val season: String
 
-    /**The time when weather data was measured, in Unix time.*/
-    val observationUnixTime: Long
-
     /**Type of precipitation.*/
     val precipitationType: Int
 

@@ -11,6 +11,8 @@ interface WeatherContract : BaseContract {
 
         fun showLayout()
 
+        fun onNotFreshWeatherData()
+
     }
 
     interface Presenter<in V : View> : BaseContract.Presenter<V>

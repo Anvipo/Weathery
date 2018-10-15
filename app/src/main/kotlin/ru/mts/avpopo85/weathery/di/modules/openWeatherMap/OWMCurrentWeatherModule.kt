@@ -26,8 +26,7 @@ class OWMCurrentWeatherModule(private val context: OWMCurrentWeatherActivity) {
     ): CurrentWeatherContract.Presenter<OWMCurrentWeatherType> =
         OWMCurrentWeatherPresenter(
             interactor,
-            schedulerManagerModule,
-            context
+            schedulerManagerModule
         )
 
     @Provides

@@ -4,7 +4,7 @@ interface BaseContract {
 
     interface View {
 
-        fun showError(throwable: Throwable)
+        fun showError(error: Throwable)
 
         fun showError(message: String)
 
@@ -24,6 +24,8 @@ interface BaseContract {
         )
 
         fun changeTitle(title: String)
+
+        fun getErrorMessageOrDefault(error: Throwable): String
 
     }
 

@@ -3,7 +3,7 @@ package ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
-import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.common.IOWMCoordinatesResponse
+import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.common.ICoordinates
 
 open class OWMCoordinatesResponse(
 
@@ -15,4 +15,4 @@ open class OWMCoordinatesResponse(
     @Expose
     override var latitude: Double = 0.0
 
-) : RealmObject(), IOWMCoordinatesResponse
+) : RealmObject(), ICoordinates

@@ -234,11 +234,12 @@
     <string name="title_activity_maps">Google Map</string>
     <string name="is_this_your_location">Is this your location?</string>
     <string name="error">Error</string>
-    <string name="invalid_location">Invalid location</string>
     <string name="specify_the_location_on_the_map_again">Specify the location on the map again</string>
     <string name="by_map">By map</string>
     <string name="specify_current_location">Specify current location</string>
     <string name="gps_is_required">GPS is required</string>
     <string name="unable_to_find_the_address_of_the_specified_location">Unable to find the address of the specified location</string>
     <string name="could_not_find_address_of_your_current_location">Сould not find the address of your current location</string>
+    <string name="there_are_problems_geocoding">There are problems geocoding</string>
+    <string name="your_location_has_changed">your location has changed</string>
 </resources>

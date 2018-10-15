@@ -26,8 +26,7 @@ class YWForecastModule(private val context: YWForecastActivity) {
     ): ForecastContract.Presenter<YWForecastListType> =
         YWForecastPresenter(
             interactor,
-            schedulerManagerModule,
-            context
+            schedulerManagerModule
         )
 
     @Provides

@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.domain.mapper.implementation.common
+package ru.mts.avpopo85.weathery.domain.mapper.implementation.common.utils
 
 import android.content.Context
 import ru.mts.avpopo85.weathery.R

@@ -6,6 +6,7 @@ import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.forecast.IOWMListItemResponse
+import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMCloudsResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.common.OWMWeatherResponse
 import ru.mts.avpopo85.weathery.data.model.implementation.openWeatherMap.currentWeather.OWMWindResponse
@@ -16,10 +17,12 @@ open class OWMListItemResponse(
 
     override var saveUnixTime: Long = 0,
 
+    override var coordinates: GeographicCoordinates? = null,
+
     @PrimaryKey
     @SerializedName("dt")
     @Expose
-    override var dateInUnixUTCInSeconds: Long = 0,
+    override var timeOfDataCalculationUnixUTCInSeconds: Long = 0,
 
     @SerializedName("rain")
     @Expose

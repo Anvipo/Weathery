@@ -12,7 +12,9 @@ import java.util.*
 
 
 abstract class AbsForecastRealmService<T : IForecastRealmResponse>
-constructor(private val context: Context) : IForecastDbService<T> {
+constructor(private val context: Context) :
+    AbsWeatherRealmService<T>(),
+    IForecastDbService<T> {
 
     override fun saveForecastResponse(forecastResponseList: List<T>): Single<List<T>> =
         Single.create { emitter ->
@@ -46,7 +48,7 @@ constructor(private val context: Context) : IForecastDbService<T> {
                 val data: List<T> = realmInstance.copyFromRealm(proxyData)
 
                 if (data.isNotEmpty()) {
-                    if (data.isFresh || data.isNotFresh && !isConnectedToInternet) {
+                    if (data.first().isFresh || data.first().isNotFresh && !isConnectedToInternet) {
                         emitter.onSuccess(data)
                     } else if (isConnectedToInternet) {
                         context.onDbHasOutdatedWeatherResponse(emitter, isConnectedToInternet)
@@ -57,11 +59,6 @@ constructor(private val context: Context) : IForecastDbService<T> {
             }
         }
 
-
     abstract val responseClassType: Class<T>
-
-    abstract val List<T>.isFresh: Boolean
-
-    abstract val List<T>.isNotFresh: Boolean
 
 }

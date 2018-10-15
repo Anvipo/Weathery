@@ -6,6 +6,8 @@ import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.commo
 /**This object contains information about the current weather.*/
 data class OWMCurrentWeather(
 
+    override val isFresh: Boolean,
+
     override val weather: OWMWeather,
 
     override val visibilityInMeters: Int,

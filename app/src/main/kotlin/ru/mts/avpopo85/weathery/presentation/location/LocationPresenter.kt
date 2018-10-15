@@ -7,7 +7,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.tbruyelle.rxpermissions2.Permission
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.BuildConfig
-import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.ILocationInteractor
 import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
@@ -16,7 +15,6 @@ import ru.mts.avpopo85.weathery.presentation.utils.APPLICATION_SETTINGS_REQUEST_
 import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
 import ru.mts.avpopo85.weathery.utils.common.GoogleGeocodeException
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
-import java.util.concurrent.TimeoutException
 import javax.inject.Inject
 
 class LocationPresenter
@@ -102,16 +100,18 @@ class LocationPresenter
         if (address.locality != null) {
             view?.showCityDialog(address.locality!!)
         } else {
-            val message =
-                context!!.getString(R.string.unable_to_find_the_address_of_the_specified_location)
-            val error = ExtractAddressException(message)
+            val error = ExtractAddressException("Locality is null")
 
-            view?.showGetAddressFromCoordinatesError(error)
+            onErrorGetAddressFromCoordinates(error)
         }
     }
 
     private fun onErrorGetAddressFromCoordinates(error: Throwable) {
-        view?.showGetAddressFromCoordinatesError(error)
+        if (error is GoogleGeocodeException) {
+            view?.onGoogleGeocodeException(error)
+        } else {
+            view?.showGetAddressFromCoordinatesError(error)
+        }
     }
 
     private fun checkLocationPermissions() {
@@ -166,20 +166,7 @@ class LocationPresenter
     }
 
     private fun onErrorGetCurrentAddressByGPS(error: Throwable) {
-        val message: String = when (error) {
-            is TimeoutException -> {
-                val part1 = context!!.getString(R.string.request_timeout)
-                val part2 = context!!.getString(R.string.please_try_later)
-                "$part1. $part2"
-            }
-            is GoogleGeocodeException -> context!!.getString(R.string.could_not_find_address_of_your_current_location)
-            else -> {
-                error.localizedMessage ?: error.message
-                ?: context!!.getString(R.string.unknown_error)
-            }
-        }
-
-        view?.showError(message)
+        view?.showError(error)
     }
 
 }

@@ -3,6 +3,7 @@ package ru.mts.avpopo85.weathery.presentation.location.base
 import com.google.android.gms.maps.model.LatLng
 import ru.mts.avpopo85.weathery.presentation.base.BaseContract
 import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.HasProgressBar
+import ru.mts.avpopo85.weathery.utils.common.GoogleGeocodeException
 
 interface LocationContract : BaseContract {
 
@@ -22,7 +23,10 @@ interface LocationContract : BaseContract {
 
         fun disableGetLastKnownLocationButton()
 
-        fun showGetAddressFromCoordinatesError(error: Throwable? = null)
+        fun showGetAddressFromCoordinatesError(error: Throwable)
+
+        fun onGoogleGeocodeException(error: GoogleGeocodeException)
+
     }
 
     interface Presenter : BaseContract.Presenter<View> {

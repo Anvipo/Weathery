@@ -25,4 +25,9 @@ abstract class AbsWeatherActivity<V : View>/*<out P : WeatherContract.Presenter<
         view.visibility = View.VISIBLE
     }
 
+    override fun onNotFreshWeatherData() {
+        //todo
+        showLongToast("")
+    }
+
 }

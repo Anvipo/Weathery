@@ -26,8 +26,7 @@ class YWCurrentWeatherModule(private val context: YWCurrentWeatherActivity) {
     ): CurrentWeatherContract.Presenter<YWCurrentWeatherType> =
         YWCurrentWeatherPresenter(
             interactor,
-            schedulerManagerModule,
-            context
+            schedulerManagerModule
         )
 
     @Provides

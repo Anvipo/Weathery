@@ -1,7 +1,10 @@
 package ru.mts.avpopo85.weathery.domain.mapper.implementation.openWeatherMap
 
 import android.content.Context
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.openWeatherMap.utils.OWM_CURRENT_WEATHER_CACHE_LIFETIME_IN_MS
 import ru.mts.avpopo85.weathery.domain.mapper.base.ICurrentWeatherMapper
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.AbsWeatherMapper
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.openWeatherMap.utils.getWindDirectionString
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.toTime
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
@@ -12,6 +15,7 @@ import javax.inject.Inject
 
 class OWMCurrentWeatherMapper
 @Inject constructor(private val context: Context) :
+    AbsWeatherMapper<OWMCurrentWeatherResponseType>(),
     ICurrentWeatherMapper<OWMCurrentWeatherResponseType, OWMCurrentWeatherType> {
 
     override fun mapCurrentWeatherResponse(
@@ -22,8 +26,10 @@ class OWMCurrentWeatherMapper
 
             val wind = response.wind!!
 
+            val weather = response.weather.first()!!
+
             OWMCurrentWeatherType(
-                weather = response.weather.first()!!.let {
+                weather = weather.let {
                     OWMWeather(
                         conditionCode = it.conditionCode,
                         groupOfWeatherParameters = it.groupOfWeatherParameters,
@@ -45,8 +51,11 @@ class OWMCurrentWeatherMapper
                         sunset = it.sunset.toTime()
                     )
                 },
-                cityName = response.cityName
+                cityName = response.cityName,
+                isFresh = response.isFresh
             )
         }
+
+    override val cacheLifeTimeInMs: Long = OWM_CURRENT_WEATHER_CACHE_LIFETIME_IN_MS
 
 }

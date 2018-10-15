@@ -75,7 +75,9 @@ class LocationRealmService
         realmInstance: Realm,
         emitter: SingleEmitter<UserAddressType>
     ) {
-        val proxyLastKnownAddress: UserAddressType? = proxyData.last()
+        val lastSaveDate = proxyData.max("saveDate")
+
+        val proxyLastKnownAddress: UserAddressType? = proxyData.find { it.saveDate == lastSaveDate }
 
         if (proxyLastKnownAddress != null) {
             val lastKnownAddress: UserAddressType =

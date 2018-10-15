@@ -9,6 +9,8 @@ import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.commo
 @Parcelize
 data class OWMForecast(
 
+    override val isFresh: Boolean,
+
     override val cityName: String,
 
     override val date: String,

@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import io.realm.annotations.PrimaryKey
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.currentWeather.IYWCurrentWeatherRealmResponse
+import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 
 /**This object contains information about the current weather.*/
 open class YWCurrentWeatherResponse(
@@ -67,7 +68,7 @@ open class YWCurrentWeatherResponse(
     @PrimaryKey
     @SerializedName("obs_time")
     @Expose
-    override var observationUnixTime: Long = 0,
+    override var timeOfDataCalculationUnixUTCInSeconds: Long = 0,
 
     @SerializedName("prec_type")
     @Expose
@@ -81,6 +82,8 @@ open class YWCurrentWeatherResponse(
     @Expose
     override var cloudiness: Double = 0.0,
 
-    override val cityName: String
+    override var cityName: String = "",
+
+    override var coordinates: GeographicCoordinates? = null
 
 ) : IYWCurrentWeatherRealmResponse

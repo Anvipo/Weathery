@@ -1,59 +1,16 @@
 package ru.mts.avpopo85.weathery.presentation.utils
 
 import android.content.Context
-import retrofit2.HttpException
 import ru.mts.avpopo85.weathery.R
-import java.net.ConnectException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 
-fun Context.parseError(throwable: Throwable): String {
-    val msg = when (throwable) {
-        is HttpException -> {
-            val code = throwable.code()
-
-            val res =
-                when (code) {
-                    in 100..199 -> parse1xxHttpCode(code)
-                    in 200..299 -> parse2xxHttpCode(code)
-                    in 300..399 -> parse3xxHttpCode(code)
-                    in 400..499 -> parse4xxHttpCode(code)
-                    in 500..599 -> parse5xxHttpCode(code)
-                    else -> "${getString(R.string.unknown_http_code)}. ${getString(R.string.please_try_later)}"
-                }
-
-            val url =
-                if (code in 400..499 && code != 403)
-                    " (${throwable.response().raw().request().url()})"
-                else ""
-
-            "$res$url"
-        }
-        is UnknownHostException -> "${getString(R.string.the_server_is_temporarily_unavailable)}. " +
-                getString(R.string.please_try_later)
-        is ConnectException -> getString(R.string.authorisation_error)
-        is SocketTimeoutException -> "${getString(R.string.response_timeout)}. " +
-                getString(R.string.make_sure_your_device_has_a_network_connection)
-        else -> {
-            throwable.localizedMessage ?: throwable.message
-            ?: applicationContext.getString(R.string.unknown_error)
-        }
-    }
-
-    return if (throwable.message != null && msg.contains(throwable.message!!))
-        msg
-    else
-        "$msg (${throwable.message})"
-}
-
-private fun Context.parse1xxHttpCode(code: Int): String = when (code) {
+fun Context.parse1xxHttpCode(code: Int): String = when (code) {
     100 -> getString(R.string._continue)
     101 -> getString(R.string.switching_protocols)
     102 -> getString(R.string.processing)
     else -> getString(R.string.unknown_informational_code_1xx)
 }
 
-private fun Context.parse2xxHttpCode(code: Int): String = when (code) {
+fun Context.parse2xxHttpCode(code: Int): String = when (code) {
     200 -> getString(R.string.ok)
     201 -> getString(R.string.created)
     202 -> getString(R.string.accepted)
@@ -67,7 +24,7 @@ private fun Context.parse2xxHttpCode(code: Int): String = when (code) {
     else -> getString(R.string.unknown_success_code_2xx)
 }
 
-private fun Context.parse3xxHttpCode(code: Int): String = when (code) {
+fun Context.parse3xxHttpCode(code: Int): String = when (code) {
     300 -> getString(R.string.multiple_choices)
     301 -> getString(R.string.moved_permanently)
     302 -> getString(R.string.found_or_moved_temporarily)
@@ -80,7 +37,7 @@ private fun Context.parse3xxHttpCode(code: Int): String = when (code) {
     else -> getString(R.string.unknown_error_3xx)
 }
 
-private fun Context.parse4xxHttpCode(code: Int): String = when (code) {
+fun Context.parse4xxHttpCode(code: Int): String = when (code) {
     400 -> getString(R.string.bad_request)
     401 -> getString(R.string.unauthorized)
     402 -> getString(R.string.payment_required)
@@ -114,7 +71,7 @@ private fun Context.parse4xxHttpCode(code: Int): String = when (code) {
     else -> getString(R.string.unknown_error_4xx)
 }
 
-private fun Context.parse5xxHttpCode(code: Int): String = when (code) {
+fun Context.parse5xxHttpCode(code: Int): String = when (code) {
     500 -> getString(R.string.internal_server_error)
     501 -> getString(R.string.not_implemented)
     502 -> getString(R.string.bad_gateway)

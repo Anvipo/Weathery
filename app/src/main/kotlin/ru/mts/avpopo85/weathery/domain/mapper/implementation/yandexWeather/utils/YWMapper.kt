@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather
+package ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather.utils
 
 import android.content.Context
 import ru.mts.avpopo85.weathery.R

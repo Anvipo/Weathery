@@ -1,17 +1,21 @@
 package ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather
 
 import android.content.Context
+import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.yandexWeather.utils.YW_DEFAULT_CACHE_LIFETIME
 import ru.mts.avpopo85.weathery.domain.mapper.base.ICurrentWeatherMapper
-import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.getDaytimeString
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.AbsWeatherMapper
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.utils.getDaytimeString
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.toDate
-import ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather.YandexWeatherMapper.getWaterTemperatureString
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather.utils.*
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather.utils.YandexWeatherMapper.getWaterTemperatureString
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 import javax.inject.Inject
 
 class YWCurrentWeatherMapper
 @Inject constructor(private val context: Context) :
+    AbsWeatherMapper<YWCurrentWeatherResponseType>(),
     ICurrentWeatherMapper<YWCurrentWeatherResponseType, YWCurrentWeatherType> {
 
     override fun mapCurrentWeatherResponse(currentWeatherResponseData: YWCurrentWeatherResponseType): YWCurrentWeatherType =
@@ -22,7 +26,7 @@ class YWCurrentWeatherMapper
                 feelsLikeTemperature = it.feelsLikeTemperature.roundIfNeeded(),
                 humidity = it.humidity.roundIfNeeded(),
                 iconUrl = "https://yastatic.net/weather/i/icons/blueye/color/svg/${it.iconId}.svg",
-                timeOfDataCalculation = it.observationUnixTime.toDate(),
+                timeOfDataCalculation = it.timeOfDataCalculationUnixUTCInSeconds.toDate(),
                 polar = context.getPolarString(it.polar),
                 precipitationStrength = context.getPrecipitationStrengthString(it.precipitationStrength),
                 precipitationType = context.getPrecipitationTypeString(it.precipitationType),
@@ -35,9 +39,12 @@ class YWCurrentWeatherMapper
                 windDirection = context.getWindDirectionString(it.windDirection),
                 windGustsSpeed = it.windGustsSpeed.roundIfNeeded(),
                 windSpeed = it.windSpeed.roundIfNeeded(),
-                cityName = it.cityName
+                cityName = it.cityName,
+                isFresh = it.isFresh
             )
         }
+
+    override val cacheLifeTimeInMs: Long = YW_DEFAULT_CACHE_LIFETIME
 
 }
 

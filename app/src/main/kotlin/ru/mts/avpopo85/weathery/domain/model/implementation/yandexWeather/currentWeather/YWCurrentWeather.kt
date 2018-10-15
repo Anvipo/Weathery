@@ -5,6 +5,8 @@ import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWCurrentWeathe
 /**This object contains information about the current weather.*/
 data class YWCurrentWeather(
 
+    override val isFresh: Boolean,
+
     override val temperature: String,
 
     override val feelsLikeTemperature: String,

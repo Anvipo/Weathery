@@ -26,8 +26,7 @@ class OWMForecastModule(private val context: OWMForecastActivity) {
     ): ForecastContract.Presenter<OWMForecastListType> =
         OWMForecastPresenter(
             interactor,
-            schedulerManagerModule,
-            context
+            schedulerManagerModule
         )
 
     @Provides

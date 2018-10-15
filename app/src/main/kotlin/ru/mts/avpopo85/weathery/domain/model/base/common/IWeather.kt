@@ -4,4 +4,6 @@ interface IWeather {
 
     val cityName: String
 
+    val isFresh: Boolean
+
 }

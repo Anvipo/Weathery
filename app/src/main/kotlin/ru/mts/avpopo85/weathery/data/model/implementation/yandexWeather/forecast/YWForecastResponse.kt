@@ -6,6 +6,7 @@ import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import ru.mts.avpopo85.weathery.data.model.base.yandexWeather.forecast.IYWForecastResponse
+import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 
 /**This object contains weather forecast data.*/
 open class YWForecastResponse(
@@ -14,6 +15,8 @@ open class YWForecastResponse(
 
     override var saveUnixTime: Long = 0,
 
+    override var coordinates: GeographicCoordinates? = null,
+
     @SerializedName("date")
     @Expose
     override var dateUTC: String = "",
@@ -21,7 +24,7 @@ open class YWForecastResponse(
     @PrimaryKey
     @SerializedName("date_ts")
     @Expose
-    override var dateInUnixUTCInSeconds: Long = 0,
+    override var timeOfDataCalculationUnixUTCInSeconds: Long = 0,
 
     @SerializedName("week")
     @Expose
