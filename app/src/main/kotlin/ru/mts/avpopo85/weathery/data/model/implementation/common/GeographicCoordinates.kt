@@ -5,12 +5,8 @@ import ru.mts.avpopo85.weathery.data.model.base.openWeatherMap.common.ICoordinat
 
 open class GeographicCoordinates(
 
-    override var latitude: Double? = null,
+    override var latitude: Double = 0.0,
 
-    override var longitude: Double? = null
+    override var longitude: Double = 0.0
 
-) : RealmObject(), ICoordinates {
-
-    fun latitudeAndLongitudeAreNotNull(): Boolean = latitude != null && longitude != null
-
-}
+) : RealmObject(), ICoordinates

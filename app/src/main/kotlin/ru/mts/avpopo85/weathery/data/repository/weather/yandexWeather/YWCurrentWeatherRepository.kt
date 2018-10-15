@@ -36,8 +36,8 @@ class YWCurrentWeatherRepository
         return if (currentAddress != null) {
             val coords: GeographicCoordinates? = currentAddress.coords
 
-            if (coords.areNotNull()) {
-                getCurrentWeather(coords!!, currentAddress.countryCode!!)
+            if (coords != null) {
+                getCurrentWeather(coords, currentAddress.countryCode!!)
             } else {
                 context.onUnknownCurrentLocation()
             }
@@ -51,7 +51,7 @@ class YWCurrentWeatherRepository
         countryCode: String
     ): Single<YWCurrentWeatherResponseType> =
         apiService.getCurrentWeather(
-            coords.latitude!!, coords.longitude!!, countryCode.decapitalize()
+            coords.latitude, coords.longitude, countryCode.decapitalize()
         )
 
 }

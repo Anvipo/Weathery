@@ -86,13 +86,16 @@ class GoogleGeocoder
         userAddress: UserAddressType
     ) {
         val location = resultItem.geometry?.location
-        val geographicCoordinates = GeographicCoordinates(
-            latitude = location?.lat,
-            longitude = location?.lng
-        )
 
-        if (userAddress.coords == null) {
-            userAddress.coords = geographicCoordinates
+        if (location != null) {
+            val geographicCoordinates = GeographicCoordinates(
+                latitude = location.latitude,
+                longitude = location.longitude
+            )
+
+            if (userAddress.coords == null) {
+                userAddress.coords = geographicCoordinates
+            }
         }
     }
 

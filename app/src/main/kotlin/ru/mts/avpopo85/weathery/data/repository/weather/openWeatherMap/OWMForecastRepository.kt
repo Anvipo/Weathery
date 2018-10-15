@@ -152,8 +152,8 @@ class OWMForecastRepository
         }
 
     override fun makeGeoCoordsApiCall(coords: GeographicCoordinates?): Single<OWMForecastResponseType>? =
-        if (coords.areNotNull()) {
-            getWeatherDataByGeographicCoordinates(coords!!)
+        if (coords != null) {
+            getWeatherDataByGeographicCoordinates(coords)
         } else {
             null
         }
@@ -170,7 +170,7 @@ class OWMForecastRepository
     override fun getWeatherDataByGeographicCoordinates(
         coords: GeographicCoordinates
     ): Single<OWMForecastResponseType> =
-        apiService.getForecastByGeographicCoordinates(coords.latitude!!, coords.longitude!!)
+        apiService.getForecastByGeographicCoordinates(coords.latitude, coords.longitude)
 
     override fun getWeatherDataByCityName(
         cityName: String,
