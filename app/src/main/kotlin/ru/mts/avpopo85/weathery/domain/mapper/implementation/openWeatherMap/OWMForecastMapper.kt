@@ -6,11 +6,14 @@ import ru.mts.avpopo85.weathery.domain.mapper.base.IForecastMapper
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.AbsWeatherMapper
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.utils.getDaytimeString
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.openWeatherMap.utils.getWindDirectionString
-import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.forecast.OWMForecastMain
-import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.toDateTime
-import ru.mts.avpopo85.weathery.utils.openWeatherMap.*
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
+import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.forecast.OWMForecastMain
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMListItemResponseType
 import javax.inject.Inject
 
 class OWMForecastMapper

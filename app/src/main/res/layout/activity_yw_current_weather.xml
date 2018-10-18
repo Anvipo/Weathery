@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/yw_current_weather_CL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/yw_current_weather_CL"
     tools:context=".presentation.weather.currentWeather.implementation.yandexWeather.YWCurrentWeatherActivity">
 
     <include layout="@layout/appbar" />

@@ -20,7 +20,8 @@ sealed class GpsCallException(message: String) : Throwable(message) {
 
     class HaveNotSuccessAndDeviceIsConnectedToInternet(message: String) : GpsCallException(message)
 
-    class HaveNotSuccessAndDeviceIsNotConnectedToInternet(message: String) : GpsCallException(message)
+    class HaveNotSuccessAndDeviceIsNotConnectedToInternet(message: String) :
+        GpsCallException(message)
 
     class UnknownErrorException(message: String) : GpsCallException(message)
 

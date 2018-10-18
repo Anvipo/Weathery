@@ -16,19 +16,19 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/MyMaterialSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/moon_phase"
-                android:text="@string/moon_phase"
-                style="@style/MyMaterialSubtitle1" />
+                android:text="@string/moon_phase" />
 
             <TextView
                 android:id="@+id/moon_text_value_YW_F_TV"
+                style="@style/MyMaterialBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/moon_phase_value"
-                android:text="@string/moon_phase_value"
-                style="@style/MyMaterialBody1" />
+                android:text="@string/moon_phase_value" />
         </LinearLayout>
 
         <LinearLayout
@@ -46,19 +46,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/sunrise_time"
-                    android:text="@string/sunrise_time"
-                    style="@style/MyMaterialSubtitle1" />
+                    android:text="@string/sunrise_time" />
 
                 <TextView
                     android:id="@+id/sunrise_time_value_YW_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/sunrise_time_value"
-                    android:text="@string/sunrise_time_value"
-                    style="@style/MyMaterialBody1" />
+                    android:text="@string/sunrise_time_value" />
             </LinearLayout>
 
             <LinearLayout
@@ -68,19 +68,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/MyMaterialSubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/sunset_time"
-                    android:text="@string/sunset_time"
-                    style="@style/MyMaterialSubtitle1" />
+                    android:text="@string/sunset_time" />
 
                 <TextView
                     android:id="@+id/sunset_time_value_YW_F_TV"
+                    style="@style/MyMaterialBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/sunset_time_value"
-                    android:text="@string/sunset_time_value"
-                    style="@style/MyMaterialBody1" />
+                    android:text="@string/sunset_time_value" />
             </LinearLayout>
         </LinearLayout>
 

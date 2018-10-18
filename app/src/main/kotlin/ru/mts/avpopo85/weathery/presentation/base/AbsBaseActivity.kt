@@ -8,7 +8,7 @@ import org.jetbrains.anko.design.longSnackbar
 import org.jetbrains.anko.design.snackbar
 import retrofit2.HttpException
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.presentation.utils.*
+import ru.mts.avpopo85.weathery.presentation.utils.onHttpException
 import ru.mts.avpopo85.weathery.utils.common.GoogleGeocodeException
 import ru.mts.avpopo85.weathery.utils.common.sendErrorLog
 import java.net.ConnectException

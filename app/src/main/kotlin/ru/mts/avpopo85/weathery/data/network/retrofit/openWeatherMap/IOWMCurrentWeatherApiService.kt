@@ -3,9 +3,9 @@ package ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMConstants.API_ID
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.utils.OWMUnitsFormat
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.utils.OpenWeatherMapLanguages
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMConstants.API_ID
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 
 @Suppress("unused")

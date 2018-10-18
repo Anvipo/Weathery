@@ -1,9 +1,9 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.adapters
 
 import android.annotation.SuppressLint
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import android.view.View
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWHourInfo
 import ru.mts.avpopo85.weathery.presentation.utils.CELSIUS_DEGREE

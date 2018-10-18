@@ -59,6 +59,6 @@ constructor(private val context: Context) :
             }
         }
 
-    protected  abstract val responseClassType: Class<T>
+    protected abstract val responseClassType: Class<T>
 
 }
