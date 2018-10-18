@@ -2,6 +2,7 @@ package ru.mts.avpopo85.weathery.presentation.location.map.google
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.core.os.bundleOf
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -19,16 +20,6 @@ class MapsActivity :
     GoogleMap.OnMapClickListener,
     GoogleMap.OnMarkerClickListener,
     GoogleMap.OnMarkerDragListener {
-
-    override fun onMarkerDragEnd(marker: Marker?) {
-        if (marker != null) {
-            showConfirmation(marker.position)
-        }
-    }
-
-    override fun onMarkerDragStart(marker: Marker?) = Unit
-
-    override fun onMarkerDrag(marker: Marker?) = Unit
 
     private lateinit var map: GoogleMap
 
@@ -69,7 +60,18 @@ class MapsActivity :
         return false
     }
 
-    override fun changeTitle(title: String) = Unit
+    @Suppress("CAST_NEVER_SUCCEEDS")
+    override val rootLayout: View by lazy { map as View }
+
+    override fun onMarkerDragEnd(marker: Marker?) {
+        if (marker != null) {
+            showConfirmation(marker.position)
+        }
+    }
+
+    override fun onMarkerDragStart(marker: Marker?) = Unit
+
+    override fun onMarkerDrag(marker: Marker?) = Unit
 
     private fun showConfirmation(coordinates: LatLng) {
         showAlertDialog(

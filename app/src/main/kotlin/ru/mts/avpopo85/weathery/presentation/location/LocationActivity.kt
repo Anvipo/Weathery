@@ -2,11 +2,13 @@ package ru.mts.avpopo85.weathery.presentation.location
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ProgressBar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_location.*
+import kotlinx.android.synthetic.main.appbar.*
+import kotlinx.android.synthetic.main.content_location.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 import ru.mts.avpopo85.weathery.R
@@ -29,11 +31,13 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
     @Inject
     lateinit var presenter: LocationContract.Presenter
 
-    override val progressBar: ProgressBar by lazy { location_PB }
+    override val rootLayout: CoordinatorLayout by lazy { activity_location_CL }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location)
+
+        toolbar.title = getString(R.string.select_current_geolocation)
 
         setSupportActionBar(toolbar)
 
@@ -112,7 +116,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
     override fun onGoogleGeocodeException(error: GoogleGeocodeException) {
         val message = getErrorMessageOrDefault(error)
 
-        showLongToast(message)
+        showError(message)
     }
 
     override fun showRationaleDialog() {
@@ -189,7 +193,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
                 val message = "${getString(R.string.google_play_services_unavailable)}. " +
                         getString(R.string.this_app_will_not_work)
 
-                showIndefiniteSnackbar(message, findViewById(android.R.id.content))
+                showIndefiniteSnackbar(message)
             }
         }
     }

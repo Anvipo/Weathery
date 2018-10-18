@@ -8,11 +8,11 @@ interface BaseContract {
 
         fun showError(message: String)
 
-        fun showToast(message: String)
+        fun showShortSnackbar(message: String, view: android.view.View? = null)
 
-        fun showLongToast(message: String)
+        fun showLongSnackbar(message: String, view: android.view.View? = null)
 
-        fun showIndefiniteSnackbar(message: String?, view: android.view.View?)
+        fun showIndefiniteSnackbar(message: String, view: android.view.View? = null)
 
         fun showAlertDialog(
             message: String,
@@ -23,7 +23,7 @@ interface BaseContract {
             title: String? = null
         )
 
-        fun changeTitle(title: String)
+        fun changeTitle(title: String) = Unit
 
         fun getErrorMessageOrDefault(error: Throwable): String
 

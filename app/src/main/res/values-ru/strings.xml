@@ -250,4 +250,7 @@
     <string name="evening_forecast">Прогноз на вечер</string>
     <string name="_12_hour_forecast_for_day">12 часовой прогноз на день</string>
     <string name="_12_hour_forecast_for_night">12 часовой прогноз на ночь</string>
+    <string name="select_current_geolocation">Выбор текущего местоположения</string>
+    <string name="api_selection">Выбор API</string>
+    <string name="forecast_type_choice">Выбор типа прогноза</string>
 </resources>

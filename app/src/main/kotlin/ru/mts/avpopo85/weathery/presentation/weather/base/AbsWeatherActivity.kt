@@ -4,7 +4,7 @@ import android.view.View
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.AbsProgressBarActivity
 
-abstract class AbsWeatherActivity<V : View>/*<out P : WeatherContract.Presenter<WeatherContract.View>>*/ :
+abstract class AbsWeatherActivity<out V : View>/*<out P : WeatherContract.Presenter<WeatherContract.View>>*/ :
     AbsProgressBarActivity/*<BaseContract.Presenter<BaseContract.View>>*/(),
     WeatherContract.View {
 
@@ -32,7 +32,7 @@ abstract class AbsWeatherActivity<V : View>/*<out P : WeatherContract.Presenter<
 
         val message = "$part1. $part2"
 
-        showLongToast(message)
+        showLongSnackbar(message)
     }
 
 }

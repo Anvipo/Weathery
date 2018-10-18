@@ -1,13 +1,12 @@
 package ru.mts.avpopo85.weathery.presentation.location.base
 
 import com.google.android.gms.maps.model.LatLng
-import ru.mts.avpopo85.weathery.presentation.base.BaseContract
-import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.HasProgressBar
+import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.BaseProgressBarContract
 import ru.mts.avpopo85.weathery.utils.common.GoogleGeocodeException
 
-interface LocationContract : BaseContract {
+interface LocationContract : BaseProgressBarContract {
 
-    interface View : BaseContract.View, HasProgressBar {
+    interface View : BaseProgressBarContract.View {
 
         fun showRationaleDialog()
 
@@ -29,7 +28,7 @@ interface LocationContract : BaseContract {
 
     }
 
-    interface Presenter : BaseContract.Presenter<View> {
+    interface Presenter : BaseProgressBarContract.Presenter<View> {
 
         fun getCurrentGeolocation()
 

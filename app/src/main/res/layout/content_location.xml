@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_location">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/application_need_to_know_your_gelocation_which_geolocation_do_you_want_to_use"
+        android:textAppearance="@style/MyMaterialHeadline6" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/get_last_known_location_LA_B"
+        style="@style/MyMaterialButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/last_known" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/specify_current_location"
+            android:textAppearance="@style/MyMaterialHeadline6" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/get_current_location_by_GPS_LA_B"
+            style="@style/MyMaterialButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/by_gps" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/get_current_location_by_map_LA_B"
+            style="@style/MyMaterialButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/by_map" />
+    </LinearLayout>
+</LinearLayout>

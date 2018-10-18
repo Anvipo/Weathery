@@ -1,11 +1,10 @@
 package ru.mts.avpopo85.weathery.presentation.weather.base
 
-import ru.mts.avpopo85.weathery.presentation.base.BaseContract
-import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.HasProgressBar
+import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.BaseProgressBarContract
 
-interface WeatherContract : BaseContract {
+interface WeatherContract : BaseProgressBarContract {
 
-    interface View : BaseContract.View, HasProgressBar {
+    interface View : BaseProgressBarContract.View {
 
         fun hideLayout()
 
@@ -15,6 +14,6 @@ interface WeatherContract : BaseContract {
 
     }
 
-    interface Presenter<in V : View> : BaseContract.Presenter<V>
+    interface Presenter<in V : View> : BaseProgressBarContract.Presenter<V>
 
 }

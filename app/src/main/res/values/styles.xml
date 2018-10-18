@@ -5,17 +5,9 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/darkPrimaryColor</item>
         <item name="colorAccent">@color/accentColor</item>
-        <item name="android:textColor">@color/primaryTextColor</item>
-        <item name="android:textColorSecondary">@color/secondaryTextColor</item>
-
-        <item name="android:textColorPrimary">@color/primaryTextColor</item>
-        <!--app bar заходит за статус бар (если таковой вообще есть)-->
-        <!--<item name="android:windowTranslucentStatus">true</item>-->
     </style>
 
-    <style name="MyAppTheme" parent="MyBaseAppTheme">
-        <item name="android:colorForeground">@android:color/background_dark</item>
-    </style>
+    <style name="MyAppTheme" parent="MyBaseAppTheme" />
 
     <style name="MyAppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -24,16 +16,9 @@
 
     <style name="MyActionBar" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-    <!--<style name="MyPopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />-->
-
-    <style name="MyToolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-    </style>
-
     <style name="MyDialog" parent="Theme.MaterialComponents.Dialog">
         <item name="buttonBarNegativeButtonStyle">@style/MyMaterialTextButton</item>
         <item name="buttonBarPositiveButtonStyle">@style/MyMaterialButton</item>
-        <!--<item name="buttonBarStyle">5dp</item>-->
         <!--buttons color-->
         <item name="colorAccent">@color/accentColor</item>
         <!--title and message color-->
@@ -42,66 +27,45 @@
         <item name="android:windowBackground">@android:color/background_light</item>
     </style>
 
-    <style name="MyProgressBar" parent="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large" >
+    <style name="LayoutWithProgressBar">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:gravity">center</item>
         <item name="android:visibility">gone</item>
     </style>
 
-    <!--<style name="MyColoredTabLayout" parent="Widget.MaterialComponents.TabLayout.Colored" >-->
-        <!--<item name="tabRippleColor">@color/dividerColor</item>-->
-        <!--<item name="tabIndicatorColor">@color/dividerColor</item>-->
-        <!--<item name="tabSelectedTextColor">@color/dividerColor</item>-->
-        <!--<item name="tabTextColor">@color/dividerColor</item>-->
-    <!--</style>-->
-
     <style name="MyMaterialHeadline5" parent="TextAppearance.MaterialComponents.Headline5">
-        <!--<item name="textAllCaps">true</item>-->
-        <!--<item name="android:textStyle">bold</item>-->
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="MyMaterialHeadline6" parent="TextAppearance.MaterialComponents.Headline6">
-        <!--<item name="textAllCaps">true</item>-->
-        <!--<item name="android:textStyle">bold</item>-->
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="MyMaterialSubtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <!--<item name="textAllCaps">true</item>-->
-        <!--<item name="android:textStyle">bold</item>-->
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:gravity">center</item>
     </style>
-
-    <!--<style name="MyMaterialBody2" parent="TextAppearance.MaterialComponents.Body2">-->
-        <!--<item name="android:textColor">@color/secondaryTextColor</item>-->
-        <!--<item name="android:gravity">center</item>-->
-    <!--</style>-->
 
     <style name="MyMaterialBody1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="android:gravity">center</item>
     </style>
 
-    <!--<style name="MyMaterialOutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">-->
-        <!--<item name="android:layout_gravity">center</item>-->
-        <!--<item name="cornerRadius">8dp</item>-->
-    <!--</style>-->
-
     <style name="MyMaterialButton" parent="Widget.MaterialComponents.Button">
         <item name="android:layout_gravity">center</item>
-        <item name="cornerRadius">8dp</item>
+        <item name="cornerRadius">@dimen/cornerRadius</item>
     </style>
 
     <style name="MyMaterialTextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:layout_gravity">center</item>
-        <item name="cornerRadius">8dp</item>
+        <item name="cornerRadius">@dimen/cornerRadius</item>
     </style>
 
     <style name="MyMaterialCardView" parent="Widget.MaterialComponents.CardView">
         <item name="android:layout_gravity">center</item>
-        <item name="cardCornerRadius">8dp</item>
+        <item name="cardCornerRadius">@dimen/cornerRadius</item>
         <item name="cardElevation">2dp</item>
         <item name="android:layout_marginLeft">8dp</item>
         <item name="android:layout_marginTop">8dp</item>

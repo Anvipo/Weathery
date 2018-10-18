@@ -3,9 +3,9 @@ package ru.mts.avpopo85.weathery.presentation.base
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.design.indefiniteSnackbar
+import org.jetbrains.anko.design.longSnackbar
+import org.jetbrains.anko.design.snackbar
 import retrofit2.HttpException
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.utils.*
@@ -34,27 +34,28 @@ abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.Vie
         super.onDestroy()
     }*/
 
+    protected abstract val rootLayout: View
+
     override fun getErrorMessageOrDefault(error: Throwable): String =
         error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)
 
     override fun showError(message: String) {
-        longToast(message)
+        showLongSnackbar(message)
     }
 
-    override fun showToast(message: String) {
-        toast(message)
+    override fun showShortSnackbar(message: String, view: View?) {
+        val _view = view ?: rootLayout
+        _view.snackbar(message)
     }
 
-    override fun showLongToast(message: String) {
-        longToast(message)
+    override fun showLongSnackbar(message: String, view: View?) {
+        val _view = view ?: rootLayout
+        _view.longSnackbar(message)
     }
 
-    override fun showIndefiniteSnackbar(message: String?, view: View?) {
-        if (message != null && view != null) {
-            Snackbar
-                .make(view, message, Snackbar.LENGTH_INDEFINITE)
-                .apply { show() }
-        }
+    override fun showIndefiniteSnackbar(message: String, view: View?) {
+        val _view = view ?: rootLayout
+        _view.indefiniteSnackbar(message)
     }
 
     override fun showAlertDialog(
@@ -84,7 +85,7 @@ abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.Vie
 
         sendErrorLog(message)
 
-        longToast(message)
+        showLongSnackbar(message)
     }
 
     private fun parseError(error: Throwable): String =
@@ -106,27 +107,6 @@ abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.Vie
         val part2 = getString(R.string.please_try_later)
 
         return "$part1. $part2"
-    }
-
-    private fun onHttpException(error: HttpException): String {
-        val code = error.code()
-
-        val res =
-            when (code) {
-                in 100..199 -> parse1xxHttpCode(code)
-                in 200..299 -> parse2xxHttpCode(code)
-                in 300..399 -> parse3xxHttpCode(code)
-                in 400..499 -> parse4xxHttpCode(code)
-                in 500..599 -> parse5xxHttpCode(code)
-                else -> "${getString(R.string.unknown_http_code)}. ${getString(R.string.please_try_later)}"
-            }
-
-        val url =
-            if (code in 400..499 && code != 403)
-                " (${error.response().raw().request().url()})"
-            else ""
-
-        return "$res$url"
     }
 
     private fun onUnknownHostException(): String =

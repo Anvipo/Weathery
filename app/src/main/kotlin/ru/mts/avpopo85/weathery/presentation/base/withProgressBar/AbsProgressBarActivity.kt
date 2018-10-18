@@ -1,21 +1,20 @@
 package ru.mts.avpopo85.weathery.presentation.base.withProgressBar
 
 import android.view.View
-import android.widget.ProgressBar
+import android.view.ViewGroup
+import kotlinx.android.synthetic.main.layout_progress_bar.*
 import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
 
-abstract class AbsProgressBarActivity : AbsBaseActivity(), HasProgressBar {
+abstract class AbsProgressBarActivity : AbsBaseActivity(), BaseProgressBarContract.View {
 
-    protected abstract val progressBar: ProgressBar
+    protected open val progressBarLayout: ViewGroup by lazy { layout_progress_bar }
 
     override fun showLoadingProgress() {
-        progressBar.visibility = View.VISIBLE
+        progressBarLayout.visibility = View.VISIBLE
     }
 
     override fun hideLoadingProgress() {
-        progressBar.visibility = View.GONE
+        progressBarLayout.visibility = View.GONE
     }
-
-    override fun isLoadingProgressShown(): Boolean = progressBar.isShown
 
 }

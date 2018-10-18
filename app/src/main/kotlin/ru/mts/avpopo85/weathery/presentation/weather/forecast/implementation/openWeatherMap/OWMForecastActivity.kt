@@ -2,9 +2,11 @@ package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.op
 
 import android.os.Bundle
 import android.view.View.GONE
-import android.widget.ProgressBar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_owm_forecast.*
+import kotlinx.android.synthetic.main.appbar.*
+import kotlinx.android.synthetic.main.content_owm_forecast.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.openWeatherMap.OWMForecastModule
@@ -22,15 +24,19 @@ class OWMForecastActivity :
     @Inject
     lateinit var presenter: ForecastContract.Presenter<OWMForecastListType>
 
-    override val progressBar: ProgressBar by lazy { owm_forecast_PB }
-
     override val view: ViewPager by lazy { owm_forecast_pager }
+
+    override val rootLayout: CoordinatorLayout by lazy { owm_forecast_CL }
 
     private lateinit var pagerAdapter: OWMForecastActivityPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_owm_forecast)
+
+        toolbar.title = getString(R.string.forecast)
+
+        setSupportActionBar(toolbar)
 
         App.appComponent
             .plus(OWMForecastModule(this))

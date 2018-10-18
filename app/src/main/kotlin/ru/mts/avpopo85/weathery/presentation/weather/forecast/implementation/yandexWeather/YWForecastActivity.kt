@@ -2,9 +2,11 @@ package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.ya
 
 import android.os.Bundle
 import android.view.View.GONE
-import android.widget.ProgressBar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_yw_forecast.*
+import kotlinx.android.synthetic.main.appbar.*
+import kotlinx.android.synthetic.main.content_yw_forecast.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.yandexWeather.YWForecastModule
@@ -22,15 +24,19 @@ class YWForecastActivity :
     @Inject
     lateinit var presenter: ForecastContract.Presenter<YWForecastListType>
 
-    override val progressBar: ProgressBar by lazy { yw_forecast_PB }
-
     override val view: ViewPager by lazy { yw_forecast_pager }
+
+    override val rootLayout: CoordinatorLayout by lazy { yw_forecast_CL }
 
     private lateinit var pagerAdapter: YWForecastActivityPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_yw_forecast)
+
+        toolbar.title = getString(R.string.forecast)
+
+        setSupportActionBar(toolbar)
 
         App.appComponent
             .plus(YWForecastModule(this))

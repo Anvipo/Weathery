@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="darkPrimaryColor">#388E3C</color>
     <!--<color name="lightPrimaryColor">#C8E6C9</color>-->
     <color name="primaryColor">#4CAF50</color>
@@ -8,4 +8,6 @@
     <color name="primaryTextColor">#212121</color>
     <color name="secondaryTextColor">#757575</color>
     <color name="dividerColor">#BDBDBD</color>
+
+    <color name="design_snackbar_background_color" tools:override="true">@color/accentColor</color>
 </resources>

@@ -2,6 +2,7 @@ package ru.mts.avpopo85.weathery.di.global
 
 import android.content.Context
 import android.net.ConnectivityManager
+import androidx.core.content.getSystemService
 import dagger.Module
 import dagger.Provides
 import ru.mts.avpopo85.weathery.data.network.retrofit.location.IGoogleGeocoderApiService
@@ -25,7 +26,6 @@ class NetworkModule(private val context: Context) {
 
     @Provides
     @Singleton
-    fun provideConnectivityManager(): ConnectivityManager =
-        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    fun provideConnectivityManager(): ConnectivityManager = context.getSystemService()!!
 
 }
