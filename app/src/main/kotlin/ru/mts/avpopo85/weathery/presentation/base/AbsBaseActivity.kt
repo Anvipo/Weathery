@@ -16,23 +16,7 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 
-//TODO как это реализовать, чтобы прокинуть это всё к наследникам?
-abstract class AbsBaseActivity/*<out P : BaseContract.Presenter<BaseContract.View>>*/ :
-    AppCompatActivity(),
-    BaseContract.View {
-
-    /*protected abstract val presenter: P
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        presenter.onBindView(this)
-    }
-
-    override fun onDestroy() {
-        presenter.onUnbindView()
-        super.onDestroy()
-    }*/
+abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
 
     protected abstract val rootLayout: View
 

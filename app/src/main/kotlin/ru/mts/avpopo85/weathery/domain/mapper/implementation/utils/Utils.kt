@@ -3,8 +3,10 @@ package ru.mts.avpopo85.weathery.domain.mapper.implementation.utils
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun Long.toTime(): String {
-    val date = Date(this * 1000)
+fun Long.toTime(inSeconds: Boolean = true): String {
+    val coefficient = if (inSeconds) 1000 else 1
+
+    val date = Date(this * coefficient)
 
     val simpleDateFormat = SimpleDateFormat(
         "HH:mm",
@@ -14,8 +16,10 @@ fun Long.toTime(): String {
     return simpleDateFormat.format(date)
 }
 
-fun Long.toDate(): String {
-    val date = Date(this * 1000)
+fun Long.toDate(inSeconds: Boolean = true): String {
+    val coefficient = if (inSeconds) 1000 else 1
+
+    val date = Date(this * coefficient)
 
     val simpleDateFormat = SimpleDateFormat(
         "dd MMM y (E)",
@@ -25,8 +29,8 @@ fun Long.toDate(): String {
     return simpleDateFormat.format(date)
 }
 
-fun Long.toDateTime(notInMillis: Boolean = true): String {
-    val coefficient = if (notInMillis) 1000 else 1
+fun Long.toDateTime(inSeconds: Boolean = true): String {
+    val coefficient = if (inSeconds) 1000 else 1
 
     val date = Date(this * coefficient)
 
@@ -37,8 +41,10 @@ fun Long.toDateTime(notInMillis: Boolean = true): String {
 }
 
 @Suppress("unused")
-fun Long.toFullDateTime(): String {
-    val date = Date(this * 1000)
+fun Long.toFullDateTime(inSeconds: Boolean = true): String {
+    val coefficient = if (inSeconds) 1000 else 1
+
+    val date = Date(this * coefficient)
 
     val simpleDateFormat = SimpleDateFormat("HH:mm:ss dd MMM y", Locale.getDefault())
 

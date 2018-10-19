@@ -18,7 +18,7 @@ import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
 import javax.inject.Inject
 
 class YWForecastActivity :
-    AbsForecastActivity<ViewPager, YWForecastListType>(),
+    AbsForecastActivity<YWForecastListType>(),
     ForecastContract.View<YWForecastListType> {
 
     @Inject

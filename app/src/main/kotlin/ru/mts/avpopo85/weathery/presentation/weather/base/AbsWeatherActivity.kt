@@ -1,22 +1,13 @@
 package ru.mts.avpopo85.weathery.presentation.weather.base
 
 import android.view.View
+import android.view.ViewGroup
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.AbsProgressBarActivity
 
-abstract class AbsWeatherActivity<out V : View>/*<out P : WeatherContract.Presenter<WeatherContract.View>>*/ :
-    AbsProgressBarActivity/*<BaseContract.Presenter<BaseContract.View>>*/(),
-    WeatherContract.View {
+abstract class AbsWeatherActivity : AbsProgressBarActivity(), WeatherContract.View {
 
-    protected abstract val view: V
-
-    /*abstract override val presenter: P
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        presenter.onStart()
-    }*/
+    protected abstract val view: ViewGroup
 
     override fun hideLayout() {
         view.visibility = View.GONE

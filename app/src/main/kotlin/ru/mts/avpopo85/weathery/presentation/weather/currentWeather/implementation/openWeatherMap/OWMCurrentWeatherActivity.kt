@@ -2,8 +2,8 @@ package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementat
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.ScrollView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.activity_owm_current_weather.*
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.item_owm_current_weather.*
@@ -17,13 +17,13 @@ import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
 import javax.inject.Inject
 
 class OWMCurrentWeatherActivity :
-    AbsCurrentWeatherActivity<MaterialCardView>(),
+    AbsCurrentWeatherActivity(),
     CurrentWeatherContract.View<OWMCurrentWeatherType> {
 
     @Inject
     lateinit var presenter: CurrentWeatherContract.Presenter<OWMCurrentWeatherType>
 
-    override val view: MaterialCardView by lazy { item_owm_current_weather }
+    override val view: ScrollView by lazy { item_owm_current_weather }
 
     override val rootLayout: CoordinatorLayout by lazy { owm_current_weather_CL }
 

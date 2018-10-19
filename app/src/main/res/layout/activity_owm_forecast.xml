@@ -11,4 +11,5 @@
     <include layout="@layout/layout_progress_bar" />
 
     <include layout="@layout/content_owm_forecast" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

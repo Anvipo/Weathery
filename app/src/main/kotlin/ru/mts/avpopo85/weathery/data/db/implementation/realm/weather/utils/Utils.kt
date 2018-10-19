@@ -7,7 +7,15 @@ import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasNoWeatherResp
 import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasOutdatedWeatherDataException
 import java.util.*
 
-fun Long.isFresh(cacheLifetimeInMs: Long): Boolean = Date().time - this < cacheLifetimeInMs
+fun Long.isFresh(cacheLifetimeInMs: Long): Boolean {
+    val nowTime = Date().time
+
+    return if (this > nowTime) {
+        true
+    } else {
+        nowTime - this < cacheLifetimeInMs
+    }
+}
 
 fun <T> Context.onDbHasNoWeatherResponse(
     isConnectedToInternet: Boolean,

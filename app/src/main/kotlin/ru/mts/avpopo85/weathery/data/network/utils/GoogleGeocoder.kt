@@ -4,8 +4,6 @@ import android.content.Context
 import android.location.Location
 import io.reactivex.Single
 import io.reactivex.SingleEmitter
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.model.implementation.common.googleGeocode.AddressComponentsItem
@@ -30,13 +28,22 @@ class GoogleGeocoder
 
             val latlng = "${location.latitude},${location.longitude}"
 
-            geocoderApiService.geocodeByLatLng(latlng, apiKey)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { onSuccessGoogleGeocoding(it, emitter) },
-                    emitter::onError
-                )
+            geocodeByLatLng(latlng, apiKey, emitter)
+        }
+
+    private fun geocodeByLatLng(
+        latlng: String,
+        apiKey: String,
+        emitter: SingleEmitter<UserAddressType>
+    ) =
+        try {
+            val response = geocoderApiService
+                .geocodeByLatLng(latlng, apiKey)
+                .blockingGet()
+
+            onSuccessGoogleGeocoding(response, emitter)
+        } catch (error: Exception) {
+            emitter.onError(error)
         }
 
     private fun onSuccessGoogleGeocoding(

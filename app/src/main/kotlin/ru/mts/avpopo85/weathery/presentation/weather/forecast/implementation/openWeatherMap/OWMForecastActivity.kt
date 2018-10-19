@@ -18,7 +18,7 @@ import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
 import javax.inject.Inject
 
 class OWMForecastActivity :
-    AbsForecastActivity<ViewPager, OWMForecastListType>(),
+    AbsForecastActivity<OWMForecastListType>(),
     ForecastContract.View<OWMForecastListType> {
 
     @Inject

@@ -11,4 +11,5 @@
     <include layout="@layout/layout_progress_bar" />
 
     <include layout="@layout/item_yw_current_weather" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
