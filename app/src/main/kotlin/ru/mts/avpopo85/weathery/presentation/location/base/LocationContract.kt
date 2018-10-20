@@ -26,6 +26,8 @@ interface LocationContract : BaseProgressBarContract {
 
         fun onGoogleGeocodeException(error: GoogleGeocodeException)
 
+        fun startSettingsActivityForResult()
+
     }
 
     interface Presenter : BaseProgressBarContract.Presenter<View> {

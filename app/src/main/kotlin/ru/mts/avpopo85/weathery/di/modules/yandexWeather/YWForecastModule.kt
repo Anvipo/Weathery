@@ -14,6 +14,7 @@ import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yan
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.YWForecastPresenter
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastType
 
 @Module
 class YWForecastModule(private val context: YWForecastActivity) {
@@ -23,11 +24,8 @@ class YWForecastModule(private val context: YWForecastActivity) {
     fun provideYWForecastPresenter(
         interactor: IForecastInteractor<YWForecastListType>,
         schedulerManagerModule: SchedulerManagerModule
-    ): ForecastContract.Presenter<YWForecastListType> =
-        YWForecastPresenter(
-            interactor,
-            schedulerManagerModule
-        )
+    ): ForecastContract.Presenter<YWForecastType> =
+        YWForecastPresenter(interactor, schedulerManagerModule)
 
     @Provides
     @YWForecastScope
@@ -35,10 +33,7 @@ class YWForecastModule(private val context: YWForecastActivity) {
         repository: IForecastRepository<YWForecastListResponseType>,
         mapper: IForecastMapper<YWForecastListResponseType, YWForecastListType>
     ): IForecastInteractor<YWForecastListType> =
-        YWForecastInteractor(
-            repository,
-            mapper
-        )
+        YWForecastInteractor(repository, mapper)
 
     @Provides
     @YWForecastScope

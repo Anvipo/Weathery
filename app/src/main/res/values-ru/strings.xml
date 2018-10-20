@@ -253,4 +253,9 @@
     <string name="select_current_geolocation">Выбор текущего местоположения</string>
     <string name="api_selection">Выбор API</string>
     <string name="forecast_type_choice">Выбор типа прогноза</string>
+    <string name="date_value">Значение времени</string>
+    <string name="forecast_time">Время прогноза</string>
+    <string name="more_info">Больше информации</string>
+    <string name="date_example">19:00 20.10.2018</string>
+    <string name="temperature_example">20.21°C</string>
 </resources>

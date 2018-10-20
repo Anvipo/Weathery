@@ -34,6 +34,6 @@ class LocationModule(private val context: LocationActivity) {
     fun providePresenter(
         interactor: ILocationInteractor,
         schedulerManagerModule: SchedulerManagerModule
-    ): LocationContract.Presenter = LocationPresenter(context, interactor, schedulerManagerModule)
+    ): LocationContract.Presenter = LocationPresenter(interactor, schedulerManagerModule)
 
 }

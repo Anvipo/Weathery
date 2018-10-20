@@ -3,8 +3,7 @@ package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementat
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.ICurrentWeatherInteractor
-import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
-import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
+import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.AbsCurrentWeatherPresenter
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 import javax.inject.Inject
 
@@ -12,8 +11,7 @@ class YWCurrentWeatherPresenter
 @Inject constructor(
     private val interactor: ICurrentWeatherInteractor<YWCurrentWeatherType>,
     private val schedulerManagerModule: SchedulerManagerModule
-) : AbsBasePresenter<CurrentWeatherContract.View<YWCurrentWeatherType>>(),
-    CurrentWeatherContract.Presenter<YWCurrentWeatherType> {
+) : AbsCurrentWeatherPresenter<YWCurrentWeatherType>() {
 
     override fun loadCurrentWeather() {
         val task: Disposable = interactor.getCurrentWeather()

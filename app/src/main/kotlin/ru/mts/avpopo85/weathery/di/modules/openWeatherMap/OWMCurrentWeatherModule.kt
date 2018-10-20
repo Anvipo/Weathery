@@ -24,10 +24,7 @@ class OWMCurrentWeatherModule(private val context: OWMCurrentWeatherActivity) {
         interactor: ICurrentWeatherInteractor<OWMCurrentWeatherType>,
         schedulerManagerModule: SchedulerManagerModule
     ): CurrentWeatherContract.Presenter<OWMCurrentWeatherType> =
-        OWMCurrentWeatherPresenter(
-            interactor,
-            schedulerManagerModule
-        )
+        OWMCurrentWeatherPresenter(interactor, schedulerManagerModule)
 
     @Provides
     @OWMCurrentWeatherScope
@@ -35,10 +32,7 @@ class OWMCurrentWeatherModule(private val context: OWMCurrentWeatherActivity) {
         repository: ICurrentWeatherRepository<OWMCurrentWeatherResponseType>,
         mapper: ICurrentWeatherMapper<OWMCurrentWeatherResponseType, OWMCurrentWeatherType>
     ): ICurrentWeatherInteractor<OWMCurrentWeatherType> =
-        OWMCurrentWeatherInteractor(
-            repository,
-            mapper
-        )
+        OWMCurrentWeatherInteractor(repository, mapper)
 
     @Provides
     @OWMCurrentWeatherScope

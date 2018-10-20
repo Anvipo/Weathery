@@ -19,6 +19,8 @@ constructor(private val context: Context) :
     override fun saveForecastResponse(forecastResponseList: List<T>): Single<List<T>> =
         Single.create { emitter ->
             Realm.getDefaultInstance()?.use { realmInstance ->
+                clearDB(realmInstance)
+
                 var proxyData: List<T>? = null
 
                 val nowInMillis: Long = Date().time
@@ -60,5 +62,9 @@ constructor(private val context: Context) :
         }
 
     protected abstract val responseClassType: Class<T>
+
+    private fun clearDB(realmInstance: Realm) {
+        realmInstance.executeTransaction { realmInstance.delete(responseClassType) }
+    }
 
 }

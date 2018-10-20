@@ -7,7 +7,7 @@ import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.forecast.IOWMFo
 @Parcelize
 data class OWMForecastMain(
 
-    override val temperature: Double,
+    override val temperature: String,
 
     override val atmosphericPressureOnTheGroundLevelInhPa: Double,
 

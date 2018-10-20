@@ -15,18 +15,21 @@ import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.AbsForecastAc
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.adapters.YWForecastActivityPagerAdapter
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
+import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastType
 import javax.inject.Inject
 
-class YWForecastActivity :
-    AbsForecastActivity<YWForecastListType>(),
-    ForecastContract.View<YWForecastListType> {
+class YWForecastActivity : AbsForecastActivity<YWForecastType>() {
 
     @Inject
-    lateinit var presenter: ForecastContract.Presenter<YWForecastListType>
+    lateinit var presenter: ForecastContract.Presenter<YWForecastType>
 
     override val view: ViewPager by lazy { yw_forecast_pager }
 
     override val rootLayout: CoordinatorLayout by lazy { yw_forecast_CL }
+
+    override val clickListener: (YWForecastType) -> Unit by lazy {
+        TODO("not implemented")
+    }
 
     private lateinit var pagerAdapter: YWForecastActivityPagerAdapter
 
@@ -56,12 +59,12 @@ class YWForecastActivity :
     override fun showWeatherResponse(data: YWForecastListType) {
         if (data.isNotEmpty()) {
             showLayout()
-            putForecastDataInPager(data)
+            fillRecyclerView(data)
         } else
             hideLayout()
     }
 
-    override fun putForecastDataInPager(data: YWForecastListType) {
+    override fun fillRecyclerView(data: YWForecastListType) {
         for (forecast in data) {
             val yfr = YWForecastFragment()
 
@@ -75,6 +78,14 @@ class YWForecastActivity :
 
     override fun changeTitle(title: String) {
         toolbar.title = title
+    }
+
+    override fun initRecyclerView() {
+        TODO("not implemented")
+    }
+
+    override fun startWeatherInfoActivity(itemData: YWForecastType) {
+        TODO("not implemented")
     }
 
     private fun initPager() {

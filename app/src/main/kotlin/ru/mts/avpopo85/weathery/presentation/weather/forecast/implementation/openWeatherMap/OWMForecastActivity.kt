@@ -1,34 +1,35 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap
 
 import android.os.Bundle
-import android.view.View.GONE
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.viewpager.widget.ViewPager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_owm_forecast.*
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.content_owm_forecast.*
+import org.jetbrains.anko.startActivity
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.openWeatherMap.OWMForecastModule
-import ru.mts.avpopo85.weathery.presentation.utils.ARG_FORECAST
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.AbsForecastActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
-import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.adapter.OWMForecastActivityPagerAdapter
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.adapter.base.IForecastAdapter
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.adapter.implementation.OWMForecastAdapter
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.utils.FORECAST_INFO_INTENT_TAG
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 import javax.inject.Inject
 
-class OWMForecastActivity :
-    AbsForecastActivity<OWMForecastListType>(),
-    ForecastContract.View<OWMForecastListType> {
+class OWMForecastActivity : AbsForecastActivity<OWMForecastType>() {
 
     @Inject
-    lateinit var presenter: ForecastContract.Presenter<OWMForecastListType>
+    lateinit var presenter: ForecastContract.Presenter<OWMForecastType>
 
-    override val view: ViewPager by lazy { owm_forecast_pager }
+    override val view: RecyclerView by lazy { owm_forecast_recycler_view }
 
     override val rootLayout: CoordinatorLayout by lazy { owm_forecast_CL }
 
-    private lateinit var pagerAdapter: OWMForecastActivityPagerAdapter
+    override val clickListener: (OWMForecastType) -> Unit = { presenter.onItemClicked(it) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +43,7 @@ class OWMForecastActivity :
             .plus(OWMForecastModule(this))
             .inject(this)
 
-        initPager()
+        initRecyclerView()
 
         presenter.onBindView(this)
         presenter.loadForecast()
@@ -56,33 +57,35 @@ class OWMForecastActivity :
     override fun showWeatherResponse(data: OWMForecastListType) {
         if (data.isNotEmpty()) {
             showLayout()
-            putForecastDataInPager(data)
+            fillRecyclerView(data)
         } else
             hideLayout()
     }
 
-    override fun putForecastDataInPager(data: OWMForecastListType) {
-        for (forecast in data) {
-            val yfr = OWMForecastFragment()
-
-            yfr.arguments = Bundle().apply {
-                putParcelable(ARG_FORECAST, forecast)
-            }
-
-            pagerAdapter.addFragment(yfr, forecast.date)
-        }
-
-        pagerAdapter.notifyDataSetChanged()
+    override fun fillRecyclerView(data: OWMForecastListType) {
+        mAdapter.addAll(data)
     }
 
     override fun changeTitle(title: String) {
         toolbar.title = title
     }
 
-    private fun initPager() {
-        pagerAdapter = OWMForecastActivityPagerAdapter(supportFragmentManager)
-        owm_forecast_pager.adapter = pagerAdapter
-        owm_forecast_pager.visibility = GONE
+    override fun initRecyclerView() {
+        findViewById<RecyclerView>(R.id.owm_forecast_recycler_view)?.apply {
+            setHasFixedSize(true)
+
+            layoutManager = LinearLayoutManager(this@OWMForecastActivity)
+
+            adapter = mAdapter as RecyclerView.Adapter<*>
+        }
+    }
+
+    override fun startWeatherInfoActivity(itemData: OWMForecastType) {
+        startActivity<OWMForecastInfoActivity>(FORECAST_INFO_INTENT_TAG to itemData)
+    }
+
+    private val mAdapter: IForecastAdapter<OWMForecastType> by lazy {
+        OWMForecastAdapter(clickListener)
     }
 
 }

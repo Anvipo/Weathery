@@ -5,7 +5,7 @@ import ru.mts.avpopo85.weathery.presentation.weather.base.WeatherContract
 
 interface CurrentWeatherContract : WeatherContract {
 
-    interface View<T : ICurrentWeather> : WeatherContract.View {
+    interface View<in T : ICurrentWeather> : WeatherContract.View {
 
         fun showWeatherResponse(data: T)
 

@@ -3,17 +3,20 @@ package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.op
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.IForecastInteractor
-import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
-import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.AbsForecastPresenter
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 import javax.inject.Inject
 
 class OWMForecastPresenter
 @Inject constructor(
     private val interactor: IForecastInteractor<OWMForecastListType>,
     private val schedulerManagerModule: SchedulerManagerModule
-) : AbsBasePresenter<ForecastContract.View<OWMForecastListType>>(),
-    ForecastContract.Presenter<OWMForecastListType> {
+) : AbsForecastPresenter<OWMForecastType>() {
+
+    override fun onItemClicked(itemData: OWMForecastType) {
+        view?.startWeatherInfoActivity(itemData)
+    }
 
     override fun loadForecast() {
         val task: Disposable = interactor.getForecast()

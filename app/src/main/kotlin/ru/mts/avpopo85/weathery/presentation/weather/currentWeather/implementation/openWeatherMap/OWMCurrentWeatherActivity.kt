@@ -16,9 +16,7 @@ import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.Current
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
 import javax.inject.Inject
 
-class OWMCurrentWeatherActivity :
-    AbsCurrentWeatherActivity(),
-    CurrentWeatherContract.View<OWMCurrentWeatherType> {
+class OWMCurrentWeatherActivity : AbsCurrentWeatherActivity<OWMCurrentWeatherType>() {
 
     @Inject
     lateinit var presenter: CurrentWeatherContract.Presenter<OWMCurrentWeatherType>

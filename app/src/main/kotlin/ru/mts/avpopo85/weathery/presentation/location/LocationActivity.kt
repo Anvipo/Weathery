@@ -1,7 +1,9 @@
 package ru.mts.avpopo85.weathery.presentation.location
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -11,6 +13,7 @@ import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.content_location.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
+import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.common.LocationModule
@@ -158,6 +161,16 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
     override fun changeTitle(title: String) {
         toolbar.title = title
+    }
+
+    override fun startSettingsActivityForResult() {
+        // Build intent that displays the App settings screen.
+        val intent = Intent().apply {
+            action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+            data = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
+        }
+
+        startActivityForResult(intent, APPLICATION_SETTINGS_REQUEST_CODE)
     }
 
     private fun initButtonListeners() {

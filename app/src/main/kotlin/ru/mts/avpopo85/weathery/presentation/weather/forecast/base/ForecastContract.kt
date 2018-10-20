@@ -5,15 +5,23 @@ import ru.mts.avpopo85.weathery.presentation.weather.base.WeatherContract
 
 interface ForecastContract : WeatherContract {
 
-    interface View<T : Collection<IForecast>> : WeatherContract.View {
+    interface View<in T : IForecast> : WeatherContract.View {
 
-        fun showWeatherResponse(data: T)
+        fun showWeatherResponse(data: List<T>)
+
+        fun fillRecyclerView(data: List<T>)
+
+        fun initRecyclerView()
+
+        fun startWeatherInfoActivity(itemData: T)
 
     }
 
-    interface Presenter<T : Collection<IForecast>> : WeatherContract.Presenter<View<T>> {
+    interface Presenter<T : IForecast> : WeatherContract.Presenter<View<T>> {
 
         fun loadForecast()
+
+        fun onItemClicked(itemData: T)
 
     }
 

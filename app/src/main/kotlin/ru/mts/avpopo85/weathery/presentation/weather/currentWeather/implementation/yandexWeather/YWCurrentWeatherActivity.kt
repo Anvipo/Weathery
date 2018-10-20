@@ -16,9 +16,7 @@ import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.Current
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 import javax.inject.Inject
 
-class YWCurrentWeatherActivity :
-    AbsCurrentWeatherActivity(),
-    CurrentWeatherContract.View<YWCurrentWeatherType> {
+class YWCurrentWeatherActivity : AbsCurrentWeatherActivity<YWCurrentWeatherType>() {
 
     @Inject
     lateinit var presenter: CurrentWeatherContract.Presenter<YWCurrentWeatherType>

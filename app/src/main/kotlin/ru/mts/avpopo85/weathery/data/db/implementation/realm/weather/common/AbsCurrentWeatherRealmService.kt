@@ -19,6 +19,8 @@ constructor(private val context: Context) :
     override fun saveCurrentWeatherResponse(currentWeatherResponse: T): Single<T> =
         Single.create { emitter ->
             Realm.getDefaultInstance().use { realmInstance ->
+                clearDB(realmInstance)
+
                 var proxyData: T? = null
 
                 realmInstance.executeTransaction {
@@ -48,6 +50,10 @@ constructor(private val context: Context) :
                 }
             }
         }
+
+    private fun clearDB(realmInstance: Realm) {
+        realmInstance.executeTransaction { realmInstance.delete(responseClassType) }
+    }
 
     private fun onDataExistsInDB(
         realmInstance: Realm,

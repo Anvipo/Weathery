@@ -14,6 +14,7 @@ import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.ope
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.OWMForecastPresenter
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 
 @Module
 class OWMForecastModule(private val context: OWMForecastActivity) {
@@ -23,11 +24,8 @@ class OWMForecastModule(private val context: OWMForecastActivity) {
     fun provideOWMForecastPresenter(
         interactor: IForecastInteractor<OWMForecastListType>,
         schedulerManagerModule: SchedulerManagerModule
-    ): ForecastContract.Presenter<OWMForecastListType> =
-        OWMForecastPresenter(
-            interactor,
-            schedulerManagerModule
-        )
+    ): ForecastContract.Presenter<OWMForecastType> =
+        OWMForecastPresenter(interactor, schedulerManagerModule)
 
     @Provides
     @OWMForecastScope
@@ -35,10 +33,7 @@ class OWMForecastModule(private val context: OWMForecastActivity) {
         repository: IForecastRepository<OWMForecastListResponseType>,
         mapper: IForecastMapper<OWMForecastListResponseType, OWMForecastListType>
     ): IForecastInteractor<OWMForecastListType> =
-        OWMForecastInteractor(
-            repository,
-            mapper
-        )
+        OWMForecastInteractor(repository, mapper)
 
     @Provides
     @OWMForecastScope

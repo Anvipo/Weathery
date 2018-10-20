@@ -45,7 +45,7 @@ class OWMForecastMapper
                 rainVolumeMm = forecastResponse.rain?.rainVolumeForLast3hoursMm ?: 0.0,
                 main = forecastResponse.main!!.let {
                     OWMForecastMain(
-                        temperature = it.temperature,
+                        temperature = it.temperature.roundIfNeeded(),
                         humidity = it.humidity,
                         atmosphericPressureOnTheGroundLevelInhPa = it.atmosphericPressureOnTheGroundLevelInhPa,
                         atmosphericPressureOnTheSeaLevelInhPa = it.atmosphericPressureOnTheSeaLevelInhPa
