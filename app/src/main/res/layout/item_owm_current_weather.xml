@@ -30,7 +30,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/MyMaterialSubtitle1"
+                    style="@style/MyMaterialSecondarySubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/observation_time"
@@ -38,7 +38,7 @@
 
                 <TextView
                     android:id="@+id/observation_unix_time_value_OWM_CW_TV"
-                    style="@style/MyMaterialBody1"
+                    style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/observation_time_value"
@@ -54,7 +54,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/MyMaterialSubtitle1"
+                    style="@style/MyMaterialSecondarySubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/temperature"
@@ -62,7 +62,7 @@
 
                 <TextView
                     android:id="@+id/temperature_value_OWM_CW_TV"
-                    style="@style/MyMaterialBody1"
+                    style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/temperature_value"
@@ -78,7 +78,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/MyMaterialSubtitle1"
+                    style="@style/MyMaterialSecondarySubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/visibility"
@@ -86,7 +86,7 @@
 
                 <TextView
                     android:id="@+id/visibility_value_OWM_CW_TV"
-                    style="@style/MyMaterialBody1"
+                    style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/visibility_value"
@@ -109,7 +109,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/MyMaterialSubtitle1"
+                        style="@style/MyMaterialSecondarySubtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/wind_speed"
@@ -117,7 +117,7 @@
 
                     <TextView
                         android:id="@+id/wind_speed_value_OWM_CW_TV"
-                        style="@style/MyMaterialBody1"
+                        style="@style/MyMaterialPrimaryBody1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:contentDescription="@string/wind_speed_value"
@@ -133,7 +133,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/MyMaterialSubtitle1"
+                        style="@style/MyMaterialSecondarySubtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/wind_direction"
@@ -141,7 +141,7 @@
 
                     <TextView
                         android:id="@+id/wind_direction_value_OWM_CW_TV"
-                        style="@style/MyMaterialBody1"
+                        style="@style/MyMaterialPrimaryBody1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:contentDescription="@string/wind_direction_value"
@@ -158,7 +158,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/MyMaterialSubtitle1"
+                    style="@style/MyMaterialSecondarySubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/atmospheric_pressure"
@@ -166,7 +166,7 @@
 
                 <TextView
                     android:id="@+id/atmospheric_pressure_value_OWM_CW_TV"
-                    style="@style/MyMaterialBody1"
+                    style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/atmospheric_pressure_value"
@@ -182,7 +182,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/MyMaterialSubtitle1"
+                    style="@style/MyMaterialSecondarySubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/humidity"
@@ -190,7 +190,7 @@
 
                 <TextView
                     android:id="@+id/humidity_value_OWM_CW_TV"
-                    style="@style/MyMaterialBody1"
+                    style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/humidity_value"
@@ -213,7 +213,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/MyMaterialSubtitle1"
+                        style="@style/MyMaterialSecondarySubtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/sunrise_time"
@@ -221,7 +221,7 @@
 
                     <TextView
                         android:id="@+id/sunrise_value_OWM_CW_TV"
-                        style="@style/MyMaterialBody1"
+                        style="@style/MyMaterialPrimaryBody1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:contentDescription="@string/sunrise_time_value"
@@ -237,7 +237,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/MyMaterialSubtitle1"
+                        style="@style/MyMaterialSecondarySubtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/sunset_time"
@@ -245,7 +245,7 @@
 
                     <TextView
                         android:id="@+id/sunset_value_OWM_CW_TV"
-                        style="@style/MyMaterialBody1"
+                        style="@style/MyMaterialPrimaryBody1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:contentDescription="@string/sunset_time_value"
@@ -262,7 +262,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/MyMaterialSubtitle1"
+                    style="@style/MyMaterialSecondarySubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/cloudiness"
@@ -270,7 +270,7 @@
 
                 <TextView
                     android:id="@+id/cloudinessValueOWMCWTV"
-                    style="@style/MyMaterialBody1"
+                    style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/cloudiness_value"
@@ -286,7 +286,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/MyMaterialSubtitle1"
+                    style="@style/MyMaterialSecondarySubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/description"
@@ -294,7 +294,7 @@
 
                 <TextView
                     android:id="@+id/descriptionValueOWMCWTV"
-                    style="@style/MyMaterialBody1"
+                    style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/description_value"

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="MyBaseAppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
@@ -43,12 +43,22 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="MyMaterialSubtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+    <style name="MyMaterialSecondarySubtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="MyMaterialSubtitle1" parent="TextAppearance.MaterialComponents.Subtitle1" tools:ignore="UnusedResources">
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="MyMaterialBody1" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="MyMaterialPrimaryBody1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="MyMaterialBody1" parent="TextAppearance.MaterialComponents.Body1" tools:ignore="UnusedResources">
         <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="android:gravity">center</item>
     </style>
