@@ -2,6 +2,7 @@ package ru.mts.avpopo85.weathery.presentation.weather.base
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.withSwipeToRefresh.AbsSwipeToRefreshActivity
 
@@ -39,7 +40,15 @@ abstract class AbsWeatherActivity : AbsSwipeToRefreshActivity(), WeatherContract
         super.onDestroy()
     }
 
-    protected abstract fun initBindings()
+    override fun changeTitle(title: String) {
+        viewToolbar.title = title
+    }
+
+    protected open fun initBindings() {
+        initSwipeRefreshLayout()
+
+        bindPresenter()
+    }
 
     protected abstract fun bindPresenter()
 
@@ -47,6 +56,18 @@ abstract class AbsWeatherActivity : AbsSwipeToRefreshActivity(), WeatherContract
 
     protected abstract fun initInjection()
 
-    protected abstract fun initView()
+    protected abstract val layoutResID: Int
+
+    protected abstract val viewToolbar: Toolbar
+
+    protected abstract val toolbarTitle: String
+
+    protected open fun initView() {
+        setContentView(layoutResID)
+
+        viewToolbar.title = toolbarTitle
+
+        setSupportActionBar(viewToolbar)
+    }
 
 }

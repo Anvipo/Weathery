@@ -1,7 +1,7 @@
 package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.yandexWeather
 
 import android.annotation.SuppressLint
-import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.android.synthetic.main.activity_yw_current_weather.*
@@ -19,42 +19,15 @@ import javax.inject.Inject
 class YWCurrentWeatherActivity : AbsCurrentWeatherActivity<YWCurrentWeatherType>() {
 
     @Inject
-    lateinit var presenter: CurrentWeatherContract.Presenter<YWCurrentWeatherType>
+    override lateinit var presenter: CurrentWeatherContract.Presenter<YWCurrentWeatherType>
 
     override val swipeRefreshLayout: SwipeRefreshLayout by lazy { item_yw_current_weather_SRL }
 
     override val rootLayout: CoordinatorLayout by lazy { yw_current_weather_CL }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override val layoutResID: Int by lazy { R.layout.activity_yw_current_weather }
 
-        initView()
-
-        initInjection()
-
-        initBindings()
-    }
-
-    override fun onDestroy() {
-        unbindPresenter()
-        super.onDestroy()
-    }
-
-    override fun initBindings() {
-        setOnRefreshListener()
-
-        bindPresenter()
-
-        presenter.loadWeatherData()
-    }
-
-    override fun bindPresenter() {
-        presenter.onBindView(this)
-    }
-
-    override fun unbindPresenter() {
-        presenter.onUnbindView()
-    }
+    override val viewToolbar: Toolbar by lazy { toolbar }
 
     override fun initInjection() {
         App.appComponent
@@ -62,17 +35,9 @@ class YWCurrentWeatherActivity : AbsCurrentWeatherActivity<YWCurrentWeatherType>
             .inject(this)
     }
 
-    override fun initView() {
-        setContentView(R.layout.activity_yw_current_weather)
-
-        toolbar.title = getString(R.string.current_weather)
-
-        setSupportActionBar(toolbar)
-    }
-
     @SuppressLint("SetTextI18n")
     override fun showWeatherResponse(data: YWCurrentWeatherType) {
-        showLayout()
+        super.showWeatherResponse(data)
 
         data.let {
             temperature_value_YW_CW_TV.text = "${it.temperature} $CELSIUS_DEGREE"
@@ -96,14 +61,6 @@ class YWCurrentWeatherActivity : AbsCurrentWeatherActivity<YWCurrentWeatherType>
             season_value_YW_CW_TV.text = it.season
             observation_unix_time_value_YW_CW_TV.text = it.timeOfDataCalculation
         }
-    }
-
-    override fun setOnRefreshListener() {
-        swipeRefreshLayout.setOnRefreshListener(this)
-    }
-
-    override fun onRefresh() {
-        presenter.loadWeatherData()
     }
 
 }

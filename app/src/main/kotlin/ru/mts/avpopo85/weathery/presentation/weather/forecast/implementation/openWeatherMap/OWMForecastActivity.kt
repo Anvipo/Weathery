@@ -1,5 +1,6 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap
 
+import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,9 +32,14 @@ class OWMForecastActivity : AbsForecastActivity<OWMForecastType>() {
 
     override val clickListener: (OWMForecastType) -> Unit = { presenter.onItemClicked(it) }
 
-    override fun setOnRefreshListener() {
-        swipeRefreshLayout.setOnRefreshListener(this)
-    }
+    override val layoutResID: Int
+        get() = TODO("not implemented")
+
+    override val viewToolbar: Toolbar
+        get() = TODO("not implemented")
+
+    override val toolbarTitle: String
+        get() = TODO("not implemented")
 
     override fun initView() {
         setContentView(R.layout.activity_owm_forecast)
@@ -50,9 +56,7 @@ class OWMForecastActivity : AbsForecastActivity<OWMForecastType>() {
     }
 
     override fun initBindings() {
-        setOnRefreshListener()
-
-        setColorSchemeResources()
+        initSwipeRefreshLayout()
 
         bindPresenter()
 

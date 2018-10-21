@@ -1,6 +1,7 @@
 package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.openWeatherMap
 
 import android.annotation.SuppressLint
+import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.android.synthetic.main.activity_owm_current_weather.*
@@ -20,33 +21,15 @@ class OWMCurrentWeatherActivity :
     SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
-    lateinit var presenter: CurrentWeatherContract.Presenter<OWMCurrentWeatherType>
+    override lateinit var presenter: CurrentWeatherContract.Presenter<OWMCurrentWeatherType>
 
     override val swipeRefreshLayout: SwipeRefreshLayout by lazy { item_owm_current_weather_SRL }
 
     override val rootLayout: CoordinatorLayout by lazy { owm_current_weather_CL }
 
-    override fun setOnRefreshListener() {
-        swipeRefreshLayout.setOnRefreshListener(this)
-    }
+    override val layoutResID: Int by lazy { R.layout.activity_owm_current_weather }
 
-    override fun bindPresenter() {
-        presenter.onBindView(this)
-    }
-
-    override fun unbindPresenter() {
-        presenter.onUnbindView()
-    }
-
-    override fun initBindings() {
-        setOnRefreshListener()
-
-        setColorSchemeResources()
-
-        bindPresenter()
-
-        presenter.loadWeatherData()
-    }
+    override val viewToolbar: Toolbar by lazy { toolbar }
 
     override fun initInjection() {
         App.appComponent
@@ -54,17 +37,9 @@ class OWMCurrentWeatherActivity :
             .inject(this)
     }
 
-    override fun initView() {
-        setContentView(R.layout.activity_owm_current_weather)
-
-        toolbar.title = getString(R.string.current_weather)
-
-        setSupportActionBar(toolbar)
-    }
-
     @SuppressLint("SetTextI18n")
     override fun showWeatherResponse(data: OWMCurrentWeatherType) {
-        showLayout()
+        super.showWeatherResponse(data)
 
         data.let {
             observation_unix_time_value_OWM_CW_TV.text = it.timeOfDataCalculation
@@ -83,10 +58,6 @@ class OWMCurrentWeatherActivity :
 
             descriptionValueOWMCWTV.text = it.weather.description
         }
-    }
-
-    override fun onRefresh() {
-        presenter.onSwipeToRefresh()
     }
 
 }

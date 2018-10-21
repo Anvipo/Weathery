@@ -15,7 +15,14 @@ abstract class AbsSwipeToRefreshActivity :
         swipeRefreshLayout.isRefreshing = false
     }
 
-    protected abstract fun setOnRefreshListener()
+    protected fun initSwipeRefreshLayout() {
+        setOnRefreshListener()
+        setColorSchemeResources()
+    }
+
+    private fun setOnRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(this)
+    }
 
     protected open fun setColorSchemeResources() {
         swipeRefreshLayout.setColorSchemeResources(R.color.accentColor)

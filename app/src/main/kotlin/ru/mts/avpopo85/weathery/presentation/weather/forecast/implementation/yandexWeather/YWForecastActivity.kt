@@ -2,6 +2,7 @@ package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.ya
 
 import android.os.Bundle
 import android.view.View.GONE
+import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.android.synthetic.main.activity_yw_forecast.*
@@ -36,6 +37,15 @@ class YWForecastActivity : AbsForecastActivity<YWForecastType>() {
         TODO("NOT IMPLEMENTED")
     }
 
+    override val layoutResID: Int
+        get() = TODO("not implemented")
+
+    override val viewToolbar: Toolbar
+        get() = TODO("not implemented")
+
+    override val toolbarTitle: String
+        get() = TODO("not implemented")
+
     private lateinit var pagerAdapter: YWForecastActivityPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +66,7 @@ class YWForecastActivity : AbsForecastActivity<YWForecastType>() {
     }
 
     override fun initBindings() {
-        setOnRefreshListener()
+        initSwipeRefreshLayout()
 
         bindPresenter()
         presenter.loadWeatherData()
@@ -84,9 +94,9 @@ class YWForecastActivity : AbsForecastActivity<YWForecastType>() {
         setSupportActionBar(toolbar)
     }
 
-    override fun setOnRefreshListener() {
-        swipeRefreshLayout.setOnRefreshListener(this)
-    }
+//    override fun setOnRefreshListener() {
+//        swipeRefreshLayout.setOnRefreshListener(this)
+//    }
 
     override fun onRefresh() {
         presenter.loadWeatherData()
