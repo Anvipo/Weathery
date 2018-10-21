@@ -153,7 +153,7 @@ class GoogleGeocoder
         addressComponent: AddressComponentsItem
     ) {
         if (userAddress.postalCode == null) {
-            userAddress.postalCode = addressComponent.longName?.toInt()
+            userAddress.postalCode = addressComponent.longName
         }
     }
 

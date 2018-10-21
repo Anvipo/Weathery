@@ -23,7 +23,7 @@ open class UserAddress(
     @PrimaryKey
     override var locality: String? = null,
 
-    override var postalCode: Int? = null,
+    override var postalCode: String? = null,
 
     override var subAdminArea: String? = null,
 

@@ -28,4 +28,7 @@ class LocationInteractor
     override fun getAddressFromCoordinates(coordinates: LatLng): Single<UserAddressType> =
         locationRepository.getAddressFromCoordinates(coordinates)
 
+    override fun saveAddress(address: UserAddressType): Single<UserAddressType> =
+        locationRepository.saveAddress(address)
+
 }

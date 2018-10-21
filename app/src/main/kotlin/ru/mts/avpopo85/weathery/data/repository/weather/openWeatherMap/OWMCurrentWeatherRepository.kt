@@ -51,7 +51,7 @@ class OWMCurrentWeatherRepository
         val coords: GeographicCoordinates? = currentAddress.coords
         val cityName: String? = currentAddress.locality
         val countryCode: String? = currentAddress.countryCode
-        val postalCode: Int? = currentAddress.postalCode
+        val postalCode: String? = currentAddress.postalCode
 
         val geoCoordsApiCall = makeGeoCoordsApiCall(coords)
         val postalCodeApiCall = makePostalCodeApiCall(postalCode, countryCode)
@@ -115,7 +115,7 @@ class OWMCurrentWeatherRepository
         }
 
     override fun makePostalCodeApiCall(
-        postalCode: Int?,
+        postalCode: String?,
         countryCode: String?
     ): Single<OWMCurrentWeatherResponseType>? =
         if (postalCode != null) {
@@ -142,10 +142,10 @@ class OWMCurrentWeatherRepository
         }
 
     override fun getWeatherDataByZipCode(
-        zipCode: Int,
+        postalCode: String,
         countryCode: String?
     ): Single<OWMCurrentWeatherResponseType> {
-        val zipCodeRequest = if (countryCode != null) "$zipCode,$countryCode" else "$zipCode"
+        val zipCodeRequest = if (countryCode != null) "$postalCode,$countryCode" else postalCode
 
         return apiService.getCurrentWeatherByZipCode(zipCodeRequest)
     }

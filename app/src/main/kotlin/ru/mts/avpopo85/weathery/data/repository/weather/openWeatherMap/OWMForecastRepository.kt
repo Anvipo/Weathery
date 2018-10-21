@@ -69,7 +69,7 @@ class OWMForecastRepository
         val coords: GeographicCoordinates? = currentAddress.coords
         val cityName: String? = currentAddress.locality
         val countryCode: String? = currentAddress.countryCode
-        val postalCode: Int? = currentAddress.postalCode
+        val postalCode: String? = currentAddress.postalCode
 
         val geoCoordsApiCall = makeGeoCoordsApiCall(coords)
         val postalCodeApiCall = makePostalCodeApiCall(postalCode, countryCode)
@@ -132,7 +132,7 @@ class OWMForecastRepository
         }
 
     override fun makePostalCodeApiCall(
-        postalCode: Int?,
+        postalCode: String?,
         countryCode: String?
     ): Single<OWMForecastResponseType>? =
         if (postalCode != null) {
@@ -159,10 +159,10 @@ class OWMForecastRepository
         }
 
     override fun getWeatherDataByZipCode(
-        zipCode: Int,
+        postalCode: String,
         countryCode: String?
     ): Single<OWMForecastResponseType> {
-        val zip = if (countryCode != null) "$zipCode,$countryCode" else "$zipCode"
+        val zip = if (countryCode != null) "$postalCode,$countryCode" else postalCode
 
         return apiService.getForecastByZipCode(zip)
     }

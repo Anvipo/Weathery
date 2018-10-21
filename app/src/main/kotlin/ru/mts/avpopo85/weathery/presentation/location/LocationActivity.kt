@@ -25,7 +25,6 @@ import ru.mts.avpopo85.weathery.presentation.main.MainActivity
 import ru.mts.avpopo85.weathery.presentation.utils.APPLICATION_SETTINGS_REQUEST_CODE
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_BY_MAPS_REQUEST_CODE
 import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
-import ru.mts.avpopo85.weathery.utils.common.GoogleGeocodeException
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import javax.inject.Inject
 
@@ -55,9 +54,17 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
             "${getString(R.string.is_your_current_geolocation)} - ${address.locality}?",
             getString(R.string.yes),
             getString(R.string.no),
-            { startActivity<MainActivity>(); finish() },
+            {
+                presenter.saveAddress(address)
+                startMainActivityAndFinish()
+            },
             title = getString(R.string.found_intended_location)
         )
+    }
+
+    override fun startMainActivityAndFinish() {
+        startActivity<MainActivity>()
+        finish()
     }
 
     override fun showLocationError() {
@@ -102,7 +109,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
                 getString(R.string.unable_to_find_the_address_of_the_specified_location)
             } else {
                 showError(error)
-                getString(R.string.error_has_occured)
+                getString(R.string.error_has_occurred)
             }
 
         val part2 = getString(R.string.specify_the_location_on_the_map_again)
@@ -116,12 +123,6 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
             { startActivityForResult<MapsActivity>(LOCATION_BY_MAPS_REQUEST_CODE) },
             title = getString(R.string.error)
         )
-    }
-
-    override fun onGoogleGeocodeException(error: GoogleGeocodeException) {
-        val message = getErrorMessageOrDefault(error)
-
-        showError(message)
     }
 
     override fun showRationaleDialog() {

@@ -57,8 +57,11 @@ class LocationRepository
         //todo
 //      return  onServiceIsNotAvailable(location, IOException(""))
 
-        return makeAddressFromLocation(location).flatMap(dbService::saveCurrentAddress)
+        return makeAddressFromLocation(location)
     }
+
+    override fun saveAddress(address: UserAddressType): Single<UserAddressType> =
+        dbService.saveCurrentAddress(address)
 
     private val rxLocation by lazy { RxLocation(context) }
 
@@ -72,7 +75,7 @@ class LocationRepository
     private fun getCurrentAddressByGPS(success: Boolean): Single<UserAddressType> =
         makeGpsCall(success)
             .flatMap(::makeAddressFromLocation)
-            .flatMap(dbService::saveCurrentAddress)
+            .flatMap(::saveAddress)
 
     private fun makeGpsCall(success: Boolean): Single<Location> =
         when {
@@ -124,6 +127,7 @@ class LocationRepository
 
     private fun checkLocalityOnNull(it: UserAddressType): Maybe<UserAddressType> =
         if (it.locality == null) {
+            //todo
             val error = ExtractAddressException("Locality is null")
 
             Maybe.error(error)
@@ -137,7 +141,7 @@ class LocationRepository
     ): Single<UserAddressType> {
         error.printStackTrace()
 
-        return geocoder.geocodeLocation(location).flatMap(dbService::saveCurrentAddress)
+        return geocoder.geocodeLocation(location).flatMap(::saveAddress)
     }
 
     private fun mapUserAddress(address: Address): UserAddressType =
@@ -157,7 +161,7 @@ class LocationRepository
                     region = it.locale?.country
                 ),
                 locality = it.locality,
-                postalCode = it.postalCode?.toInt(),
+                postalCode = it.postalCode,
                 subAdminArea = it.subAdminArea,
                 subThoroughfare = it.subThoroughfare,
                 thoroughfare = it.thoroughfare,

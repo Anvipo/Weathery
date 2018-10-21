@@ -24,7 +24,7 @@ interface IUserAddress {
     /**E.g. district of city*/
     val locality: String?
 
-    val postalCode: Int?
+    val postalCode: String?
 
     /**E.g. city*/
     val subAdminArea: String?

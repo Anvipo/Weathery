@@ -11,13 +11,13 @@ interface IOWMRepository<T : IBaseWeatherResponse> {
 
     fun getWeatherDataByGeographicCoordinates(coords: GeographicCoordinates): Single<T>
 
-    fun getWeatherDataByZipCode(zipCode: Int, countryCode: String?): Single<T>
+    fun getWeatherDataByZipCode(postalCode: String, countryCode: String?): Single<T>
 
     fun makeGeoCoordsApiCall(coords: GeographicCoordinates?): Single<T>?
 
     fun makeCityNameApiCall(cityName: String?, countryCode: String?): Single<T>?
 
-    fun makePostalCodeApiCall(postalCode: Int?, countryCode: String?): Single<T>?
+    fun makePostalCodeApiCall(postalCode: String?, countryCode: String?): Single<T>?
 
     fun make3ApiCalls(): TripleOfOWMApiCalls<T>
 

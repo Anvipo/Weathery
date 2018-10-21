@@ -63,6 +63,16 @@ class LocationPresenter
         compositeDisposable.add(task)
     }
 
+    override fun saveAddress(address: UserAddressType) {
+        val task: Disposable = interactor.saveAddress(address)
+            .compose(schedulerManagerModule.singleTransformer())
+            .doOnSubscribe { view?.showLoadingProgress() }
+            .doAfterTerminate { view?.hideLoadingProgress() }
+            .subscribe({}, { view?.showError(it) })
+
+        compositeDisposable.add(task)
+    }
+
     private fun onSuccessGetLastKnownAddress(address: UserAddressType) {
         if (address.locality != null) {
             view?.showCityDialog(address)
@@ -82,6 +92,7 @@ class LocationPresenter
         if (address.locality != null) {
             view?.showCityDialog(address)
         } else {
+            //todo
             val error = ExtractAddressException("Locality is null")
 
             onErrorGetAddressFromCoordinates(error)
@@ -90,7 +101,7 @@ class LocationPresenter
 
     private fun onErrorGetAddressFromCoordinates(error: Throwable) {
         if (error is GoogleGeocodeException) {
-            view?.onGoogleGeocodeException(error)
+            view?.showError(error)
         } else {
             view?.showGetAddressFromCoordinatesError(error)
         }
@@ -140,8 +151,8 @@ class LocationPresenter
 
     private fun onSuccessGetCurrentAddressByGPS(address: UserAddressType) {
         if (address.locality != null) {
-            view?.showCityDialog(address)
             view?.enableGetLastKnownLocationButton()
+            view?.startMainActivityAndFinish()
         } else {
             view?.showLocationError()
         }
