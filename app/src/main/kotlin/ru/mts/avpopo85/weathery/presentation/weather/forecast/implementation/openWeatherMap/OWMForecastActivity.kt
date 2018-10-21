@@ -1,9 +1,9 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap
 
-import android.os.Bundle
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.android.synthetic.main.activity_owm_forecast.*
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.content_owm_forecast.*
@@ -25,33 +25,50 @@ class OWMForecastActivity : AbsForecastActivity<OWMForecastType>() {
     @Inject
     lateinit var presenter: ForecastContract.Presenter<OWMForecastType>
 
-    override val view: RecyclerView by lazy { owm_forecast_recycler_view }
+    override val swipeRefreshLayout: SwipeRefreshLayout by lazy { owm_forecast_SRL }
 
     override val rootLayout: CoordinatorLayout by lazy { owm_forecast_CL }
 
     override val clickListener: (OWMForecastType) -> Unit = { presenter.onItemClicked(it) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setOnRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(this)
+    }
+
+    override fun initView() {
         setContentView(R.layout.activity_owm_forecast)
 
         toolbar.title = getString(R.string.forecast)
 
         setSupportActionBar(toolbar)
+    }
 
+    override fun initInjection() {
         App.appComponent
             .plus(OWMForecastModule(this))
             .inject(this)
-
-        initRecyclerView()
-
-        presenter.onBindView(this)
-        presenter.loadForecast()
     }
 
-    override fun onDestroy() {
+    override fun initBindings() {
+        setOnRefreshListener()
+
+        setColorSchemeResources()
+
+        bindPresenter()
+
+        presenter.loadWeatherData()
+    }
+
+    override fun bindPresenter() {
+        presenter.onBindView(this)
+    }
+
+    override fun unbindPresenter() {
         presenter.onUnbindView()
-        super.onDestroy()
+    }
+
+    override fun onRefresh() {
+        presenter.onSwipeToRefresh()
     }
 
     override fun showWeatherResponse(data: OWMForecastListType) {
@@ -71,7 +88,7 @@ class OWMForecastActivity : AbsForecastActivity<OWMForecastType>() {
     }
 
     override fun initRecyclerView() {
-        findViewById<RecyclerView>(R.id.owm_forecast_recycler_view)?.apply {
+        findViewById<RecyclerView>(R.id.owm_forecast_RV)?.apply {
             setHasFixedSize(true)
 
             layoutManager = LinearLayoutManager(this@OWMForecastActivity)
@@ -84,8 +101,9 @@ class OWMForecastActivity : AbsForecastActivity<OWMForecastType>() {
         startActivity<OWMForecastInfoActivity>(FORECAST_INFO_INTENT_TAG to itemData)
     }
 
-    private val mAdapter: IForecastAdapter<OWMForecastType> by lazy {
-        OWMForecastAdapter(clickListener)
-    }
+    override val mAdapter: IForecastAdapter<OWMForecastType>
+            by lazy {
+                OWMForecastAdapter(clickListener)
+            }
 
 }

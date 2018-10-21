@@ -9,17 +9,11 @@ interface ForecastContract : WeatherContract {
 
         fun showWeatherResponse(data: List<T>)
 
-        fun fillRecyclerView(data: List<T>)
-
-        fun initRecyclerView()
-
         fun startWeatherInfoActivity(itemData: T)
 
     }
 
     interface Presenter<T : IForecast> : WeatherContract.Presenter<View<T>> {
-
-        fun loadForecast()
 
         fun onItemClicked(itemData: T)
 

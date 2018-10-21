@@ -11,10 +11,6 @@ interface CurrentWeatherContract : WeatherContract {
 
     }
 
-    interface Presenter<T : ICurrentWeather> : WeatherContract.Presenter<View<T>> {
-
-        fun loadCurrentWeather()
-
-    }
+    interface Presenter<T : ICurrentWeather> : WeatherContract.Presenter<View<T>>
 
 }

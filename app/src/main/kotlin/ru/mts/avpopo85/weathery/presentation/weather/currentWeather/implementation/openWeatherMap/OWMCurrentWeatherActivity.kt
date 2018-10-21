@@ -1,9 +1,8 @@
 package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.openWeatherMap
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import android.widget.ScrollView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.android.synthetic.main.activity_owm_current_weather.*
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.item_owm_current_weather.*
@@ -16,35 +15,51 @@ import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.Current
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
 import javax.inject.Inject
 
-class OWMCurrentWeatherActivity : AbsCurrentWeatherActivity<OWMCurrentWeatherType>() {
+class OWMCurrentWeatherActivity :
+    AbsCurrentWeatherActivity<OWMCurrentWeatherType>(),
+    SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     lateinit var presenter: CurrentWeatherContract.Presenter<OWMCurrentWeatherType>
 
-    override val view: ScrollView by lazy { item_owm_current_weather }
+    override val swipeRefreshLayout: SwipeRefreshLayout by lazy { item_owm_current_weather_SRL }
 
     override val rootLayout: CoordinatorLayout by lazy { owm_current_weather_CL }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setOnRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(this)
+    }
+
+    override fun bindPresenter() {
+        presenter.onBindView(this)
+    }
+
+    override fun unbindPresenter() {
+        presenter.onUnbindView()
+    }
+
+    override fun initBindings() {
+        setOnRefreshListener()
+
+        setColorSchemeResources()
+
+        bindPresenter()
+
+        presenter.loadWeatherData()
+    }
+
+    override fun initInjection() {
+        App.appComponent
+            .plus(OWMCurrentWeatherModule(this))
+            .inject(this)
+    }
+
+    override fun initView() {
         setContentView(R.layout.activity_owm_current_weather)
 
         toolbar.title = getString(R.string.current_weather)
 
         setSupportActionBar(toolbar)
-
-        App.appComponent
-            .plus(OWMCurrentWeatherModule(this))
-            .inject(this)
-
-        presenter.onBindView(this)
-
-        presenter.loadCurrentWeather()
-    }
-
-    override fun onDestroy() {
-        presenter.onUnbindView()
-        super.onDestroy()
     }
 
     @SuppressLint("SetTextI18n")
@@ -70,8 +85,8 @@ class OWMCurrentWeatherActivity : AbsCurrentWeatherActivity<OWMCurrentWeatherTyp
         }
     }
 
-    override fun changeTitle(title: String) {
-        toolbar.title = title
+    override fun onRefresh() {
+        presenter.onSwipeToRefresh()
     }
 
 }

@@ -20,7 +20,7 @@ abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
 
     protected abstract val rootLayout: View
 
-    override fun getErrorMessageOrDefault(error: Throwable): String =
+    protected fun getErrorMessageOrDefault(error: Throwable): String =
         error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)
 
     override fun showError(message: String) {

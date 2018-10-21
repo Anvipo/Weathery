@@ -18,7 +18,7 @@ abstract class AbsCurrentWeatherRepository<T : ICurrentWeatherRealmResponse>(
     protected abstract fun makeApiCall(): Single<T>
 
     protected fun getCurrentWeatherHelper(): Single<T> =
-        if (networkManager.isConnectedToInternet) {
+         if (networkManager.isConnectedToInternet) {
             makeDBCall().onErrorResumeNext(::onDbCallError)
         } else {
             makeDBCall()

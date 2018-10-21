@@ -25,8 +25,6 @@ interface BaseContract {
 
         fun changeTitle(title: String) = Unit
 
-        fun getErrorMessageOrDefault(error: Throwable): String
-
     }
 
     interface Presenter<in V : View> {

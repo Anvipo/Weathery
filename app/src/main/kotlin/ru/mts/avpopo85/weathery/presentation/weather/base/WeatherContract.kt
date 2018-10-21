@@ -1,10 +1,10 @@
 package ru.mts.avpopo85.weathery.presentation.weather.base
 
-import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.BaseProgressBarContract
+import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.withSwipeToRefresh.BaseSwipeToRefreshContract
 
-interface WeatherContract : BaseProgressBarContract {
+interface WeatherContract : BaseSwipeToRefreshContract {
 
-    interface View : BaseProgressBarContract.View {
+    interface View : BaseSwipeToRefreshContract.View {
 
         fun hideLayout()
 
@@ -14,6 +14,12 @@ interface WeatherContract : BaseProgressBarContract {
 
     }
 
-    interface Presenter<in V : View> : BaseProgressBarContract.Presenter<V>
+    interface Presenter<in V : View> : BaseSwipeToRefreshContract.Presenter<V> {
+
+        fun onSwipeToRefresh()
+
+        fun loadWeatherData()
+
+    }
 
 }

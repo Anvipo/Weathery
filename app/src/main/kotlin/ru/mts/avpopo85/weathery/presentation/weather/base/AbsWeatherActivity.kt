@@ -1,20 +1,18 @@
 package ru.mts.avpopo85.weathery.presentation.weather.base
 
+import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.AbsProgressBarActivity
+import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.withSwipeToRefresh.AbsSwipeToRefreshActivity
 
-abstract class AbsWeatherActivity : AbsProgressBarActivity(), WeatherContract.View {
-
-    protected abstract val view: ViewGroup
+abstract class AbsWeatherActivity : AbsSwipeToRefreshActivity(), WeatherContract.View {
 
     override fun hideLayout() {
-        view.visibility = View.GONE
+        swipeRefreshLayout.visibility = View.GONE
     }
 
     override fun showLayout() {
-        view.visibility = View.VISIBLE
+        swipeRefreshLayout.visibility = View.VISIBLE
     }
 
     override fun onNotFreshWeatherData() {
@@ -25,5 +23,30 @@ abstract class AbsWeatherActivity : AbsProgressBarActivity(), WeatherContract.Vi
 
         showLongSnackbar(message)
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        initView()
+
+        initInjection()
+
+        initBindings()
+    }
+
+    override fun onDestroy() {
+        unbindPresenter()
+        super.onDestroy()
+    }
+
+    protected abstract fun initBindings()
+
+    protected abstract fun bindPresenter()
+
+    protected abstract fun unbindPresenter()
+
+    protected abstract fun initInjection()
+
+    protected abstract fun initView()
 
 }
