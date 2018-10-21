@@ -8,30 +8,30 @@ abstract class AbsCurrentWeatherActivity<T : ICurrentWeather> :
     AbsWeatherActivity(),
     CurrentWeatherContract.View<T> {
 
-    protected abstract val presenter: CurrentWeatherContract.Presenter<T>
+    override fun showWeatherResponse(data: T) {
+        showLayout()
+    }
 
-    override val toolbarTitle: String by lazy { getString(R.string.current_weather) }
+    final override val toolbarTitle: String by lazy { getString(R.string.current_weather) }
 
-    override fun bindPresenter() {
+    final override fun bindPresenter() {
         presenter.onBindView(this)
     }
 
-    override fun unbindPresenter() {
+    final override fun unbindPresenter() {
         presenter.onUnbindView()
     }
 
-    override fun onRefresh() {
+    final override fun onRefresh() {
         presenter.onSwipeToRefresh()
     }
 
-    override fun initBindings() {
+    final override fun initBindings() {
         super.initBindings()
 
         presenter.loadWeatherData()
     }
 
-    override fun showWeatherResponse(data: T) {
-        showLayout()
-    }
+    protected abstract val presenter: CurrentWeatherContract.Presenter<T>
 
 }

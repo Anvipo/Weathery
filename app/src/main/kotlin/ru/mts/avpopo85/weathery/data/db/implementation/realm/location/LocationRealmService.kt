@@ -5,6 +5,7 @@ import io.reactivex.Single
 import io.reactivex.SingleEmitter
 import io.realm.Realm
 import io.realm.RealmResults
+import io.realm.kotlin.delete
 import io.realm.kotlin.where
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
@@ -18,6 +19,8 @@ class LocationRealmService
     override fun saveCurrentAddress(address: UserAddressType): Single<UserAddressType> =
         Single.create { emitter ->
             Realm.getDefaultInstance().use { realmInstance ->
+                clearDB(realmInstance)
+
                 var proxyData: UserAddressType? = null
 
                 realmInstance.executeTransaction {
@@ -69,6 +72,10 @@ class LocationRealmService
                 }
             }
         }
+
+    private fun clearDB(realmInstance: Realm) {
+        realmInstance.executeTransaction { realmInstance.delete<UserAddressType>() }
+    }
 
     private fun onDataExistsInDB(
         proxyData: RealmResults<UserAddressType>,

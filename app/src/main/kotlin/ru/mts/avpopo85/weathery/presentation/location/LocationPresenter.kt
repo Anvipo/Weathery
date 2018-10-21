@@ -65,7 +65,7 @@ class LocationPresenter
 
     private fun onSuccessGetLastKnownAddress(address: UserAddressType) {
         if (address.locality != null) {
-            view?.showCityDialog(address.locality!!)
+            view?.showCityDialog(address)
         } else {
             view?.disableGetLastKnownLocationButton()
             view?.showLastKnownLocationError()
@@ -80,7 +80,7 @@ class LocationPresenter
 
     private fun onSuccessGetAddressFromCoordinates(address: UserAddressType) {
         if (address.locality != null) {
-            view?.showCityDialog(address.locality!!)
+            view?.showCityDialog(address)
         } else {
             val error = ExtractAddressException("Locality is null")
 
@@ -140,7 +140,7 @@ class LocationPresenter
 
     private fun onSuccessGetCurrentAddressByGPS(address: UserAddressType) {
         if (address.locality != null) {
-            view?.showCityDialog(address.locality!!)
+            view?.showCityDialog(address)
             view?.enableGetLastKnownLocationButton()
         } else {
             view?.showLocationError()

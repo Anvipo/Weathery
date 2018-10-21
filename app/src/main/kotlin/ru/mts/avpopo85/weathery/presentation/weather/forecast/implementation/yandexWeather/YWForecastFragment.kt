@@ -19,6 +19,7 @@ import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yan
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastType
 
 
+@Suppress("unused")
 class YWForecastFragment : Fragment() {
 
     override fun onCreateView(

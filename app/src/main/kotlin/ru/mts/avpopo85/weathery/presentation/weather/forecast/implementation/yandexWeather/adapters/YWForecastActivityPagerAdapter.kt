@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 
+@Suppress("unused")
 class YWForecastActivityPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     private val items = mutableListOf<Fragment>()

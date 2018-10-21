@@ -3,6 +3,7 @@ package ru.mts.avpopo85.weathery.presentation.location.base
 import com.google.android.gms.maps.model.LatLng
 import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.BaseProgressBarContract
 import ru.mts.avpopo85.weathery.utils.common.GoogleGeocodeException
+import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 
 interface LocationContract : BaseProgressBarContract {
 
@@ -12,7 +13,7 @@ interface LocationContract : BaseProgressBarContract {
 
         fun showGoSettingsDialog()
 
-        fun showCityDialog(city: String)
+        fun showCityDialog(address: UserAddressType)
 
         fun showLocationError()
 

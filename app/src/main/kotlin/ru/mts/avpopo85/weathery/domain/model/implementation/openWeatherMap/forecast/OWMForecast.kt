@@ -1,6 +1,5 @@
 package ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.forecast
 
-import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.forecast.IOWMForecast
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
@@ -29,4 +28,4 @@ data class OWMForecast(
 
     override val windDirection: String
 
-) : Parcelable, IOWMForecast
+) : IOWMForecast

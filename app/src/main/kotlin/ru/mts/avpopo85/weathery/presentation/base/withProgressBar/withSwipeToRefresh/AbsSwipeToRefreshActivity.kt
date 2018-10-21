@@ -9,23 +9,23 @@ abstract class AbsSwipeToRefreshActivity :
     BaseSwipeToRefreshContract.View,
     SwipeRefreshLayout.OnRefreshListener {
 
-    protected abstract val swipeRefreshLayout: SwipeRefreshLayout
-
-    override fun hideRefreshingIndicator() {
+    final override fun hideRefreshingIndicator() {
         swipeRefreshLayout.isRefreshing = false
     }
+
+    protected abstract val swipeRefreshLayout: SwipeRefreshLayout
 
     protected fun initSwipeRefreshLayout() {
         setOnRefreshListener()
         setColorSchemeResources()
     }
 
-    private fun setOnRefreshListener() {
-        swipeRefreshLayout.setOnRefreshListener(this)
-    }
-
     protected open fun setColorSchemeResources() {
         swipeRefreshLayout.setColorSchemeResources(R.color.accentColor)
+    }
+
+    private fun setOnRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(this)
     }
 
 }

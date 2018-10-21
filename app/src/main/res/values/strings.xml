@@ -256,4 +256,5 @@
     <string name="more_info">More info</string>
     <string name="date_example">19:00 20.10.2018</string>
     <string name="temperature_example">20.21°C</string>
+    <string name="error_has_occured">Error has occured</string>
 </resources>

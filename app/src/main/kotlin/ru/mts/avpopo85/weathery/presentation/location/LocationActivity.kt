@@ -26,6 +26,7 @@ import ru.mts.avpopo85.weathery.presentation.utils.APPLICATION_SETTINGS_REQUEST_
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_BY_MAPS_REQUEST_CODE
 import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
 import ru.mts.avpopo85.weathery.utils.common.GoogleGeocodeException
+import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import javax.inject.Inject
 
 
@@ -49,9 +50,9 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         initButtonListeners()
     }
 
-    override fun showCityDialog(city: String) {
+    override fun showCityDialog(address: UserAddressType) {
         showAlertDialog(
-            "${getString(R.string.is_your_current_geolocation)} - $city?",
+            "${getString(R.string.is_your_current_geolocation)} - ${address.locality}?",
             getString(R.string.yes),
             getString(R.string.no),
             { startActivity<MainActivity>(); finish() },
@@ -100,7 +101,8 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
             if (error is ExtractAddressException) {
                 getString(R.string.unable_to_find_the_address_of_the_specified_location)
             } else {
-                getErrorMessageOrDefault(error)
+                showError(error)
+                getString(R.string.error_has_occured)
             }
 
         val part2 = getString(R.string.specify_the_location_on_the_map_again)

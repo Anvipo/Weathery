@@ -8,23 +8,6 @@ import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.withSwipeToRef
 
 abstract class AbsWeatherActivity : AbsSwipeToRefreshActivity(), WeatherContract.View {
 
-    override fun hideLayout() {
-        swipeRefreshLayout.visibility = View.GONE
-    }
-
-    override fun showLayout() {
-        swipeRefreshLayout.visibility = View.VISIBLE
-    }
-
-    override fun onNotFreshWeatherData() {
-        val part1 = getString(R.string.the_forecast_is_outdated)
-        val part2 = getString(R.string.internet_connection_required)
-
-        val message = "$part1. $part2"
-
-        showLongSnackbar(message)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,12 +18,29 @@ abstract class AbsWeatherActivity : AbsSwipeToRefreshActivity(), WeatherContract
         initBindings()
     }
 
-    override fun onDestroy() {
+    final override fun hideLayout() {
+        swipeRefreshLayout.visibility = View.GONE
+    }
+
+    final override fun showLayout() {
+        swipeRefreshLayout.visibility = View.VISIBLE
+    }
+
+    final override fun onNotFreshWeatherData() {
+        val part1 = getString(R.string.the_forecast_is_outdated)
+        val part2 = getString(R.string.internet_connection_required)
+
+        val message = "$part1. $part2"
+
+        showLongSnackbar(message)
+    }
+
+    final override fun onDestroy() {
         unbindPresenter()
         super.onDestroy()
     }
 
-    override fun changeTitle(title: String) {
+    final override fun changeTitle(title: String) {
         viewToolbar.title = title
     }
 

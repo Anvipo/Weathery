@@ -18,31 +18,29 @@ import java.util.concurrent.TimeoutException
 
 abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
 
-    protected abstract val rootLayout: View
-
-    protected fun getErrorMessageOrDefault(error: Throwable): String =
-        error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)
-
-    override fun showError(message: String) {
+    final override fun showError(message: String) {
         showLongSnackbar(message)
     }
 
-    override fun showShortSnackbar(message: String, view: View?) {
+    final override fun showShortSnackbar(message: String, view: View?) {
         val _view = view ?: rootLayout
+
         _view.snackbar(message)
     }
 
-    override fun showLongSnackbar(message: String, view: View?) {
+    final override fun showLongSnackbar(message: String, view: View?) {
         val _view = view ?: rootLayout
+
         _view.longSnackbar(message)
     }
 
-    override fun showIndefiniteSnackbar(message: String, view: View?) {
+    final override fun showIndefiniteSnackbar(message: String, view: View?) {
         val _view = view ?: rootLayout
+
         _view.indefiniteSnackbar(message)
     }
 
-    override fun showAlertDialog(
+    final override fun showAlertDialog(
         message: String,
         positiveButtonText: String,
         negativeButtonText: String,
@@ -62,7 +60,7 @@ abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
         }.create().show()
     }
 
-    override fun showError(error: Throwable) {
+    final override fun showError(error: Throwable) {
         error.printStackTrace()
 
         val message = parseError(error)
@@ -71,6 +69,11 @@ abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
 
         showLongSnackbar(message)
     }
+
+    protected abstract val rootLayout: View
+
+    protected fun getErrorMessageOrDefault(error: Throwable): String =
+        error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)
 
     private fun parseError(error: Throwable): String =
         when (error) {
