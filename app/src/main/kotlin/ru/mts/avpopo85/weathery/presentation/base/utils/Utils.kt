@@ -37,39 +37,37 @@ private fun createIntent(
 }
 
 private fun fillIntentArguments(intent: Intent, params: Array<out Pair<String, Any?>>) {
-    params.forEach {
-        //todo
-        val value = it.second
+    for ((name, value) in params) {
         when (value) {
-            null -> intent.putExtra(it.first, null as Serializable?)
-            is Boolean -> intent.putExtra(it.first, value)
-            is Byte -> intent.putExtra(it.first, value)
-            is Char -> intent.putExtra(it.first, value)
-            is Short -> intent.putExtra(it.first, value)
-            is Int -> intent.putExtra(it.first, value)
-            is Long -> intent.putExtra(it.first, value)
-            is Float -> intent.putExtra(it.first, value)
-            is Double -> intent.putExtra(it.first, value)
-            is String -> intent.putExtra(it.first, value)
-            is CharSequence -> intent.putExtra(it.first, value)
-            is Parcelable -> intent.putExtra(it.first, value)
-            is Serializable -> intent.putExtra(it.first, value)
-            is BooleanArray -> intent.putExtra(it.first, value)
-            is ByteArray -> intent.putExtra(it.first, value)
-            is ShortArray -> intent.putExtra(it.first, value)
-            is CharArray -> intent.putExtra(it.first, value)
-            is IntArray -> intent.putExtra(it.first, value)
-            is LongArray -> intent.putExtra(it.first, value)
-            is FloatArray -> intent.putExtra(it.first, value)
-            is DoubleArray -> intent.putExtra(it.first, value)
+            null -> intent.putExtra(name, null as Serializable?)
+            is Boolean -> intent.putExtra(name, value)
+            is Byte -> intent.putExtra(name, value)
+            is Char -> intent.putExtra(name, value)
+            is Short -> intent.putExtra(name, value)
+            is Int -> intent.putExtra(name, value)
+            is Long -> intent.putExtra(name, value)
+            is Float -> intent.putExtra(name, value)
+            is Double -> intent.putExtra(name, value)
+            is String -> intent.putExtra(name, value)
+            is CharSequence -> intent.putExtra(name, value)
+            is Parcelable -> intent.putExtra(name, value)
+            is Serializable -> intent.putExtra(name, value)
+            is BooleanArray -> intent.putExtra(name, value)
+            is ByteArray -> intent.putExtra(name, value)
+            is ShortArray -> intent.putExtra(name, value)
+            is CharArray -> intent.putExtra(name, value)
+            is IntArray -> intent.putExtra(name, value)
+            is LongArray -> intent.putExtra(name, value)
+            is FloatArray -> intent.putExtra(name, value)
+            is DoubleArray -> intent.putExtra(name, value)
             is Array<*> -> when {
-                value.isArrayOf<CharSequence>() -> intent.putExtra(it.first, value)
-                value.isArrayOf<String>() -> intent.putExtra(it.first, value)
-                value.isArrayOf<Parcelable>() -> intent.putExtra(it.first, value)
-                else -> throw RuntimeException("Intent extra ${it.first} has wrong type ${value.javaClass.name}")
+                value.isArrayOf<CharSequence>() -> intent.putExtra(name, value)
+                value.isArrayOf<String>() -> intent.putExtra(name, value)
+                value.isArrayOf<Parcelable>() -> intent.putExtra(name, value)
+                else -> throw RuntimeException("Intent extra $name has wrong type ${value.javaClass.name}")
             }
-            is Bundle -> intent.putExtra(it.first, value)
-            else -> throw RuntimeException("Intent extra ${it.first} has wrong type ${value.javaClass.name}")
+            is Bundle -> intent.putExtra(name, value)
+            else -> throw RuntimeException("Intent extra $name has wrong type ${value.javaClass.name}")
         }
     }
 }
