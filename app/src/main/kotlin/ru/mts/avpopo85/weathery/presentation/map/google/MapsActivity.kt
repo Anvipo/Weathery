@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.presentation.location.map.google
+package ru.mts.avpopo85.weathery.presentation.map.google
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_maps.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
-import ru.mts.avpopo85.weathery.presentation.location.utils.COORDINATES_TAG
+import ru.mts.avpopo85.weathery.presentation.utils.COORDINATES_TAG
+import ru.mts.avpopo85.weathery.presentation.utils.SUCCESS_LOCATION_BY_MAPS_RESULT_CODE
 
 class MapsActivity :
     AbsBaseActivity(),
@@ -79,10 +80,10 @@ class MapsActivity :
             getString(R.string.no),
             {
                 val data = Intent().apply {
-                    this.putExtra(COORDINATES_TAG, coordinates)
+                    putExtra(COORDINATES_TAG, coordinates)
                 }
 
-                setResult(0, data)
+                setResult(SUCCESS_LOCATION_BY_MAPS_RESULT_CODE, data)
                 finish()
             })
     }

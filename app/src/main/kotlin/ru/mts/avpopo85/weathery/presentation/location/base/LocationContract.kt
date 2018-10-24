@@ -8,13 +8,13 @@ interface LocationContract : BaseProgressBarContract {
 
     interface View : BaseProgressBarContract.View {
 
+        fun setResultAndFinish(address: UserAddressType)
+
         fun showRationaleDialog()
 
         fun showGoSettingsDialog()
 
         fun showCityDialog(address: UserAddressType)
-
-        fun startMainActivityAndFinish()
 
         fun showLocationError()
 

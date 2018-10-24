@@ -1,5 +1,6 @@
-package ru.mts.avpopo85.weathery.presentation.location
+package ru.mts.avpopo85.weathery.presentation.location.implementation
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -17,11 +18,8 @@ import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.common.LocationModule
 import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.AbsProgressBarActivity
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
-import ru.mts.avpopo85.weathery.presentation.location.map.google.MapsActivity
-import ru.mts.avpopo85.weathery.presentation.location.utils.COORDINATES_TAG
-import ru.mts.avpopo85.weathery.presentation.main.MainActivity
-import ru.mts.avpopo85.weathery.presentation.utils.APPLICATION_SETTINGS_REQUEST_CODE
-import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_BY_MAPS_REQUEST_CODE
+import ru.mts.avpopo85.weathery.presentation.map.google.MapsActivity
+import ru.mts.avpopo85.weathery.presentation.utils.*
 import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import javax.inject.Inject
@@ -44,32 +42,6 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         injectDependencies()
 
         initButtonListeners()
-    }
-
-    override fun showCityDialog(address: UserAddressType) {
-        showAlertDialog(
-            "${getString(R.string.is_your_current_geolocation)} - ${address.locality}?",
-            getString(R.string.yes),
-            getString(R.string.no),
-            {
-                presenter.saveAddress(address)
-                startMainActivityAndFinish()
-            },
-            title = getString(R.string.found_intended_location)
-        )
-    }
-
-    override fun startMainActivityAndFinish() {
-        startActivity<MainActivity>()
-        finish()
-    }
-
-    override fun showLocationError() {
-        showError(getString(R.string.could_not_find_your_geolocation))
-    }
-
-    override fun showLastKnownLocationError() {
-        showError(getString(R.string.previous_location_unknown))
     }
 
     override fun onResume() {
@@ -126,8 +98,10 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         val part1 = getString(R.string.application_needs_permissions_to_geolocation)
         val part2 = getString(R.string.provide)
 
+        val message = "$part1. $part2?"
+
         showAlertDialog(
-            "$part1. $part2?",
+            message,
             getString(R.string.yes),
             getString(R.string.no),
             { presenter.onRationalePositiveClick() },
@@ -141,14 +115,49 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
             getString(R.string.go_to_applications_settings_and_provide_permissions_to_geolocation)
         val part2 = getString(R.string.go_to)
 
+        val message = "$part1. $part2?"
+
         showAlertDialog(
-            "$part1. $part2?",
+            message,
             getString(R.string.yes),
             getString(R.string.no),
             { presenter.onGoSettingsPositiveClick() },
             { presenter.onGoSettingNegativeClick() },
             getString(R.string.impossible_to_continue)
         )
+    }
+
+    override fun setResultAndFinish(address: UserAddressType) {
+        val data = Intent().apply {
+            putExtra(ADDRESS_TAG, address)
+        }
+
+        savePreferences(address)
+
+        setResult(SUCCESS_LOCATION_RESULT_CODE, data)
+        finish()
+    }
+
+    override fun showCityDialog(address: UserAddressType) {
+        showAlertDialog(
+            "${getString(R.string.is_your_current_geolocation)} - ${address.locality}?",
+            getString(R.string.yes),
+            getString(R.string.no),
+            {
+                presenter.saveAddress(address)
+
+                setResultAndFinish(address)
+            },
+            title = getString(R.string.found_intended_location)
+        )
+    }
+
+    override fun showLocationError() {
+        showError(getString(R.string.could_not_find_your_geolocation))
+    }
+
+    override fun showLastKnownLocationError() {
+        showError(getString(R.string.previous_location_unknown))
     }
 
     override fun enableGetLastKnownLocationButton() {
@@ -195,6 +204,16 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         presenter.onBindView(this)
     }
 
+    private fun savePreferences(address: UserAddressType) {
+        val sharedPreferences =
+            getSharedPreferences(LOCALITY_PREFERENCES_NAME, Context.MODE_PRIVATE)!!
+
+        with(sharedPreferences.edit()!!) {
+            putString(LOCALITY_TAG, address.locality)
+            apply()
+        }
+    }
+
     private fun checkPlayServicesAvailable() {
         val apiAvailability: GoogleApiAvailability = GoogleApiAvailability.getInstance()
         val resultCode = apiAvailability.isGooglePlayServicesAvailable(this)
@@ -212,7 +231,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
     }
 
     private fun onLocationByMapsRequestCode(resultCode: Int, data: Intent?) {
-        if (resultCode == 0) {
+        if (resultCode == SUCCESS_LOCATION_BY_MAPS_RESULT_CODE) {
             if (data != null) {
                 showLoadingProgress()
 

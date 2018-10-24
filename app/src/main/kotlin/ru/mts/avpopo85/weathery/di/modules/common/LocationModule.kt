@@ -10,8 +10,8 @@ import ru.mts.avpopo85.weathery.domain.interactor.base.ILocationInteractor
 import ru.mts.avpopo85.weathery.domain.interactor.implementation.location.LocationInteractor
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
 import ru.mts.avpopo85.weathery.domain.repository.IPermissionsRepository
-import ru.mts.avpopo85.weathery.presentation.location.LocationActivity
-import ru.mts.avpopo85.weathery.presentation.location.LocationPresenter
+import ru.mts.avpopo85.weathery.presentation.location.implementation.LocationActivity
+import ru.mts.avpopo85.weathery.presentation.location.implementation.LocationPresenter
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
 
 @Module
@@ -34,6 +34,10 @@ class LocationModule(private val context: LocationActivity) {
     fun providePresenter(
         interactor: ILocationInteractor,
         schedulerManagerModule: SchedulerManagerModule
-    ): LocationContract.Presenter = LocationPresenter(interactor, schedulerManagerModule)
+    ): LocationContract.Presenter =
+        LocationPresenter(
+            interactor,
+            schedulerManagerModule
+        )
 
 }

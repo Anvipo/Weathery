@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.presentation.location
+package ru.mts.avpopo85.weathery.presentation.location.implementation
 
 import com.google.android.gms.maps.model.LatLng
 import com.tbruyelle.rxpermissions2.Permission
@@ -152,7 +152,7 @@ class LocationPresenter
     private fun onSuccessGetCurrentAddressByGPS(address: UserAddressType) {
         if (address.locality != null) {
             view?.enableGetLastKnownLocationButton()
-            view?.startMainActivityAndFinish()
+            view?.setResultAndFinish(address)
         } else {
             view?.showLocationError()
         }

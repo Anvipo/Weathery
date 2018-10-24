@@ -1,9 +1,12 @@
 package ru.mts.avpopo85.weathery.data.model.implementation.common
 
+import android.os.Parcelable
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 import ru.mts.avpopo85.weathery.data.model.base.common.IUserAddress
 
+@Parcelize
 open class UserAddress(
 
     override var saveDate: Long = 0,
@@ -41,4 +44,4 @@ open class UserAddress(
 
     override var url: String? = null
 
-) : RealmObject(), IUserAddress
+) : RealmObject(), IUserAddress, Parcelable
