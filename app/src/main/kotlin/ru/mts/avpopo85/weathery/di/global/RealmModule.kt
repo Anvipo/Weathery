@@ -25,13 +25,17 @@ class RealmModule(val context: Context) {
 
     init {
         Realm.init(context)
-        Realm.setDefaultConfiguration(
-            RealmConfiguration
-                .Builder()
-                .deleteRealmIfMigrationNeeded()
-                .name("realm")
-                .build()
-        )
+
+        val configuration = RealmConfiguration
+            .Builder()
+            .deleteRealmIfMigrationNeeded()
+            .compactOnLaunch()
+            .name("realm")
+            .build()
+
+        Realm.setDefaultConfiguration(configuration)
+
+        Realm.compactRealm(configuration)
     }
 
     @Provides

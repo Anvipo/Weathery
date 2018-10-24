@@ -18,18 +18,16 @@ class LocationRealmService
 
     override fun saveCurrentAddress(address: UserAddressType): Single<UserAddressType> =
         Single.create { emitter ->
-            Realm.getDefaultInstance().use { realmInstance ->
-                clearDB(realmInstance)
+            Realm.getDefaultInstance().use {
+                it.executeTransaction { realmInstance ->
+                    clearDB(realmInstance)
 
-                var proxyData: UserAddressType? = null
+                    val proxyData: UserAddressType = realmInstance.copyToRealmOrUpdate(address)
 
-                realmInstance.executeTransaction {
-                    proxyData = realmInstance.copyToRealmOrUpdate(address)
+                    val currentAddress: UserAddressType = realmInstance.copyFromRealm(proxyData)
+
+                    emitter.onSuccess(currentAddress)
                 }
-
-                val currentAddress: UserAddressType = realmInstance.copyFromRealm(proxyData!!)
-
-                emitter.onSuccess(currentAddress)
             }
         }
 
@@ -74,7 +72,7 @@ class LocationRealmService
         }
 
     private fun clearDB(realmInstance: Realm) {
-        realmInstance.executeTransaction { realmInstance.delete<UserAddressType>() }
+        realmInstance.delete<UserAddressType>()
     }
 
     private fun onDataExistsInDB(

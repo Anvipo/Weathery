@@ -18,24 +18,22 @@ constructor(private val context: Context) :
 
     override fun saveForecastResponse(forecastResponseList: List<T>): Single<List<T>> =
         Single.create { emitter ->
-            Realm.getDefaultInstance()?.use { realmInstance ->
-                clearDB(realmInstance)
+            Realm.getDefaultInstance()?.use {
+                it.executeTransaction { realmInstance ->
+                    clearDB(realmInstance)
 
-                var proxyData: List<T>? = null
+                    val nowInMillis: Long = Date().time
 
-                val nowInMillis: Long = Date().time
+                    forecastResponseList.map { forecast ->
+                        forecast.saveUnixTime = nowInMillis
+                    }
 
-                forecastResponseList.map {
-                    it.saveUnixTime = nowInMillis
+                    val proxyData: List<T> = realmInstance.copyToRealmOrUpdate(forecastResponseList)
+
+                    val data: List<T> = realmInstance.copyFromRealm(proxyData)
+
+                    emitter.onSuccess(data)
                 }
-
-                realmInstance.executeTransaction {
-                    proxyData = realmInstance.copyToRealmOrUpdate(forecastResponseList)
-                }
-
-                val data: List<T> = realmInstance.copyFromRealm(proxyData!!)
-
-                emitter.onSuccess(data)
             }
         }
 
@@ -64,7 +62,7 @@ constructor(private val context: Context) :
     protected abstract val responseClassType: Class<T>
 
     private fun clearDB(realmInstance: Realm) {
-        realmInstance.executeTransaction { realmInstance.delete(responseClassType) }
+        realmInstance.delete(responseClassType)
     }
 
 }

@@ -18,18 +18,16 @@ constructor(private val context: Context) :
 
     override fun saveCurrentWeatherResponse(currentWeatherResponse: T): Single<T> =
         Single.create { emitter ->
-            Realm.getDefaultInstance().use { realmInstance ->
-                clearDB(realmInstance)
+            Realm.getDefaultInstance().use {
+                it.executeTransaction { realmInstance ->
+                    clearDB(realmInstance)
 
-                var proxyData: T? = null
+                    val proxyData: T = realmInstance.copyToRealmOrUpdate(currentWeatherResponse)
 
-                realmInstance.executeTransaction {
-                    proxyData = realmInstance.copyToRealmOrUpdate(currentWeatherResponse)
+                    val data: T = realmInstance.copyFromRealm(proxyData)
+
+                    emitter.onSuccess(data)
                 }
-
-                val data: T = realmInstance.copyFromRealm(proxyData!!)
-
-                emitter.onSuccess(data)
             }
         }
 
@@ -52,7 +50,7 @@ constructor(private val context: Context) :
         }
 
     private fun clearDB(realmInstance: Realm) {
-        realmInstance.executeTransaction { realmInstance.delete(responseClassType) }
+        realmInstance.delete(responseClassType)
     }
 
     private fun onDataExistsInDB(
