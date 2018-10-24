@@ -6,7 +6,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.android.synthetic.main.activity_owm_forecast.*
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.content_owm_forecast.*
-import org.jetbrains.anko.startActivity
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.openWeatherMap.OWMForecastModule

@@ -126,13 +126,12 @@ class LocationRepository
     }
 
     private fun checkLocalityOnNull(it: UserAddressType): Maybe<UserAddressType> =
-        if (it.locality == null) {
-            //todo
+        if (it.locality != null) {
+            Maybe.just(it)
+        } else {
             val error = ExtractAddressException("Locality is null")
 
             Maybe.error(error)
-        } else {
-            Maybe.just(it)
         }
 
     private fun onServiceIsNotAvailable(

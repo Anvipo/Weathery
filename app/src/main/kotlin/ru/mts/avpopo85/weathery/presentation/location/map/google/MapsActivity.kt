@@ -3,13 +3,13 @@ package ru.mts.avpopo85.weathery.presentation.location.map.google
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_maps.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
 import ru.mts.avpopo85.weathery.presentation.location.utils.COORDINATES_TAG
@@ -28,7 +28,7 @@ class MapsActivity :
         setContentView(R.layout.activity_maps)
 
         val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as? SupportMapFragment
+            .findFragmentById(R.id.map_fragment) as? SupportMapFragment
 
         mapFragment?.getMapAsync(this)
     }
@@ -60,8 +60,7 @@ class MapsActivity :
         return false
     }
 
-    @Suppress("CAST_NEVER_SUCCEEDS")
-    override val rootLayout: View by lazy { map as View }
+    override val rootLayout: View by lazy { map_fragment as View }
 
     override fun onMarkerDragEnd(marker: Marker?) {
         if (marker != null) {
@@ -80,7 +79,7 @@ class MapsActivity :
             getString(R.string.no),
             {
                 val data = Intent().apply {
-                    this.putExtras(bundleOf(COORDINATES_TAG to coordinates))
+                    this.putExtra(COORDINATES_TAG, coordinates)
                 }
 
                 setResult(0, data)

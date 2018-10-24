@@ -82,8 +82,9 @@ class LocationPresenter
         }
     }
 
-    @Suppress("UNUSED_PARAMETER")
     private fun onErrorGetLastKnownAddress(error: Throwable) {
+        error.printStackTrace()
+
         view?.disableGetLastKnownLocationButton()
         view?.showLastKnownLocationError()
     }
@@ -92,7 +93,6 @@ class LocationPresenter
         if (address.locality != null) {
             view?.showCityDialog(address)
         } else {
-            //todo
             val error = ExtractAddressException("Locality is null")
 
             onErrorGetAddressFromCoordinates(error)

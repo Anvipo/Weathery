@@ -1,14 +1,17 @@
 package ru.mts.avpopo85.weathery.presentation.weather.main
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import kotlinx.android.synthetic.main.activity_yw.*
 import kotlinx.android.synthetic.main.content_yw.*
-import org.jetbrains.anko.startActivity
 import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.yandexWeather.YWCurrentWeatherActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather.YWForecastActivity
 
-class YWActivity : AppCompatActivity() {
+class YWActivity : AbsBaseActivity() {
+
+    override val rootLayout: View by lazy { activity_yw_CL }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,15 +1,18 @@
 package ru.mts.avpopo85.weathery.presentation.weather.main
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import kotlinx.android.synthetic.main.activity_owm.*
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.content_owm.*
-import org.jetbrains.anko.startActivity
 import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.openWeatherMap.OWMCurrentWeatherActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.OWMForecastActivity
 
-class OWMActivity : AppCompatActivity() {
+class OWMActivity : AbsBaseActivity() {
+
+    override val rootLayout: View by lazy { activity_owm_CL }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

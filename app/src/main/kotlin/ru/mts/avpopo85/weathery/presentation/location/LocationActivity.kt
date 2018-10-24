@@ -11,8 +11,6 @@ import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_location.*
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.content_location.*
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.startActivityForResult
 import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
@@ -27,7 +25,6 @@ import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_BY_MAPS_REQUEST_CODE
 import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import javax.inject.Inject
-
 
 class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
@@ -209,7 +206,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
                 val message = "${getString(R.string.google_play_services_unavailable)}. " +
                         getString(R.string.this_app_will_not_work)
 
-                showIndefiniteSnackbar(message)
+                showError(message, true)
             }
         }
     }

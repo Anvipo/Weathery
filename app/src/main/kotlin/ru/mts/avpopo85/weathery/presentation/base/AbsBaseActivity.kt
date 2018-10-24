@@ -1,13 +1,16 @@
 package ru.mts.avpopo85.weathery.presentation.base
 
+import android.app.Activity
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import org.jetbrains.anko.design.indefiniteSnackbar
-import org.jetbrains.anko.design.longSnackbar
-import org.jetbrains.anko.design.snackbar
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.HttpException
 import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.presentation.base.utils.SnackbarLengths
+import ru.mts.avpopo85.weathery.presentation.base.utils.SnackbarLengths.*
+import ru.mts.avpopo85.weathery.presentation.base.utils.startActivity
+import ru.mts.avpopo85.weathery.presentation.base.utils.startActivityForResult
 import ru.mts.avpopo85.weathery.presentation.utils.onHttpException
 import ru.mts.avpopo85.weathery.utils.common.GoogleGeocodeException
 import ru.mts.avpopo85.weathery.utils.common.sendErrorLog
@@ -18,26 +21,20 @@ import java.util.concurrent.TimeoutException
 
 abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
 
-    final override fun showError(message: String) {
-        showLongSnackbar(message)
+    final override fun showError(message: String, isCritical: Boolean) {
+        val length = if (!isCritical) nonCriticalSnackbarLength else criticalSnackbarLength
+
+        showSnackbar(message, length)
     }
 
-    final override fun showShortSnackbar(message: String, view: View?) {
-        val _view = view ?: rootLayout
+    final override fun showSnackbar(message: String, length: SnackbarLengths, rootView: View?) {
+        val view = rootView ?: rootLayout
 
-        _view.snackbar(message)
-    }
-
-    final override fun showLongSnackbar(message: String, view: View?) {
-        val _view = view ?: rootLayout
-
-        _view.longSnackbar(message)
-    }
-
-    final override fun showIndefiniteSnackbar(message: String, view: View?) {
-        val _view = view ?: rootLayout
-
-        _view.indefiniteSnackbar(message)
+        when (length) {
+            LENGTH_INDEFINITE -> view.indefiniteSnackbar(message)
+            LENGTH_SHORT -> view.shortSnackbar(message)
+            LENGTH_LONG -> view.longSnackbar(message)
+        }
     }
 
     final override fun showAlertDialog(
@@ -60,20 +57,43 @@ abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
         }.create().show()
     }
 
-    final override fun showError(error: Throwable) {
+    final override fun showError(error: Throwable, isCritical: Boolean) {
         error.printStackTrace()
 
         val message = parseError(error)
 
         sendErrorLog(message)
 
-        showLongSnackbar(message)
+        showError(message)
+    }
+
+    protected inline fun <reified T : Activity> startActivity(vararg params: Pair<String, Any?>) {
+        startActivity(this, T::class.java, params)
+    }
+
+    protected inline fun <reified T : Activity> startActivityForResult(
+        requestCode: Int,
+        vararg params: Pair<String, Any?>
+    ) {
+        startActivityForResult(this, T::class.java, requestCode, params)
     }
 
     protected abstract val rootLayout: View
 
     private fun getErrorMessageOrDefault(error: Throwable): String =
         error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)
+
+    private fun View.shortSnackbar(message: CharSequence) = Snackbar
+        .make(this, message, Snackbar.LENGTH_SHORT)
+        .apply { show() }
+
+    private fun View.longSnackbar(message: CharSequence) = Snackbar
+        .make(this, message, Snackbar.LENGTH_LONG)
+        .apply { show() }
+
+    private fun View.indefiniteSnackbar(message: CharSequence) = Snackbar
+        .make(this, message, Snackbar.LENGTH_INDEFINITE)
+        .apply { show() }
 
     private fun parseError(error: Throwable): String =
         when (error) {
@@ -105,5 +125,9 @@ abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
     private fun onSocketTimeoutException(): String =
         "${getString(R.string.response_timeout)}. " +
                 getString(R.string.make_sure_your_device_has_a_network_connection)
+
+    private val criticalSnackbarLength = LENGTH_INDEFINITE
+
+    private val nonCriticalSnackbarLength = LENGTH_LONG
 
 }

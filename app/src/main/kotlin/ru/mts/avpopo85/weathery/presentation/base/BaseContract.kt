@@ -1,18 +1,20 @@
 package ru.mts.avpopo85.weathery.presentation.base
 
+import ru.mts.avpopo85.weathery.presentation.base.utils.SnackbarLengths
+
 interface BaseContract {
 
     interface View {
 
-        fun showError(error: Throwable)
+        fun showError(error: Throwable, isCritical: Boolean = false)
 
-        fun showError(message: String)
+        fun showError(message: String, isCritical: Boolean = false)
 
-        fun showShortSnackbar(message: String, view: android.view.View? = null)
-
-        fun showLongSnackbar(message: String, view: android.view.View? = null)
-
-        fun showIndefiniteSnackbar(message: String, view: android.view.View? = null)
+        fun showSnackbar(
+            message: String,
+            length: SnackbarLengths = SnackbarLengths.LENGTH_LONG,
+            rootView: android.view.View? = null
+        )
 
         fun showAlertDialog(
             message: String,

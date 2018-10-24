@@ -32,7 +32,7 @@ abstract class AbsWeatherActivity : AbsSwipeToRefreshActivity(), WeatherContract
 
         val message = "$part1. $part2"
 
-        showLongSnackbar(message)
+        showSnackbar(message)
     }
 
     final override fun onDestroy() {
