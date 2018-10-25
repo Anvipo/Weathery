@@ -2,18 +2,15 @@ package ru.mts.avpopo85.weathery.presentation.base
 
 import android.app.Activity
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 import retrofit2.HttpException
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.presentation.base.utils.SnackbarLengths
-import ru.mts.avpopo85.weathery.presentation.base.utils.SnackbarLengths.*
+import ru.mts.avpopo85.weathery.presentation.base.utils.SnackbarLengths.LENGTH_INDEFINITE
+import ru.mts.avpopo85.weathery.presentation.base.utils.SnackbarLengths.LENGTH_LONG
 import ru.mts.avpopo85.weathery.presentation.base.utils.startActivity
 import ru.mts.avpopo85.weathery.presentation.base.utils.startActivityForResult
 import ru.mts.avpopo85.weathery.presentation.utils.onHttpException
-import ru.mts.avpopo85.weathery.utils.common.GoogleGeocodeException
-import ru.mts.avpopo85.weathery.utils.common.sendErrorLog
+import ru.mts.avpopo85.weathery.utils.common.*
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -21,50 +18,40 @@ import java.util.concurrent.TimeoutException
 
 abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
 
-    final override fun showError(message: String, isCritical: Boolean) {
-        val length = if (!isCritical) nonCriticalSnackbarLength else criticalSnackbarLength
-
-        showSnackbar(message, length)
-    }
-
-    final override fun showSnackbar(message: String, length: SnackbarLengths, rootView: View?) {
-        val view = rootView ?: rootLayout
-
-        when (length) {
-            LENGTH_INDEFINITE -> view.indefiniteSnackbar(message)
-            LENGTH_SHORT -> view.shortSnackbar(message)
-            LENGTH_LONG -> view.longSnackbar(message)
+    final override fun showError(message: String, isCritical: Boolean, rootView: View?) {
+        if (!isCritical) {
+            showLongSnackbar(message, rootView)
+        } else {
+            showIndefiniteSnackbar(message, rootView)
         }
     }
 
-    final override fun showAlertDialog(
-        message: String,
-        positiveButtonText: String,
-        negativeButtonText: String,
-        onClickedPositiveButton: () -> Unit,
-        onClickedNegativeButton: () -> Unit,
-        title: String?
-    ) {
-        AlertDialog.Builder(this, R.style.MyDialog).apply {
-            if (title != null)
-                setTitle(title)
+    final override fun showShortSnackbar(message: String, rootView: View?) {
+        val view = rootView ?: rootLayout
 
-            setMessage(message)
-
-            setNegativeButton(negativeButtonText) { _, _ -> onClickedNegativeButton() }
-
-            setPositiveButton(positiveButtonText) { _, _ -> onClickedPositiveButton() }
-        }.create().show()
+        view.showShortSnackbar(message)
     }
 
-    final override fun showError(error: Throwable, isCritical: Boolean) {
+    final override fun showLongSnackbar(message: String, rootView: View?) {
+        val view = rootView ?: rootLayout
+
+        view.showLongSnackbar(message)
+    }
+
+    final override fun showIndefiniteSnackbar(message: String, rootView: View?) {
+        val view = rootView ?: rootLayout
+
+        view.showIndefiniteSnackbar(message)
+    }
+
+    final override fun showError(error: Throwable, isCritical: Boolean, rootView: View?) {
         error.printStackTrace()
 
         val message = parseError(error)
 
         sendErrorLog(message)
 
-        showError(message)
+        showError(message, isCritical, rootView)
     }
 
     protected inline fun <reified T : Activity> startActivity(vararg params: Pair<String, Any?>) {
@@ -82,18 +69,6 @@ abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
 
     private fun getErrorMessageOrDefault(error: Throwable): String =
         error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)
-
-    private fun View.shortSnackbar(message: CharSequence) = Snackbar
-        .make(this, message, Snackbar.LENGTH_SHORT)
-        .apply { show() }
-
-    private fun View.longSnackbar(message: CharSequence) = Snackbar
-        .make(this, message, Snackbar.LENGTH_LONG)
-        .apply { show() }
-
-    private fun View.indefiniteSnackbar(message: CharSequence) = Snackbar
-        .make(this, message, Snackbar.LENGTH_INDEFINITE)
-        .apply { show() }
 
     private fun parseError(error: Throwable): String =
         when (error) {

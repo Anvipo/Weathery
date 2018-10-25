@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.activity_maps.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
 import ru.mts.avpopo85.weathery.presentation.utils.COORDINATES_TAG
-import ru.mts.avpopo85.weathery.presentation.utils.SUCCESS_LOCATION_BY_MAPS_RESULT_CODE
+import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_BY_MAPS_RESULT_OK
+import ru.mts.avpopo85.weathery.utils.common.showAlertDialog
 
 class MapsActivity :
     AbsBaseActivity(),
@@ -61,6 +62,7 @@ class MapsActivity :
         return false
     }
 
+    @Suppress("CAST_NEVER_SUCCEEDS")
     override val rootLayout: View by lazy { map_fragment as View }
 
     override fun onMarkerDragEnd(marker: Marker?) {
@@ -83,7 +85,7 @@ class MapsActivity :
                     putExtra(COORDINATES_TAG, coordinates)
                 }
 
-                setResult(SUCCESS_LOCATION_BY_MAPS_RESULT_CODE, data)
+                setResult(LOCATION_BY_MAPS_RESULT_OK, data)
                 finish()
             })
     }

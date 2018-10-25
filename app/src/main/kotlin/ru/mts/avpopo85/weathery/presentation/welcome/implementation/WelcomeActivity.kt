@@ -1,15 +1,19 @@
 package ru.mts.avpopo85.weathery.presentation.welcome.implementation
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_welcome.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.AbsProgressBarActivity
-import ru.mts.avpopo85.weathery.presentation.location.implementation.LocationActivity
 import ru.mts.avpopo85.weathery.presentation.main.MainActivity
-import ru.mts.avpopo85.weathery.presentation.utils.*
+import ru.mts.avpopo85.weathery.presentation.settings.implementation.SettingsActivity
+import ru.mts.avpopo85.weathery.presentation.utils.ADDRESS_TAG
+import ru.mts.avpopo85.weathery.presentation.utils.LOCALITY_TAG
+import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_REQUEST
+import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_RESULT_OK
 import ru.mts.avpopo85.weathery.presentation.welcome.base.WelcomeContract
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 
@@ -18,34 +22,53 @@ class WelcomeActivity : AbsProgressBarActivity(), WelcomeContract.View {
     override val rootLayout: View by lazy { activity_welcome_CL }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // убедитесь, что вызываете до super.onCreate()
         setTheme(R.style.MyAppTheme)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
 
-        val sharedPreferences = getSharedPreferences(LOCALITY_PREFERENCES_NAME, Context.MODE_PRIVATE)!!
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)!!
 
-        val location = sharedPreferences.getString(LOCALITY_TAG, null)
+        val currentLocationPrefKey = getString(R.string.pref_key_current_location)
 
-        routeToAppropriatePage(location)
+        val currentLocation = sharedPreferences.getString(currentLocationPrefKey, null)
+
+        routeToAppropriatePage(currentLocation)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == SUCCESS_LOCATION_RESULT_CODE) {
+        if (resultCode == LOCATION_RESULT_OK) {
             val address: UserAddressType? = data?.getParcelableExtra(ADDRESS_TAG)
+            val localityExtra: String? = data?.getStringExtra(LOCALITY_TAG)
 
-            val locality = address?.locality
+            val locality =
+                when {
+                    address != null -> address.locality
+                    localityExtra != null -> localityExtra
+                    else -> {
+                        Toast.makeText(
+                            baseContext,
+                            getString(R.string.current_location_unknown),
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        null
+                    }
+                }
 
             routeToAppropriatePage(locality)
+        } else {
+            val message = getString(R.string.unexpected_application_behavior)
+
+            showIndefiniteSnackbar(message)
         }
     }
 
     private fun routeToAppropriatePage(locality: String?) {
         when (locality) {
-            null -> startActivityForResult<LocationActivity>(LOCATION_REQUEST_CODE)
+            null -> startActivityForResult<SettingsActivity>(LOCATION_REQUEST)
             else -> {
                 startActivity<MainActivity>()
                 finish()

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Weathery</string>
     <string name="meters_per_second">м/c</string>
     <string name="mm_hg">мм рт. ст.</string>
     <string name="hPa">гПа</string>
@@ -110,7 +109,6 @@
     <string name="visibility">Видимость</string>
     <string name="visibility_value">Значение видимости</string>
     <string name="yandex_weather">Яндекс.Погода</string>
-    <string name="open_weather_map">Open Weather Map</string>
 
     <!--1xx informational codes-->
     <string name="unknown_informational_code_1xx">Неизвестный информационный код (1xx)</string>
@@ -119,17 +117,17 @@
     <string name="processing">Идёт обработка</string>
 
     <!--2xx success codes-->
-    <string name="unknown_success_code_2xx">Unknown success code (2xx)</string>
+    <string name="unknown_success_code_2xx">Неизвестный код успеха (2xx)</string>
     <string name="ok">OK</string>
-    <string name="created">Created</string>
-    <string name="accepted">Accepted</string>
-    <string name="non_authoritative_information">Non-authoritative information</string>
-    <string name="no_content">No content</string>
-    <string name="reset_content">Reset content</string>
-    <string name="partial_content">Partial content</string>
-    <string name="multi_status">Multi-status</string>
-    <string name="already_reported">Already reported</string>
-    <string name="im_used">IM used</string>
+    <string name="created">Создано</string>
+    <string name="accepted">Принято</string>
+    <string name="non_authoritative_information">Неавторитетная информация</string>
+    <string name="no_content">Без содержания</string>
+    <string name="reset_content">Сбросить содержимое</string>
+    <string name="partial_content">Частичное содержимое</string>
+    <string name="multi_status">Мульти-статус</string>
+    <string name="already_reported">Уже сообщалось</string>
+    <string name="im_used">IM использован</string>
 
     <!--3xx redirection codes-->
     <string name="unknown_error_3xx">Неизвестная ошибка перенаправления (3xx)</string>
@@ -163,7 +161,7 @@
     <string name="range_not_satisfiable">Диапазон не достижим</string>
     <string name="expectation_failed">Ожидание не удалось</string>
     <string name="im_a_teapot">Я — чайник</string>
-    <string name="misdirected_request">Misdirected request</string>
+    <string name="misdirected_request">Неверный запрос</string>
     <string name="unprocessable_entity">Необрабатываемый экземпляр</string>
     <string name="locked">Заблокировано</string>
     <string name="failed_dependency">Невыполненная зависимость</string>
@@ -171,7 +169,7 @@
     <string name="precondition_required">Необходимо предусловие</string>
     <string name="too_many_requests">Слишком много запросов</string>
     <string name="request_header_fields_too_large">Поля заголовка запроса слишком большие</string>
-    <string name="requested_host_unavailable">Requested host unavailable</string>
+    <string name="requested_host_unavailable">Запрошенный хост недоступен</string>
     <string name="retry_with">Повторить с</string>
     <string name="unavailable_for_legal_reasons">Недоступно по юридическим причинам</string>
 
@@ -259,4 +257,10 @@
     <string name="date_example">19:00 20.10.2018</string>
     <string name="temperature_example">20.21°C</string>
     <string name="error_has_occurred">Произошла ошибка</string>
+    <string name="no_previous_address_data">Предыдущих данных о геолокации нет</string>
+    <string name="unexpected_application_behavior">Неожиданное поведение приложения</string>
+    <string name="you_must_find_out_it">You must find out it</string>
+    <string name="geolocation">Геолокация</string>
+    <string name="current_geolocation">Текущая геолокация</string>
+    <string name="find_out_current_geolocation">Узнать текущую геолокацию</string>
 </resources>

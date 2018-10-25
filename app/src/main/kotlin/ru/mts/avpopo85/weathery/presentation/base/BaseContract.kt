@@ -1,29 +1,26 @@
 package ru.mts.avpopo85.weathery.presentation.base
 
-import ru.mts.avpopo85.weathery.presentation.base.utils.SnackbarLengths
-
 interface BaseContract {
 
     interface View {
 
-        fun showError(error: Throwable, isCritical: Boolean = false)
-
-        fun showError(message: String, isCritical: Boolean = false)
-
-        fun showSnackbar(
-            message: String,
-            length: SnackbarLengths = SnackbarLengths.LENGTH_LONG,
+        fun showError(
+            error: Throwable,
+            isCritical: Boolean = false,
             rootView: android.view.View? = null
         )
 
-        fun showAlertDialog(
+        fun showError(
             message: String,
-            positiveButtonText: String,
-            negativeButtonText: String,
-            onClickedPositiveButton: () -> Unit = {},
-            onClickedNegativeButton: () -> Unit = {},
-            title: String? = null
+            isCritical: Boolean = false,
+            rootView: android.view.View? = null
         )
+
+        fun showShortSnackbar(message: String, rootView: android.view.View? = null)
+
+        fun showLongSnackbar(message: String, rootView: android.view.View? = null)
+
+        fun showIndefiniteSnackbar(message: String, rootView: android.view.View? = null)
 
         fun changeTitle(title: String) = Unit
 

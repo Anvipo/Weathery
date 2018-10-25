@@ -9,6 +9,10 @@
 
     <style name="MyAppTheme" parent="MyBaseAppTheme" />
 
+    <style name="MyAppTheme.SettingsTheme" parent="MyAppTheme.NoActionBar">
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+    </style>
+
     <style name="MyAppTheme.Launcher" parent="MyAppTheme">
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>

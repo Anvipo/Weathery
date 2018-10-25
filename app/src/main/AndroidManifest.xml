@@ -60,6 +60,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.settings.implementation.SettingsActivity"
+            android:theme="@style/MyAppTheme.SettingsTheme" />
     </application>
 
 </manifest>

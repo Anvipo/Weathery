@@ -118,7 +118,7 @@ class LocationRealmService
     }
 
     private fun <T> Context.onDbHasNoCurrentAddress(emitter: SingleEmitter<T>) {
-        val part1 = getString(R.string.no_previous_weather_data)
+        val part1 = getString(R.string.no_previous_address_data)
 
         val part2 = getString(R.string.find_out_your_current_location_in_one_of_the_suggested_ways)
 

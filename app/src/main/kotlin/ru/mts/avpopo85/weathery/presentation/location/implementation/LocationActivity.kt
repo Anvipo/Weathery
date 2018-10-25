@@ -1,11 +1,11 @@
 package ru.mts.avpopo85.weathery.presentation.location.implementation
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.preference.PreferenceManager
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.maps.model.LatLng
@@ -22,7 +22,9 @@ import ru.mts.avpopo85.weathery.presentation.map.google.MapsActivity
 import ru.mts.avpopo85.weathery.presentation.utils.*
 import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
+import ru.mts.avpopo85.weathery.utils.common.showAlertDialog
 import javax.inject.Inject
+
 
 class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
@@ -65,10 +67,14 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == APPLICATION_SETTINGS_REQUEST_CODE) {
-            onApplicationSettingsRequestCode(resultCode)
-        } else if (requestCode == LOCATION_BY_MAPS_REQUEST_CODE) {
-            onLocationByMapsRequestCode(resultCode, data)
+        when (requestCode) {
+            APPLICATION_SETTINGS_REQUEST -> onApplicationSettingsRequestCode(resultCode)
+            LOCATION_BY_MAPS_REQUEST -> onLocationByMapsRequestCode(resultCode, data)
+            else -> {
+                val message = getString(R.string.unexpected_application_behavior)
+
+                showIndefiniteSnackbar(message)
+            }
         }
     }
 
@@ -89,7 +95,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
             message,
             getString(R.string.yes),
             getString(R.string.no),
-            { startActivityForResult<MapsActivity>(LOCATION_BY_MAPS_REQUEST_CODE) },
+            { startActivityForResult<MapsActivity>(LOCATION_BY_MAPS_REQUEST) },
             title = getString(R.string.error)
         )
     }
@@ -134,7 +140,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
         savePreferences(address)
 
-        setResult(SUCCESS_LOCATION_RESULT_CODE, data)
+        setResult(LOCATION_RESULT_OK, data)
         finish()
     }
 
@@ -179,7 +185,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
             data = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
         }
 
-        startActivityForResult(intent, APPLICATION_SETTINGS_REQUEST_CODE)
+        startActivityForResult(intent, APPLICATION_SETTINGS_REQUEST)
     }
 
     private fun initButtonListeners() {
@@ -192,7 +198,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         }
 
         get_current_location_by_map_LA_B.setOnClickListener {
-            startActivityForResult<MapsActivity>(LOCATION_BY_MAPS_REQUEST_CODE)
+            startActivityForResult<MapsActivity>(LOCATION_BY_MAPS_REQUEST)
         }
     }
 
@@ -205,11 +211,12 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
     }
 
     private fun savePreferences(address: UserAddressType) {
-        val sharedPreferences =
-            getSharedPreferences(LOCALITY_PREFERENCES_NAME, Context.MODE_PRIVATE)!!
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)!!
 
-        with(sharedPreferences.edit()!!) {
-            putString(LOCALITY_TAG, address.locality)
+        val key = getString(R.string.pref_key_current_location)
+
+        with(sharedPref.edit()!!) {
+            putString(key, address.locality)
             apply()
         }
     }
@@ -231,7 +238,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
     }
 
     private fun onLocationByMapsRequestCode(resultCode: Int, data: Intent?) {
-        if (resultCode == SUCCESS_LOCATION_BY_MAPS_RESULT_CODE) {
+        if (resultCode == LOCATION_BY_MAPS_RESULT_OK) {
             if (data != null) {
                 showLoadingProgress()
 
