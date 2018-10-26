@@ -1,7 +1,9 @@
 package ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragment
 import ru.mts.avpopo85.weathery.R
@@ -15,6 +17,28 @@ import ru.mts.avpopo85.weathery.utils.common.showLongSnackbar
 
 class LocationPreferenceFragment : PreferenceFragment() {
 
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.pref_location, rootKey)
+
+        setHasOptionsMenu(true)
+
+        currentLocationDefaultValue = getString(R.string.current_location_unknown)!!
+
+        currentLocationPrefKey = getString(R.string.pref_key_current_location)!!
+
+        val sharedPref = preferenceManager.sharedPreferences!!
+
+        val currentLocation =
+            sharedPref.getString(currentLocationPrefKey, currentLocationDefaultValue)
+                ?: currentLocationDefaultValue
+
+        findPreference(currentLocationPrefKey)!!.apply {
+            summary = currentLocation
+
+            onPreferenceChangeListener = sBindPreferenceSummaryToValueListener
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -23,13 +47,13 @@ class LocationPreferenceFragment : PreferenceFragment() {
                 findPreference(currentLocationPrefKey)!!.apply {
                     val address: UserAddressType? = data?.getParcelableExtra(ADDRESS_TAG)
 
-                    val locality = address?.locality ?: defaultValue
+                    val locality = address?.locality ?: currentLocationDefaultValue
 
                     summary = locality
                 }
             } else {
                 val part1 = getString(R.string.current_location_unknown)
-                val part2 = getString(R.string.you_must_find_out_it)
+                val part2 = getString(R.string.you_must_specify_it)
 
                 view!!.showLongSnackbar("$part1. $part2")
             }
@@ -54,28 +78,40 @@ class LocationPreferenceFragment : PreferenceFragment() {
             }
         }
 
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.pref_location, rootKey)
-
-        defaultValue = getString(R.string.current_location_unknown)!!
-
-        currentLocationPrefKey = getString(R.string.pref_key_current_location)!!
-
-        val sharedPref = preferenceManager.sharedPreferences!!
-
-        val currentLocation =
-            sharedPref.getString(currentLocationPrefKey, defaultValue) ?: defaultValue
-
-        findPreference(currentLocationPrefKey)!!.apply {
-            summary = currentLocation
-
-            onPreferenceChangeListener = sBindPreferenceSummaryToValueListener
-        }
+    override fun onResume() {
+        super.onResume()
+        preferenceScreen
+            .sharedPreferences
+            .registerOnSharedPreferenceChangeListener(listener)
     }
+
+    override fun onPause() {
+        super.onPause()
+        preferenceScreen
+            .sharedPreferences
+            .unregisterOnSharedPreferenceChangeListener(listener)
+    }
+
+    private val listener =
+        SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
+            when (key) {
+                currentLocationPrefKey -> {
+                    val preference = findPreference(key)!!
+
+                    preference.summary =
+                            sharedPreferences.getString(key, currentLocationDefaultValue)
+                }
+                else -> {
+                    Log.d(TAG, "unknown key")
+                }
+            }
+        }
 
     companion object {
 
-        lateinit var defaultValue: String
+        val TAG: String = LocationPreferenceFragment::class.java.simpleName
+
+        lateinit var currentLocationDefaultValue: String
 
         lateinit var currentLocationPrefKey: String
 

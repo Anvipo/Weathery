@@ -8,6 +8,10 @@ interface BaseSwipeToRefreshContract : BaseProgressBarContract {
 
         fun hideRefreshingIndicator()
 
+        fun hideLayout()
+
+        fun showLayout()
+
     }
 
     interface Presenter<in V : View> : BaseProgressBarContract.Presenter<V>

@@ -1,4 +1,4 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference
         android:key="@string/pref_key_current_location"
@@ -8,4 +8,4 @@
         android:key="@string/pref_key_get_location"
         android:title="@string/find_out_current_geolocation" />
 
-</PreferenceScreen>
+</androidx.preference.PreferenceScreen>

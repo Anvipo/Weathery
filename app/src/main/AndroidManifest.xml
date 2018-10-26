@@ -62,6 +62,7 @@
         </activity>
         <activity
             android:name=".presentation.settings.implementation.SettingsActivity"
+            android:label="@string/settings"
             android:theme="@style/MyAppTheme.SettingsTheme" />
     </application>
 

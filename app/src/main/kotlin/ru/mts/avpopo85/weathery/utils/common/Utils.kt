@@ -3,6 +3,8 @@
 package ru.mts.avpopo85.weathery.utils.common
 
 import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -67,4 +69,37 @@ fun Context.showAlertDialog(
         onClickedNegativeButton = onClickedNegativeButton,
         title = title
     ).show()
+}
+
+fun Context.getFullApplicationInfo(): String = try {
+    val sb = StringBuilder()
+
+    sb.append("\n\n-----------------------------")
+    sb.append("\nPlease don't remove this information")
+    sb.append("\nDevice OS: Android")
+
+    val osVersion = Build.VERSION.RELEASE
+
+    sb.append("\nDevice OS version: $osVersion")
+
+    val appVersion =
+        packageManager
+            .getPackageInfo(packageName, 0)
+            .versionName
+
+    sb.append("\nApp Version: $appVersion")
+
+    val deviceBrand = Build.BRAND
+
+    sb.append("\nDevice Brand: $deviceBrand")
+
+    val deviceModel = Build.MODEL
+    sb.append("\nDevice Model: $deviceModel")
+
+    val deviceManufacturer = Build.MANUFACTURER
+    sb.append("\nDevice Manufacturer: $deviceManufacturer")
+
+    sb.toString()
+} catch (e: PackageManager.NameNotFoundException) {
+    ""
 }

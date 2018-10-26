@@ -261,8 +261,9 @@
     <string name="pref_key_get_location" translatable="false">pref_key_get_location</string>
     <string name="no_previous_address_data">No previous address data</string>
     <string name="unexpected_application_behavior">Unexpected application behavior</string>
-    <string name="you_must_find_out_it">You must find out it</string>
+    <string name="you_must_specify_it">You must specify it</string>
     <string name="geolocation">Geolocation</string>
     <string name="current_geolocation">Current geolocation</string>
     <string name="find_out_current_geolocation">Find out current geolocation</string>
+    <string name="settings">Settings</string>
 </resources>

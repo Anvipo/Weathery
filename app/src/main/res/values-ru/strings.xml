@@ -259,8 +259,9 @@
     <string name="error_has_occurred">Произошла ошибка</string>
     <string name="no_previous_address_data">Предыдущих данных о геолокации нет</string>
     <string name="unexpected_application_behavior">Неожиданное поведение приложения</string>
-    <string name="you_must_find_out_it">You must find out it</string>
+    <string name="you_must_specify_it">Вы должны его указать</string>
     <string name="geolocation">Геолокация</string>
     <string name="current_geolocation">Текущая геолокация</string>
     <string name="find_out_current_geolocation">Узнать текущую геолокацию</string>
+    <string name="settings">Настройки</string>
 </resources>

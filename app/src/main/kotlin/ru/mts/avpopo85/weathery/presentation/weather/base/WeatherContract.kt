@@ -6,10 +6,6 @@ interface WeatherContract : BaseSwipeToRefreshContract {
 
     interface View : BaseSwipeToRefreshContract.View {
 
-        fun hideLayout()
-
-        fun showLayout()
-
         fun onNotFreshWeatherData()
 
     }

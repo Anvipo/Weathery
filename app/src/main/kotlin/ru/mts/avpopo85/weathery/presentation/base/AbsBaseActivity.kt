@@ -5,8 +5,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import retrofit2.HttpException
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.presentation.base.utils.SnackbarLengths.LENGTH_INDEFINITE
-import ru.mts.avpopo85.weathery.presentation.base.utils.SnackbarLengths.LENGTH_LONG
 import ru.mts.avpopo85.weathery.presentation.base.utils.startActivity
 import ru.mts.avpopo85.weathery.presentation.base.utils.startActivityForResult
 import ru.mts.avpopo85.weathery.presentation.utils.onHttpException
@@ -100,9 +98,5 @@ abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
     private fun onSocketTimeoutException(): String =
         "${getString(R.string.response_timeout)}. " +
                 getString(R.string.make_sure_your_device_has_a_network_connection)
-
-    private val criticalSnackbarLength = LENGTH_INDEFINITE
-
-    private val nonCriticalSnackbarLength = LENGTH_LONG
 
 }
