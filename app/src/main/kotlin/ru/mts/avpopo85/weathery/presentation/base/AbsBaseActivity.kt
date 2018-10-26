@@ -16,6 +16,12 @@ import java.util.concurrent.TimeoutException
 
 abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
 
+    final override fun onUnexpectedApplicationBehavior(rootView: View?) {
+        val message = getString(R.string.unexpected_application_behavior)
+
+        showIndefiniteSnackbar(message)
+    }
+
     final override fun showError(message: String, isCritical: Boolean, rootView: View?) {
         if (!isCritical) {
             showLongSnackbar(message, rootView)
@@ -65,7 +71,7 @@ abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
 
     protected abstract val rootLayout: View
 
-    private fun getErrorMessageOrDefault(error: Throwable): String =
+    protected fun getErrorMessageOrDefault(error: Throwable): String =
         error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)
 
     private fun parseError(error: Throwable): String =

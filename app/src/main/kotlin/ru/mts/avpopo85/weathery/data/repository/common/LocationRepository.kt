@@ -7,6 +7,7 @@ import android.location.Location
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.maps.model.LatLng
 import com.patloew.rxlocation.RxLocation
+import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Single
 import ru.mts.avpopo85.weathery.R
@@ -34,6 +35,16 @@ class LocationRepository
     private val networkManager: NetworkManager,
     private val geocoder: IGeocoder
 ) : ILocationRepository {
+
+    override fun checkInternetConnection(): Completable =
+        if (networkManager.isConnectedToInternet) {
+            Completable.complete()
+        } else {
+            val message = context.getString(R.string.internet_connection_required)
+            val error = DeviceIsNotConnectedToInternetException(message)
+
+            Completable.error(error)
+        }
 
     override fun getCurrentAddressByGPS(): Single<UserAddressType> =
         rxLocation
@@ -80,8 +91,8 @@ class LocationRepository
     private fun makeGpsCall(success: Boolean): Single<Location> =
         when {
             success && networkManager.isConnectedToInternet -> getCurrentLocation()
-            success && !networkManager.isConnectedToInternet -> onHaveSuccessAndDeviceIsNotConnectedToInternet()
             !success && networkManager.isConnectedToInternet -> onHaveNotSuccessAndDeviceIsConnectedToInternet()
+            success && !networkManager.isConnectedToInternet -> onHaveSuccessAndDeviceIsNotConnectedToInternet()
             !success && !networkManager.isConnectedToInternet -> onHaveNotSuccessAndDeviceIsNotConnectedToInternet()
             else -> onUnknownError()
         }

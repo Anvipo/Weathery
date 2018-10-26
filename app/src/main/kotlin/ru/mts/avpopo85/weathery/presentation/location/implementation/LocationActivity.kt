@@ -21,6 +21,7 @@ import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
 import ru.mts.avpopo85.weathery.presentation.map.google.MapsActivity
 import ru.mts.avpopo85.weathery.presentation.utils.*
 import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
+import ru.mts.avpopo85.weathery.utils.common.GpsCallException
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.common.showAlertDialog
 import javax.inject.Inject
@@ -68,24 +69,16 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         super.onActivityResult(requestCode, resultCode, data)
 
         when (requestCode) {
-            APPLICATION_SETTINGS_REQUEST -> onApplicationSettingsRequestCode(resultCode)
+            APPLICATION_SETTINGS_REQUEST -> onApplicationSettingsRequestForGetCurrentLocationCode(
+                resultCode
+            )
             LOCATION_BY_MAPS_REQUEST -> onLocationByMapsRequestCode(resultCode, data)
-            else -> {
-                val message = getString(R.string.unexpected_application_behavior)
-
-                showIndefiniteSnackbar(message)
-            }
+            else -> onUnexpectedApplicationBehavior()
         }
     }
 
     override fun showGetAddressFromCoordinatesError(error: Throwable) {
-        val part1: String =
-            if (error is ExtractAddressException) {
-                getString(R.string.unable_to_find_the_address_of_the_specified_location)
-            } else {
-                showError(error)
-                getString(R.string.error_has_occurred)
-            }
+        val part1 = getErrorPart1(error)
 
         val part2 = getString(R.string.specify_the_location_on_the_map_again)
 
@@ -100,7 +93,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         )
     }
 
-    override fun showRationaleDialog() {
+    override fun showGetCurrentLocationRationaleDialog() {
         val part1 = getString(R.string.application_needs_permissions_to_geolocation)
         val part2 = getString(R.string.provide)
 
@@ -110,13 +103,13 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
             message,
             getString(R.string.yes),
             getString(R.string.no),
-            { presenter.onRationalePositiveClick() },
-            { presenter.onRationaleNegativeClick() },
+            { presenter.onGetCurrentLocationRationalePositiveClick() },
+            { presenter.onGetCurrentLocationRationaleNegativeClick() },
             getString(R.string.impossible_to_continue)
         )
     }
 
-    override fun showGoSettingsDialog() {
+    override fun showGoSettingsForGetCurrentLocationDialog() {
         val part1 =
             getString(R.string.go_to_applications_settings_and_provide_permissions_to_geolocation)
         val part2 = getString(R.string.go_to)
@@ -127,8 +120,8 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
             message,
             getString(R.string.yes),
             getString(R.string.no),
-            { presenter.onGoSettingsPositiveClick() },
-            { presenter.onGoSettingNegativeClick() },
+            { presenter.onGoSettingsForGetCurrentLocationPositiveClick() },
+            { presenter.onGoSettingForGetCurrentLocationNegativeClick() },
             getString(R.string.impossible_to_continue)
         )
     }
@@ -188,17 +181,50 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         startActivityForResult(intent, APPLICATION_SETTINGS_REQUEST)
     }
 
+    override fun getCurrentLocationByMap() {
+        startActivityForResult<MapsActivity>(LOCATION_BY_MAPS_REQUEST)
+    }
+
+    private fun getErrorPart1(error: Throwable): String = when (error) {
+        is ExtractAddressException -> {
+            getString(R.string.unable_to_find_the_address_of_the_specified_location)
+        }
+        is GpsCallException.DeviceIsNotConnectedToInternetException -> {
+            val defaultMessage =
+                getString(R.string.internet_connection_required)
+
+            getErrorMessage(error, defaultMessage)
+        }
+        else -> {
+            showError(error)
+            getString(R.string.error_has_occurred)
+        }
+    }
+
+    private fun getErrorMessage(
+        error: Throwable,
+        defaultMessage: String
+    ): String {
+        val message = getErrorMessageOrDefault(error)
+
+        return if (message == defaultMessage) {
+            defaultMessage
+        } else {
+            message
+        }
+    }
+
     private fun initButtonListeners() {
         get_last_known_location_LA_B.setOnClickListener {
-            presenter.getLastKnownGeolocation()
+            presenter.onGetLastKnownLocationClick()
         }
 
         get_current_location_by_GPS_LA_B.setOnClickListener {
-            presenter.getCurrentGeolocation()
+            presenter.onGetCurrentGeolocationByGPSClick()
         }
 
         get_current_location_by_map_LA_B.setOnClickListener {
-            startActivityForResult<MapsActivity>(LOCATION_BY_MAPS_REQUEST)
+            presenter.onGetCurrentLocationByMapClick()
         }
     }
 
@@ -238,27 +264,30 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
     }
 
     private fun onLocationByMapsRequestCode(resultCode: Int, data: Intent?) {
-        if (resultCode == LOCATION_BY_MAPS_RESULT_OK) {
-            if (data != null) {
-                showLoadingProgress()
+        when (resultCode) {
+            LOCATION_BY_MAPS_RESULT_OK -> {
+                if (data != null) {
+                    showLoadingProgress()
 
-                val coordinates: LatLng? = data.getParcelableExtra(COORDINATES_TAG)
+                    val coordinates: LatLng? = data.getParcelableExtra(COORDINATES_TAG)
 
-                if (coordinates != null) {
-                    injectDependencies()
-                    presenter.getAddressFromCoordinates(coordinates)
-                } else {
-                    showLocationError()
-                    hideLoadingProgress()
+                    if (coordinates != null) {
+                        injectDependencies()
+                        presenter.onLocationByMapsRequestActivityResult(coordinates)
+                    } else {
+                        showLocationError()
+                        hideLoadingProgress()
+                    }
                 }
             }
+            else -> onUnexpectedApplicationBehavior()
         }
     }
 
-    private fun onApplicationSettingsRequestCode(resultCode: Int) {
+    private fun onApplicationSettingsRequestForGetCurrentLocationCode(resultCode: Int) {
         if (resultCode == 0) {
             injectDependencies()
-            presenter.onActivityResult()
+            presenter.onApplicationSettingsRequestForGetCurrentLocationActivityResult()
         }
     }
 

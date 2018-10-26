@@ -12,7 +12,7 @@ import ru.mts.avpopo85.weathery.presentation.utils.ADDRESS_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_REQUEST
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_RESULT_OK
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
-import ru.mts.avpopo85.weathery.utils.common.showIndefiniteSnackbar
+import ru.mts.avpopo85.weathery.utils.common.onUnexpectedApplicationBehavior
 import ru.mts.avpopo85.weathery.utils.common.showLongSnackbar
 
 class LocationPreferenceFragment : PreferenceFragment() {
@@ -58,9 +58,7 @@ class LocationPreferenceFragment : PreferenceFragment() {
                 view!!.showLongSnackbar("$part1. $part2")
             }
         } else {
-            val message = getString(R.string.unexpected_application_behavior)
-
-            view?.showIndefiniteSnackbar(message)
+            this.activity!!.applicationContext!!.onUnexpectedApplicationBehavior(view!!)
         }
     }
 

@@ -19,19 +19,36 @@ class LocationPresenter
 ) : AbsBasePresenter<LocationContract.View>(),
     LocationContract.Presenter {
 
-    override fun onGoSettingsPositiveClick() {
+    override fun onGoSettingsForGetCurrentLocationPositiveClick() {
         view?.startSettingsActivityForResult()
     }
 
-    override fun onGoSettingNegativeClick() {
+    override fun onGoSettingForGetCurrentLocationNegativeClick() {
         view?.showLocationError()
     }
 
-    override fun getCurrentGeolocation() {
+    override fun onGetCurrentLocationRationalePositiveClick() {
         checkLocationPermissions()
     }
 
-    override fun getLastKnownGeolocation() {
+    override fun onGetCurrentLocationRationaleNegativeClick() {
+        view?.showLocationError()
+    }
+
+    override fun onGetCurrentGeolocationByGPSClick() {
+        val task: Disposable = interactor.checkInternetConnection()
+            .compose(schedulerManagerModule.completableTransformer())
+            .doOnSubscribe { view?.showLoadingProgress() }
+            .doAfterTerminate { view?.hideLoadingProgress() }
+            .subscribe(
+                ::onSuccessCheckInternetConnectionForGetCurrentLocationByGPS,
+                ::onErrorCheckInternetConnectionForGetCurrentLocationByGPS
+            )
+
+        compositeDisposable.add(task)
+    }
+
+    override fun onGetLastKnownLocationClick() {
         val task: Disposable = interactor.getLastKnownAddress()
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
@@ -41,19 +58,20 @@ class LocationPresenter
         compositeDisposable.add(task)
     }
 
-    override fun onActivityResult() {
-        checkLocationPermissions()
+    override fun onGetCurrentLocationByMapClick() {
+        val task: Disposable = interactor.checkInternetConnection()
+            .compose(schedulerManagerModule.completableTransformer())
+            .doOnSubscribe { view?.showLoadingProgress() }
+            .doAfterTerminate { view?.hideLoadingProgress() }
+            .subscribe(
+                ::onSuccessCheckInternetConnectionForGetCurrentLocationByMap,
+                ::onErrorCheckInternetConnectionForGetCurrentLocationByMap
+            )
+
+        compositeDisposable.add(task)
     }
 
-    override fun onRationalePositiveClick() {
-        checkLocationPermissions()
-    }
-
-    override fun onRationaleNegativeClick() {
-        view?.showLocationError()
-    }
-
-    override fun getAddressFromCoordinates(coordinates: LatLng) {
+    override fun onLocationByMapsRequestActivityResult(coordinates: LatLng) {
         val task: Disposable = interactor.getAddressFromCoordinates(coordinates)
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
@@ -71,6 +89,26 @@ class LocationPresenter
             .subscribe({}, { view?.showError(it) })
 
         compositeDisposable.add(task)
+    }
+
+    override fun onApplicationSettingsRequestForGetCurrentLocationActivityResult() {
+        checkLocationPermissions()
+    }
+
+    private fun onErrorCheckInternetConnectionForGetCurrentLocationByGPS(error: Throwable) {
+        view?.showError(error)
+    }
+
+    private fun onSuccessCheckInternetConnectionForGetCurrentLocationByGPS() {
+        checkLocationPermissions()
+    }
+
+    private fun onSuccessCheckInternetConnectionForGetCurrentLocationByMap() {
+        view?.getCurrentLocationByMap()
+    }
+
+    private fun onErrorCheckInternetConnectionForGetCurrentLocationByMap(error: Throwable) {
+        view?.showError(error)
     }
 
     private fun onSuccessGetLastKnownAddress(address: UserAddressType) {
@@ -137,14 +175,14 @@ class LocationPresenter
                 //user denied permission, but dont tap "dont ask"
                 view?.hideLoadingProgress()
 
-                view?.showRationaleDialog()
+                view?.showGetCurrentLocationRationaleDialog()
             }
 
             else -> {
                 //user denied permission with tap on "dont ask"
                 view?.hideLoadingProgress()
 
-                view?.showGoSettingsDialog()
+                view?.showGoSettingsForGetCurrentLocationDialog()
             }
         }
     }

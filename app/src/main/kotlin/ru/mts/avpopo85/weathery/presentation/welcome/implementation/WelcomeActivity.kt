@@ -60,9 +60,7 @@ class WelcomeActivity : AbsProgressBarActivity(), WelcomeContract.View {
 
             routeToAppropriatePage(locality)
         } else {
-            val message = getString(R.string.unexpected_application_behavior)
-
-            showIndefiniteSnackbar(message)
+            onUnexpectedApplicationBehavior()
         }
     }
 

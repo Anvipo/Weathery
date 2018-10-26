@@ -5,6 +5,8 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/darkPrimaryColor</item>
         <item name="colorAccent">@color/accentColor</item>
+        <item name="android:alertDialogTheme">@style/MyDialog</item>
+        <item name="alertDialogTheme">@style/MyDialog</item>
     </style>
 
     <style name="MyAppTheme" parent="MyBaseAppTheme" />
@@ -24,6 +26,10 @@
 
     <style name="MyActionBar" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
+    <!--TODO
+    Theme.AppCompat.DayNight.Dialog.Alert
+    Theme.AppCompat.DayNight
+    -->
     <style name="MyDialog" parent="Theme.MaterialComponents.Dialog">
         <item name="buttonBarNegativeButtonStyle">@style/MyMaterialTextButton</item>
         <item name="buttonBarPositiveButtonStyle">@style/MyMaterialButton</item>

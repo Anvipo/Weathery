@@ -4,6 +4,8 @@ interface BaseContract {
 
     interface View {
 
+        fun onUnexpectedApplicationBehavior(rootView: android.view.View? = null)
+
         fun showError(
             error: Throwable,
             isCritical: Boolean = false,

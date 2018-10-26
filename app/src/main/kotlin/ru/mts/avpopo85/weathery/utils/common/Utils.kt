@@ -11,6 +11,12 @@ import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import ru.mts.avpopo85.weathery.R
 
+fun Context.onUnexpectedApplicationBehavior(view: View) {
+    val message = getString(R.string.unexpected_application_behavior)
+
+    view.showIndefiniteSnackbar(message)
+}
+
 fun sendErrorLog(message: String, tag: String? = null) {
     if (tag != null) {
         Log.e(tag, message)
@@ -42,7 +48,7 @@ fun Context.alertDialog(
     onClickedNegativeButton: () -> Unit,
     title: String?
 ): AlertDialog =
-    AlertDialog.Builder(this, R.style.MyDialog).apply {
+    AlertDialog.Builder(this).apply {
         if (title != null)
             setTitle(title)
 

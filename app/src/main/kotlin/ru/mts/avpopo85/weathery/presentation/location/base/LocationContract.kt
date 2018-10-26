@@ -10,9 +10,9 @@ interface LocationContract : BaseProgressBarContract {
 
         fun setResultAndFinish(address: UserAddressType)
 
-        fun showRationaleDialog()
+        fun showGetCurrentLocationRationaleDialog()
 
-        fun showGoSettingsDialog()
+        fun showGoSettingsForGetCurrentLocationDialog()
 
         fun showCityDialog(address: UserAddressType)
 
@@ -28,27 +28,31 @@ interface LocationContract : BaseProgressBarContract {
 
         fun startSettingsActivityForResult()
 
+        fun getCurrentLocationByMap()
+
     }
 
     interface Presenter : BaseProgressBarContract.Presenter<View> {
 
-        fun getCurrentGeolocation()
+        fun onGetCurrentLocationRationalePositiveClick()
 
-        fun getLastKnownGeolocation()
+        fun onGetCurrentLocationRationaleNegativeClick()
 
-        fun onRationalePositiveClick()
+        fun onGoSettingsForGetCurrentLocationPositiveClick()
 
-        fun onRationaleNegativeClick()
+        fun onGoSettingForGetCurrentLocationNegativeClick()
 
-        fun onGoSettingsPositiveClick()
+        fun onGetLastKnownLocationClick()
 
-        fun onGoSettingNegativeClick()
+        fun onGetCurrentGeolocationByGPSClick()
 
-        fun onActivityResult()
-
-        fun getAddressFromCoordinates(coordinates: LatLng)
+        fun onGetCurrentLocationByMapClick()
 
         fun saveAddress(address: UserAddressType)
+
+        fun onApplicationSettingsRequestForGetCurrentLocationActivityResult()
+
+        fun onLocationByMapsRequestActivityResult(coordinates: LatLng)
 
     }
 
