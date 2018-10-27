@@ -6,6 +6,6 @@ interface IForecastAdapter<T : IForecast> {
 
     val clickListener: (T) -> Unit
 
-    fun addAll(newItems: List<T>)
+    fun updateData(newData: List<T>)
 
 }

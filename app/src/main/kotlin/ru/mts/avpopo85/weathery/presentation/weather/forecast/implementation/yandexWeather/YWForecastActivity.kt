@@ -28,7 +28,7 @@ class YWForecastActivity : AbsForecastActivity<YWForecastType>() {
         TODO("not implemented")
     }
 
-    override val mAdapter: IForecastAdapter<YWForecastType> by lazy {
+    override val adapter: IForecastAdapter<YWForecastType> by lazy {
         TODO("not implemented")
     }
 

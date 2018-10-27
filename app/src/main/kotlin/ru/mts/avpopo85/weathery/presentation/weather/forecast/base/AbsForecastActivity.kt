@@ -23,13 +23,13 @@ abstract class AbsForecastActivity<T : IForecast> :
     final override fun showWeatherResponse(data: List<T>) {
         if (data.isNotEmpty()) {
             showLayout()
-            fillRecyclerView(data)
+            updateRecyclerViewData(data = data)
         } else
             hideLayout()
     }
 
     final override fun bindPresenter() {
-        presenter.onBindView(this)
+        presenter.onBindView(view = this)
     }
 
     final override fun unbindPresenter() {
@@ -50,21 +50,23 @@ abstract class AbsForecastActivity<T : IForecast> :
 
     protected abstract val presenter: ForecastContract.Presenter<T>
 
-    protected abstract val mAdapter: IForecastAdapter<T>
+    protected abstract val adapter: IForecastAdapter<T>
 
     protected abstract val recyclerViewId: Int
 
-    private fun fillRecyclerView(data: List<T>) {
-        mAdapter.addAll(data)
+    private fun updateRecyclerViewData(data: List<T>) {
+        adapter.updateData(newData = data)
     }
 
+    private val mRecyclerView: RecyclerView by lazy { findViewById<RecyclerView>(recyclerViewId)!! }
+
     private fun initRecyclerView() {
-        findViewById<RecyclerView>(recyclerViewId)?.apply {
+        mRecyclerView.apply {
             setHasFixedSize(true)
 
             layoutManager = LinearLayoutManager(this@AbsForecastActivity)
 
-            adapter = mAdapter as RecyclerView.Adapter<*>
+            adapter = this@AbsForecastActivity.adapter as RecyclerView.Adapter<*>
         }
     }
 

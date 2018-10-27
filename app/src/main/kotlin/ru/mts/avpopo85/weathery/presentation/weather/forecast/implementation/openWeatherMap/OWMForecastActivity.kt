@@ -34,7 +34,7 @@ class OWMForecastActivity : AbsForecastActivity<OWMForecastType>() {
 
     override val recyclerViewId: Int by lazy { R.id.owm_forecast_RV }
 
-    override val mAdapter: IForecastAdapter<OWMForecastType>
+    override val adapter: IForecastAdapter<OWMForecastType>
             by lazy { OWMForecastAdapter(clickListener) }
 
     override fun initInjection() {
