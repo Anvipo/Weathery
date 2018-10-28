@@ -211,44 +211,27 @@
 
     <string name="google_play_services_unavailable">Google Play Services недоступны</string>
     <string name="this_app_will_not_work">Приложение не будет работать</string>
-    <string name="application_need_to_know_your_gelocation_which_geolocation_do_you_want_to_use">
-        Для работы приложения необходимо узнать Ваше местоположение. Какое местоположение Вы хотите использовать?</string>
     <string name="last_known">Последнее известное</string>
     <string name="by_gps">С помощью GPS</string>
     <string name="no_previous_weather_data">Предыдущих данных о погоде нет</string>
     <string name="the_forecast_is_outdated">Прогноз устарел</string>
     <string name="get_data_from_server">Получите данные с сервера</string>
-    <string name="is_your_current_geolocation">Ваше текущее местоположение</string>
-    <string name="found_intended_location">Найдено предполагаемое местоположение</string>
-    <string name="could_not_find_your_geolocation">Не удалось узнать Ваше местоположение</string>
-    <string name="application_needs_permissions_to_geolocation">Для установки местоположения приложению необходимы права доступа к геопозиции</string>
-    <string name="go_to_applications_settings_and_provide_permissions_to_geolocation">Для установки Вашего местоположения, необходимо перейти в настройки приложения и включить разрешение доступа к геопозиции</string>
     <string name="provide">Предоставить</string>
     <string name="impossible_to_continue">Продолжение работы невозможно</string>
     <string name="go_to">Перейти</string>
-    <string name="find_out_your_current_location_in_one_of_the_suggested_ways">Узнайте Ваше текущее местоположение одним из предложенных способов</string>
-    <string name="previous_location_unknown">Предыдущее местоположение неизвестно</string>
     <string name="internet_connection_required">Необходимо интернет соединение</string>
     <string name="internet_connection_and_GPS_required">Необходимы включённые интернет соединение и GPS</string>
-    <string name="current_location_unknown">Текущее местоположение неизвестно</string>
     <string name="title_activity_maps">Google Maps</string>
-    <string name="is_this_your_location">Это Ваше местоположение?</string>
     <string name="error">Ошибка</string>
-    <string name="specify_the_location_on_the_map_again">Указать местоположение на карте ещё раз</string>
     <string name="by_map">С помощью карты</string>
-    <string name="specify_current_location">Указать текущее местоположение</string>
     <string name="gps_is_required">Необходимо включить GPS</string>
-    <string name="unable_to_find_the_address_of_the_specified_location">Невозможно узнать адрес указанного местоположения</string>
-    <string name="could_not_find_address_of_your_current_location">Не удалось узнать адрес Вашего текущего местоположения</string>
     <string name="there_are_problems_geocoding">Возникли проблемы геокодирования</string>
-    <string name="your_location_has_changed">Ваше местоположение изменилось</string>
     <string name="night_forecast">Прогноз на ночь</string>
     <string name="morning_forecast">Прогноз на утро</string>
     <string name="day_forecast">Прогноз на день</string>
     <string name="evening_forecast">Прогноз на вечер</string>
     <string name="_12_hour_forecast_for_day">12 часовой прогноз на день</string>
     <string name="_12_hour_forecast_for_night">12 часовой прогноз на ночь</string>
-    <string name="select_current_geolocation">Выбор текущего местоположения</string>
     <string name="api_selection">Выбор API</string>
     <string name="forecast_type_choice">Выбор типа прогноза</string>
     <string name="date_value">Значение времени</string>
@@ -257,11 +240,33 @@
     <string name="date_example">19:00 20.10.2018</string>
     <string name="temperature_example">20.21°C</string>
     <string name="error_has_occurred">Произошла ошибка</string>
-    <string name="no_previous_address_data">Предыдущих данных о геолокации нет</string>
     <string name="unexpected_application_behavior">Неожиданное поведение приложения</string>
     <string name="you_must_specify_it">Вы должны его указать</string>
-    <string name="geolocation">Геолокация</string>
-    <string name="current_geolocation">Текущая геолокация</string>
-    <string name="find_out_current_geolocation">Узнать текущую геолокацию</string>
     <string name="settings">Настройки</string>
+    <string name="unknown">Неизвестно</string>
+
+    <!--location-->
+    <string name="application_need_to_know_your_location_which_location_do_you_want_to_use">
+        Для работы приложения необходимо узнать Ваше местоположение. Какое местоположение Вы хотите использовать?</string>
+    <string name="find_out_your_current_location_in_one_of_the_suggested_ways">Узнайте Ваше текущее местоположение одним из предложенных способов</string>
+    <string name="location">Местоположение</string>
+    <string name="current_location">Текущее местоположение</string>
+    <string name="is_your_current_location">Ваше текущее местоположение</string>
+    <string name="find_out_current_location">Узнать текущее местоположение</string>
+    <string name="specify_current_location">Указать текущее местоположение</string>
+    <string name="select_current_location">Выбор текущего местоположения</string>
+    <string name="your_location_has_changed">Ваше местоположение изменилось</string>
+    <string name="specify_the_location_on_the_map_again">Указать местоположение на карте ещё раз</string>
+    <string name="found_intended_location">Найдено предполагаемое местоположение</string>
+    <string name="is_this_your_location">Это Ваше местоположение?</string>
+    <string name="current_location_unknown">Текущее местоположение неизвестно</string>
+    <string name="previous_location_unknown">Предыдущее местоположение неизвестно</string>
+    <string name="no_previous_address_data">Предыдущих данных о местоположении нет</string>
+    <string name="unable_to_find_the_address_of_the_specified_location">Невозможно узнать адрес указанного местоположения</string>
+    <string name="could_not_find_address_of_your_current_location">Не удалось узнать адрес Вашего текущего местоположения</string>
+    <string name="could_not_find_your_location">Не удалось узнать Ваше местоположение</string>
+    <string name="application_needs_permissions_to_location">Для установки местоположения приложению необходимы права доступа к местоположению</string>
+    <string name="go_to_applications_settings_and_provide_permissions_to_location">Для установки Вашего местоположения, необходимо перейти в настройки приложения и включить разрешение доступа к местоположению</string>
+    <string name="welcome_to_weathery">Добро пожаловать в Weathery</string>
+
 </resources>

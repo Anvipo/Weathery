@@ -18,24 +18,26 @@ import ru.mts.avpopo85.weathery.utils.common.showLongSnackbar
 class LocationPreferenceFragment : PreferenceFragment() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.pref_location, rootKey)
+        setPreferencesFromResource(R.xml.preference_location, rootKey)
 
         setHasOptionsMenu(true)
 
-        currentLocationDefaultValue = getString(R.string.current_location_unknown)!!
+        currentGeolocationDefaultValue = getString(R.string.unknown)!!
 
-        currentLocationPrefKey = getString(R.string.pref_key_current_location)!!
+        currentGeolocationPrefKey = getString(R.string.pref_key_current_location)!!
 
-        val sharedPref = preferenceManager.sharedPreferences!!
+        val sharedPreferences = preferenceManager.sharedPreferences!!
 
         val currentLocation =
-            sharedPref.getString(currentLocationPrefKey, currentLocationDefaultValue)
-                ?: currentLocationDefaultValue
+            sharedPreferences.getString(currentGeolocationPrefKey, currentGeolocationDefaultValue)
+                ?: currentGeolocationDefaultValue
 
-        findPreference(currentLocationPrefKey)!!.apply {
+        val currentGeolocationPreference = findPreference(currentGeolocationPrefKey)!!
+
+        currentGeolocationPreference.apply {
             summary = currentLocation
 
-            onPreferenceChangeListener = sBindPreferenceSummaryToValueListener
+            onPreferenceChangeListener = bindPreferenceSummaryToValueListener
         }
     }
 
@@ -44,10 +46,10 @@ class LocationPreferenceFragment : PreferenceFragment() {
 
         if (requestCode == LOCATION_REQUEST) {
             if (resultCode == LOCATION_RESULT_OK) {
-                findPreference(currentLocationPrefKey)!!.apply {
+                findPreference(currentGeolocationPrefKey)!!.apply {
                     val address: UserAddressType? = data?.getParcelableExtra(ADDRESS_TAG)
 
-                    val locality = address?.locality ?: currentLocationDefaultValue
+                    val locality = address?.locality ?: currentGeolocationDefaultValue
 
                     summary = locality
                 }
@@ -93,11 +95,11 @@ class LocationPreferenceFragment : PreferenceFragment() {
     private val listener =
         SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
             when (key) {
-                currentLocationPrefKey -> {
-                    val preference = findPreference(key)!!
+                currentGeolocationPrefKey -> {
+                    val currentGeolocationPreference = findPreference(key)!!
 
-                    preference.summary =
-                            sharedPreferences.getString(key, currentLocationDefaultValue)
+                    currentGeolocationPreference.summary =
+                            sharedPreferences.getString(key, currentGeolocationDefaultValue)
                 }
                 else -> {
                     Log.d(TAG, "unknown key")
@@ -109,11 +111,11 @@ class LocationPreferenceFragment : PreferenceFragment() {
 
         val TAG: String = LocationPreferenceFragment::class.java.simpleName
 
-        lateinit var currentLocationDefaultValue: String
+        lateinit var currentGeolocationDefaultValue: String
 
-        lateinit var currentLocationPrefKey: String
+        lateinit var currentGeolocationPrefKey: String
 
-        private val sBindPreferenceSummaryToValueListener =
+        private val bindPreferenceSummaryToValueListener =
             Preference.OnPreferenceChangeListener { preference, value ->
                 val stringValue = value.toString()
 

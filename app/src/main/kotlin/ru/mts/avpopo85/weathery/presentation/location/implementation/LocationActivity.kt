@@ -38,7 +38,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location)
 
-        toolbar.title = getString(R.string.select_current_geolocation)
+        toolbar.title = getString(R.string.select_current_location)
 
         setSupportActionBar(toolbar)
 
@@ -94,7 +94,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
     }
 
     override fun showGetCurrentLocationRationaleDialog() {
-        val part1 = getString(R.string.application_needs_permissions_to_geolocation)
+        val part1 = getString(R.string.application_needs_permissions_to_location)
         val part2 = getString(R.string.provide)
 
         val message = "$part1. $part2?"
@@ -111,7 +111,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
     override fun showGoSettingsForGetCurrentLocationDialog() {
         val part1 =
-            getString(R.string.go_to_applications_settings_and_provide_permissions_to_geolocation)
+            getString(R.string.go_to_applications_settings_and_provide_permissions_to_location)
         val part2 = getString(R.string.go_to)
 
         val message = "$part1. $part2?"
@@ -139,7 +139,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
     override fun showCityDialog(address: UserAddressType) {
         showAlertDialog(
-            "${getString(R.string.is_your_current_geolocation)} - ${address.locality}?",
+            "${getString(R.string.is_your_current_location)} - ${address.locality}?",
             getString(R.string.yes),
             getString(R.string.no),
             {
@@ -152,7 +152,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
     }
 
     override fun showLocationError() {
-        showError(getString(R.string.could_not_find_your_geolocation))
+        showError(getString(R.string.could_not_find_your_location))
     }
 
     override fun showLastKnownLocationError() {

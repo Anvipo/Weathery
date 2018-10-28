@@ -3,6 +3,6 @@
     <header
         android:fragment="ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.LocationPreferenceFragment"
         android:icon="@android:drawable/ic_dialog_map"
-        android:title="@string/geolocation" />
+        android:title="@string/location" />
 
 </preference-headers>

@@ -21,7 +21,7 @@ abstract class AbsForecastPresenter<T : IForecast>(
         val task: Disposable = interactor.getForecast()
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
-            .doAfterTerminate { view?.hideLoadingProgress() }
+            .doFinally { view?.hideLoadingProgress() }
             .subscribe(::onSuccessLoadingWeatherData, ::onErrorLoadingWeatherData)
 
         compositeDisposable.add(task)
@@ -30,7 +30,7 @@ abstract class AbsForecastPresenter<T : IForecast>(
     override fun onSwipeToRefresh() {
         val task: Disposable = interactor.getForecast()
             .compose(schedulerManagerModule.singleTransformer())
-            .doAfterTerminate { view?.hideRefreshingIndicator() }
+            .doFinally { view?.hideRefreshingIndicator() }
             .subscribe(::onSuccessLoadingWeatherData, ::onErrorLoadingWeatherData)
 
         compositeDisposable.add(task)

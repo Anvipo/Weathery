@@ -39,7 +39,7 @@ class LocationPresenter
         val task: Disposable = interactor.checkInternetConnection()
             .compose(schedulerManagerModule.completableTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
-            .doAfterTerminate { view?.hideLoadingProgress() }
+            .doFinally { view?.hideLoadingProgress() }
             .subscribe(
                 ::onSuccessCheckInternetConnectionForGetCurrentLocationByGPS,
                 ::onErrorCheckInternetConnectionForGetCurrentLocationByGPS
@@ -52,7 +52,7 @@ class LocationPresenter
         val task: Disposable = interactor.getLastKnownAddress()
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
-            .doAfterTerminate { view?.hideLoadingProgress() }
+            .doFinally { view?.hideLoadingProgress() }
             .subscribe(::onSuccessGetLastKnownAddress, ::onErrorGetLastKnownAddress)
 
         compositeDisposable.add(task)
@@ -62,7 +62,7 @@ class LocationPresenter
         val task: Disposable = interactor.checkInternetConnection()
             .compose(schedulerManagerModule.completableTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
-            .doAfterTerminate { view?.hideLoadingProgress() }
+            .doFinally { view?.hideLoadingProgress() }
             .subscribe(
                 ::onSuccessCheckInternetConnectionForGetCurrentLocationByMap,
                 ::onErrorCheckInternetConnectionForGetCurrentLocationByMap
@@ -75,7 +75,7 @@ class LocationPresenter
         val task: Disposable = interactor.getAddressFromCoordinates(coordinates)
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
-            .doAfterTerminate { view?.hideLoadingProgress() }
+            .doFinally { view?.hideLoadingProgress() }
             .subscribe(::onSuccessGetAddressFromCoordinates, ::onErrorGetAddressFromCoordinates)
 
         compositeDisposable.add(task)
@@ -85,7 +85,7 @@ class LocationPresenter
         val task: Disposable = interactor.saveAddress(address)
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
-            .doAfterTerminate { view?.hideLoadingProgress() }
+            .doFinally { view?.hideLoadingProgress() }
             .subscribe({}, { view?.showError(it) })
 
         compositeDisposable.add(task)
@@ -165,7 +165,7 @@ class LocationPresenter
             permission.granted -> {
                 val task: Disposable = interactor.getCurrentAddressByGPS()
                     .compose(schedulerManagerModule.singleTransformer())
-                    .doAfterTerminate { view?.hideLoadingProgress() }
+                    .doFinally { view?.hideLoadingProgress() }
                     .subscribe(::onSuccessGetCurrentAddressByGPS, ::onErrorGetCurrentAddressByGPS)
 
                 compositeDisposable.add(task)

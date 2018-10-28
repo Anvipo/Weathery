@@ -2,10 +2,10 @@
 
     <Preference
         android:key="@string/pref_key_current_location"
-        android:title="@string/current_geolocation" />
+        android:title="@string/current_location" />
 
     <Preference
         android:key="@string/pref_key_get_location"
-        android:title="@string/find_out_current_geolocation" />
+        android:title="@string/find_out_current_location" />
 
 </androidx.preference.PreferenceScreen>
