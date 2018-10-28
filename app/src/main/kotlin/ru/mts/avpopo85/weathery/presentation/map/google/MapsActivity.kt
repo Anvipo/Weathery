@@ -11,7 +11,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_maps.*
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
+import ru.mts.avpopo85.weathery.presentation.base.activity.AbsBaseActivity
 import ru.mts.avpopo85.weathery.presentation.utils.COORDINATES_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_BY_MAPS_RESULT_OK
 import ru.mts.avpopo85.weathery.utils.common.showAlertDialog

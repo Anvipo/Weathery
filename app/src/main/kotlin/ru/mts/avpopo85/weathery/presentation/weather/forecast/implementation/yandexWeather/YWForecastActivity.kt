@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.content_yw_forecast.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.yandexWeather.YWForecastModule
-import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.AbsForecastActivity
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.view.activity.AbsForecastActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.adapter.base.IForecastAdapter
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastType
@@ -46,7 +46,7 @@ class YWForecastActivity : AbsForecastActivity<YWForecastType>() {
             .inject(this)
     }
 
-    override fun startWeatherInfoActivity(itemData: YWForecastType) {
+    override fun showWeatherInfo(itemData: YWForecastType) {
         TODO("not implemented")
     }
 

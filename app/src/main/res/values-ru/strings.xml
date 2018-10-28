@@ -233,7 +233,6 @@
     <string name="_12_hour_forecast_for_day">12 часовой прогноз на день</string>
     <string name="_12_hour_forecast_for_night">12 часовой прогноз на ночь</string>
     <string name="api_selection">Выбор API</string>
-    <string name="forecast_type_choice">Выбор типа прогноза</string>
     <string name="date_value">Значение времени</string>
     <string name="forecast_time">Время прогноза</string>
     <string name="more_info">Больше информации</string>
@@ -268,5 +267,8 @@
     <string name="application_needs_permissions_to_location">Для установки местоположения приложению необходимы права доступа к местоположению</string>
     <string name="go_to_applications_settings_and_provide_permissions_to_location">Для установки Вашего местоположения, необходимо перейти в настройки приложения и включить разрешение доступа к местоположению</string>
     <string name="welcome_to_weathery">Добро пожаловать в Weathery</string>
+    <string name="detailed_information">Подробная информация</string>
+    <string name="title_activity_tabbed_weather">Прогноз погоды</string>
+    <string name="action_settings">Настройки</string>
 
 </resources>

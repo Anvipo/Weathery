@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_welcome.*
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.AbsProgressBarActivity
+import ru.mts.avpopo85.weathery.presentation.base.activity.withProgressBar.AbsProgressBarActivity
 import ru.mts.avpopo85.weathery.presentation.main.MainActivity
 import ru.mts.avpopo85.weathery.presentation.settings.implementation.SettingsActivity
 import ru.mts.avpopo85.weathery.presentation.utils.ADDRESS_TAG

@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -16,14 +17,11 @@ import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.common.LocationModule
-import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.AbsProgressBarActivity
+import ru.mts.avpopo85.weathery.presentation.base.activity.withProgressBar.AbsProgressBarActivity
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
 import ru.mts.avpopo85.weathery.presentation.map.google.MapsActivity
 import ru.mts.avpopo85.weathery.presentation.utils.*
-import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
-import ru.mts.avpopo85.weathery.utils.common.GpsCallException
-import ru.mts.avpopo85.weathery.utils.common.UserAddressType
-import ru.mts.avpopo85.weathery.utils.common.showAlertDialog
+import ru.mts.avpopo85.weathery.utils.common.*
 import javax.inject.Inject
 
 
@@ -236,14 +234,14 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         presenter.onBindView(this)
     }
 
+    //TODO: do it in data layer (mb)
     private fun savePreferences(address: UserAddressType) {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)!!
 
         val key = getString(R.string.pref_key_current_location)
 
-        with(sharedPref.edit()!!) {
+        sharedPref.edit(true) {
             putString(key, address.locality)
-            apply()
         }
     }
 

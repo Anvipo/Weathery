@@ -14,7 +14,7 @@ abstract class AbsForecastPresenter<T : IForecast>(
     ForecastContract.Presenter<T> {
 
     override fun onItemClicked(itemData: T) {
-        view?.startWeatherInfoActivity(itemData)
+        view?.showWeatherInfo(itemData)
     }
 
     override fun loadWeatherData() {

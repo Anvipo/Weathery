@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/owm_forecast_SRL"
     android:layout_width="match_parent"
@@ -9,8 +8,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:visibility="gone"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_owm_forecast">
+    tools:showIn="@layout/view_owm_forecast">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/owm_forecast_RV"

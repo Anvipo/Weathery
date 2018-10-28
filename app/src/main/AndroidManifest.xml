@@ -41,16 +41,15 @@
 
         <activity android:name=".presentation.main.MainActivity" />
         <activity android:name=".presentation.weather.main.YWActivity" />
-        <activity android:name=".presentation.weather.main.OWMActivity" />
         <activity android:name=".presentation.weather.currentWeather.implementation.yandexWeather.YWCurrentWeatherActivity" />
         <activity android:name=".presentation.weather.forecast.implementation.yandexWeather.YWForecastActivity" />
-        <activity android:name=".presentation.weather.currentWeather.implementation.openWeatherMap.OWMCurrentWeatherActivity" />
-        <activity android:name=".presentation.weather.forecast.implementation.openWeatherMap.OWMForecastActivity" />
+        <activity android:name=".presentation.weather.currentWeather.implementation.openWeatherMap.view.activity.OWMCurrentWeatherActivity" />
+        <activity android:name=".presentation.weather.forecast.implementation.openWeatherMap.view.activity.OWMForecastActivity" />
         <activity android:name=".presentation.location.implementation.LocationActivity" />
         <activity
             android:name=".presentation.map.google.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".presentation.weather.forecast.implementation.openWeatherMap.OWMForecastInfoActivity" />
+        <activity android:name=".presentation.weather.forecast.implementation.openWeatherMap.view.activity.OWMForecastInfoActivity" />
         <activity
             android:name=".presentation.welcome.implementation.WelcomeActivity"
             android:theme="@style/MyAppTheme.Launcher">
@@ -64,6 +63,9 @@
             android:name=".presentation.settings.implementation.SettingsActivity"
             android:label="@string/settings"
             android:theme="@style/MyAppTheme.SettingsTheme" />
+        <activity
+            android:name=".presentation.weather.tab.TabbedWeather"
+            android:label="@string/title_activity_tabbed_weather" />
     </application>
 
 </manifest>

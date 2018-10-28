@@ -1,5 +1,6 @@
 package ru.mts.avpopo85.weathery.di.modules.openWeatherMap
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
@@ -10,14 +11,13 @@ import ru.mts.avpopo85.weathery.domain.mapper.base.IForecastMapper
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.openWeatherMap.OWMForecastMapper
 import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
-import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.OWMForecastActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.OWMForecastPresenter
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 
 @Module
-class OWMForecastModule(private val context: OWMForecastActivity) {
+class OWMForecastModule(private val context: Context) {
 
     @Provides
     @OWMForecastScope

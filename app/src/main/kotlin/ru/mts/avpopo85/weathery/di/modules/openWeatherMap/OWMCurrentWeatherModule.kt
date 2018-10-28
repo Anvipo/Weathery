@@ -1,5 +1,6 @@
 package ru.mts.avpopo85.weathery.di.modules.openWeatherMap
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
@@ -10,13 +11,12 @@ import ru.mts.avpopo85.weathery.domain.mapper.base.ICurrentWeatherMapper
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.openWeatherMap.OWMCurrentWeatherMapper
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
-import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.openWeatherMap.OWMCurrentWeatherActivity
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.openWeatherMap.OWMCurrentWeatherPresenter
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherType
 
 @Module
-class OWMCurrentWeatherModule(private val context: OWMCurrentWeatherActivity) {
+class OWMCurrentWeatherModule(private val context: Context) {
 
     @Provides
     @OWMCurrentWeatherScope

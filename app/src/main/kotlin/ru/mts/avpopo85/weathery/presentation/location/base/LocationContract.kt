@@ -1,10 +1,11 @@
 package ru.mts.avpopo85.weathery.presentation.location.base
 
 import com.google.android.gms.maps.model.LatLng
-import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.BaseProgressBarContract
+import ru.mts.avpopo85.weathery.presentation.base.common.withProgressBar.BaseProgressBarContract
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 
-interface LocationContract : BaseProgressBarContract {
+interface LocationContract :
+    BaseProgressBarContract {
 
     interface View : BaseProgressBarContract.View {
 

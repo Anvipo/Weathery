@@ -1,8 +1,9 @@
 package ru.mts.avpopo85.weathery.presentation.welcome.base
 
-import ru.mts.avpopo85.weathery.presentation.base.withProgressBar.BaseProgressBarContract
+import ru.mts.avpopo85.weathery.presentation.base.common.withProgressBar.BaseProgressBarContract
 
-interface WelcomeContract : BaseProgressBarContract {
+interface WelcomeContract :
+    BaseProgressBarContract {
 
     interface View : BaseProgressBarContract.View
 

@@ -6,9 +6,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.content_main.*
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.presentation.base.AbsBaseActivity
-import ru.mts.avpopo85.weathery.presentation.weather.main.OWMActivity
+import ru.mts.avpopo85.weathery.presentation.base.activity.AbsBaseActivity
 import ru.mts.avpopo85.weathery.presentation.weather.main.YWActivity
+import ru.mts.avpopo85.weathery.presentation.weather.tab.TabbedWeather
 
 class MainActivity : AbsBaseActivity() {
 
@@ -27,7 +27,7 @@ class MainActivity : AbsBaseActivity() {
         }
 
         owm_B.setOnClickListener {
-            startActivity<OWMActivity>()
+            startActivity<TabbedWeather>()
         }
     }
 }

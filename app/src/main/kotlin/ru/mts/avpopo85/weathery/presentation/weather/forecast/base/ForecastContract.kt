@@ -9,7 +9,7 @@ interface ForecastContract : WeatherContract {
 
         fun showWeatherResponse(data: List<T>)
 
-        fun startWeatherInfoActivity(itemData: T)
+        fun showWeatherInfo(itemData: T)
 
     }
 

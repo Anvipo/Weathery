@@ -11,7 +11,7 @@ import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.yandexWeather.YWCurrentWeatherModule
 import ru.mts.avpopo85.weathery.presentation.utils.CELSIUS_DEGREE
-import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.AbsCurrentWeatherActivity
+import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.view.activity.AbsCurrentWeatherActivity
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 import javax.inject.Inject

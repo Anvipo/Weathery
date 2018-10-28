@@ -5,7 +5,7 @@ import com.tbruyelle.rxpermissions2.Permission
 import io.reactivex.disposables.Disposable
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.domain.interactor.base.ILocationInteractor
-import ru.mts.avpopo85.weathery.presentation.base.AbsBasePresenter
+import ru.mts.avpopo85.weathery.presentation.base.common.AbsBasePresenter
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
 import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
 import ru.mts.avpopo85.weathery.utils.common.GoogleGeocodeException
