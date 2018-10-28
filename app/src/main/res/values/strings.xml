@@ -233,7 +233,6 @@
     <string name="evening_forecast">Evening forecast</string>
     <string name="_12_hour_forecast_for_day">12 hour forecast for day</string>
     <string name="_12_hour_forecast_for_night">12 hour forecast for night</string>
-    <string name="api_selection">API selection</string>
     <string name="date_value">Date value</string>
     <string name="forecast_time">Forecast time</string>
     <string name="more_info">More info</string>
@@ -242,8 +241,9 @@
     <string name="error_has_occurred">Error has occurred</string>
     <string name="no_previous_address_data">No previous address data</string>
     <string name="unexpected_application_behavior">Unexpected application behavior</string>
-    <string name="you_must_specify_it">You must specify it</string>
+    <string name="you_must_find_out_it">You must find out it</string>
     <string name="settings">Settings</string>
+    <string name="pref_key_weather_API" translatable="false">pref_key_weather_API</string>
 
     <!--location-->
     <string name="pref_key_current_location" translatable="false">pref_key_current_location</string>
@@ -273,5 +273,16 @@
     <string name="title_activity_tabbed_weather">Weather Forecast</string>
     <string name="action_settings">Settings</string>
     <string name="detailed_information">Detailed information</string>
+    <string name="network">Network</string>
+    <string name="weather_api_dialog_title">Select which weather resource API will be used</string>
+    <string name="weather_resource_API">Weather Resource API</string>
+    <string name="not_selected">Not selected</string>
+    <string name="you_did_not_select_weather_API">You did not select weather API</string>
+    <string name="you_must_select_it">You must select it</string>
+
+    <string-array name="weather_API">
+        <item>Open Weather Map</item>
+        <!--<item>Yandex.Weather</item>-->
+    </string-array>
 
 </resources>

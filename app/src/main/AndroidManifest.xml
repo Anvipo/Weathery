@@ -39,7 +39,6 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".presentation.main.MainActivity" />
         <activity android:name=".presentation.weather.main.YWActivity" />
         <activity android:name=".presentation.weather.currentWeather.implementation.yandexWeather.YWCurrentWeatherActivity" />
         <activity android:name=".presentation.weather.forecast.implementation.yandexWeather.YWForecastActivity" />

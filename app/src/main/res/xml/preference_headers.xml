@@ -5,4 +5,9 @@
         android:icon="@android:drawable/ic_dialog_map"
         android:title="@string/location" />
 
+    <header
+        android:fragment="ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.NetworkPreferenceFragment"
+        android:icon="@android:drawable/stat_notify_sync_noanim"
+        android:title="@string/network" />
+
 </preference-headers>

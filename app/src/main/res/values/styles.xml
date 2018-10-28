@@ -5,8 +5,8 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/darkPrimaryColor</item>
         <item name="colorAccent">@color/accentColor</item>
-        <item name="android:alertDialogTheme">@style/MyDialog</item>
         <item name="alertDialogTheme">@style/MyDialog</item>
+        <item name="dialogTheme">@style/MyDialog</item>
     </style>
 
     <style name="MyAppTheme" parent="MyBaseAppTheme" />
@@ -35,8 +35,16 @@
         <item name="buttonBarPositiveButtonStyle">@style/MyMaterialButton</item>
         <!--buttons color-->
         <item name="colorAccent">@color/accentColor</item>
+
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColorSecondary">@color/secondaryTextColor</item>
+
+        <item name="textColorAlertDialogListItem">@color/primaryTextColor</item>
+        <item name="android:textColorAlertDialogListItem">@color/primaryTextColor</item>
+
         <!--title and message color-->
         <item name="android:textColorPrimary">@color/primaryTextColor</item>
+
         <!--dialog background-->
         <item name="android:windowBackground">@android:color/background_light</item>
     </style>

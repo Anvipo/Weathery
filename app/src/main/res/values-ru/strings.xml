@@ -232,7 +232,6 @@
     <string name="evening_forecast">Прогноз на вечер</string>
     <string name="_12_hour_forecast_for_day">12 часовой прогноз на день</string>
     <string name="_12_hour_forecast_for_night">12 часовой прогноз на ночь</string>
-    <string name="api_selection">Выбор API</string>
     <string name="date_value">Значение времени</string>
     <string name="forecast_time">Время прогноза</string>
     <string name="more_info">Больше информации</string>
@@ -240,7 +239,7 @@
     <string name="temperature_example">20.21°C</string>
     <string name="error_has_occurred">Произошла ошибка</string>
     <string name="unexpected_application_behavior">Неожиданное поведение приложения</string>
-    <string name="you_must_specify_it">Вы должны его указать</string>
+    <string name="you_must_find_out_it">Вы должны его узнать</string>
     <string name="settings">Настройки</string>
     <string name="unknown">Неизвестно</string>
 
@@ -270,5 +269,11 @@
     <string name="detailed_information">Подробная информация</string>
     <string name="title_activity_tabbed_weather">Прогноз погоды</string>
     <string name="action_settings">Настройки</string>
+    <string name="network">Сеть</string>
+    <string name="weather_api_dialog_title">Выберите, какой API погодного ресурса будет использован</string>
+    <string name="weather_resource_API">API погодного ресурса</string>
+    <string name="not_selected">Не выбрано</string>
+    <string name="you_did_not_select_weather_API">Вы не выбрали API погодного ресурса</string>
+    <string name="you_must_select_it">Вы должны выбрать его</string>
 
 </resources>

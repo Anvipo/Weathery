@@ -20,4 +20,6 @@ const val COORDINATES_TAG: String = "coordinates"
 
 const val ADDRESS_TAG: String = "address"
 
-const val LOCALITY_TAG = "locality"
+const val LOCALITY_TAG: String = "locality"
+
+const val WEATHER_API_TAG: String = "weather API"

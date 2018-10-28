@@ -34,11 +34,7 @@ class LocationPreferenceFragment : PreferenceFragment() {
 
         val currentGeolocationPreference = findPreference(currentGeolocationPrefKey)!!
 
-        currentGeolocationPreference.apply {
-            summary = currentLocation
-
-            onPreferenceChangeListener = bindPreferenceSummaryToValueListener
-        }
+        currentGeolocationPreference.summary = currentLocation
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -55,7 +51,7 @@ class LocationPreferenceFragment : PreferenceFragment() {
                 }
             } else {
                 val part1 = getString(R.string.current_location_unknown)
-                val part2 = getString(R.string.you_must_specify_it)
+                val part2 = getString(R.string.you_must_find_out_it)
 
                 view!!.showLongSnackbar("$part1. $part2")
             }
@@ -114,15 +110,6 @@ class LocationPreferenceFragment : PreferenceFragment() {
         lateinit var currentGeolocationDefaultValue: String
 
         lateinit var currentGeolocationPrefKey: String
-
-        private val bindPreferenceSummaryToValueListener =
-            Preference.OnPreferenceChangeListener { preference, value ->
-                val stringValue = value.toString()
-
-                preference.summary = stringValue
-
-                true
-            }
 
     }
 

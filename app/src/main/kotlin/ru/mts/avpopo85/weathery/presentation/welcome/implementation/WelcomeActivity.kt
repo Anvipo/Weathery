@@ -8,12 +8,12 @@ import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_welcome.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.activity.withProgressBar.AbsProgressBarActivity
-import ru.mts.avpopo85.weathery.presentation.main.MainActivity
 import ru.mts.avpopo85.weathery.presentation.settings.implementation.SettingsActivity
 import ru.mts.avpopo85.weathery.presentation.utils.ADDRESS_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCALITY_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_REQUEST
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_RESULT_OK
+import ru.mts.avpopo85.weathery.presentation.weather.tab.TabbedWeather
 import ru.mts.avpopo85.weathery.presentation.welcome.base.WelcomeContract
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 
@@ -68,7 +68,7 @@ class WelcomeActivity : AbsProgressBarActivity(), WelcomeContract.View {
         when (locality) {
             null -> startActivityForResult<SettingsActivity>(LOCATION_REQUEST)
             else -> {
-                startActivity<MainActivity>()
+                startActivity<TabbedWeather>()
                 finish()
             }
         }

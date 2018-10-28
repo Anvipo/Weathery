@@ -14,8 +14,10 @@ import androidx.preference.PreferenceManager
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.settings.base.SettingsContract
 import ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.LocationPreferenceFragment
+import ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.NetworkPreferenceFragment
 import ru.mts.avpopo85.weathery.presentation.utils.LOCALITY_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_RESULT_OK
+import ru.mts.avpopo85.weathery.presentation.utils.WEATHER_API_TAG
 import ru.mts.avpopo85.weathery.utils.common.showLongSnackbar
 
 class SettingsActivity : PreferenceActivity(), SettingsContract.View {
@@ -40,7 +42,8 @@ class SettingsActivity : PreferenceActivity(), SettingsContract.View {
      */
     override fun isValidFragment(fragmentName: String): Boolean =
         (PreferenceFragment::class.java.name == fragmentName
-                || LocationPreferenceFragment::class.java.name == fragmentName)
+                || LocationPreferenceFragment::class.java.name == fragmentName
+                || NetworkPreferenceFragment::class.java.name == fragmentName)
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
@@ -55,19 +58,33 @@ class SettingsActivity : PreferenceActivity(), SettingsContract.View {
 
         val currentLocation = sharedPreferences.getString(currentLocationPrefKey, null)
 
-        if (currentLocation == null) {
-            val part1 = getString(R.string.current_location_unknown)
-            val part2 = getString(R.string.you_must_specify_it)
+        val weatherAPIPrefKey = getString(R.string.pref_key_weather_API)
 
-            listView!!.showLongSnackbar("$part1. $part2")
-        } else {
-            val intent = Intent().apply {
-                putExtra(LOCALITY_TAG, currentLocation)
+        val chosenWeatherAPI = sharedPreferences.getString(weatherAPIPrefKey, null)
+
+        when {
+            currentLocation == null -> {
+                val part1 = getString(R.string.current_location_unknown)
+                val part2 = getString(R.string.you_must_find_out_it)
+
+                listView!!.showLongSnackbar("$part1. $part2")
             }
+            chosenWeatherAPI == null -> {
+                val part1 = getString(R.string.you_did_not_select_weather_API)
+                val part2 = getString(R.string.you_must_select_it)
 
-            setResult(LOCATION_RESULT_OK, intent)
+                listView!!.showLongSnackbar("$part1. $part2")
+            }
+            else -> {
+                val intent = Intent().apply {
+                    putExtra(LOCALITY_TAG, currentLocation)
+                    putExtra(WEATHER_API_TAG, chosenWeatherAPI)
+                }
 
-            super.onBackPressed()
+                setResult(LOCATION_RESULT_OK, intent)
+
+                super.onBackPressed()
+            }
         }
     }
 
