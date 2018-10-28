@@ -13,8 +13,14 @@ abstract class AbsForecastPresenter<T : IForecast>(
     AbsWeatherPresenter<ForecastContract.View<T>>(),
     ForecastContract.Presenter<T> {
 
-    override fun onItemClicked(itemData: T) {
-        view?.showWeatherInfo(itemData)
+    override fun onNewLocation() {
+        val task: Disposable = interactor.onNewLocation()
+            .compose(schedulerManagerModule.singleTransformer())
+            .doOnSubscribe { view?.showLoadingProgress() }
+            .doFinally { view?.hideLoadingProgress() }
+            .subscribe(::onSuccessLoadingWeatherData, ::onErrorLoadingWeatherData)
+
+        compositeDisposable.add(task)
     }
 
     override fun loadWeatherData() {
@@ -34,6 +40,10 @@ abstract class AbsForecastPresenter<T : IForecast>(
             .subscribe(::onSuccessLoadingWeatherData, ::onErrorLoadingWeatherData)
 
         compositeDisposable.add(task)
+    }
+
+    override fun onItemClicked(itemData: T) {
+        view?.showWeatherInfo(itemData)
     }
 
     protected open fun onSuccessLoadingWeatherData(data: List<T>) {

@@ -48,9 +48,18 @@ abstract class AbsForecastFragment<T : IForecast> :
         presenter.loadWeatherData()
     }
 
+    final override fun onNewLocation() {
+        if (!this::presenter.isInitialized) {
+            //TODO
+            initInjection()
+        }
+
+        presenter.onNewLocation()
+    }
+
     final override val toolbarTitle: String by lazy { getString(R.string.forecast) }
 
-    protected abstract val presenter: ForecastContract.Presenter<T>
+    protected open lateinit var presenter: ForecastContract.Presenter<T>
 
     protected abstract val adapter: IForecastAdapter<T>
 

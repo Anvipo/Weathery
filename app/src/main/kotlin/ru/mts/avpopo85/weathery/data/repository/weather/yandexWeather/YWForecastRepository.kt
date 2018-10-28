@@ -33,6 +33,8 @@ class YWForecastRepository
     ),
     IForecastRepository<YWForecastListResponseType> {
 
+    override fun onNewLocation(): Single<YWForecastListResponseType> = onNewLocationHelper()
+
     override fun getForecast(): Single<YWForecastListResponseType> = getForecastHelper()
 
     override fun makeApiCall(): Single<YWForecastListResponseType> {

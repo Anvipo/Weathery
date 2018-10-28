@@ -14,6 +14,11 @@ class OWMForecastInteractor
     private val mapper: IForecastMapper<OWMForecastListResponseType, OWMForecastListType>
 ) : IForecastInteractor<OWMForecastListType> {
 
+    override fun onNewLocation(): Single<OWMForecastListType> =
+        repository
+            .onNewLocation()
+            .map { mapper.mapForecast(it) }
+
     override fun getForecast(): Single<OWMForecastListType> =
         repository
             .getForecast()

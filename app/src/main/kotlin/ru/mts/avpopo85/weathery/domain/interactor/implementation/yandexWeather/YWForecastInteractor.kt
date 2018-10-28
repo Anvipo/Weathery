@@ -15,6 +15,10 @@ class YWForecastInteractor
     private val mapper: IForecastMapper<YWForecastListResponseType, YWForecastListType>
 ) : IForecastInteractor<YWForecastListType> {
 
+    override fun onNewLocation(): Single<YWForecastListType> {
+        TODO("not implemented")
+    }
+
     override fun getForecast(): Single<YWForecastListType> =
         repository
             .getForecast()

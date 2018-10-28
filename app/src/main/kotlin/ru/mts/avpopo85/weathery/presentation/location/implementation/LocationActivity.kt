@@ -67,9 +67,8 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         super.onActivityResult(requestCode, resultCode, data)
 
         when (requestCode) {
-            APPLICATION_SETTINGS_REQUEST -> onApplicationSettingsRequestForGetCurrentLocationCode(
-                resultCode
-            )
+            APPLICATION_SETTINGS_REQUEST ->
+                onApplicationSettingsRequestForGetCurrentLocationCode(resultCode)
             LOCATION_BY_MAPS_REQUEST -> onLocationByMapsRequestCode(resultCode, data)
             else -> onUnexpectedApplicationBehavior()
         }
@@ -131,7 +130,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
         savePreferences(address)
 
-        setResult(LOCATION_RESULT_OK, data)
+        setResult(SETTING_RESULT_OK, data)
         finish()
     }
 

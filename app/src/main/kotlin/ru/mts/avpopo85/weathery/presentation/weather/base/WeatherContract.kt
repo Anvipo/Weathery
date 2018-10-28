@@ -9,6 +9,8 @@ interface WeatherContract :
 
         fun onNotFreshWeatherData()
 
+        fun onNewLocation()
+
     }
 
     interface Presenter<in V : View> : BaseSwipeToRefreshContract.Presenter<V> {
@@ -16,6 +18,8 @@ interface WeatherContract :
         fun onSwipeToRefresh()
 
         fun loadWeatherData()
+
+        fun onNewLocation()
 
     }
 

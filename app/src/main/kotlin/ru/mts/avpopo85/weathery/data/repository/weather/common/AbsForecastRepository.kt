@@ -17,6 +17,9 @@ abstract class AbsForecastRepository<T : IForecastRealmResponse>(
 
     protected abstract fun makeApiCall(): Single<List<T>>
 
+    protected fun onNewLocationHelper(): Single<List<T>> =
+        makeApiCall().flatMap(::saveInDB)
+
     protected fun getForecastHelper(): Single<List<T>> =
         if (!networkManager.isConnectedToInternet) {
             makeDBCall()

@@ -35,6 +35,8 @@ class OWMForecastRepository
     IForecastRepository<OWMForecastListResponseType>,
     IOWMRepository<OWMForecastResponseType> {
 
+    override fun onNewLocation(): Single<OWMForecastListResponseType> = onNewLocationHelper()
+
     override fun getForecast(): Single<OWMForecastListResponseType> = getForecastHelper()
 
     override fun makeApiCall(): Single<OWMForecastListResponseType> {

@@ -7,4 +7,6 @@ interface ICurrentWeatherInteractor<T : ICurrentWeather> {
 
     fun getCurrentWeather(): Single<T>
 
+    fun onNewLocation(): Single<T>
+
 }

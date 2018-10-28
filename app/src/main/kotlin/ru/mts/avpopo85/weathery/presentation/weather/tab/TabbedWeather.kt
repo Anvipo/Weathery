@@ -1,31 +1,29 @@
 package ru.mts.avpopo85.weathery.presentation.weather.tab
 
 
-import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_tabbed_weather.*
 import kotlinx.android.synthetic.main.appbar.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.activity.withProgressBar.AbsProgressBarActivity
-import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.openWeatherMap.view.fragment.OWMCurrentWeatherFragment
-import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.view.fragment.OWMForecastFragment
-import ru.mts.avpopo85.weathery.utils.common.onUnexpectedApplicationBehavior
+import ru.mts.avpopo85.weathery.presentation.settings.implementation.SettingsActivity
+import ru.mts.avpopo85.weathery.presentation.utils.LOCALITY_TAG
+import ru.mts.avpopo85.weathery.presentation.utils.SETTINGS_REQUEST
+import ru.mts.avpopo85.weathery.presentation.utils.SETTING_RESULT_OK
+import ru.mts.avpopo85.weathery.presentation.utils.WEATHER_API_TAG
+import ru.mts.avpopo85.weathery.presentation.weather.base.view.fragment.AbsWeatherFragment
+import ru.mts.avpopo85.weathery.presentation.weather.tab.adapter.SectionsPagerAdapter
 
 class TabbedWeather : AbsProgressBarActivity() {
 
     override val rootLayout: View by lazy { activity_tabbed_weather_CL }
-
-    private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
-
-    private val viewToolbar: Toolbar by lazy { toolbar }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,14 +31,10 @@ class TabbedWeather : AbsProgressBarActivity() {
 
         setSupportActionBar(viewToolbar)
 
-        mSectionsPagerAdapter =
-                SectionsPagerAdapter(
-                    fragmentManager = supportFragmentManager!!,
-                    context = applicationContext!!,
-                    rootLayout = rootLayout
-                )
+        currentLocation = sharedPreferences.getString(currentLocationPrefKey, null)
+        chosenWeatherAPI = sharedPreferences.getString(weatherAPIPrefKey, null)
 
-        activity_tabbed_weather_VP.adapter = mSectionsPagerAdapter!!
+        activity_tabbed_weather_VP.adapter = weatherTypesPagerAdapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -49,50 +43,77 @@ class TabbedWeather : AbsProgressBarActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.action_settings -> true
+        R.id.action_settings -> {
+            currentLocation = sharedPreferences.getString(currentLocationPrefKey, null)
+            chosenWeatherAPI = sharedPreferences.getString(weatherAPIPrefKey, null)
+
+            startActivityForResult<SettingsActivity>(SETTINGS_REQUEST)
+            true
+        }
         else -> super.onOptionsItemSelected(item)
     }
 
-    class SectionsPagerAdapter(
-        fragmentManager: FragmentManager,
-        private val context: Context,
-        private val rootLayout: View
-    ) :
-        FragmentStatePagerAdapter(fragmentManager) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-        override fun getItem(position: Int): Fragment {
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)!!
+        when (requestCode) {
+            SETTINGS_REQUEST -> onSettingsRequest(resultCode, data)
+            else -> onUnexpectedApplicationBehavior()
+        }
+    }
 
-            val weatherAPIPrefKey = context.getString(R.string.pref_key_weather_API)
+    private val weatherTypesPagerAdapter: SectionsPagerAdapter by lazy {
+        SectionsPagerAdapter(
+            fragmentManager = this@TabbedWeather.supportFragmentManager!!,
+            context = this@TabbedWeather.applicationContext!!,
+            rootLayout = this@TabbedWeather.rootLayout
+        )
+    }
 
-            val chosenWeatherAPI = sharedPreferences.getString(weatherAPIPrefKey, null)
+    private val viewToolbar: Toolbar by lazy { toolbar }
 
-            //todo: when added new api
-            return if (chosenWeatherAPI == null || chosenWeatherAPI == context.getString(R.string.open_weather_map)) {
-                when (position) {
-                    0 -> OWMCurrentWeatherFragment()
-                    else -> OWMForecastFragment()
+    private val sharedPreferences: SharedPreferences
+            by lazy { PreferenceManager.getDefaultSharedPreferences(this)!! }
+
+    private val currentLocationPrefKey: String by lazy { getString(R.string.pref_key_current_location) }
+
+    private val weatherAPIPrefKey: String by lazy { getString(R.string.pref_key_weather_API) }
+
+    private var currentLocation: String? = null
+
+    private var chosenWeatherAPI: String? = null
+
+    private fun onSettingsRequest(resultCode: Int, data: Intent?) {
+        when (resultCode) {
+            SETTING_RESULT_OK -> {
+                if (currentLocation != null) {
+                    val coordinates = data?.getStringExtra(LOCALITY_TAG)
+
+                    if (coordinates != currentLocation) {
+                        //TODO
+//                        repeat(weatherTypesPagerAdapter.count) {
+//                            val item = weatherTypesPagerAdapter.getItem(it) as AbsWeatherFragment
+//
+//                            item.onNewLocation()
+//                        }
+                    }
                 }
-            } else if (chosenWeatherAPI == context.getString(R.string.yandex_weather)) {
-                //todo: when yandex weather api will be available
-                when (position) {
-                    0 -> OWMCurrentWeatherFragment()
-                    else -> OWMForecastFragment()
-                }
-            } else {
-                context.onUnexpectedApplicationBehavior(rootLayout)
 
-                throw Exception(context.getString(R.string.unexpected_application_behavior))
+                if (chosenWeatherAPI != null) {
+                    val weatherAPI = data?.getStringExtra(WEATHER_API_TAG)
+
+                    if (weatherAPI != chosenWeatherAPI) {
+                        //TODO
+                        //do work
+
+                        val c = 1
+                    }
+
+                    val c = 1
+                }
             }
+            else -> onUnexpectedApplicationBehavior()
         }
-
-        override fun getCount(): Int = 2
-
-        override fun getPageTitle(position: Int): CharSequence? = when (position) {
-            0 -> context.getString(R.string.current_weather)
-            else -> context.getString(R.string.forecast)
-        }
-
     }
 
 }

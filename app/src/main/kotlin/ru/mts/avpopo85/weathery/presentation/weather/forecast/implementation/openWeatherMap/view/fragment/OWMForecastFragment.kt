@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.view_owm_forecast.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.openWeatherMap.OWMForecastModule
+import ru.mts.avpopo85.weathery.presentation.utils.FORECAST_INFO_REQUEST
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.view.fragment.AbsForecastFragment
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.adapter.base.IForecastAdapter
@@ -61,7 +62,7 @@ class OWMForecastFragment : AbsForecastFragment<OWMForecastType>() {
             putExtra(FORECAST_INFO_INTENT_TAG, itemData)
         }
 
-        activity!!.startActivityFromFragment(this, intent, 99)
+        activity!!.startActivityFromFragment(this, intent, FORECAST_INFO_REQUEST)
 
         //todo
         //не работает так как надо

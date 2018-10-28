@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import kotlinx.android.synthetic.main.view_owm_current_weather.*
 import kotlinx.android.synthetic.main.item_owm_current_weather.*
+import kotlinx.android.synthetic.main.view_owm_current_weather.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.openWeatherMap.OWMCurrentWeatherModule

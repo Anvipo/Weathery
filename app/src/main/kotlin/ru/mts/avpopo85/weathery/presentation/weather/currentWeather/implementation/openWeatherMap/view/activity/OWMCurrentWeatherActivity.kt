@@ -61,4 +61,8 @@ class OWMCurrentWeatherActivity :
         }
     }
 
+    override fun onNewLocation() {
+        TODO("not implemented")
+    }
+
 }

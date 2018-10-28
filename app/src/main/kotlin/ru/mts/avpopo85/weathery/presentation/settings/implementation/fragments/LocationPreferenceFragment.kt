@@ -10,7 +10,7 @@ import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.location.implementation.LocationActivity
 import ru.mts.avpopo85.weathery.presentation.utils.ADDRESS_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_REQUEST
-import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_RESULT_OK
+import ru.mts.avpopo85.weathery.presentation.utils.SETTING_RESULT_OK
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.common.onUnexpectedApplicationBehavior
 import ru.mts.avpopo85.weathery.utils.common.showLongSnackbar
@@ -41,7 +41,7 @@ class LocationPreferenceFragment : PreferenceFragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == LOCATION_REQUEST) {
-            if (resultCode == LOCATION_RESULT_OK) {
+            if (resultCode == SETTING_RESULT_OK) {
                 findPreference(currentGeolocationPrefKey)!!.apply {
                     val address: UserAddressType? = data?.getParcelableExtra(ADDRESS_TAG)
 

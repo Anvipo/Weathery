@@ -7,4 +7,6 @@ interface ICurrentWeatherRepository<T : ICurrentWeatherResponse> {
 
     fun getCurrentWeather(): Single<T>
 
+    fun onNewLocation(): Single<T>
+
 }

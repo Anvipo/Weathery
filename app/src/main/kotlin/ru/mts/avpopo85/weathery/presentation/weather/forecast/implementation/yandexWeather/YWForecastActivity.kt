@@ -50,4 +50,8 @@ class YWForecastActivity : AbsForecastActivity<YWForecastType>() {
         TODO("not implemented")
     }
 
+    override fun onNewLocation() {
+        TODO("not implemented")
+    }
+
 }

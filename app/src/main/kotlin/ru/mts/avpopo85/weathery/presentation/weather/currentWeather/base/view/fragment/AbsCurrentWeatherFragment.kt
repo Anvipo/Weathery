@@ -33,6 +33,15 @@ abstract class AbsCurrentWeatherFragment<T : ICurrentWeather> :
         presenter.loadWeatherData()
     }
 
-    protected abstract val presenter: CurrentWeatherContract.Presenter<T>
+    final override fun onNewLocation() {
+        if (!this::presenter.isInitialized) {
+            //TODO
+            initInjection()
+        }
+
+        presenter.onNewLocation()
+    }
+
+    protected open lateinit var presenter: CurrentWeatherContract.Presenter<T>
 
 }

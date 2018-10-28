@@ -7,4 +7,6 @@ interface IForecastRepository<T : Collection<IForecastResponse>> {
 
     fun getForecast(): Single<T>
 
+    fun onNewLocation(): Single<T>
+
 }

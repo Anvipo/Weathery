@@ -32,6 +32,8 @@ class OWMCurrentWeatherRepository
     ICurrentWeatherRepository<OWMCurrentWeatherResponseType>,
     IOWMRepository<OWMCurrentWeatherResponseType> {
 
+    override fun onNewLocation(): Single<OWMCurrentWeatherResponseType> = onNewLocationHelper()
+
     override fun getCurrentWeather(): Single<OWMCurrentWeatherResponseType> =
         getCurrentWeatherHelper()
 
