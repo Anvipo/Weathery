@@ -10,7 +10,7 @@ import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.location.implementation.LocationActivity
 import ru.mts.avpopo85.weathery.presentation.utils.ADDRESS_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_REQUEST
-import ru.mts.avpopo85.weathery.presentation.utils.SETTING_RESULT_OK
+import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_RESULT_OK
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.common.onUnexpectedApplicationBehavior
 import ru.mts.avpopo85.weathery.utils.common.showLongSnackbar
@@ -41,7 +41,7 @@ class LocationPreferenceFragment : PreferenceFragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == LOCATION_REQUEST) {
-            if (resultCode == SETTING_RESULT_OK) {
+            if (resultCode == LOCATION_RESULT_OK) {
                 findPreference(currentGeolocationPrefKey)!!.apply {
                     val address: UserAddressType? = data?.getParcelableExtra(ADDRESS_TAG)
 
@@ -50,10 +50,17 @@ class LocationPreferenceFragment : PreferenceFragment() {
                     summary = locality
                 }
             } else {
-                val part1 = getString(R.string.current_location_unknown)
-                val part2 = getString(R.string.you_must_find_out_it)
+                val sharedPreferences = preferenceManager.sharedPreferences!!
 
-                view!!.showLongSnackbar("$part1. $part2")
+                val currentLocation =
+                    sharedPreferences.getString(currentGeolocationPrefKey, null)
+
+                if (currentLocation == null) {
+                    val part1 = getString(R.string.current_location_unknown)
+                    val part2 = getString(R.string.you_must_find_out_it)
+
+                    view!!.showLongSnackbar("$part1. $part2")
+                }
             }
         } else {
             this.activity!!.applicationContext!!.onUnexpectedApplicationBehavior(view!!)

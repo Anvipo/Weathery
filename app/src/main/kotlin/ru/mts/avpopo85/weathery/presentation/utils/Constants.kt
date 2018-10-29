@@ -16,7 +16,7 @@ const val LOCATION_BY_MAPS_REQUEST = 9001
 
 const val LOCATION_BY_MAPS_RESULT_OK = 9010
 
-const val SETTING_RESULT_OK = 9002
+const val LOCATION_RESULT_OK = 9002
 
 const val COORDINATES_TAG: String = "coordinates"
 

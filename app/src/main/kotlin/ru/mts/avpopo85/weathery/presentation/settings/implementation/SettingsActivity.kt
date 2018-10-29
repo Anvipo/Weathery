@@ -16,7 +16,7 @@ import ru.mts.avpopo85.weathery.presentation.settings.base.SettingsContract
 import ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.LocationPreferenceFragment
 import ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.NetworkPreferenceFragment
 import ru.mts.avpopo85.weathery.presentation.utils.LOCALITY_TAG
-import ru.mts.avpopo85.weathery.presentation.utils.SETTING_RESULT_OK
+import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_RESULT_OK
 import ru.mts.avpopo85.weathery.presentation.utils.WEATHER_API_TAG
 import ru.mts.avpopo85.weathery.utils.common.showLongSnackbar
 
@@ -81,7 +81,7 @@ class SettingsActivity : PreferenceActivity(), SettingsContract.View {
                     putExtra(WEATHER_API_TAG, chosenWeatherAPI)
                 }
 
-                setResult(SETTING_RESULT_OK, intent)
+                setResult(LOCATION_RESULT_OK, intent)
 
                 super.onBackPressed()
             }

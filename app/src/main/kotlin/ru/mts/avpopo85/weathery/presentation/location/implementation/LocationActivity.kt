@@ -129,7 +129,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
         savePreferences(address)
 
-        setResult(SETTING_RESULT_OK, data)
+        setResult(LOCATION_RESULT_OK, data)
         finish()
     }
 

@@ -12,7 +12,7 @@ import ru.mts.avpopo85.weathery.presentation.settings.implementation.SettingsAct
 import ru.mts.avpopo85.weathery.presentation.utils.ADDRESS_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCALITY_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_REQUEST
-import ru.mts.avpopo85.weathery.presentation.utils.SETTING_RESULT_OK
+import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_RESULT_OK
 import ru.mts.avpopo85.weathery.presentation.weather.tab.TabbedWeather
 import ru.mts.avpopo85.weathery.presentation.welcome.base.WelcomeContract
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
@@ -39,7 +39,7 @@ class WelcomeActivity : AbsProgressBarActivity(), WelcomeContract.View {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == SETTING_RESULT_OK) {
+        if (resultCode == LOCATION_RESULT_OK) {
             val address: UserAddressType? = data?.getParcelableExtra(ADDRESS_TAG)
             val localityExtra: String? = data?.getStringExtra(LOCALITY_TAG)
 
