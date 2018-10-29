@@ -265,7 +265,6 @@
     <string name="could_not_find_your_location">Не удалось узнать Ваше местоположение</string>
     <string name="application_needs_permissions_to_location">Для установки местоположения приложению необходимы права доступа к местоположению</string>
     <string name="go_to_applications_settings_and_provide_permissions_to_location">Для установки Вашего местоположения, необходимо перейти в настройки приложения и включить разрешение доступа к местоположению</string>
-    <string name="welcome_to_weathery">Добро пожаловать в Weathery</string>
     <string name="detailed_information">Подробная информация</string>
     <string name="title_activity_tabbed_weather">Прогноз погоды</string>
     <string name="action_settings">Настройки</string>

@@ -5,6 +5,7 @@
         android:dialogTitle="@string/weather_api_dialog_title"
         android:entries="@array/weather_API"
         android:entryValues="@array/weather_API"
+        android:icon="@drawable/ic_cloud_upload_24dp"
         android:key="@string/pref_key_weather_API"
         android:title="@string/weather_resource_API" />
 
