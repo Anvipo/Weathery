@@ -39,7 +39,6 @@ class LocationPresenter
         val task: Disposable = interactor.checkInternetConnection()
             .compose(schedulerManagerModule.completableTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }
-            .doFinally { view?.hideLoadingProgress() }
             .subscribe(
                 ::onSuccessCheckInternetConnectionForGetCurrentLocationByGPS,
                 ::onErrorCheckInternetConnectionForGetCurrentLocationByGPS
@@ -96,6 +95,7 @@ class LocationPresenter
     }
 
     private fun onErrorCheckInternetConnectionForGetCurrentLocationByGPS(error: Throwable) {
+        view?.hideLoadingProgress()
         view?.showError(error)
     }
 

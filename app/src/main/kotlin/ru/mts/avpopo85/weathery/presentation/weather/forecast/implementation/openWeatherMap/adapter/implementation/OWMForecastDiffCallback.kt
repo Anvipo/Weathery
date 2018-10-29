@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
 
 
-class DiffCallback(
+class OWMForecastDiffCallback(
     private val newData: OWMForecastListType,
     private val oldData: OWMForecastListType
 ) : DiffUtil.Callback() {
@@ -21,11 +21,12 @@ class DiffCallback(
         oldData[oldItemPosition] == newData[newItemPosition]
 
     override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
-        val newProduct = newData[newItemPosition]
-        val oldProduct = oldData[oldItemPosition]
+//        val newProduct = newData[newItemPosition]
+//        val oldProduct = oldData[oldItemPosition]
 
         val diffBundle = Bundle()
 
+        //todo
         //my realization
 
         return if (diffBundle.size() == 0) null else diffBundle

@@ -3,6 +3,7 @@ package ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import androidx.core.content.edit
 import androidx.preference.PreferenceFragment
 import ru.mts.avpopo85.weathery.R
 
@@ -13,20 +14,27 @@ class NetworkPreferenceFragment : PreferenceFragment() {
 
         setHasOptionsMenu(true)
 
-        weatherAPIDefaultValue = getString(R.string.not_selected)!!
+        val weatherAPIs = resources.getStringArray(R.array.weather_API)
+
+        weatherAPIDefaultValue = weatherAPIs[0]
 
         weatherAPIPrefKey = getString(R.string.pref_key_weather_API)!!
 
         val sharedPreferences = preferenceManager.sharedPreferences!!
 
-        val currentLocation =
+        sharedPreferences.edit {
+            putString(weatherAPIPrefKey, weatherAPIDefaultValue)
+        }
+
+        val currentWeatherAPI =
             sharedPreferences.getString(weatherAPIPrefKey, weatherAPIDefaultValue)
                 ?: weatherAPIDefaultValue
 
-        val currentGeolocationPreference = findPreference(weatherAPIPrefKey)!!
+        val weatherAPIPreference = findPreference(weatherAPIPrefKey)!!
 
-        currentGeolocationPreference.apply {
-            summary = currentLocation
+        weatherAPIPreference.apply {
+            summary = currentWeatherAPI
+            setDefaultValue(weatherAPIDefaultValue)
         }
     }
 
@@ -48,9 +56,9 @@ class NetworkPreferenceFragment : PreferenceFragment() {
         SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
             when (key) {
                 weatherAPIPrefKey -> {
-                    val currentGeolocationPreference = findPreference(key)!!
+                    val weatherAPIPreference = findPreference(key)!!
 
-                    currentGeolocationPreference.summary =
+                    weatherAPIPreference.summary =
                             sharedPreferences.getString(key, weatherAPIDefaultValue)
                 }
                 else -> {

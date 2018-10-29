@@ -1,6 +1,7 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
+        android:defaultValue="Open Weather Map"
         android:dialogTitle="@string/weather_api_dialog_title"
         android:entries="@array/weather_API"
         android:entryValues="@array/weather_API"

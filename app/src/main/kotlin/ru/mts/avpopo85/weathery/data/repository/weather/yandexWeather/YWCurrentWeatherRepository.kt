@@ -27,8 +27,6 @@ class YWCurrentWeatherRepository
     ),
     ICurrentWeatherRepository<YWCurrentWeatherResponseType> {
 
-    override fun onNewLocation(): Single<YWCurrentWeatherResponseType> = onNewLocationHelper()
-
     override fun getCurrentWeather(): Single<YWCurrentWeatherResponseType> =
         getCurrentWeatherHelper()
 

@@ -27,8 +27,8 @@ abstract class AbsCurrentWeatherActivity<T : ICurrentWeather> :
         presenter.onSwipeToRefresh()
     }
 
-    final override fun initBindings() {
-        super.initBindings()
+    final override fun onStart() {
+        super.onStart()
 
         presenter.loadWeatherData()
     }

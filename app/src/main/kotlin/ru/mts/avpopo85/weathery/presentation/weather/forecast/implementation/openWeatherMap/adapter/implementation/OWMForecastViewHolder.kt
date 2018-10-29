@@ -21,15 +21,15 @@ class OWMForecastViewHolder(private val view: View) :
 
     @SuppressLint("SetTextI18n")
     override fun bind(
-        item: OWMForecastType,
+        data: OWMForecastType,
         clickListener: (OWMForecastType) -> Unit
     ) {
-        dateTV.text = item.date
-        descriptionTV.text = item.weather.description
-        temperatureTV.text = "${item.main.temperature}$CELSIUS_DEGREE"
+        dateTV.text = data.date
+        descriptionTV.text = data.weather.description
+        temperatureTV.text = "${data.main.temperature}$CELSIUS_DEGREE"
 
-        view.setOnClickListener { clickListener(item) }
-        moreB.setOnClickListener { clickListener(item) }
+        view.setOnClickListener { clickListener(data) }
+        moreB.setOnClickListener { clickListener(data) }
     }
 
 }

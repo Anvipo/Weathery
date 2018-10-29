@@ -42,19 +42,16 @@ abstract class AbsForecastFragment<T : IForecast> :
         presenter.onSwipeToRefresh()
     }
 
-    final override fun initBindings() {
-        super.initBindings()
+    final override fun onStart() {
+        super.onStart()
 
         presenter.loadWeatherData()
     }
 
-    final override fun onNewLocation() {
-        if (!this::presenter.isInitialized) {
-            //TODO
-            initInjection()
-        }
+    final override fun onStop() {
+        super.onStop()
 
-        presenter.onNewLocation()
+        hideLayout()
     }
 
     final override val toolbarTitle: String by lazy { getString(R.string.forecast) }

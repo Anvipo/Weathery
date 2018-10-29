@@ -17,6 +17,7 @@ import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
 @Module
 class LocationModule(private val context: LocationActivity) {
 
+    @Suppress("Annotator")
     @Provides
     @LocationScope
     fun providePermissionsRepository(): IPermissionsRepository =

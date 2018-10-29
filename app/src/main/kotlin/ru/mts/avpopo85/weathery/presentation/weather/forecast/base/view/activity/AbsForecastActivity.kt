@@ -41,8 +41,8 @@ abstract class AbsForecastActivity<T : IForecast> :
         presenter.onSwipeToRefresh()
     }
 
-    final override fun initBindings() {
-        super.initBindings()
+    final override fun onStart() {
+        super.onStart()
 
         presenter.loadWeatherData()
     }

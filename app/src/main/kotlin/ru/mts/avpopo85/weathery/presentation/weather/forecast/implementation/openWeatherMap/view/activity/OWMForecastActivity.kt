@@ -48,8 +48,4 @@ class OWMForecastActivity : AbsForecastActivity<OWMForecastType>() {
         startActivity<OWMForecastInfoActivity>(FORECAST_INFO_INTENT_TAG to itemData)
     }
 
-    override fun onNewLocation() {
-        TODO("not implemented")
-    }
-
 }

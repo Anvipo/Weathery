@@ -6,18 +6,22 @@ import io.reactivex.disposables.CompositeDisposable
 abstract class AbsBasePresenter<V : BaseContract.View> :
     BaseContract.Presenter<V> {
 
-    protected var view: V? = null
-
-    protected val compositeDisposable = CompositeDisposable()
-
-    override fun onBindView(view: V) {
+    final override fun onBindView(view: V) {
         this.view = view
     }
 
     override fun onUnbindView() {
-        compositeDisposable.clear()
+        clearCompositeDisposable()
 
         this.view = null
     }
+
+    final override fun clearCompositeDisposable() {
+        compositeDisposable.clear()
+    }
+
+    protected var view: V? = null
+
+    protected val compositeDisposable = CompositeDisposable()
 
 }

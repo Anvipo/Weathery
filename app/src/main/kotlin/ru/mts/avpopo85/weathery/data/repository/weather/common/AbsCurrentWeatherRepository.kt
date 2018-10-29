@@ -24,8 +24,6 @@ abstract class AbsCurrentWeatherRepository<T : ICurrentWeatherRealmResponse>(
             makeDBCall()
         }
 
-    protected fun onNewLocationHelper(): Single<T> = makeApiCall().flatMap(::saveInDB)
-
     private fun makeDBCall(): Single<T> =
         currentWeatherDbService
             .getCurrentWeatherResponse(networkManager.isConnectedToInternet)

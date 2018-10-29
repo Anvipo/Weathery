@@ -27,19 +27,16 @@ abstract class AbsCurrentWeatherFragment<T : ICurrentWeather> :
         presenter.onSwipeToRefresh()
     }
 
-    final override fun initBindings() {
-        super.initBindings()
+    final override fun onStart() {
+        super.onStart()
 
         presenter.loadWeatherData()
     }
 
-    final override fun onNewLocation() {
-        if (!this::presenter.isInitialized) {
-            //TODO
-            initInjection()
-        }
+    final override fun onStop() {
+        super.onStop()
 
-        presenter.onNewLocation()
+        hideLayout()
     }
 
     protected open lateinit var presenter: CurrentWeatherContract.Presenter<T>

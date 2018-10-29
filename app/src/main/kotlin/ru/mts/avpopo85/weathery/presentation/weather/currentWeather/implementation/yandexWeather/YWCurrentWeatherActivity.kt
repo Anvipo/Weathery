@@ -63,8 +63,4 @@ class YWCurrentWeatherActivity : AbsCurrentWeatherActivity<YWCurrentWeatherType>
         }
     }
 
-    override fun onNewLocation() {
-        TODO("not implemented")
-    }
-
 }

@@ -13,16 +13,6 @@ abstract class AbsForecastPresenter<T : IForecast>(
     AbsWeatherPresenter<ForecastContract.View<T>>(),
     ForecastContract.Presenter<T> {
 
-    override fun onNewLocation() {
-        val task: Disposable = interactor.onNewLocation()
-            .compose(schedulerManagerModule.singleTransformer())
-            .doOnSubscribe { view?.showLoadingProgress() }
-            .doFinally { view?.hideLoadingProgress() }
-            .subscribe(::onSuccessLoadingWeatherData, ::onErrorLoadingWeatherData)
-
-        compositeDisposable.add(task)
-    }
-
     override fun loadWeatherData() {
         val task: Disposable = interactor.getForecast()
             .compose(schedulerManagerModule.singleTransformer())
@@ -33,7 +23,7 @@ abstract class AbsForecastPresenter<T : IForecast>(
         compositeDisposable.add(task)
     }
 
-    override fun onSwipeToRefresh() {
+    final override fun onSwipeToRefresh() {
         val task: Disposable = interactor.getForecast()
             .compose(schedulerManagerModule.singleTransformer())
             .doFinally { view?.hideRefreshingIndicator() }

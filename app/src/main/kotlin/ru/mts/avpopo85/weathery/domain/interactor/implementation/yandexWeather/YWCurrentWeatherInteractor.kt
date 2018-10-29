@@ -14,10 +14,6 @@ class YWCurrentWeatherInteractor
     private val mapper: ICurrentWeatherMapper<YWCurrentWeatherResponseType, YWCurrentWeatherType>
 ) : ICurrentWeatherInteractor<YWCurrentWeatherType> {
 
-    override fun onNewLocation(): Single<YWCurrentWeatherType> {
-        TODO("not implemented")
-    }
-
     override fun getCurrentWeather(): Single<YWCurrentWeatherType> =
         repository
             .getCurrentWeather()

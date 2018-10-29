@@ -34,6 +34,8 @@ interface BaseContract {
 
         fun onUnbindView()
 
+        fun clearCompositeDisposable()
+
     }
 
 }

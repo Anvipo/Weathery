@@ -19,9 +19,4 @@ class OWMCurrentWeatherInteractor
             .getCurrentWeather()
             .map { mapper.mapCurrentWeatherResponse(it) }
 
-    override fun onNewLocation(): Single<OWMCurrentWeatherType> =
-        repository
-            .onNewLocation()
-            .map { mapper.mapCurrentWeatherResponse(it) }
-
 }

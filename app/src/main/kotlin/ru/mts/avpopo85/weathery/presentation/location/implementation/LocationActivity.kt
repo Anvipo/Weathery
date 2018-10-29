@@ -51,16 +51,15 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         checkPlayServicesAvailable()
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        presenter.onBindView(this)
-    }
-
     override fun onStop() {
         super.onStop()
 
+        presenter.clearCompositeDisposable()
+    }
+
+    override fun onDestroy() {
         presenter.onUnbindView()
+        super.onDestroy()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -269,21 +268,19 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
                     val coordinates: LatLng? = data.getParcelableExtra(COORDINATES_TAG)
 
                     if (coordinates != null) {
-                        injectDependencies()
                         presenter.onLocationByMapsRequestActivityResult(coordinates)
                     } else {
-                        showLocationError()
                         hideLoadingProgress()
+                        showLocationError()
                     }
                 }
             }
-            else -> onUnexpectedApplicationBehavior()
+            else -> showLocationError()
         }
     }
 
     private fun onApplicationSettingsRequestForGetCurrentLocationCode(resultCode: Int) {
         if (resultCode == 0) {
-            injectDependencies()
             presenter.onApplicationSettingsRequestForGetCurrentLocationActivityResult()
         }
     }

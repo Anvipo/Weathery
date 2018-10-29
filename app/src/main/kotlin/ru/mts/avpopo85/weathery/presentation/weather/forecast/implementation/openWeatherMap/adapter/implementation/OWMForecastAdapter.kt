@@ -20,7 +20,7 @@ class OWMForecastAdapter(override val clickListener: (OWMForecastType) -> Unit) 
         }
 
     override fun updateData(newData: OWMForecastListType) {
-        val diffCallback = DiffCallback(newData = newData, oldData = data)
+        val diffCallback = OWMForecastDiffCallback(newData = newData, oldData = data)
 
         //for large data sets it is advised to move the calculation to background thread
         val diffResult = DiffUtil.calculateDiff(diffCallback)
@@ -97,7 +97,7 @@ class OWMForecastAdapter(override val clickListener: (OWMForecastType) -> Unit) 
     }
 
     override fun onBindViewHolder(holder: OWMForecastViewHolder, position: Int) {
-        holder.bind(item = data[position], clickListener = clickListener)
+        holder.bind(data = data[position], clickListener = clickListener)
     }
 
     override fun getItemCount(): Int = data.size
