@@ -33,6 +33,6 @@ class LocationInteractor
         locationRepository.getAddressFromCoordinates(coordinates)
 
     override fun saveAddress(address: UserAddressType): Single<UserAddressType> =
-        locationRepository.saveAddress(address)
+        locationRepository.saveAddressToDB(address)
 
 }

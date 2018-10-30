@@ -8,7 +8,6 @@ import ru.mts.avpopo85.weathery.domain.interactor.base.ILocationInteractor
 import ru.mts.avpopo85.weathery.presentation.base.common.AbsBasePresenter
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
 import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
-import ru.mts.avpopo85.weathery.utils.common.GoogleGeocodeException
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import javax.inject.Inject
 
@@ -138,11 +137,7 @@ class LocationPresenter
     }
 
     private fun onErrorGetAddressFromCoordinates(error: Throwable) {
-        if (error is GoogleGeocodeException) {
-            view?.showError(error)
-        } else {
-            view?.showGetAddressFromCoordinatesError(error)
-        }
+        view?.showGetAddressFromCoordinatesError(error)
     }
 
     private fun checkLocationPermissions() {

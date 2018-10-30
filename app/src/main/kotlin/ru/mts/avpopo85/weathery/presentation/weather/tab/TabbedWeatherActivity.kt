@@ -11,9 +11,11 @@ import kotlinx.android.synthetic.main.appbar.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.activity.withProgressBar.AbsProgressBarActivity
 import ru.mts.avpopo85.weathery.presentation.settings.implementation.SettingsActivity
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.view.activity.OWMForecastInfoActivity
 import ru.mts.avpopo85.weathery.presentation.weather.tab.adapter.SectionsPagerAdapter
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 
-class TabbedWeather : AbsProgressBarActivity() {
+class TabbedWeatherActivity : AbsProgressBarActivity() {
 
     override val rootLayout: View by lazy { activity_tabbed_weather_CL }
 
@@ -39,11 +41,14 @@ class TabbedWeather : AbsProgressBarActivity() {
         else -> super.onOptionsItemSelected(item)
     }
 
+    val clickListener: (Pair<String, OWMForecastType>) -> Unit =
+        { startActivity<OWMForecastInfoActivity>(it) }
+
     private val weatherTypesPagerAdapter: SectionsPagerAdapter by lazy {
         SectionsPagerAdapter(
-            fragmentManager = this@TabbedWeather.supportFragmentManager!!,
-            context = this@TabbedWeather.applicationContext!!,
-            rootLayout = this@TabbedWeather.rootLayout
+            fragmentManager = this@TabbedWeatherActivity.supportFragmentManager!!,
+            context = this@TabbedWeatherActivity.applicationContext!!,
+            rootLayout = this@TabbedWeatherActivity.rootLayout
         )
     }
 

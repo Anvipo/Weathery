@@ -7,6 +7,4 @@ interface IForecastInteractor<T : Collection<IForecast>> {
 
     fun getForecast(): Single<T>
 
-    fun onNewLocation(): Single<T>
-
 }

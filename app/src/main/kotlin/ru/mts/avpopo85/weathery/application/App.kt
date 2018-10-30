@@ -3,7 +3,6 @@ package ru.mts.avpopo85.weathery.application
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
-import ru.mts.avpopo85.weathery.data.network.retrofit.location.utils.Geocoder.GOOGLE_GEOCODER_BASE_URL
 import ru.mts.avpopo85.weathery.di.global.*
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMConstants
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWConstants
@@ -24,16 +23,18 @@ class App : Application() {
     private fun initDagger() {
         appComponent = DaggerAppComponent
             .builder()
+            .sharedPreferencesModule(SharedPreferencesModule(this))
             .appModule(AppModule(this))
             .networkModule(NetworkModule(this))
             .realmModule(RealmModule(this))
             .oWMRetrofitModule(OWMRetrofitModule(OWMConstants.BASE_URL))
             .yWRetrofitModule(YWRetrofitModule(YWConstants.BASE_URL))
-            .geocoderRetrofitModule(GeocoderRetrofitModule(GOOGLE_GEOCODER_BASE_URL))
             .build()
     }
 
     companion object {
+
+        val TAG: String = App::class.java.simpleName
 
         lateinit var appComponent: AppComponent
             private set

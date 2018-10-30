@@ -24,7 +24,6 @@ class SectionsPagerAdapter(
 
         val chosenWeatherAPI = sharedPreferences.getString(weatherAPIPrefKey, null)
 
-        //todo: when added new api
         return if (chosenWeatherAPI == null || chosenWeatherAPI == context.getString(R.string.open_weather_map)) {
             when (position) {
                 0 -> OWMCurrentWeatherFragment()

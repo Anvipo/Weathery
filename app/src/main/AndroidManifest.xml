@@ -63,7 +63,7 @@
             android:label="@string/settings"
             android:theme="@style/MyAppTheme.SettingsTheme" />
         <activity
-            android:name=".presentation.weather.tab.TabbedWeather"
+            android:name=".presentation.weather.tab.TabbedWeatherActivity"
             android:label="@string/title_activity_tabbed_weather" />
     </application>
 

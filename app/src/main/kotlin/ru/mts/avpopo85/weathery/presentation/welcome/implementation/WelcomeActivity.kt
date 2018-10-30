@@ -13,7 +13,7 @@ import ru.mts.avpopo85.weathery.presentation.utils.ADDRESS_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCALITY_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_REQUEST
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_RESULT_OK
-import ru.mts.avpopo85.weathery.presentation.weather.tab.TabbedWeather
+import ru.mts.avpopo85.weathery.presentation.weather.tab.TabbedWeatherActivity
 import ru.mts.avpopo85.weathery.presentation.welcome.base.WelcomeContract
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 
@@ -22,8 +22,6 @@ class WelcomeActivity : AbsProgressBarActivity(), WelcomeContract.View {
     override val rootLayout: View by lazy { activity_welcome_CL }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.MyAppTheme)
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
 
@@ -68,7 +66,7 @@ class WelcomeActivity : AbsProgressBarActivity(), WelcomeContract.View {
         when (locality) {
             null -> startActivityForResult<SettingsActivity>(LOCATION_REQUEST)
             else -> {
-                startActivity<TabbedWeather>()
+                startActivity<TabbedWeatherActivity>()
                 finish()
             }
         }

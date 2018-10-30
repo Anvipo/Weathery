@@ -28,5 +28,3 @@ sealed class GpsCallException(message: String) : Throwable(message) {
 }
 
 class ExtractAddressException(message: String) : Throwable(message)
-
-class GoogleGeocodeException(message: String) : Throwable(message)

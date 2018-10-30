@@ -15,7 +15,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
-        versionName "0.83"
+        versionName "0.84"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -26,20 +26,6 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'),
                     'proguard-rules.pro'
-        }
-    }
-    // When building Android App Bundles, the splits block is ignored.
-    splits {
-        density {
-            enable true
-            exclude 'ldpi', 'tvdpi'/*, 'xxxhdpi'*/
-            compatibleScreens 'small', 'normal', 'large', 'xlarge'
-        }
-        abi {
-            enable true
-            reset()
-            include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-            universalApk true //generate an additional APK that contains all the ABIs
         }
     }
     bundle {

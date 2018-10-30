@@ -14,7 +14,7 @@ abstract class AbsForecastFragment<T : IForecast> :
     AbsWeatherFragment(),
     ForecastContract.View<T> {
 
-    abstract val clickListener: (T) -> Unit
+    abstract val itemClickListener: (T) -> Unit
 
     final override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

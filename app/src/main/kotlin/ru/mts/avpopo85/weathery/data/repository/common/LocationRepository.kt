@@ -2,8 +2,11 @@ package ru.mts.avpopo85.weathery.data.repository.common
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import android.location.Address
 import android.location.Location
+import android.util.Log
+import androidx.core.content.edit
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.maps.model.LatLng
 import com.patloew.rxlocation.RxLocation
@@ -11,11 +14,11 @@ import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Single
 import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserAddress
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserLocale
-import ru.mts.avpopo85.weathery.data.network.utils.IGeocoder
 import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import ru.mts.avpopo85.weathery.data.repository.common.utils.ONE_SECOND_IN_MILLIS
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
@@ -33,7 +36,7 @@ class LocationRepository
     private val context: Context,
     private val dbService: ILocationDbService<UserAddressType>,
     private val networkManager: NetworkManager,
-    private val geocoder: IGeocoder
+    private val sharedPreferences: SharedPreferences
 ) : ILocationRepository {
 
     override fun checkInternetConnection(): Completable =
@@ -65,13 +68,20 @@ class LocationRepository
             longitude = coordinates.longitude
         }
 
-        //todo
-//      return  onServiceIsNotAvailable(location, IOException(""))
-
         return makeAddressFromLocation(location)
     }
 
-    override fun saveAddress(address: UserAddressType): Single<UserAddressType> =
+    override fun saveAddressToSharedPreferences(address: UserAddressType): Single<UserAddressType> {
+        val key = context.getString(R.string.pref_key_current_location)
+
+        sharedPreferences.edit(true) {
+            putString(key, address.locality)
+        }
+
+        return Single.just(address)
+    }
+
+    override fun saveAddressToDB(address: UserAddressType): Single<UserAddressType> =
         dbService.saveCurrentAddress(address)
 
     private val rxLocation by lazy { RxLocation(context) }
@@ -86,7 +96,8 @@ class LocationRepository
     private fun getCurrentAddressByGPS(success: Boolean): Single<UserAddressType> =
         makeGpsCall(success)
             .flatMap(::makeAddressFromLocation)
-            .flatMap(::saveAddress)
+            .flatMap(::saveAddressToDB)
+            .flatMap(::saveAddressToSharedPreferences)
 
     private fun makeGpsCall(success: Boolean): Single<Location> =
         when {
@@ -149,9 +160,10 @@ class LocationRepository
         location: Location,
         error: IOException
     ): Single<UserAddressType> {
-        error.printStackTrace()
+        val message = "${error.message}\n$location"
+        Log.d(App.TAG, message, error)
 
-        return geocoder.geocodeLocation(location).flatMap(::saveAddress)
+        return Single.error(error)
     }
 
     private fun mapUserAddress(address: Address): UserAddressType =

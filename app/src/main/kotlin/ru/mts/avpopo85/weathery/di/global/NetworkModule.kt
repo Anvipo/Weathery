@@ -5,9 +5,6 @@ import android.net.ConnectivityManager
 import androidx.core.content.getSystemService
 import dagger.Module
 import dagger.Provides
-import ru.mts.avpopo85.weathery.data.network.retrofit.location.IGoogleGeocoderApiService
-import ru.mts.avpopo85.weathery.data.network.utils.GoogleGeocoder
-import ru.mts.avpopo85.weathery.data.network.utils.IGeocoder
 import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import javax.inject.Singleton
 
@@ -18,11 +15,6 @@ class NetworkModule(private val context: Context) {
     @Singleton
     fun provideNetworkManager(connectivityManager: ConnectivityManager): NetworkManager =
         NetworkManager(connectivityManager, context)
-
-    @Provides
-    @Singleton
-    fun provideGoogleGeocoder(geocoderApiService: IGoogleGeocoderApiService): IGeocoder =
-        GoogleGeocoder(geocoderApiService, context)
 
     @Provides
     @Singleton

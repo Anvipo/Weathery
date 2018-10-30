@@ -13,7 +13,9 @@ interface ILocationRepository {
 
     fun getAddressFromCoordinates(coordinates: LatLng): Single<UserAddressType>
 
-    fun saveAddress(address: UserAddressType): Single<UserAddressType>
+    fun saveAddressToDB(address: UserAddressType): Single<UserAddressType>
+
+    fun saveAddressToSharedPreferences(address: UserAddressType): Single<UserAddressType>
 
     fun checkInternetConnection(): Completable
 

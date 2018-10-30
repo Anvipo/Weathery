@@ -5,8 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.content.edit
-import androidx.preference.PreferenceManager
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.maps.model.LatLng
@@ -127,8 +125,6 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
             putExtra(ADDRESS_TAG, address)
         }
 
-        savePreferences(address)
-
         setResult(LOCATION_RESULT_OK, data)
         finish()
     }
@@ -230,17 +226,6 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
             .inject(this)
 
         presenter.onBindView(this)
-    }
-
-    //TODO: do it in data layer (mb)
-    private fun savePreferences(address: UserAddressType) {
-        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)!!
-
-        val key = getString(R.string.pref_key_current_location)
-
-        sharedPref.edit(true) {
-            putString(key, address.locality)
-        }
     }
 
     private fun checkPlayServicesAvailable() {

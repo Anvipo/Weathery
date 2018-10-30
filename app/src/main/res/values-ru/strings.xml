@@ -225,7 +225,6 @@
     <string name="error">Ошибка</string>
     <string name="by_map">С помощью карты</string>
     <string name="gps_is_required">Необходимо включить GPS</string>
-    <string name="there_are_problems_geocoding">Возникли проблемы геокодирования</string>
     <string name="night_forecast">Прогноз на ночь</string>
     <string name="morning_forecast">Прогноз на утро</string>
     <string name="day_forecast">Прогноз на день</string>
@@ -261,7 +260,6 @@
     <string name="previous_location_unknown">Предыдущее местоположение неизвестно</string>
     <string name="no_previous_address_data">Предыдущих данных о местоположении нет</string>
     <string name="unable_to_find_the_address_of_the_specified_location">Невозможно узнать адрес указанного местоположения</string>
-    <string name="could_not_find_address_of_your_current_location">Не удалось узнать адрес Вашего текущего местоположения</string>
     <string name="could_not_find_your_location">Не удалось узнать Ваше местоположение</string>
     <string name="application_needs_permissions_to_location">Для установки местоположения приложению необходимы права доступа к местоположению</string>
     <string name="go_to_applications_settings_and_provide_permissions_to_location">Для установки Вашего местоположения, необходимо перейти в настройки приложения и включить разрешение доступа к местоположению</string>

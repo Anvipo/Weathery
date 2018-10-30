@@ -1,6 +1,7 @@
 package ru.mts.avpopo85.weathery.di.global
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -12,7 +13,6 @@ import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMCurrent
 import ru.mts.avpopo85.weathery.data.network.retrofit.openWeatherMap.IOWMForecastApiService
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWCurrentWeatherApiService
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
-import ru.mts.avpopo85.weathery.data.network.utils.IGeocoder
 import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import ru.mts.avpopo85.weathery.data.repository.common.LocationRepository
 import ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap.OWMCurrentWeatherRepository
@@ -112,7 +112,8 @@ class AppModule(private val context: Context) {
     fun provideLocationsRepository(
         dbService: ILocationDbService<UserAddressType>,
         networkManager: NetworkManager,
-        geocoder: IGeocoder
-    ): ILocationRepository = LocationRepository(context, dbService, networkManager, geocoder)
+        sharedPreferences: SharedPreferences
+    ): ILocationRepository =
+        LocationRepository(context, dbService, networkManager, sharedPreferences)
 
 }

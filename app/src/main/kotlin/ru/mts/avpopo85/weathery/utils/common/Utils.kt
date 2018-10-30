@@ -118,7 +118,6 @@ fun Context.getFullApplicationInfo(): String = try {
 
 fun Context.parseError(error: Throwable): String =
     when (error) {
-        is GoogleGeocodeException -> onGoogleGeocodeException()
         is TimeoutException -> onTimeoutException()
         is HttpException -> onHttpException(error)
         is UnknownHostException -> onUnknownHostException()
@@ -129,9 +128,6 @@ fun Context.parseError(error: Throwable): String =
 
 fun Context.getErrorMessageOrDefault(error: Throwable): String =
     error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)
-
-private fun Context.onGoogleGeocodeException(): String =
-    getString(R.string.could_not_find_address_of_your_current_location)
 
 private fun Context.onTimeoutException(): String {
     val part1 = getString(R.string.request_timeout)
