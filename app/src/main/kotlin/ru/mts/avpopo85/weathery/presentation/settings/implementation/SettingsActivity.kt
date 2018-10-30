@@ -3,12 +3,18 @@ package ru.mts.avpopo85.weathery.presentation.settings.implementation
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceActivity
+import android.preference.RingtonePreference
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
+import androidx.preference.ListPreference
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragment
 import androidx.preference.PreferenceManager
 import ru.mts.avpopo85.weathery.R
@@ -51,27 +57,32 @@ class SettingsActivity : PreferenceActivity(), SettingsContract.View {
         setupActionBar()
     }
 
+    private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(this)!! }
+
+    private val currentLocation: String?
+        get() {
+            val currentLocationPrefKey = getString(R.string.pref_key_current_location)
+
+            return sharedPreferences.getString(currentLocationPrefKey, null)
+        }
+
+    private val chosenWeatherAPI: String
+        get() {
+            val weatherAPIPrefKey = getString(R.string.pref_key_weather_API)
+
+            val weatherAPIs = resources.getStringArray(R.array.weather_API)
+
+            val weatherAPIDefaultValue = weatherAPIs[0]
+
+            return sharedPreferences.getString(weatherAPIPrefKey, weatherAPIDefaultValue)!!
+        }
+
     private fun onBackPressedInHeaders() {
-        val currentLocationPrefKey = getString(R.string.pref_key_current_location)
-
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)!!
-
-        val currentLocation = sharedPreferences.getString(currentLocationPrefKey, null)
-
-        val weatherAPIPrefKey = getString(R.string.pref_key_weather_API)
-
-        val chosenWeatherAPI = sharedPreferences.getString(weatherAPIPrefKey, null)
-
+        @Suppress("IntroduceWhenSubject")
         when {
             currentLocation == null -> {
                 val part1 = getString(R.string.current_location_unknown)
                 val part2 = getString(R.string.you_must_find_out_it)
-
-                listView!!.showLongSnackbar("$part1. $part2")
-            }
-            chosenWeatherAPI == null -> {
-                val part1 = getString(R.string.you_did_not_select_weather_API)
-                val part2 = getString(R.string.you_must_select_it)
 
                 listView!!.showLongSnackbar("$part1. $part2")
             }
@@ -117,6 +128,54 @@ class SettingsActivity : PreferenceActivity(), SettingsContract.View {
         private fun isXLargeTablet(context: Context): Boolean =
             context.resources.configuration.screenLayout and
                     Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_XLARGE
+
+        private val bindPreferenceSummaryToValueListener =
+            Preference.OnPreferenceChangeListener { preference, value ->
+                val stringValue = value.toString()
+
+                if (preference is ListPreference) {
+                    val index = preference.findIndexOfValue(stringValue)
+
+                    val summaryValue = if (index >= 0)
+                        preference.entryValues[index]
+                    else
+                        null
+
+                    preference.summary = summaryValue
+                } else if (preference is RingtonePreference) {
+                    if (TextUtils.isEmpty(stringValue)) {
+                        preference.setSummary(R.string.pref_ringtone_silent)
+                    } else {
+                        val ringtone = RingtoneManager
+                            .getRingtone(preference.getContext(), Uri.parse(stringValue))
+
+                        if (ringtone == null) {
+                            preference.setSummary(null)
+                        } else {
+                            val name = ringtone.getTitle(preference.getContext())
+                            preference.setSummary(name)
+                        }
+                    }
+                } else preference.summary = stringValue
+
+                true
+            }
+
+        fun bindPreferenceSummaryToValue(
+            preference: Preference,
+            defaultValue: String
+        ) {
+            preference.onPreferenceChangeListener = bindPreferenceSummaryToValueListener
+
+            // Trigger the listener immediately with the preference's
+            // current value.
+            bindPreferenceSummaryToValueListener.onPreferenceChange(
+                preference,
+                PreferenceManager
+                    .getDefaultSharedPreferences(preference.context)
+                    .getString(preference.key, defaultValue)
+            )
+        }
 
     }
 }

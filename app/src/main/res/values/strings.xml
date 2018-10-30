@@ -275,8 +275,7 @@
     <string name="network">Network</string>
     <string name="weather_api_dialog_title">Select which weather resource API will be used</string>
     <string name="weather_resource_API">Weather Resource API</string>
-    <string name="you_did_not_select_weather_API">You did not select weather API</string>
-    <string name="you_must_select_it">You must select it</string>
+    <string name="pref_ringtone_silent">Silent</string>
 
     <string-array name="weather_API">
         <item>Open Weather Map</item>

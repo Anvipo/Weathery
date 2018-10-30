@@ -1,13 +1,12 @@
 package ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragment
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.location.implementation.LocationActivity
+import ru.mts.avpopo85.weathery.presentation.settings.implementation.SettingsActivity
 import ru.mts.avpopo85.weathery.presentation.utils.ADDRESS_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_REQUEST
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_RESULT_OK
@@ -29,12 +28,11 @@ class LocationPreferenceFragment : PreferenceFragment() {
         val sharedPreferences = preferenceManager.sharedPreferences!!
 
         val currentLocation =
-            sharedPreferences.getString(currentGeolocationPrefKey, currentGeolocationDefaultValue)
-                ?: currentGeolocationDefaultValue
+            sharedPreferences.getString(currentGeolocationPrefKey, currentGeolocationDefaultValue)!!
 
         val currentGeolocationPreference = findPreference(currentGeolocationPrefKey)!!
 
-        currentGeolocationPreference.summary = currentLocation
+        SettingsActivity.bindPreferenceSummaryToValue(currentGeolocationPreference, currentLocation)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -81,38 +79,7 @@ class LocationPreferenceFragment : PreferenceFragment() {
             }
         }
 
-    override fun onResume() {
-        super.onResume()
-        preferenceScreen
-            .sharedPreferences
-            .registerOnSharedPreferenceChangeListener(listener)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        preferenceScreen
-            .sharedPreferences
-            .unregisterOnSharedPreferenceChangeListener(listener)
-    }
-
-    private val listener =
-        SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
-            when (key) {
-                currentGeolocationPrefKey -> {
-                    val currentGeolocationPreference = findPreference(key)!!
-
-                    currentGeolocationPreference.summary =
-                            sharedPreferences.getString(key, currentGeolocationDefaultValue)
-                }
-                else -> {
-                    Log.d(TAG, "unknown key")
-                }
-            }
-        }
-
     companion object {
-
-        val TAG: String = LocationPreferenceFragment::class.java.simpleName
 
         lateinit var currentGeolocationDefaultValue: String
 

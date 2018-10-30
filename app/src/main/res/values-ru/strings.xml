@@ -271,7 +271,6 @@
     <string name="network">Сеть</string>
     <string name="weather_api_dialog_title">Выберите, какой API погодного ресурса будет использован</string>
     <string name="weather_resource_API">API погодного ресурса</string>
-    <string name="you_did_not_select_weather_API">Вы не выбрали API погодного ресурса</string>
-    <string name="you_must_select_it">Вы должны выбрать его</string>
+    <string name="pref_ringtone_silent">Без звука</string>
 
 </resources>

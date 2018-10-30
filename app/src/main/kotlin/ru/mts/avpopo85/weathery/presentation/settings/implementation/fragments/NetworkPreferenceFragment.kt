@@ -1,11 +1,10 @@
 package ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.core.content.edit
 import androidx.preference.PreferenceFragment
 import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.presentation.settings.implementation.SettingsActivity
 
 class NetworkPreferenceFragment : PreferenceFragment() {
 
@@ -27,49 +26,14 @@ class NetworkPreferenceFragment : PreferenceFragment() {
         }
 
         val currentWeatherAPI =
-            sharedPreferences.getString(weatherAPIPrefKey, weatherAPIDefaultValue)
-                ?: weatherAPIDefaultValue
+            sharedPreferences.getString(weatherAPIPrefKey, weatherAPIDefaultValue)!!
 
         val weatherAPIPreference = findPreference(weatherAPIPrefKey)!!
 
-        weatherAPIPreference.apply {
-            summary = currentWeatherAPI
-            setDefaultValue(weatherAPIDefaultValue)
-        }
+        SettingsActivity.bindPreferenceSummaryToValue(weatherAPIPreference, currentWeatherAPI)
     }
-
-    override fun onResume() {
-        super.onResume()
-        preferenceScreen
-            .sharedPreferences
-            .registerOnSharedPreferenceChangeListener(listener)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        preferenceScreen
-            .sharedPreferences
-            .unregisterOnSharedPreferenceChangeListener(listener)
-    }
-
-    private val listener =
-        SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
-            when (key) {
-                weatherAPIPrefKey -> {
-                    val weatherAPIPreference = findPreference(key)!!
-
-                    weatherAPIPreference.summary =
-                            sharedPreferences.getString(key, weatherAPIDefaultValue)
-                }
-                else -> {
-                    Log.d(TAG, "unknown key")
-                }
-            }
-        }
 
     companion object {
-
-        val TAG: String = LocationPreferenceFragment::class.java.simpleName
 
         lateinit var weatherAPIDefaultValue: String
 
