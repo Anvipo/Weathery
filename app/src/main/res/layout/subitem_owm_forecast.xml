@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:visibility="gone"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <com.google.android.material.card.MaterialCardView
@@ -58,7 +59,7 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/temperature_value" />
+                    android:contentDescription="@string/temperature" />
             </LinearLayout>
 
             <LinearLayout
@@ -78,7 +79,7 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/daytime_value" />
+                    android:contentDescription="@string/daytime" />
             </LinearLayout>
 
             <LinearLayout
@@ -99,7 +100,7 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/cloudiness_value" />
+                    android:contentDescription="@string/cloudiness" />
             </LinearLayout>
 
             <LinearLayout
@@ -120,7 +121,7 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/humidity_value" />
+                    android:contentDescription="@string/humidity" />
             </LinearLayout>
 
             <LinearLayout
@@ -162,7 +163,7 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/description_value" />
+                    android:contentDescription="@string/description" />
             </LinearLayout>
 
             <LinearLayout
@@ -191,7 +192,7 @@
                         style="@style/MyMaterialPrimaryBody1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:contentDescription="@string/wind_speed_value" />
+                        android:contentDescription="@string/wind_speed" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -213,7 +214,7 @@
                         style="@style/MyMaterialPrimaryBody1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:contentDescription="@string/wind_direction_value" />
+                        android:contentDescription="@string/wind_direction" />
                 </LinearLayout>
             </LinearLayout>
 

@@ -60,6 +60,21 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="MyMaterialHeadline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="MyMaterialHeadline3" parent="TextAppearance.MaterialComponents.Headline3" tools:ignore="UnusedResources">
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="MyMaterialHeadline4" parent="TextAppearance.MaterialComponents.Headline4" tools:ignore="UnusedResources">
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="MyMaterialHeadline5" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:gravity">center</item>

@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:visibility="gone"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_yw_current_weather">
 
@@ -27,268 +26,84 @@
                 android:orientation="vertical"
                 tools:ignore="UnusedIds">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/temperature_value_YW_CW_TV"
+                    style="@style/MyMaterialHeadline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/temperature"
+                    android:text="@string/temperature"
+                    tools:ignore="UnusedIds" />
+
+                <TextView
+                    android:id="@+id/feels_like_temperature_value_YW_CW_TV"
+                    style="@style/MyMaterialSecondarySubtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
+                    android:contentDescription="@string/feels_like_temperature"
+                    android:text="@string/feels_like_temperature"
+                    tools:ignore="UnusedIds" />
 
-                    <TextView
-                        style="@style/MyMaterialSecondarySubtitle1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/observation_time"
-                        android:text="@string/observation_time" />
-
-                    <TextView
-                        android:id="@+id/observation_unix_time_value_YW_CW_TV"
-                        style="@style/MyMaterialPrimaryBody1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/observation_time_value"
-                        android:text="@string/observation_time_value" />
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/condition_value_YW_CW_TV"
+                    style="@style/MyMaterialHeadline6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal">
+                    android:contentDescription="@string/condition"
+                    android:text="@string/condition"
+                    tools:ignore="UnusedIds" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/border"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/MyMaterialSecondarySubtitle1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/temperature"
-                            android:text="@string/temperature" />
-
-                        <TextView
-                            android:id="@+id/temperature_value_YW_CW_TV"
-                            style="@style/MyMaterialPrimaryBody1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:contentDescription="@string/temperature_value"
-                            android:text="@string/temperature_value"
-                            tools:ignore="UnusedIds" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/border"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/MyMaterialSecondarySubtitle1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/feels_like_temperature"
-                            android:text="@string/feels_like_temperature" />
-
-                        <TextView
-                            android:id="@+id/feels_like_temperature_value_YW_CW_TV"
-                            style="@style/MyMaterialPrimaryBody1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:contentDescription="@string/feels_like_temperature_value"
-                            android:text="@string/feels_like_temperature_value"
-                            tools:ignore="UnusedIds" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/MyMaterialSecondarySubtitle1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/condition"
-                        android:text="@string/condition" />
-
-                    <TextView
-                        android:id="@+id/condition_value_YW_CW_TV"
-                        style="@style/MyMaterialPrimaryBody1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/condition_value"
-                        android:text="@string/condition_value"
-                        tools:ignore="UnusedIds" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/wind_info_value_YW_CW_TV"
+                    style="@style/MyMaterialPrimaryBody1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal">
+                    android:layout_margin="@dimen/drawable_textview_margin_and_padding"
+                    android:contentDescription="@string/wind_info"
+                    android:drawableStart="@drawable/ic_wind"
+                    android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
+                    android:padding="@dimen/drawable_textview_margin_and_padding"
+                    android:text="@string/wind_info" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/border"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/MyMaterialSecondarySubtitle1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/wind_speed"
-                            android:text="@string/wind_speed" />
-
-                        <TextView
-                            android:id="@+id/wind_speed_value_YW_CW_TV"
-                            style="@style/MyMaterialPrimaryBody1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:contentDescription="@string/wind_speed_value"
-                            android:text="@string/wind_speed_value"
-                            tools:ignore="UnusedIds" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/border"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/MyMaterialSecondarySubtitle1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/wind_gusts_speed"
-                            android:text="@string/wind_gusts_speed" />
-
-                        <TextView
-                            android:id="@+id/wind_gusts_speed_value_YW_CW_TV"
-                            style="@style/MyMaterialPrimaryBody1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:contentDescription="@string/wind_gusts_speed_value"
-                            android:text="@string/wind_gusts_speed_value"
-                            tools:ignore="UnusedIds" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/border"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/MyMaterialSecondarySubtitle1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/wind_direction"
-                            android:text="@string/wind_direction" />
-
-                        <TextView
-                            android:id="@+id/wind_direction_value_YW_CW_TV"
-                            style="@style/MyMaterialPrimaryBody1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:contentDescription="@string/wind_direction_value"
-                            android:text="@string/wind_direction_value"
-                            tools:ignore="UnusedIds" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/humidity_value_YW_CW_TV"
+                    style="@style/MyMaterialPrimaryBody1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal">
+                    android:layout_margin="@dimen/drawable_textview_margin_and_padding"
+                    android:contentDescription="@string/humidity"
+                    android:drawableStart="@drawable/ic_humidity"
+                    android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
+                    android:padding="@dimen/drawable_textview_margin_and_padding"
+                    android:text="@string/humidity"
+                    tools:ignore="UnusedIds" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/border"
-                        android:orientation="vertical">
+                <TextView
+                    android:id="@+id/cloudiness_value_YW_CW_TV"
+                    style="@style/MyMaterialPrimaryBody1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/drawable_textview_margin_and_padding"
+                    android:contentDescription="@string/cloudiness"
+                    android:drawableStart="@drawable/ic_cloudy"
+                    android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
+                    android:padding="@dimen/drawable_textview_margin_and_padding"
+                    android:text="@string/cloudiness"
+                    tools:ignore="UnusedIds" />
 
-                        <TextView
-                            style="@style/MyMaterialSecondarySubtitle1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/atmospheric_pressure_mm_hg"
-                            android:text="@string/atmospheric_pressure" />
-
-                        <TextView
-                            android:id="@+id/atmospheric_pressure_in_mm_hg_value_YW_CW_TV"
-                            style="@style/MyMaterialPrimaryBody1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:contentDescription="@string/atmospheric_pressure_mm_hg_value"
-                            android:text="@string/atmospheric_pressure_value"
-                            tools:ignore="UnusedIds" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/border"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/MyMaterialSecondarySubtitle1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/atmospheric_pressure_hPa"
-                            android:text="@string/atmospheric_pressure" />
-
-                        <TextView
-                            android:id="@+id/atmospheric_pressure_in_hPa_value_YW_CW_TV"
-                            style="@style/MyMaterialPrimaryBody1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:contentDescription="@string/atmospheric_pressure_hPa_value"
-                            android:text="@string/atmospheric_pressure"
-                            tools:ignore="UnusedIds" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/MyMaterialSecondarySubtitle1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/humidity"
-                        android:text="@string/humidity" />
-
-                    <TextView
-                        android:id="@+id/humidity_value_YW_CW_TV"
-                        style="@style/MyMaterialPrimaryBody1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/humidity_value"
-                        android:text="@string/humidity_value"
-                        tools:ignore="UnusedIds" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/atmospheric_pressure_in_mm_hg_value_YW_CW_TV"
+                    style="@style/MyMaterialPrimaryBody1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/drawable_textview_margin_and_padding"
+                    android:contentDescription="@string/atmospheric_pressure"
+                    android:drawableStart="@drawable/ic_pressure"
+                    android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
+                    android:padding="@dimen/drawable_textview_margin_and_padding"
+                    android:text="@string/atmospheric_pressure"
+                    tools:ignore="UnusedIds" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -316,8 +131,8 @@
                             style="@style/MyMaterialPrimaryBody1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:contentDescription="@string/precipitation_type_value"
-                            android:text="@string/precipitation_type_value"
+                            android:contentDescription="@string/precipitation_type"
+                            android:text="@string/precipitation_type"
                             tools:ignore="UnusedIds" />
                     </LinearLayout>
 
@@ -340,34 +155,10 @@
                             style="@style/MyMaterialPrimaryBody1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:contentDescription="@string/precipitation_strength_value"
-                            android:text="@string/precipitation_strength_value"
+                            android:contentDescription="@string/precipitation_strength"
+                            android:text="@string/precipitation_strength"
                             tools:ignore="UnusedIds" />
                     </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/MyMaterialSecondarySubtitle1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/cloudiness"
-                        android:text="@string/cloudiness" />
-
-                    <TextView
-                        android:id="@+id/cloudiness_value_YW_CW_TV"
-                        style="@style/MyMaterialPrimaryBody1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/cloudiness_value"
-                        android:text="@string/cloudiness_value"
-                        tools:ignore="UnusedIds" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -389,8 +180,8 @@
                         style="@style/MyMaterialPrimaryBody1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:contentDescription="@string/daytime_value"
-                        android:text="@string/daytime_value"
+                        android:contentDescription="@string/daytime"
+                        android:text="@string/daytime"
                         tools:ignore="UnusedIds" />
                 </LinearLayout>
 
@@ -413,8 +204,8 @@
                         style="@style/MyMaterialPrimaryBody1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:contentDescription="@string/is_there_polar_value"
-                        android:text="@string/is_there_polar_value"
+                        android:contentDescription="@string/is_there_polar"
+                        android:text="@string/is_there_polar"
                         tools:ignore="UnusedIds" />
                 </LinearLayout>
 
@@ -437,8 +228,8 @@
                         style="@style/MyMaterialPrimaryBody1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:contentDescription="@string/season_value"
-                        android:text="@string/season_value"
+                        android:contentDescription="@string/season"
+                        android:text="@string/season"
                         tools:ignore="UnusedIds" />
                 </LinearLayout>
             </LinearLayout>

@@ -11,8 +11,8 @@ import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.yandexWeather.YWCurrentWeatherModule
 import ru.mts.avpopo85.weathery.presentation.utils.CELSIUS_DEGREE
-import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.view.activity.AbsCurrentWeatherActivity
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
+import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.view.activity.AbsCurrentWeatherActivity
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 import javax.inject.Inject
 
@@ -43,15 +43,12 @@ class YWCurrentWeatherActivity : AbsCurrentWeatherActivity<YWCurrentWeatherType>
             temperature_value_YW_CW_TV.text = "${it.temperature} $CELSIUS_DEGREE"
             feels_like_temperature_value_YW_CW_TV.text = "${it.feelsLikeTemperature}$CELSIUS_DEGREE"
             condition_value_YW_CW_TV.text = it.weatherDescription
-            wind_speed_value_YW_CW_TV.text =
-                    "${it.windSpeed} ${getString(R.string.meters_per_second)}"
-            wind_gusts_speed_value_YW_CW_TV.text =
-                    "${it.windGustsSpeed} ${getString(R.string.meters_per_second)}"
-            wind_direction_value_YW_CW_TV.text = it.windDirection
+            wind_info_value_YW_CW_TV.text =
+                    "${it.windSpeed} ${getString(R.string.meters_per_second)}${it.windDirection}"
             atmospheric_pressure_in_mm_hg_value_YW_CW_TV.text =
                     "${it.atmosphericPressureInMmHg} ${getString(R.string.mm_hg)}"
-            atmospheric_pressure_in_hPa_value_YW_CW_TV.text =
-                    "${it.atmosphericPressureInhPa} ${getString(R.string.hPa)}"
+            //todo
+//            "${it.atmosphericPressureInhPa} ${getString(R.string.hPa)}"
             humidity_value_YW_CW_TV.text = "${it.humidity}%"
             precipitation_type_value_YW_CW_TV.text = it.precipitationType
             precipitation_strength_value_YW_CW_TV.text = it.precipitationStrength
@@ -59,7 +56,6 @@ class YWCurrentWeatherActivity : AbsCurrentWeatherActivity<YWCurrentWeatherType>
             daytime_value_YW_CW_TV.text = it.daytime
             polar_value_YW_CW_TV.text = it.polar
             season_value_YW_CW_TV.text = it.season
-            observation_unix_time_value_YW_CW_TV.text = it.timeOfDataCalculation
         }
     }
 

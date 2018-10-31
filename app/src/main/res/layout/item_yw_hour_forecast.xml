@@ -26,8 +26,8 @@
                 style="@style/MyMaterialPrimaryBody1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/local_time_value"
-                android:text="@string/local_time_value" />
+                android:contentDescription="@string/local_time"
+                android:text="@string/local_time" />
         </LinearLayout>
 
         <LinearLayout
@@ -56,8 +56,8 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/temperature_value"
-                    android:text="@string/temperature_value" />
+                    android:contentDescription="@string/temperature"
+                    android:text="@string/temperature" />
             </LinearLayout>
 
             <LinearLayout
@@ -79,8 +79,8 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/feels_like_temperature_value"
-                    android:text="@string/feels_like_temperature_value" />
+                    android:contentDescription="@string/feels_like_temperature"
+                    android:text="@string/feels_like_temperature" />
             </LinearLayout>
         </LinearLayout>
 
@@ -102,8 +102,8 @@
                 style="@style/MyMaterialPrimaryBody1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/condition_value"
-                android:text="@string/condition_value" />
+                android:contentDescription="@string/condition"
+                android:text="@string/condition" />
         </LinearLayout>
 
         <LinearLayout
@@ -132,8 +132,8 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/wind_speed_value"
-                    android:text="@string/wind_speed_value" />
+                    android:contentDescription="@string/wind_speed"
+                    android:text="@string/wind_speed" />
             </LinearLayout>
 
             <LinearLayout
@@ -155,8 +155,8 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/wind_gusts_speed_value"
-                    android:text="@string/wind_gusts_speed_value" />
+                    android:contentDescription="@string/wind_gusts_speed"
+                    android:text="@string/wind_gusts_speed" />
             </LinearLayout>
 
             <LinearLayout
@@ -178,8 +178,8 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/wind_direction_value"
-                    android:text="@string/wind_direction_value" />
+                    android:contentDescription="@string/wind_direction"
+                    android:text="@string/wind_direction" />
             </LinearLayout>
         </LinearLayout>
 
@@ -209,8 +209,8 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/atmospheric_pressure_mm_hg_value"
-                    android:text="@string/atmospheric_pressure_value" />
+                    android:contentDescription="@string/atmospheric_pressure_mm_hg"
+                    android:text="@string/atmospheric_pressure" />
             </LinearLayout>
 
             <LinearLayout
@@ -232,8 +232,8 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/atmospheric_pressure_hPa_value"
-                    android:text="@string/atmospheric_pressure_value" />
+                    android:contentDescription="@string/atmospheric_pressure_hPa"
+                    android:text="@string/atmospheric_pressure" />
             </LinearLayout>
         </LinearLayout>
 
@@ -255,8 +255,8 @@
                 style="@style/MyMaterialPrimaryBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/humidity_value"
-                android:text="@string/humidity_value" />
+                android:contentDescription="@string/humidity"
+                android:text="@string/humidity" />
         </LinearLayout>
 
         <LinearLayout
@@ -284,8 +284,8 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/precipitation_type_value"
-                    android:text="@string/precipitation_type_value" />
+                    android:contentDescription="@string/precipitation_type"
+                    android:text="@string/precipitation_type" />
 
             </LinearLayout>
 
@@ -307,8 +307,8 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/precipitation_strength_value"
-                    android:text="@string/precipitation_strength_value" />
+                    android:contentDescription="@string/precipitation_strength"
+                    android:text="@string/precipitation_strength" />
             </LinearLayout>
         </LinearLayout>
 
@@ -338,8 +338,8 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/precipitation_in_mm_value"
-                    android:text="@string/precipitation_value" />
+                    android:contentDescription="@string/precipitation_in_mm"
+                    android:text="@string/precipitation" />
 
             </LinearLayout>
 
@@ -362,8 +362,8 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/precipitation_in_minutes_value"
-                    android:text="@string/precipitation_value" />
+                    android:contentDescription="@string/precipitation_in_minutes"
+                    android:text="@string/precipitation" />
             </LinearLayout>
         </LinearLayout>
 
@@ -384,8 +384,8 @@
                 style="@style/MyMaterialPrimaryBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/cloudiness_value"
-                android:text="@string/cloudiness_value" />
+                android:contentDescription="@string/cloudiness"
+                android:text="@string/cloudiness" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -24,8 +24,8 @@ abstract class AbsForecastFragment<T : IForecast> :
 
     final override fun showWeatherResponse(data: List<T>) {
         if (data.isNotEmpty()) {
-            showLayout()
             updateRecyclerViewData(data = data)
+            showLayout()
         } else
             hideLayout()
     }

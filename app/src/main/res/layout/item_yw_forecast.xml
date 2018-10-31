@@ -33,61 +33,21 @@
                     style="@style/MyMaterialPrimaryBody1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/moon_phase_value"
-                    android:text="@string/moon_phase_value" />
+                    android:contentDescription="@string/moon_phase"
+                    android:text="@string/moon_phase" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/MyMaterialSecondarySubtitle1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/sunrise_time"
-                        android:text="@string/sunrise_time" />
-
-                    <TextView
-                        android:id="@+id/sunrise_time_value_YW_F_TV"
-                        style="@style/MyMaterialPrimaryBody1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="@string/sunrise_time_value"
-                        android:text="@string/sunrise_time_value" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/MyMaterialSecondarySubtitle1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/sunset_time"
-                        android:text="@string/sunset_time" />
-
-                    <TextView
-                        android:id="@+id/sunset_time_value_YW_F_TV"
-                        style="@style/MyMaterialPrimaryBody1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="@string/sunset_time_value"
-                        android:text="@string/sunset_time_value" />
-                </LinearLayout>
-            </LinearLayout>
+            <TextView
+            android:id="@+id/suntime_value_YW_F_TV"
+            style="@style/MyMaterialPrimaryBody1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/drawable_textview_margin_and_padding"
+            android:drawableStart="@drawable/ic_sun"
+            android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
+            android:padding="@dimen/drawable_textview_margin_and_padding"
+            android:text="@string/sunrise_and_sunset_time"
+            tools:ignore="UnusedIds" />
 
             <LinearLayout
                 android:layout_width="match_parent"

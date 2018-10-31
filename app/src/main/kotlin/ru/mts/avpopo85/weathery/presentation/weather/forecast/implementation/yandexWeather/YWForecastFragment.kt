@@ -1,5 +1,6 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -77,14 +78,13 @@ class YWForecastFragment : Fragment() {
         }
     }
 
-    private fun fillFields(YWYWForecast: YWForecastType) {
+    @SuppressLint("SetTextI18n")
+    private fun fillFields(forecast: YWForecastType) {
         val moonTextValueTV = view?.findViewById<TextView>(R.id.moon_text_value_YW_F_TV)
-        val sunriseTimeValueTV = view?.findViewById<TextView>(R.id.sunrise_time_value_YW_F_TV)
-        val sunsetTimeValueTV = view?.findViewById<TextView>(R.id.sunset_time_value_YW_F_TV)
+        val suntimeValueTV = view?.findViewById<TextView>(R.id.suntime_value_YW_F_TV)
 
-        moonTextValueTV?.text = YWYWForecast.moonText
-        sunriseTimeValueTV?.text = YWYWForecast.sunriseInLocalTime
-        sunsetTimeValueTV?.text = YWYWForecast.sunsetInLocalTime
+        moonTextValueTV?.text = forecast.moonText
+        suntimeValueTV?.text = "${forecast.sunriseInLocalTime}-${forecast.sunsetInLocalTime}"
     }
 
 }

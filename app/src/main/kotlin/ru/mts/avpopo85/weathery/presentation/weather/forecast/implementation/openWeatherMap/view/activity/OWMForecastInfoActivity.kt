@@ -69,6 +69,7 @@ class OWMForecastInfoActivity : AbsBaseActivity() {
             }
         }
 
+        subitem_owm_forecast_SV.visibility = View.VISIBLE
     }
 
 }

@@ -6,8 +6,6 @@ const val PERCENT_SIGN: String = "%"
 
 const val ARG_FORECAST: String = "FORECAST"
 
-const val FORECAST_INFO_REQUEST = 6000
-
 const val APPLICATION_SETTINGS_REQUEST = 8000
 
 const val LOCATION_REQUEST = 9000
