@@ -4,10 +4,5 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">api.weather.yandex.ru</domain>
         <domain includeSubdomains="true">api.openweathermap.org</domain>
-        <trust-anchors>
-            <!-- Trust a debug certificate in addition to the system certificates -->
-            <!--<certificates src="system" />-->
-            <!--<certificates src="@raw/debug_certificate" />-->
-        </trust-anchors>
     </domain-config>
 </network-security-config>

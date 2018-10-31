@@ -142,6 +142,7 @@ class SettingsActivity : PreferenceActivity(), SettingsContract.View {
                         null
 
                     preference.summary = summaryValue
+                    preference.value = summaryValue?.toString()
                 } else if (preference is RingtonePreference) {
                     if (TextUtils.isEmpty(stringValue)) {
                         preference.setSummary(R.string.pref_ringtone_silent)
