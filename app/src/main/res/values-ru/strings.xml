@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="meters_per_second">м/c</string>
     <string name="mm_hg">мм рт. ст.</string>
     <string name="hPa">гПа</string>
@@ -225,7 +225,7 @@
     <string name="detailed_information">Подробная информация</string>
     <string name="title_activity_tabbed_weather">Прогноз погоды</string>
     <string name="action_settings">Настройки</string>
-    <string name="network">Сеть</string>
+    <string name="network" tools:ignore="UnusedResources">Сеть</string>
     <string name="weather_api_dialog_title">Выберите, какой API погодного ресурса будет использован</string>
     <string name="weather_resource_API">API погодного ресурса</string>
     <string name="pref_ringtone_silent">Без звука</string>

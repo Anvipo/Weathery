@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">Weathery</string>
     <string name="meters_per_second">m/s</string>
     <string name="mm_hg">mm hg</string>
@@ -229,7 +229,7 @@
     <string name="title_activity_tabbed_weather">Weather Forecast</string>
     <string name="action_settings">Settings</string>
     <string name="detailed_information">Detailed information</string>
-    <string name="network">Network</string>
+    <string name="network" tools:ignore="UnusedResources">Network</string>
     <string name="weather_api_dialog_title">Select which weather resource API will be used</string>
     <string name="weather_resource_API">Weather Resource API</string>
     <string name="pref_ringtone_silent">Silent</string>

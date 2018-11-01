@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_owm_current_weather_SRL"
     android:layout_width="match_parent"
@@ -12,7 +13,7 @@
         android:id="@+id/item_owm_current_weather_SV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <com.google.android.material.card.MaterialCardView
             style="@style/MyMaterialCardView"
@@ -30,7 +31,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:contentDescription="@string/temperature"
                     android:text="@string/temperature"
                     tools:ignore="UnusedIds" />
 
@@ -40,85 +40,146 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:contentDescription="@string/weather_description"
                     android:text="@string/weather_description"
                     tools:ignore="UnusedIds" />
 
-                <TextView
-                    android:id="@+id/humidityOwmCurrentWeather"
-                    style="@style/MyMaterialPrimaryBody1"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/drawable_textview_margin_and_padding"
-                    android:contentDescription="@string/humidity"
-                    android:drawableStart="@drawable/ic_humidity"
-                    android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
-                    android:padding="@dimen/drawable_textview_margin_and_padding"
-                    android:text="@string/humidity"
-                    tools:ignore="UnusedIds" />
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
-                <TextView
-                    android:id="@+id/windInfoOwmCurrentWeather"
-                    style="@style/MyMaterialPrimaryBody1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/drawable_textview_margin_and_padding"
-                    android:contentDescription="@string/wind_info"
-                    android:drawableStart="@drawable/ic_wind"
-                    android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
-                    android:padding="@dimen/drawable_textview_margin_and_padding"
-                    android:text="@string/wind_info" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/humidity"
+                        app:srcCompat="@drawable/ic_humidity" />
 
-                <TextView
-                    android:id="@+id/cloudinessOwmCurrentWeather"
-                    style="@style/MyMaterialPrimaryBody1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/drawable_textview_margin_and_padding"
-                    android:contentDescription="@string/cloudiness"
-                    android:drawableStart="@drawable/ic_cloudy"
-                    android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
-                    android:padding="@dimen/drawable_textview_margin_and_padding"
-                    android:text="@string/cloudiness"
-                    tools:ignore="UnusedIds" />
+                    <TextView
+                        android:id="@+id/humidityOwmCurrentWeather"
+                        style="@style/MyMaterialPrimaryBody1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/drawable_textview_margin_and_padding"
+                        android:text="@string/humidity"
+                        tools:ignore="UnusedIds" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/atmosphericPressureOwmCurrentWeather"
-                    style="@style/MyMaterialPrimaryBody1"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/drawable_textview_margin_and_padding"
-                    android:contentDescription="@string/atmospheric_pressure"
-                    android:drawableStart="@drawable/ic_pressure"
-                    android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
-                    android:padding="@dimen/drawable_textview_margin_and_padding"
-                    android:text="@string/atmospheric_pressure"
-                    tools:ignore="UnusedIds" />
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
-                <TextView
-                    android:id="@+id/visibilityOwmCurrentWeather"
-                    style="@style/MyMaterialPrimaryBody1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/drawable_textview_margin_and_padding"
-                    android:contentDescription="@string/visibility"
-                    android:drawableStart="@drawable/ic_visibility"
-                    android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
-                    android:padding="@dimen/drawable_textview_margin_and_padding"
-                    android:text="@string/visibility"
-                    tools:ignore="UnusedIds" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/wind_info"
+                        app:srcCompat="@drawable/ic_wind" />
 
-                <TextView
-                    android:id="@+id/suntimeOwmCurrentWeather"
-                    style="@style/MyMaterialPrimaryBody1"
+                    <TextView
+                        android:id="@+id/windInfoOwmCurrentWeather"
+                        style="@style/MyMaterialPrimaryBody1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/drawable_textview_margin_and_padding"
+                        android:text="@string/wind_info"
+                        tools:ignore="UnusedIds" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/drawable_textview_margin_and_padding"
-                    android:drawableStart="@drawable/ic_sun"
-                    android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
-                    android:padding="@dimen/drawable_textview_margin_and_padding"
-                    android:text="@string/sunrise_and_sunset_time"
-                    tools:ignore="UnusedIds" />
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/cloudiness"
+                        app:srcCompat="@drawable/ic_cloudy" />
+
+                    <TextView
+                        android:id="@+id/cloudinessOwmCurrentWeather"
+                        style="@style/MyMaterialPrimaryBody1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/drawable_textview_margin_and_padding"
+                        android:text="@string/cloudiness"
+                        tools:ignore="UnusedIds" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/drawable_textview_margin_and_padding"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/atmospheric_pressure"
+                        app:srcCompat="@drawable/ic_pressure" />
+
+                    <TextView
+                        android:id="@+id/atmosphericPressureOwmCurrentWeather"
+                        style="@style/MyMaterialPrimaryBody1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/drawable_textview_margin_and_padding"
+                        android:text="@string/atmospheric_pressure"
+                        tools:ignore="UnusedIds" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/drawable_textview_margin_and_padding"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/visibility"
+                        app:srcCompat="@drawable/ic_visibility" />
+
+                    <TextView
+                        android:id="@+id/visibilityOwmCurrentWeather"
+                        style="@style/MyMaterialPrimaryBody1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/drawable_textview_margin_and_padding"
+                        android:text="@string/visibility"
+                        tools:ignore="UnusedIds" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/drawable_textview_margin_and_padding"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/sunrise_and_sunset_time"
+                        app:srcCompat="@drawable/ic_sun" />
+
+                    <TextView
+                        android:id="@+id/suntimeOwmCurrentWeather"
+                        style="@style/MyMaterialPrimaryBody1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/drawable_textview_margin_and_padding"
+                        android:text="@string/sunrise_and_sunset_time"
+                        tools:ignore="UnusedIds" />
+                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </ScrollView>

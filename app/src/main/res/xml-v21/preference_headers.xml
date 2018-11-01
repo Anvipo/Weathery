@@ -2,10 +2,12 @@
 
     <header
         android:fragment="ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.LocationPreferenceFragment"
+        android:icon="@drawable/ic_edit_location_24dp"
         android:title="@string/location" />
 
     <!--<header-->
     <!--android:fragment="ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.NetworkPreferenceFragment"-->
+    <!--android:icon="@drawable/ic_cloud_24dp"-->
     <!--android:title="@string/network" />-->
 
 </preference-headers>

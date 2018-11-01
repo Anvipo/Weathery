@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollViewOwmForecastInfo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="gone"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/MyMaterialCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dateOwmForecastInfo"
+                style="@style/MyMaterialHeadline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/date_value"
+                android:text="@string/forecast_time_and_date" />
+
+            <TextView
+                android:id="@+id/temperatureOwmForecastInfo"
+                style="@style/MyMaterialHeadline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/temperature"
+                android:text="@string/temperature"
+                tools:ignore="UnusedIds" />
+
+            <TextView
+                android:id="@+id/weatherDescriptionOwmForecastInfo"
+                style="@style/MyMaterialHeadline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/weather_description"
+                android:text="@string/weather_description"
+                tools:ignore="UnusedIds" />
+
+            <TextView
+                android:id="@+id/humidityOwmForecastInfo"
+                style="@style/MyMaterialPrimaryBody1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawable_textview_margin_and_padding"
+                android:contentDescription="@string/humidity"
+                android:drawableStart="@drawable/ic_humidity"
+                android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
+                android:padding="@dimen/drawable_textview_margin_and_padding"
+                android:text="@string/humidity"
+                tools:ignore="UnusedIds" />
+
+            <TextView
+                android:id="@+id/windInfoOwmForecastInfo"
+                style="@style/MyMaterialPrimaryBody1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawable_textview_margin_and_padding"
+                android:contentDescription="@string/wind_info"
+                android:drawableStart="@drawable/ic_wind"
+                android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
+                android:padding="@dimen/drawable_textview_margin_and_padding"
+                android:text="@string/wind_info" />
+
+            <TextView
+                android:id="@+id/cloudinessOwmForecastInfo"
+                style="@style/MyMaterialPrimaryBody1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawable_textview_margin_and_padding"
+                android:contentDescription="@string/cloudiness"
+                android:drawableStart="@drawable/ic_cloudy"
+                android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
+                android:padding="@dimen/drawable_textview_margin_and_padding"
+                android:text="@string/cloudiness"
+                tools:ignore="UnusedIds" />
+
+            <TextView
+                android:id="@+id/atmosphericPressureOwmForecastInfo"
+                style="@style/MyMaterialPrimaryBody1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawable_textview_margin_and_padding"
+                android:contentDescription="@string/atmospheric_pressure"
+                android:drawableStart="@drawable/ic_pressure"
+                android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
+                android:padding="@dimen/drawable_textview_margin_and_padding"
+                android:text="@string/atmospheric_pressure"
+                tools:ignore="UnusedIds" />
+
+            <TextView
+                android:id="@+id/rainVolumeOwmForecastInfo"
+                style="@style/MyMaterialPrimaryBody1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawable_textview_margin_and_padding"
+                android:contentDescription="@string/cloudiness"
+                android:drawableStart="@drawable/ic_drizzle"
+                android:drawablePadding="@dimen/drawable_textview_margin_and_padding"
+                android:padding="@dimen/drawable_textview_margin_and_padding"
+                android:text="@string/rain_volume_for_last_3_hours"
+                tools:ignore="UnusedIds" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</ScrollView>

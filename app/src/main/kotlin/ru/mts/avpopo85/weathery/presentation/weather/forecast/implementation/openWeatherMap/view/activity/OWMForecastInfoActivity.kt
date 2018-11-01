@@ -13,7 +13,6 @@ import ru.mts.avpopo85.weathery.presentation.utils.PERCENT_SIGN
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.utils.FORECAST_INFO_INTENT_TAG
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 
-//TODO: delete
 class OWMForecastInfoActivity : AbsBaseActivity() {
 
     override val rootLayout: View by lazy { scrollViewOwmForecastInfo }
