@@ -8,6 +8,6 @@
 
     <include layout="@layout/appbar" />
 
-    <include layout="@layout/subitem_owm_forecast" />
+    <include layout="@layout/item_owm_forecast_info" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

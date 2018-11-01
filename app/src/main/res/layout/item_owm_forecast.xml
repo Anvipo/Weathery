@@ -12,14 +12,14 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/date_owm_forecast_item_TV"
+            android:id="@+id/dateOwmForecast"
             style="@style/MyMaterialSubtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:contentDescription="@string/forecast_time"
-            android:text="@string/date_example"
+            android:contentDescription="@string/forecast_time_and_date"
+            android:text="@string/forecast_time_and_date"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -28,29 +28,29 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/description_owm_forecast_item_TV"
+            android:id="@+id/descriptionOwmForecast"
             style="@style/MyMaterialPrimaryBody1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:contentDescription="@string/description"
-            android:text="@string/partly_cloudy"
+            android:contentDescription="@string/weather_description"
+            android:text="@string/weather_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date_owm_forecast_item_TV"
+            app:layout_constraintTop_toBottomOf="@+id/dateOwmForecast"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/temperature_owm_forecast_item_TV"
+            android:id="@+id/temperatureOwmForecast"
             style="@style/MyMaterialHeadline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:contentDescription="@string/temperature"
-            android:text="@string/temperature_example"
+            android:text="@string/temperature"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

@@ -8,6 +8,10 @@ interface WeatherContract : BaseSwipeToRefreshContract {
 
         fun onNotFreshWeatherData()
 
+        fun hideLayout()
+
+        fun showLayout()
+
     }
 
     interface Presenter<in V : View> : BaseSwipeToRefreshContract.Presenter<V> {

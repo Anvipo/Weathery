@@ -1,6 +1,5 @@
 package ru.mts.avpopo85.weathery.presentation.base.fragment.withProgressBar.withSwipeToRefresh
 
-import android.view.View
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.common.withProgressBar.withSwipeToRefresh.BaseSwipeToRefreshContract
@@ -12,14 +11,6 @@ abstract class AbsSwipeToRefreshFragment : AbsProgressBarFragment(),
 
     final override fun hideRefreshingIndicator() {
         swipeRefreshLayout.isRefreshing = false
-    }
-
-    final override fun hideLayout() {
-        swipeRefreshLayout.visibility = View.GONE
-    }
-
-    final override fun showLayout() {
-        swipeRefreshLayout.visibility = View.VISIBLE
     }
 
     protected abstract val swipeRefreshLayout: SwipeRefreshLayout

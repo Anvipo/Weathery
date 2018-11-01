@@ -1,6 +1,7 @@
 package ru.mts.avpopo85.weathery.presentation.weather.base.view.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.activity.withProgressBar.withSwipeToRefresh.AbsSwipeToRefreshActivity
@@ -36,6 +37,14 @@ abstract class AbsWeatherActivity : AbsSwipeToRefreshActivity(), WeatherContract
         viewToolbar.title = title
     }
 
+    final override fun hideLayout() {
+        hidingLayout.visibility = View.GONE
+    }
+
+    final override fun showLayout() {
+        hidingLayout.visibility = View.VISIBLE
+    }
+
     protected open fun initBindings() {
         initSwipeRefreshLayout()
 
@@ -53,6 +62,8 @@ abstract class AbsWeatherActivity : AbsSwipeToRefreshActivity(), WeatherContract
     protected abstract val viewToolbar: Toolbar
 
     protected abstract val toolbarTitle: String
+
+    protected abstract val hidingLayout: View
 
     private fun initView() {
         setContentView(layoutResID)

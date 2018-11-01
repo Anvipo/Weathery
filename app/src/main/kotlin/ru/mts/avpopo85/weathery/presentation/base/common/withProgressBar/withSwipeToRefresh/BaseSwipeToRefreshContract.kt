@@ -2,16 +2,11 @@ package ru.mts.avpopo85.weathery.presentation.base.common.withProgressBar.withSw
 
 import ru.mts.avpopo85.weathery.presentation.base.common.withProgressBar.BaseProgressBarContract
 
-interface BaseSwipeToRefreshContract :
-    BaseProgressBarContract {
+interface BaseSwipeToRefreshContract : BaseProgressBarContract {
 
     interface View : BaseProgressBarContract.View {
 
         fun hideRefreshingIndicator()
-
-        fun hideLayout()
-
-        fun showLayout()
 
     }
 

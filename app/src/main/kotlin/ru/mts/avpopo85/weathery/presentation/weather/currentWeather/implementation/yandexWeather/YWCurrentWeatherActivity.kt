@@ -1,6 +1,7 @@
 package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.yandexWeather
 
 import android.annotation.SuppressLint
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -22,6 +23,8 @@ class YWCurrentWeatherActivity : AbsCurrentWeatherActivity<YWCurrentWeatherType>
     override lateinit var presenter: CurrentWeatherContract.Presenter<YWCurrentWeatherType>
 
     override val swipeRefreshLayout: SwipeRefreshLayout by lazy { item_yw_current_weather_SRL }
+
+    override val hidingLayout: View by lazy { item_yw_current_weather_SV }
 
     override val rootLayout: CoordinatorLayout by lazy { yw_current_weather_CL }
 

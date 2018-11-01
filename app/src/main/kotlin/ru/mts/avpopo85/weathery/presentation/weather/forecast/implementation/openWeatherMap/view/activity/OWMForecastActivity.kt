@@ -1,5 +1,6 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.view.activity
 
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -24,6 +25,8 @@ class OWMForecastActivity : AbsForecastActivity<OWMForecastType>() {
     override lateinit var presenter: ForecastContract.Presenter<OWMForecastType>
 
     override val swipeRefreshLayout: SwipeRefreshLayout by lazy { owm_forecast_SRL }
+
+    override val hidingLayout: View by lazy { owm_forecast_RV }
 
     override val rootLayout: CoordinatorLayout by lazy { owm_forecast_CL }
 

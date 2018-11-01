@@ -23,12 +23,11 @@ class MapsActivity :
     GoogleMap.OnMarkerClickListener,
     GoogleMap.OnMarkerDragListener {
 
-    private lateinit var map: GoogleMap
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
 
+        @Suppress("CAST_NEVER_SUCCEEDS")
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map_fragment) as? SupportMapFragment
 
@@ -74,6 +73,8 @@ class MapsActivity :
     override fun onMarkerDragStart(marker: Marker?) = Unit
 
     override fun onMarkerDrag(marker: Marker?) = Unit
+
+    private lateinit var map: GoogleMap
 
     private fun showConfirmation(coordinates: LatLng) {
         showAlertDialog(

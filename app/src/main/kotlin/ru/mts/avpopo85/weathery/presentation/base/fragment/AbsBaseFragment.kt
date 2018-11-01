@@ -46,6 +46,7 @@ abstract class AbsBaseFragment : Fragment(), BaseContract.View {
         context?.let {
             val message = it.parseError(error)
 
+            sendErrorLog(error.toString())
             sendErrorLog(message)
 
             showError(message, isCritical, rootView)

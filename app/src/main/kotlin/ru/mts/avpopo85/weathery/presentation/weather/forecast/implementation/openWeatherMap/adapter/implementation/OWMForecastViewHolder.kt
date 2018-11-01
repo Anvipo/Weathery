@@ -13,18 +13,18 @@ import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 class OWMForecastViewHolder(private val view: View) :
     RecyclerView.ViewHolder(view), IForecastViewHolder<OWMForecastType> {
 
-    private val dateTV: TextView = view.date_owm_forecast_item_TV
-    private val descriptionTV: TextView = view.description_owm_forecast_item_TV
-    private val temperatureTV: TextView = view.temperature_owm_forecast_item_TV
+    private val date: TextView = view.dateOwmForecast
+    private val description: TextView = view.descriptionOwmForecast
+    private val temperature: TextView = view.temperatureOwmForecast
 
     @SuppressLint("SetTextI18n")
     override fun bind(
         data: OWMForecastType,
         clickListener: (OWMForecastType) -> Unit
     ) {
-        dateTV.text = data.date
-        descriptionTV.text = data.weather.description
-        temperatureTV.text = "${data.main.temperature}$CELSIUS_DEGREE"
+        date.text = data.date
+        description.text = data.weather.description
+        temperature.text = "${data.main.temperature}$CELSIUS_DEGREE"
 
         view.setOnClickListener { clickListener(data) }
     }

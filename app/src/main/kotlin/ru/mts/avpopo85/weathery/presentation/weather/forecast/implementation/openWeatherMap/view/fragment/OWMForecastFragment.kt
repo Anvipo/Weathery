@@ -1,6 +1,5 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.view.fragment
 
-//import ru.mts.avpopo85.weathery.presentation.base.utils.startActivityFromFragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +30,8 @@ class OWMForecastFragment : AbsForecastFragment<OWMForecastType>() {
 
     @Inject
     override lateinit var presenter: ForecastContract.Presenter<OWMForecastType>
+
+    override val hidingLayout: View by lazy { owm_forecast_RV }
 
     override val swipeRefreshLayout: SwipeRefreshLayout by lazy { owm_forecast_SRL }
 

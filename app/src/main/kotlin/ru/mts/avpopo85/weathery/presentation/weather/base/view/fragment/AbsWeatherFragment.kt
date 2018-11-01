@@ -37,6 +37,14 @@ abstract class AbsWeatherFragment : AbsSwipeToRefreshFragment(), WeatherContract
         viewToolbar.title = title
     }
 
+    final override fun hideLayout() {
+        hidingLayout.visibility = View.GONE
+    }
+
+    final override fun showLayout() {
+        hidingLayout.visibility = View.VISIBLE
+    }
+
     protected open fun initBindings() {
         initSwipeRefreshLayout()
 
@@ -52,6 +60,8 @@ abstract class AbsWeatherFragment : AbsSwipeToRefreshFragment(), WeatherContract
     protected abstract val viewToolbar: ActionBar
 
     protected abstract val toolbarTitle: String
+
+    protected abstract val hidingLayout: View
 
     private fun initView() {
         viewToolbar.title = toolbarTitle

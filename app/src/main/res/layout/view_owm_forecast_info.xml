@@ -6,6 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".presentation.weather.forecast.implementation.yandexWeather.YWForecastActivity">
 
-    <include layout="@layout/subitem_owm_forecast" />
+    <include layout="@layout/item_owm_forecast_info" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

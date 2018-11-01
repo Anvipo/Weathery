@@ -29,6 +29,8 @@ class OWMCurrentWeatherFragment : AbsCurrentWeatherFragment<OWMCurrentWeatherTyp
 
     override val swipeRefreshLayout: SwipeRefreshLayout by lazy { item_owm_current_weather_SRL }
 
+    override val hidingLayout: View by lazy { item_owm_current_weather_SV }
+
     override val rootLayout: View by lazy { owm_current_weather_CL }
 
     override fun onCreateView(
@@ -46,17 +48,17 @@ class OWMCurrentWeatherFragment : AbsCurrentWeatherFragment<OWMCurrentWeatherTyp
     @SuppressLint("SetTextI18n")
     override fun showWeatherResponse(data: OWMCurrentWeatherType) {
         data.let {
-            cloudinessValueOWMCWTV.text = "${it.cloudiness}%"
-            temperature_value_OWM_CW_TV.text = "${it.temperature} $CELSIUS_DEGREE"
-            atmospheric_pressure_value_OWM_CW_TV.text =
+            cloudinessOwmCurrentWeather.text = "${it.cloudiness}%"
+            temperatureOwmCurrentWeather.text = "${it.temperature} $CELSIUS_DEGREE"
+            atmosphericPressureOwmCurrentWeather.text =
                     "${it.atmosphericPressureInhPa} ${getString(R.string.hPa)}"
-            humidity_value_OWM_CW_TV.text = "${it.humidity}%"
-            suntime_value_OWM_CW_TV.text = "${it.sys.sunrise}-${it.sys.sunset}"
-            visibility_value_OWM_CW_TV.text =
+            humidityOwmCurrentWeather.text = "${it.humidity}%"
+            suntimeOwmCurrentWeather.text = "${it.sys.sunrise}-${it.sys.sunset}"
+            visibilityOwmCurrentWeather.text =
                     "${it.visibilityInMeters} ${getString(R.string.meters)}"
-            wind_info_value_OWM_CW_TV.text =
+            windInfoOwmCurrentWeather.text =
                     "${it.windSpeed} ${getString(R.string.meters_per_second)}, ${it.windDirection}"
-            descriptionValueOWMCWTV.text = it.weather.description
+            descriptionOwmCurrentWeather.text = it.weather.description
         }
 
         super.showWeatherResponse(data)

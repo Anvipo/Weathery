@@ -1,5 +1,6 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.yandexWeather
 
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -9,8 +10,8 @@ import kotlinx.android.synthetic.main.content_yw_forecast.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.yandexWeather.YWForecastModule
-import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.view.activity.AbsForecastActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.view.activity.AbsForecastActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.adapter.base.IForecastAdapter
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastType
 import javax.inject.Inject
@@ -21,6 +22,8 @@ class YWForecastActivity : AbsForecastActivity<YWForecastType>() {
     override lateinit var presenter: ForecastContract.Presenter<YWForecastType>
 
     override val swipeRefreshLayout: SwipeRefreshLayout by lazy { yw_forecast_SRL }
+
+    override val hidingLayout: View by lazy { yw_forecast_VP }
 
     override val rootLayout: CoordinatorLayout by lazy { yw_forecast_CL }
 
