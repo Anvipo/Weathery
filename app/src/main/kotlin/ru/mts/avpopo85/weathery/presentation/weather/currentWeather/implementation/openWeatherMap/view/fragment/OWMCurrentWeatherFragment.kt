@@ -46,8 +46,8 @@ class OWMCurrentWeatherFragment : AbsCurrentWeatherFragment<OWMCurrentWeatherTyp
     }
 
     @SuppressLint("SetTextI18n")
-    override fun showWeatherResponse(data: OWMCurrentWeatherType) {
-        data.let {
+    override fun showWeatherResponse(currentWeather: OWMCurrentWeatherType) {
+        currentWeather.let {
             cloudinessOwmCurrentWeather.text = "${it.cloudiness}%"
             temperatureOwmCurrentWeather.text = "${it.temperature} $CELSIUS_DEGREE"
             atmosphericPressureOwmCurrentWeather.text =
@@ -61,7 +61,7 @@ class OWMCurrentWeatherFragment : AbsCurrentWeatherFragment<OWMCurrentWeatherTyp
             descriptionOwmCurrentWeather.text = it.weather.description
         }
 
-        super.showWeatherResponse(data)
+        super.showWeatherResponse(currentWeather)
     }
 
 }

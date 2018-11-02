@@ -9,6 +9,7 @@ import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.toDate
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather.utils.*
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.yandexWeather.utils.YandexWeatherMapper.getWaterTemperatureString
+import ru.mts.avpopo85.weathery.utils.common.PrecipitationType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherType
 import javax.inject.Inject
@@ -21,6 +22,7 @@ class YWCurrentWeatherMapper
     override fun mapCurrentWeatherResponse(currentWeatherResponseData: YWCurrentWeatherResponseType): YWCurrentWeatherType =
         currentWeatherResponseData.let {
             YWCurrentWeatherType(
+                //todo cloudiness
                 cloudiness = context.getCloudinessString(it.cloudiness),
                 daytime = context.getDaytimeString(it.daytime),
                 feelsLikeTemperature = it.feelsLikeTemperature.roundIfNeeded(),
@@ -29,7 +31,8 @@ class YWCurrentWeatherMapper
                 timeOfDataCalculation = it.timeOfDataCalculationUnixUTCInSeconds.toDate(),
                 polar = context.getPolarString(it.polar),
                 precipitationStrength = context.getPrecipitationStrengthString(it.precipitationStrength),
-                precipitationType = context.getPrecipitationTypeString(it.precipitationType),
+                precipitationTypeString = context.getPrecipitationTypeString(it.precipitationType),
+                precipitationType = getPrecipitationType(it.precipitationType),
                 atmosphericPressureInMmHg = it.atmosphericPressureInMmHg.roundIfNeeded(),
                 atmosphericPressureInhPa = it.atmosphericPressureInhPa.roundIfNeeded(),
                 season = context.getSeasonString(it.season),
@@ -45,5 +48,16 @@ class YWCurrentWeatherMapper
         }
 
     override val cacheLifeTimeInMs: Long = YW_DEFAULT_CACHE_LIFETIME
+
+    private fun getPrecipitationType(conditionCode: Int): PrecipitationType = when (conditionCode) {
+        //todo
+        in 200..299 -> PrecipitationType.THUNDERSTORM
+        in 300..399 -> PrecipitationType.DRIZZLE
+        in 500..599 -> PrecipitationType.RAIN
+        in 600..699 -> PrecipitationType.SNOW
+        in 700..799 -> PrecipitationType.ATMOSPHERE
+        else -> PrecipitationType.UNKNOWN
+    }
+
 
 }

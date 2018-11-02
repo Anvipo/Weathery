@@ -164,19 +164,13 @@
     <string name="invalid_ssl_certificate">Недействительный сертификат SSL</string>
     <string name="please_try_later">Пожалуйста, попробуйте позже</string>
     <string name="unknown_http_code">Неизвестный http код</string>
-    <string name="the_server_is_temporarily_unavailable">Сервер временно недоступен</string>
     <string name="authorisation_error">Ошибка авторизации</string>
-    <string name="response_timeout">Время ожидания ответа истекло</string>
 
-
-    <string name="make_sure_your_device_has_a_network_connection">Убедитесь, что на устройсте есть подключение к сети</string>
     <string name="rain_volume_for_last_3_hours">Количество дождя, выпавшего за последние 3 часа</string>
-
     <string name="google_play_services_unavailable">Google Play Services недоступны</string>
     <string name="this_app_will_not_work">Приложение не будет работать</string>
     <string name="last_known">Последнее известное</string>
     <string name="by_gps">С помощью GPS</string>
-    <string name="no_previous_weather_data">Предыдущих данных о погоде нет</string>
     <string name="the_forecast_is_outdated">Прогноз устарел</string>
     <string name="get_data_from_server">Получите данные с сервера</string>
     <string name="provide">Предоставить</string>
@@ -204,7 +198,6 @@
     <!--location-->
     <string name="application_need_to_know_your_location_which_location_do_you_want_to_use">
         Для работы приложения необходимо узнать Ваше местоположение. Какое местоположение Вы хотите использовать?</string>
-    <string name="find_out_your_current_location_in_one_of_the_suggested_ways">Узнайте Ваше текущее местоположение одним из предложенных способов</string>
     <string name="location">Местоположение</string>
     <string name="current_location">Текущее местоположение</string>
     <string name="is_your_current_location">Ваше текущее местоположение</string>
@@ -217,7 +210,6 @@
     <string name="is_this_your_location">Это Ваше местоположение?</string>
     <string name="current_location_unknown">Текущее местоположение неизвестно</string>
     <string name="previous_location_unknown">Предыдущее местоположение неизвестно</string>
-    <string name="no_previous_address_data">Предыдущих данных о местоположении нет</string>
     <string name="unable_to_find_the_address_of_the_specified_location">Невозможно узнать адрес указанного местоположения</string>
     <string name="could_not_find_your_location">Не удалось узнать Ваше местоположение</string>
     <string name="application_needs_permissions_to_location">Для установки местоположения приложению необходимы права доступа к местоположению</string>
@@ -232,5 +224,8 @@
     <string name="sunrise_and_sunset_time">Время восхода и захода Солнца</string>
     <string name="wind_info">Информация о ветре</string>
     <string name="forecast_time_and_date">Дата и время прогноза</string>
+    <string name="unknown_coordinates">Координаты неизвестны</string>
+    <string name="check_network_connection">Проверьте соединение с интернетом</string>
+    <string name="error_occurs">Произошла ошибка</string>
 
 </resources>

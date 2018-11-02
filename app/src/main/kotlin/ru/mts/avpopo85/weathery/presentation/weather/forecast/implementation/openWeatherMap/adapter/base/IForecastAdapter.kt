@@ -4,7 +4,7 @@ import ru.mts.avpopo85.weathery.domain.model.base.common.IForecast
 
 interface IForecastAdapter<T : IForecast> {
 
-    val clickListener: (T) -> Unit
+    val itemClickListener: (T) -> Unit
 
     fun updateData(newData: List<T>)
 

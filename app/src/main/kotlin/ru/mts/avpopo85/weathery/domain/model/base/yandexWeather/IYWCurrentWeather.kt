@@ -36,7 +36,7 @@ interface IYWCurrentWeather : ICurrentWeather {
     val season: String
 
     /**Type of precipitation.*/
-    val precipitationType: String
+    val precipitationTypeString: String
 
     /**Intensity of precipitation.*/
     val precipitationStrength: String

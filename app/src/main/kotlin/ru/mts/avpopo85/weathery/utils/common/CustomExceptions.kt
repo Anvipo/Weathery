@@ -2,7 +2,7 @@ package ru.mts.avpopo85.weathery.utils.common
 
 sealed class MyRealmException(message: String) : Throwable(message) {
 
-    class DBHasNothingAndGetGeolocationException(message: String) : MyRealmException(message)
+    class DBHasNoCurrentAddress(message: String) : MyRealmException(message)
 
     class DBHasOutdatedWeatherDataException(message: String, val isConnectedToInternet: Boolean) :
         MyRealmException(message)

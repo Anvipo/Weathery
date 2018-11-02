@@ -5,8 +5,6 @@ import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.IOWMWeather
 
 interface IOWMForecast : IForecast {
 
-    val cloudiness: Int
-
     /**Wind speed.
      *
      *Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.*/

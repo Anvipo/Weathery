@@ -8,6 +8,7 @@ import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.utils.onDbH
 import ru.mts.avpopo85.weathery.data.model.base.common.IWeatherResponse
 import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import ru.mts.avpopo85.weathery.data.repository.weather.utils.PreviousLocationUnknownException
+import ru.mts.avpopo85.weathery.utils.common.MyRealmException
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import kotlin.math.abs
 
@@ -24,11 +25,21 @@ abstract class AbsWeatherRepository<T : IWeatherResponse>(
                 isNetworkProviderEnabled = networkManager.isNetworkProviderEnabled,
                 isConnectedToInternet = networkManager.isConnectedToInternet
             ).blockingGet()
-        } catch (exception: Exception) {
-            val part1 = context.getString(R.string.previous_location_unknown)
-            val part2 = exception.localizedMessage ?: exception.message
+        } catch (exception: Throwable) {
+            val cause = exception.cause ?: exception
 
-            val message: String = if (part2 != null) "$part1\n$part2" else part1
+            val message: String = if (cause is MyRealmException.DBHasNoCurrentAddress) {
+                cause.localizedMessage ?: cause.message ?: context.getString(R.string.unknown_error)
+            } else {
+                val part1 = context.getString(R.string.previous_location_unknown)
+
+                val part2 = cause.localizedMessage ?: cause.message
+
+                if (part2 != null)
+                    "$part1\n$part2"
+                else
+                    part1
+            }
 
             throw PreviousLocationUnknownException(message)
         }

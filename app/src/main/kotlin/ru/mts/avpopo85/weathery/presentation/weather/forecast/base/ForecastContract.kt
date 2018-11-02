@@ -7,7 +7,7 @@ interface ForecastContract : WeatherContract {
 
     interface View<in T : IForecast> : WeatherContract.View {
 
-        fun showWeatherResponse(data: List<T>)
+        fun showWeatherResponse(forecast: List<T>)
 
         fun showWeatherInfo(itemData: T)
 

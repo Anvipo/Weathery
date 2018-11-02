@@ -69,7 +69,7 @@ class LocationPresenter
         compositeDisposable.add(task)
     }
 
-    override fun onLocationByMapsRequestActivityResult(coordinates: LatLng) {
+    override fun onLocationByMapsRequestActivityResult(coordinates: LatLng?) {
         val task: Disposable = interactor.getAddressFromCoordinates(coordinates)
             .compose(schedulerManagerModule.singleTransformer())
             .doOnSubscribe { view?.showLoadingProgress() }

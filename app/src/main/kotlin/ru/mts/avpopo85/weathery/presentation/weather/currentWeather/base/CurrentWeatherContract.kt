@@ -7,7 +7,7 @@ interface CurrentWeatherContract : WeatherContract {
 
     interface View<in T : ICurrentWeather> : WeatherContract.View {
 
-        fun showWeatherResponse(data: T)
+        fun showWeatherResponse(currentWeather: T)
 
     }
 

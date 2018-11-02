@@ -10,6 +10,7 @@ import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.toDateTime
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.forecast.OWMForecastMain
+import ru.mts.avpopo85.weathery.utils.common.PrecipitationType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
@@ -28,9 +29,11 @@ class OWMForecastMapper
             val weather = forecastResponse.weather.first()!!
 
             OWMForecastType(
+                precipitationType = getPrecipitationType(weather.conditionCode),
                 cityName = forecastResponse.cityName,
+                dateInSeconds = forecastResponse.timeOfDataCalculationUnixUTCInSeconds,
                 date = forecastResponse.timeOfDataCalculationUnixUTCInSeconds.toDateTime(),
-                cloudiness = forecastResponse.clouds!!.cloudiness,
+                cloudiness = forecastResponse.clouds!!.cloudiness.roundIfNeeded(),
                 windDirection = context.getWindDirectionString(wind.directionInDegrees),
                 windSpeed = wind.speedInUnits.roundIfNeeded(),
                 weather = weather.let {
@@ -56,5 +59,16 @@ class OWMForecastMapper
         }
 
     override val cacheLifeTimeInMs: Long = OWM_FORECAST_DEFAULT_CACHE_LIFETIME_IN_MS
+
+    private fun getPrecipitationType(conditionCode: Int): PrecipitationType = when (conditionCode) {
+        in 200..299 -> PrecipitationType.THUNDERSTORM
+        in 300..399 -> PrecipitationType.DRIZZLE
+        in 500..599 -> PrecipitationType.RAIN
+        in 600..699 -> PrecipitationType.SNOW
+        in 700..799 -> PrecipitationType.ATMOSPHERE
+        800 -> PrecipitationType.CLEAR
+        in 801..804 -> PrecipitationType.CLOUDS
+        else -> PrecipitationType.UNKNOWN
+    }
 
 }

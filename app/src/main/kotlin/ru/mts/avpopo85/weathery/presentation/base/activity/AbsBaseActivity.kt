@@ -3,6 +3,7 @@ package ru.mts.avpopo85.weathery.presentation.base.activity
 import android.app.Activity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import io.reactivex.exceptions.CompositeException
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.common.BaseContract
 import ru.mts.avpopo85.weathery.presentation.base.utils.startActivity
@@ -46,11 +47,17 @@ abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
     final override fun showError(error: Throwable, isCritical: Boolean, rootView: View?) {
         error.printStackTrace()
 
-        val message = parseError(error)
+        val cause = if (error is CompositeException) {
+            error.exceptions.last()!!
+        } else {
+            error
+        }
+
+        val message = parseError(cause)
 
         sendErrorLog(message)
 
-        showError(message, isCritical, rootView)
+        showError(message, isCritical,  rootView)
     }
 
     protected inline fun <reified T : Activity> Activity.startActivity(vararg params: Pair<String, Any?>) {

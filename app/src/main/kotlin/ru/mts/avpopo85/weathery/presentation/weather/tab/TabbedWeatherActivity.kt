@@ -54,4 +54,10 @@ class TabbedWeatherActivity : AbsProgressBarActivity() {
 
     private val viewToolbar: Toolbar by lazy { toolbar }
 
+    companion object {
+
+        var snackbarIsShownOrQueued: Boolean = false
+
+    }
+
 }

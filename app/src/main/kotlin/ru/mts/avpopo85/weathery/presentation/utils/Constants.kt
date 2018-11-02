@@ -23,3 +23,5 @@ const val ADDRESS_TAG: String = "address"
 const val LOCALITY_TAG: String = "locality"
 
 const val WEATHER_API_TAG: String = "weather API"
+
+const val BAD_WEATHER_IS_COMING_ID: Int = 666

@@ -137,11 +137,9 @@ private fun Context.onTimeoutException(): String {
 }
 
 private fun Context.onUnknownHostException(): String =
-    "${getString(R.string.the_server_is_temporarily_unavailable)}. " +
-            getString(R.string.please_try_later)
+    "${getString(R.string.error_occurs)}. ${getString(R.string.please_try_later)}"
 
 private fun Context.onConnectException(): String = getString(R.string.authorisation_error)
 
 private fun Context.onSocketTimeoutException(): String =
-    "${getString(R.string.response_timeout)}. " +
-            getString(R.string.make_sure_your_device_has_a_network_connection)
+    "${getString(R.string.error_occurs)}. ${getString(R.string.check_network_connection)}"

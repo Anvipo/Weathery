@@ -9,7 +9,7 @@ abstract class AbsCurrentWeatherActivity<T : ICurrentWeather> :
     AbsWeatherActivity(),
     CurrentWeatherContract.View<T> {
 
-    override fun showWeatherResponse(data: T) {
+    override fun showWeatherResponse(currentWeather: T) {
         showLayout()
     }
 

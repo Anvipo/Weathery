@@ -53,7 +53,7 @@ interface LocationContract :
 
         fun onApplicationSettingsRequestForGetCurrentLocationActivityResult()
 
-        fun onLocationByMapsRequestActivityResult(coordinates: LatLng)
+        fun onLocationByMapsRequestActivityResult(coordinates: LatLng?)
 
     }
 

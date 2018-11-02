@@ -29,10 +29,12 @@ class LocationInteractor
     override fun getLastKnownAddress(): Single<UserAddressType> =
         locationRepository.getLastKnownAddress()
 
-    override fun getAddressFromCoordinates(coordinates: LatLng): Single<UserAddressType> =
+    override fun getAddressFromCoordinates(coordinates: LatLng?): Single<UserAddressType> =
         locationRepository.getAddressFromCoordinates(coordinates)
 
     override fun saveAddress(address: UserAddressType): Single<UserAddressType> =
-        locationRepository.saveAddressToDB(address)
+        locationRepository.saveAddressToDB(address).flatMap {
+            locationRepository.saveAddressToSharedPreferences(it)
+        }
 
 }

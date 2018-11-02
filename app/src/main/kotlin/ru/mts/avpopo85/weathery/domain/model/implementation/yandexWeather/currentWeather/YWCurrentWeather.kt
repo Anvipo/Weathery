@@ -1,6 +1,7 @@
 package ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.currentWeather
 
 import ru.mts.avpopo85.weathery.domain.model.base.yandexWeather.IYWCurrentWeather
+import ru.mts.avpopo85.weathery.utils.common.PrecipitationType
 
 /**This object contains information about the current weather.*/
 data class YWCurrentWeather(
@@ -35,7 +36,9 @@ data class YWCurrentWeather(
 
     override val season: String,
 
-    override val precipitationType: String,
+    override val precipitationTypeString: String,
+
+    override val precipitationType: PrecipitationType,
 
     override val precipitationStrength: String,
 

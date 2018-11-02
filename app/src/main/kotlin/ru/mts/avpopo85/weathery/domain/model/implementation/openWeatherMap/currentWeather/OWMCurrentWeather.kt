@@ -2,9 +2,12 @@ package ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.curr
 
 import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.currentWeather.IOWMCurrentWeather
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
+import ru.mts.avpopo85.weathery.utils.common.PrecipitationType
 
 /**This object contains information about the current weather.*/
 data class OWMCurrentWeather(
+
+    override val precipitationType: PrecipitationType,
 
     override val isFresh: Boolean,
 

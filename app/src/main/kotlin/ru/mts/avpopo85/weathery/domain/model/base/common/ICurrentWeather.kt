@@ -14,9 +14,6 @@ interface ICurrentWeather : IWeather {
 
     val timeOfDataCalculation: String
 
-    /**Cloud cover.*/
-    val cloudiness: String
-
     /**YW: Wind speed (meters per second).*/
     /**OWM: Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.*/
     val windSpeed: String

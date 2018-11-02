@@ -17,7 +17,7 @@ interface ILocationInteractor {
 
     fun getLastKnownAddress(): Single<UserAddressType>
 
-    fun getAddressFromCoordinates(coordinates: LatLng): Single<UserAddressType>
+    fun getAddressFromCoordinates(coordinates: LatLng?): Single<UserAddressType>
 
     fun saveAddress(address: UserAddressType): Single<UserAddressType>
 

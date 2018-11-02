@@ -166,10 +166,7 @@
 
     <string name="please_try_later">Please, try later</string>
     <string name="unknown_http_code">Unknown http code</string>
-    <string name="the_server_is_temporarily_unavailable">The server is temporarily unavailable</string>
     <string name="authorisation_error">Authorisation error</string>
-    <string name="response_timeout">Response timeout</string>
-    <string name="make_sure_your_device_has_a_network_connection">Make sure your device has a network connection</string>
     <string name="rain_volume_for_last_3_hours">Rain volume for last 3 hours</string>
 
     <string name="google_play_services_unavailable">Google Play Services unavailable</string>
@@ -177,7 +174,6 @@
 
     <string name="last_known">Last known</string>
     <string name="by_gps">By GPS</string>
-    <string name="no_previous_weather_data">No previous weather data</string>
     <string name="the_forecast_is_outdated">The forecast is outdated</string>
     <string name="get_data_from_server">Get data from server</string>
     <string name="provide">Provide</string>
@@ -197,7 +193,6 @@
     <string name="_12_hour_forecast_for_night">12 hour forecast for night</string>
     <string name="date_value">Date value</string>
     <string name="error_has_occurred">Error has occurred</string>
-    <string name="no_previous_address_data">No previous address data</string>
     <string name="unexpected_application_behavior">Unexpected application behavior</string>
     <string name="you_must_find_out_it">You must find out it</string>
     <string name="settings">Settings</string>
@@ -216,7 +211,6 @@
     <string name="could_not_find_your_location">Could not find your location</string>
     <string name="application_needs_permissions_to_location">To find out your current location, application needs permissions to location</string>
     <string name="go_to_applications_settings_and_provide_permissions_to_location">To find out your current location, you must go to application\'s settings and provide permissions to location</string>
-    <string name="find_out_your_current_location_in_one_of_the_suggested_ways">Find out your current location in one of the suggested ways</string>
     <string name="previous_location_unknown">Previous location unknown</string>
     <string name="is_this_your_location">Is this your location?</string>
     <string name="specify_the_location_on_the_map_again">Specify the location on the map again</string>
@@ -236,6 +230,9 @@
     <string name="sunrise_and_sunset_time">Sunrise and sunset time</string>
     <string name="wind_info">Wind info</string>
     <string name="forecast_time_and_date">Forecast time and date</string>
+    <string name="unknown_coordinates">Unknown coordinates</string>
+    <string name="check_network_connection">Check network connection</string>
+    <string name="error_occurs">Error occurs</string>
 
     <string-array name="weather_API">
         <item>Open Weather Map</item>

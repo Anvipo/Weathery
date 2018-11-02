@@ -39,10 +39,8 @@ class YWCurrentWeatherActivity : AbsCurrentWeatherActivity<YWCurrentWeatherType>
     }
 
     @SuppressLint("SetTextI18n")
-    override fun showWeatherResponse(data: YWCurrentWeatherType) {
-        super.showWeatherResponse(data)
-
-        data.let {
+    override fun showWeatherResponse(currentWeather: YWCurrentWeatherType) {
+        currentWeather.let {
             temperature_value_YW_CW_TV.text = "${it.temperature} $CELSIUS_DEGREE"
             feels_like_temperature_value_YW_CW_TV.text = "${it.feelsLikeTemperature}$CELSIUS_DEGREE"
             condition_value_YW_CW_TV.text = it.weatherDescription
@@ -53,13 +51,15 @@ class YWCurrentWeatherActivity : AbsCurrentWeatherActivity<YWCurrentWeatherType>
             //todo
 //            "${it.atmosphericPressureInhPa} ${getString(R.string.hPa)}"
             humidity_value_YW_CW_TV.text = "${it.humidity}%"
-            precipitation_type_value_YW_CW_TV.text = it.precipitationType
+            precipitation_type_value_YW_CW_TV.text = it.precipitationTypeString
             precipitation_strength_value_YW_CW_TV.text = it.precipitationStrength
             cloudiness_value_YW_CW_TV.text = it.cloudiness
             daytime_value_YW_CW_TV.text = it.daytime
             polar_value_YW_CW_TV.text = it.polar
             season_value_YW_CW_TV.text = it.season
         }
+
+        super.showWeatherResponse(currentWeather)
     }
 
 }

@@ -7,7 +7,6 @@ import android.provider.Settings
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_location.*
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.content_location.*
@@ -247,18 +246,9 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
     private fun onLocationByMapsRequestCode(resultCode: Int, data: Intent?) {
         when (resultCode) {
             LOCATION_BY_MAPS_RESULT_OK -> {
-                if (data != null) {
-                    showLoadingProgress()
-
-                    val coordinates: LatLng? = data.getParcelableExtra(COORDINATES_TAG)
-
-                    if (coordinates != null) {
-                        presenter.onLocationByMapsRequestActivityResult(coordinates)
-                    } else {
-                        hideLoadingProgress()
-                        showLocationError()
-                    }
-                }
+                presenter.onLocationByMapsRequestActivityResult(
+                    data?.getParcelableExtra(COORDINATES_TAG)
+                )
             }
             else -> showLocationError()
         }

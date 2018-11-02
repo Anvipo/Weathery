@@ -17,6 +17,7 @@ import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.foreca
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWDayTime
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWHourInfo
 import ru.mts.avpopo85.weathery.domain.model.implementation.yandexWeather.forecast.YWParts
+import ru.mts.avpopo85.weathery.utils.common.PrecipitationType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastListType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWForecastResponseType
@@ -33,6 +34,7 @@ class YWForecastMapper
             YWForecastType(
                 cityName = it.cityName,
                 date = it.dateUTC,
+                dateInSeconds = it.timeOfDataCalculationUnixUTCInSeconds,
                 dateInUnixtime = it.timeOfDataCalculationUnixUTCInSeconds.toDate(),
                 weekSerialNumber = it.weekSerialNumber,
                 sunriseInLocalTime = it.sunriseInLocalTime,
@@ -41,11 +43,24 @@ class YWForecastMapper
                 moonText = context.getMoonTextString(it.moonText),
                 parts = mapPartsResponse(it.partsResponse!!),
                 hours = mapHoursResponse(it.hours),
-                isFresh = it.isFresh
+                isFresh = it.isFresh,
+                precipitationType = getPrecipitationType(it.hours.first()!!.precipitationType),
+                cloudiness = it.hours.first()!!.cloudiness.roundIfNeeded()
             )
         }
 
     override val cacheLifeTimeInMs: Long = YW_DEFAULT_CACHE_LIFETIME
+
+    private fun getPrecipitationType(conditionCode: Int): PrecipitationType = when (conditionCode) {
+        //todo
+        in 200..299 -> PrecipitationType.THUNDERSTORM
+        in 300..399 -> PrecipitationType.DRIZZLE
+        in 500..599 -> PrecipitationType.RAIN
+        in 600..699 -> PrecipitationType.SNOW
+        in 700..799 -> PrecipitationType.ATMOSPHERE
+        else -> PrecipitationType.UNKNOWN
+    }
+
 
     private fun mapHoursResponse(YWHourInfoResponse: List<IYWHourInfoResponse>?): List<YWHourInfo>? =
         YWHourInfoResponse?.map {

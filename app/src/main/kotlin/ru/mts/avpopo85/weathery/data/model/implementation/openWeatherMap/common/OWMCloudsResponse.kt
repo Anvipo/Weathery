@@ -9,6 +9,6 @@ open class OWMCloudsResponse(
 
     @SerializedName("all")
     @Expose
-    override var cloudiness: Int = 0
+    override var cloudiness: Double = 0.0
 
 ) : RealmObject(), IOWMCloudsResponse

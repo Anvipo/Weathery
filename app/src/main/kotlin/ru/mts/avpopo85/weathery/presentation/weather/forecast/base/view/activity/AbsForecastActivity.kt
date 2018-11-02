@@ -21,10 +21,10 @@ abstract class AbsForecastActivity<T : IForecast> :
         initRecyclerView()
     }
 
-    final override fun showWeatherResponse(data: List<T>) {
-        if (data.isNotEmpty()) {
+    final override fun showWeatherResponse(forecast: List<T>) {
+        if (forecast.isNotEmpty()) {
             showLayout()
-            updateRecyclerViewData(data = data)
+            updateRecyclerViewData(data = forecast)
         } else
             hideLayout()
     }

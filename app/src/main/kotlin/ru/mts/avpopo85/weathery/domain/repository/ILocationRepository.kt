@@ -11,7 +11,7 @@ interface ILocationRepository {
 
     fun getLastKnownAddress(): Single<UserAddressType>
 
-    fun getAddressFromCoordinates(coordinates: LatLng): Single<UserAddressType>
+    fun getAddressFromCoordinates(coordinates: LatLng?): Single<UserAddressType>
 
     fun saveAddressToDB(address: UserAddressType): Single<UserAddressType>
 

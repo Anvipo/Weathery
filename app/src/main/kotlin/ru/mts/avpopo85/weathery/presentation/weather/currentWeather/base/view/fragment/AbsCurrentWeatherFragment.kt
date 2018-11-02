@@ -9,7 +9,7 @@ abstract class AbsCurrentWeatherFragment<T : ICurrentWeather> :
     AbsWeatherFragment(),
     CurrentWeatherContract.View<T> {
 
-    override fun showWeatherResponse(data: T) {
+    override fun showWeatherResponse(currentWeather: T) {
         showLayout()
     }
 
@@ -24,12 +24,14 @@ abstract class AbsCurrentWeatherFragment<T : ICurrentWeather> :
     }
 
     final override fun onRefresh() {
+        dismissSnackbar()
         presenter.onSwipeToRefresh()
     }
 
     final override fun onStart() {
         super.onStart()
 
+        dismissSnackbar()
         presenter.loadWeatherData()
     }
 

@@ -54,6 +54,8 @@ class LocationRepository
             .settings()
             .checkAndHandleResolution(locationRequest)
             .flatMap(::getCurrentAddressByGPS)
+            .flatMap(::saveAddressToDB)
+            .flatMap(::saveAddressToSharedPreferences)
 
     override fun getLastKnownAddress(): Single<UserAddressType> =
         dbService.getLastKnownAddress(
@@ -62,12 +64,19 @@ class LocationRepository
             networkManager.isConnectedToInternet
         )
 
-    override fun getAddressFromCoordinates(coordinates: LatLng): Single<UserAddressType> {
+    override fun getAddressFromCoordinates(coordinates: LatLng?): Single<UserAddressType> {
+        if (coordinates == null) {
+            val error = ExtractAddressException(context.getString(R.string.unknown_coordinates))
+
+            return Single.error(error)
+        }
+
         val location = Location(coordinates.toString()).apply {
             latitude = coordinates.latitude
             longitude = coordinates.longitude
         }
 
+        //will save data when user confirmed location
         return makeAddressFromLocation(location)
     }
 
@@ -96,8 +105,6 @@ class LocationRepository
     private fun getCurrentAddressByGPS(success: Boolean): Single<UserAddressType> =
         makeGpsCall(success)
             .flatMap(::makeAddressFromLocation)
-            .flatMap(::saveAddressToDB)
-            .flatMap(::saveAddressToSharedPreferences)
 
     private fun makeGpsCall(success: Boolean): Single<Location> =
         when {

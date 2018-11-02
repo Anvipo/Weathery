@@ -9,7 +9,7 @@ import io.realm.kotlin.delete
 import io.realm.kotlin.where
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
-import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasNothingAndGetGeolocationException
+import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasNoCurrentAddress
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import javax.inject.Inject
 
@@ -118,13 +118,9 @@ class LocationRealmService
     }
 
     private fun <T> Context.onDbHasNoCurrentAddress(emitter: SingleEmitter<T>) {
-        val part1 = getString(R.string.no_previous_address_data)
+        val message = getString(R.string.find_out_current_location)
 
-        val part2 = getString(R.string.find_out_your_current_location_in_one_of_the_suggested_ways)
-
-        val message = "$part1. $part2"
-
-        val error = DBHasNothingAndGetGeolocationException(message)
+        val error = DBHasNoCurrentAddress(message)
 
         emitter.onError(error)
     }

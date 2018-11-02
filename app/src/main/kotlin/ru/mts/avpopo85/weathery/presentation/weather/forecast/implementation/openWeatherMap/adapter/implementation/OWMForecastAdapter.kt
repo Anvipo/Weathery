@@ -9,7 +9,7 @@ import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.ope
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 
-class OWMForecastAdapter(override val clickListener: (OWMForecastType) -> Unit) :
+class OWMForecastAdapter(override val itemClickListener: (OWMForecastType) -> Unit) :
     RecyclerView.Adapter<OWMForecastViewHolder>(),
     IForecastAdapter<OWMForecastType> {
 
@@ -97,7 +97,7 @@ class OWMForecastAdapter(override val clickListener: (OWMForecastType) -> Unit) 
     }
 
     override fun onBindViewHolder(holder: OWMForecastViewHolder, position: Int) {
-        holder.bind(data = data[position], clickListener = clickListener)
+        holder.bind(data = data[position], clickListener = itemClickListener)
     }
 
     override fun getItemCount(): Int = data.size

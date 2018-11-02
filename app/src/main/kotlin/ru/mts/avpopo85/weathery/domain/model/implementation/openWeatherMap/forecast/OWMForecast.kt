@@ -3,10 +3,13 @@ package ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.fore
 import kotlinx.android.parcel.Parcelize
 import ru.mts.avpopo85.weathery.domain.model.base.openWeatherMap.forecast.IOWMForecast
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
+import ru.mts.avpopo85.weathery.utils.common.PrecipitationType
 
 /**This object contains weather forecast data.*/
 @Parcelize
 data class OWMForecast(
+
+    override val precipitationType: PrecipitationType,
 
     override val isFresh: Boolean,
 
@@ -14,7 +17,9 @@ data class OWMForecast(
 
     override val date: String,
 
-    override val cloudiness: Int,
+    override val dateInSeconds: Long,
+
+    override val cloudiness: String,
 
     override val weather: OWMWeather,
 
