@@ -10,12 +10,9 @@ import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import ru.mts.avpopo85.weathery.data.repository.weather.common.AbsCurrentWeatherRepository
 import ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap.base.IOWMRepository
 import ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap.utils.TripleOfOWMApiCalls
-import ru.mts.avpopo85.weathery.data.repository.weather.utils.onUnknownCurrentLocation
 import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 import javax.inject.Inject
 
 class OWMCurrentWeatherRepository
@@ -23,8 +20,8 @@ class OWMCurrentWeatherRepository
     private val apiService: IOWMCurrentWeatherApiService,
     networkManager: NetworkManager,
     currentWeatherDbService: ICurrentWeatherDbService<OWMCurrentWeatherResponseType>,
-    locationDbService: ILocationDbService<UserAddressType>,
-    private val context: Context
+    locationDbService: ILocationDbService,
+    context: Context
 ) :
     AbsCurrentWeatherRepository<OWMCurrentWeatherResponseType>(
         currentWeatherDbService, networkManager, locationDbService, context
@@ -60,59 +57,6 @@ class OWMCurrentWeatherRepository
         //CHANGE ORDER ONLY HERE
         return TripleOfOWMApiCalls(geoCoordsApiCall, postalCodeApiCall, cityNameApiCall)
     }
-
-    override fun makeApiCall(
-        firstApiCall: Single<OWMCurrentWeatherResponseType>?,
-        secondApiCall: Single<OWMCurrentWeatherResponseType>?,
-        thirdApiCall: Single<OWMCurrentWeatherResponseType>?
-    ): Single<OWMCurrentWeatherResponseType> =
-        when {
-            //Priority order
-            //The order is important
-            //DONT CHANGE ANY ORDER (CHANGE ORDER ONLY IN make3ApiCalls)
-            firstApiCall != null ->
-                firstApiCallWithErrorCatching(firstApiCall, secondApiCall, thirdApiCall)
-            secondApiCall != null ->
-                secondApiCallWithErrorCatching(secondApiCall, thirdApiCall)
-            thirdApiCall != null -> thirdApiCallWithErrorCatching(thirdApiCall)
-            else -> onUnknownLocation()
-        }
-
-    override fun firstApiCallWithErrorCatching(
-        first: Single<OWMCurrentWeatherResponseType>,
-        second: Single<OWMCurrentWeatherResponseType>?,
-        third: Single<OWMCurrentWeatherResponseType>?
-    ): Single<OWMCurrentWeatherResponseType> =
-        first.onErrorResumeNext {
-            when {
-                it is UnknownHostException || it is SocketTimeoutException -> Single.error(it)
-                second != null ->
-                    secondApiCallWithErrorCatching(second, third)
-                third != null -> thirdApiCallWithErrorCatching(third)
-                else -> onUnknownLocation()
-            }
-        }
-
-    override fun secondApiCallWithErrorCatching(
-        second: Single<OWMCurrentWeatherResponseType>,
-        third: Single<OWMCurrentWeatherResponseType>?
-    ): Single<OWMCurrentWeatherResponseType> =
-        second.onErrorResumeNext {
-            when {
-                it is UnknownHostException || it is SocketTimeoutException -> Single.error(it)
-                third != null -> thirdApiCallWithErrorCatching(third)
-                else -> onUnknownLocation()
-            }
-        }
-
-    override fun thirdApiCallWithErrorCatching(third: Single<OWMCurrentWeatherResponseType>)
-            : Single<OWMCurrentWeatherResponseType> =
-        third.onErrorResumeNext {
-            when (it) {
-                is UnknownHostException, is SocketTimeoutException -> Single.error(it)
-                else -> onUnknownLocation()
-            }
-        }
 
     override fun makePostalCodeApiCall(
         postalCode: String?,
@@ -164,7 +108,7 @@ class OWMCurrentWeatherRepository
         return apiService.getCurrentWeatherByCityName(cityNameRequest)
     }
 
-    override fun onUnknownLocation(): Single<OWMCurrentWeatherResponseType> =
-        context.onUnknownCurrentLocation()
+//    override fun onUnknownLocation(): Single<OWMCurrentWeatherResponseType> =
+//        context.onUnknownCurrentLocation()
 
 }

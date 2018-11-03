@@ -62,6 +62,8 @@ class WelcomeActivity : AbsProgressBarActivity(), WelcomeContract.View {
         }
     }
 
+    override fun changeTitle(title: String) = Unit
+
     private fun routeToAppropriatePage(locality: String?) {
         when (locality) {
             null -> startActivityForResult<SettingsActivity>(LOCATION_REQUEST)

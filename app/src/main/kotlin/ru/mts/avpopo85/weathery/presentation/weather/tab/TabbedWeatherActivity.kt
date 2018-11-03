@@ -41,6 +41,8 @@ class TabbedWeatherActivity : AbsProgressBarActivity() {
         else -> super.onOptionsItemSelected(item)
     }
 
+    override fun changeTitle(title: String) = Unit
+
     val clickListener: (Pair<String, OWMForecastType>) -> Unit =
         { startActivity<OWMForecastInfoActivity>(it) }
 

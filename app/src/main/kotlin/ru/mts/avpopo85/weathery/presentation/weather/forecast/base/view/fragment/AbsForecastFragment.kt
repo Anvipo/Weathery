@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.app.NotificationCompat
-import androidx.core.app.TaskStackBuilder
 import androidx.core.content.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,7 +37,7 @@ abstract class AbsForecastFragment<T : IForecast> :
         if (forecast.isNotEmpty()) {
             updateRecyclerViewData(data = forecast)
             showLayout()
-            checkPrecipitation(forecast = forecast)
+//            checkPrecipitation(forecast = forecast)
         } else
             hideLayout()
     }
@@ -64,6 +63,7 @@ abstract class AbsForecastFragment<T : IForecast> :
     final override fun onStop() {
         super.onStop()
 
+        presenter.clearCompositeDisposable()
         hideLayout()
     }
 
@@ -76,6 +76,7 @@ abstract class AbsForecastFragment<T : IForecast> :
     protected abstract val recyclerView: RecyclerView
 
     //TODO
+    @Suppress("unused")
     private fun checkPrecipitation(forecast: List<T>) {
         val tommorowForecast = getTommorowForecast(forecast)
 
@@ -88,30 +89,34 @@ abstract class AbsForecastFragment<T : IForecast> :
                     val c = 1
                     //notificate
                 } else {
-                    val mBuilder = NotificationCompat.Builder(context!!, "")
+                    val resultIntent = Intent(context!!, TabbedWeatherActivity::class.java)
+
+//                    val stackBuilder = TaskStackBuilder.create(context!!).apply {
+//                        addNextIntent(resultIntent)
+//                    }
+
+                    val resultPendingIntent = PendingIntent.getActivity(
+                        context!!,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                    )
+
+                    val builder = NotificationCompat.Builder(context!!, "")
                         .setSmallIcon(R.drawable.ic_launcher_foreground)
                         .setContentTitle("Будет хорошая погода")
                         .setContentText("${hourForecast.date} ожидается хорошая погода")
                         .setPriority(NotificationCompat.PRIORITY_MAX)
+                        .setContentIntent(resultPendingIntent)
+                        .setAutoCancel(true)
+//                        .setWhen()
 
-                    val resultIntent = Intent(context!!, TabbedWeatherActivity::class.java)
+                    val notification = builder.build()
 
-                    val stackBuilder = TaskStackBuilder.create(context!!).apply {
-                        addNextIntent(resultIntent)
-                    }
+                    val notificationManager = context!!.getSystemService<NotificationManager>()!!
 
-                    val resultPendingIntent = stackBuilder.getPendingIntent(
-                        0,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                    )
+                    notificationManager.notify(BAD_WEATHER_IS_COMING_ID, notification)
 
-                    mBuilder.setContentIntent(resultPendingIntent)
-
-                    val mNotificationManager = context!!.getSystemService<NotificationManager>()!!
-
-                    mNotificationManager.notify(BAD_WEATHER_IS_COMING_ID, mBuilder.build())
-
-                    val c = 1
                     break
                 }
             }

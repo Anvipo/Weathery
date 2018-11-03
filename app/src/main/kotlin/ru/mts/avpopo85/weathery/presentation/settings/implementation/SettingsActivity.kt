@@ -17,16 +17,36 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragment
 import androidx.preference.PreferenceManager
+import io.reactivex.exceptions.CompositeException
 import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.application.App
+import ru.mts.avpopo85.weathery.data.repository.weather.utils.PreviousLocationUnknownException
+import ru.mts.avpopo85.weathery.di.modules.common.SettingsModule
 import ru.mts.avpopo85.weathery.presentation.settings.base.SettingsContract
 import ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.LocationPreferenceFragment
 import ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.NetworkPreferenceFragment
 import ru.mts.avpopo85.weathery.presentation.utils.LOCALITY_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_RESULT_OK
 import ru.mts.avpopo85.weathery.presentation.utils.WEATHER_API_TAG
-import ru.mts.avpopo85.weathery.utils.common.showLongSnackbar
+import ru.mts.avpopo85.weathery.utils.common.*
+import javax.inject.Inject
 
 class SettingsActivity : PreferenceActivity(), SettingsContract.View {
+
+    @Inject
+    lateinit var presenter: SettingsContract.Presenter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        initInjection()
+        bindPresenter()
+    }
+
+    override fun onDestroy() {
+        unbindPresenter()
+        super.onDestroy()
+    }
 
     override fun onBuildHeaders(target: List<PreferenceActivity.Header>) {
         loadHeadersFromResource(R.xml.preference_headers, target)
@@ -57,46 +77,93 @@ class SettingsActivity : PreferenceActivity(), SettingsContract.View {
         setupActionBar()
     }
 
-    private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(this)!! }
+    override fun onUnexpectedApplicationBehavior(rootView: View?) = Unit
 
-    private val currentLocation: String?
-        get() {
-            val currentLocationPrefKey = getString(R.string.pref_key_current_location)
+    override fun showShortSnackbar(message: String, rootView: View?) {
+        val view = rootView ?: rootLayout
 
-            return sharedPreferences.getString(currentLocationPrefKey, null)
+        view.showShortSnackbar(message)
+    }
+
+    override fun showLongSnackbar(message: String, rootView: View?) {
+        val view = rootView ?: rootLayout
+
+        view.showLongSnackbar(message)
+    }
+
+    override fun showIndefiniteSnackbar(message: String, rootView: View?) {
+        val view = rootView ?: rootLayout
+
+        view.showIndefiniteSnackbar(message)
+    }
+
+    override fun changeTitle(title: String) = Unit
+
+    override fun showError(message: String, isCritical: Boolean, rootView: View?) {
+        if (!isCritical) {
+            showLongSnackbar(message, rootView)
+        } else {
+            showIndefiniteSnackbar(message, rootView)
+        }
+    }
+
+    override fun showError(error: Throwable, isCritical: Boolean, rootView: View?) {
+        error.printStackTrace()
+
+        val cause = if (error is CompositeException) {
+            error.exceptions.last()!!
+        } else {
+            error
         }
 
-    private val chosenWeatherAPI: String
-        get() {
-            val weatherAPIPrefKey = getString(R.string.pref_key_weather_API)
+        sendErrorLog(cause.toString())
 
-            val weatherAPIs = resources.getStringArray(R.array.weather_API)
+        val message = parseError(cause)
 
-            val weatherAPIDefaultValue = weatherAPIs[0]
+        sendErrorLog(message)
 
-            return sharedPreferences.getString(weatherAPIPrefKey, weatherAPIDefaultValue)!!
+        val internetConnectionRequired =
+            if (cause is MyRealmException.DBHasNoWeatherResponseException) {
+                !cause.isConnectedToInternet
+            } else {
+                false
+            }
+
+        val _isCritical =
+            cause is PreviousLocationUnknownException || isCritical || internetConnectionRequired
+
+        showError(message, _isCritical, rootView)
+    }
+
+    override fun onSuccessCheckPreferences(settingsInfo: SettingsInfo) {
+        val intent = Intent().apply {
+            putExtra(LOCALITY_TAG, settingsInfo.currentLocation)
+            putExtra(WEATHER_API_TAG, settingsInfo.chosenWeatherAPI)
         }
+
+        setResult(LOCATION_RESULT_OK, intent)
+
+        super.onBackPressed()
+    }
+
+    override fun notifyAbout(error: Throwable) = Unit
+
+    private fun bindPresenter() {
+        presenter.onBindView(this)
+    }
+
+    private fun unbindPresenter() {
+        presenter.onUnbindView()
+    }
+
+    private fun initInjection() {
+        App.appComponent
+            .plus(SettingsModule())
+            .inject(this)
+    }
 
     private fun onBackPressedInHeaders() {
-        @Suppress("IntroduceWhenSubject")
-        when {
-            currentLocation == null -> {
-                val part1 = getString(R.string.current_location_unknown)
-                val part2 = getString(R.string.you_must_find_out_it)
-
-                listView!!.showLongSnackbar("$part1. $part2")
-            }
-            else -> {
-                val intent = Intent().apply {
-                    putExtra(LOCALITY_TAG, currentLocation)
-                    putExtra(WEATHER_API_TAG, chosenWeatherAPI)
-                }
-
-                setResult(LOCATION_RESULT_OK, intent)
-
-                super.onBackPressed()
-            }
-        }
+        presenter.checkPreferences()
     }
 
     private fun onBackPressedInFragment() {
@@ -104,7 +171,7 @@ class SettingsActivity : PreferenceActivity(), SettingsContract.View {
     }
 
     private fun setupActionBar() {
-        root.addView(toolbar, 0) // insert at top
+        rootLayout.addView(toolbar, 0) // insert at top
 
         toolbar.setNavigationOnClickListener { onBackPressed() }
     }
@@ -112,10 +179,10 @@ class SettingsActivity : PreferenceActivity(), SettingsContract.View {
     private val toolbar: Toolbar by lazy {
         LayoutInflater
             .from(this)
-            .inflate(R.layout.settings_toolbar, root, false) as Toolbar
+            .inflate(R.layout.settings_toolbar, rootLayout, false) as Toolbar
     }
 
-    private val root: LinearLayout by lazy {
+    private val rootLayout: LinearLayout by lazy {
         findViewById<View>(android.R.id.list).parent.parent.parent as LinearLayout
     }
 

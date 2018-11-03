@@ -7,7 +7,7 @@ import ru.mts.avpopo85.weathery.data.repository.common.PermissionsRepository
 import ru.mts.avpopo85.weathery.di.global.SchedulerManagerModule
 import ru.mts.avpopo85.weathery.di.scopes.common.LocationScope
 import ru.mts.avpopo85.weathery.domain.interactor.base.ILocationInteractor
-import ru.mts.avpopo85.weathery.domain.interactor.implementation.location.LocationInteractor
+import ru.mts.avpopo85.weathery.domain.interactor.implementation.common.LocationInteractor
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
 import ru.mts.avpopo85.weathery.domain.repository.IPermissionsRepository
 import ru.mts.avpopo85.weathery.presentation.location.implementation.LocationActivity

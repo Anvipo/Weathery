@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.domain.interactor.implementation.location
+package ru.mts.avpopo85.weathery.domain.interactor.implementation.common
 
 import com.google.android.gms.maps.model.LatLng
 import com.tbruyelle.rxpermissions2.Permission

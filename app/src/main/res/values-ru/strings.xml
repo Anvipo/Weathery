@@ -201,7 +201,7 @@
     <string name="location">Местоположение</string>
     <string name="current_location">Текущее местоположение</string>
     <string name="is_your_current_location">Ваше текущее местоположение</string>
-    <string name="find_out_current_location">Узнать текущее местоположение</string>
+    <string name="find_out_your_current_location">Узнайте Ваше текущее местоположение</string>
     <string name="specify_current_location">Указать текущее местоположение</string>
     <string name="select_current_location">Выбор текущего местоположения</string>
     <string name="your_location_has_changed">Ваше местоположение изменилось</string>

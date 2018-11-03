@@ -1,6 +1,7 @@
 package ru.mts.avpopo85.weathery.di.global
 
 import android.content.Context
+import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import io.realm.Realm
@@ -13,7 +14,6 @@ import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.openWeather
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.openWeatherMap.OWMForecastRealmService
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.yandexWeather.YWCurrentWeatherRealmService
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.yandexWeather.YWForecastRealmService
-import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMListItemResponseType
 import ru.mts.avpopo85.weathery.utils.yandexWeather.YWCurrentWeatherResponseType
@@ -60,7 +60,7 @@ class RealmModule(val context: Context) {
 
     @Provides
     @Singleton
-    fun provideLocationRealmService(): ILocationDbService<UserAddressType> =
-        LocationRealmService(context)
+    fun provideLocationRealmService(sharedPreferences: SharedPreferences): ILocationDbService =
+        LocationRealmService(context, sharedPreferences)
 
 }

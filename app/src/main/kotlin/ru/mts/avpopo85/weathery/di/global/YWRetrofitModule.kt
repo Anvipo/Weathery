@@ -3,6 +3,7 @@ package ru.mts.avpopo85.weathery.di.global
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -17,11 +18,12 @@ class YWRetrofitModule(private val baseUrl: String) {
     @Provides
     @Singleton
     @Named("YWRetrofit")
-    fun provideYWRetrofit(gson: Gson): Retrofit = Retrofit
+    fun provideYWRetrofit(gson: Gson, client: OkHttpClient): Retrofit = Retrofit
         .Builder()
         .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .baseUrl(baseUrl)
+        .client(client)
         .build()
 
     @Provides

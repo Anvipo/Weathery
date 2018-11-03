@@ -203,7 +203,7 @@
     <string name="pref_key_get_location" translatable="false">pref_key_get_location</string>
     <string name="location">Location</string>
     <string name="current_location">Current location</string>
-    <string name="find_out_current_location">Find out current location</string>
+    <string name="find_out_your_current_location">Find out your current location</string>
     <string name="application_need_to_know_your_location_which_location_do_you_want_to_use">
         Application need to know your location. Which location do you want to use?</string>
     <string name="is_your_current_location">Is your current location</string>

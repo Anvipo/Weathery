@@ -19,7 +19,7 @@ class YWCurrentWeatherRepository
     private val apiService: IYWCurrentWeatherApiService,
     networkManager: NetworkManager,
     currentWeatherDbService: ICurrentWeatherDbService<YWCurrentWeatherResponseType>,
-    locationDbService: ILocationDbService<UserAddressType>,
+    locationDbService: ILocationDbService,
     private val context: Context
 ) :
     AbsCurrentWeatherRepository<YWCurrentWeatherResponseType>(

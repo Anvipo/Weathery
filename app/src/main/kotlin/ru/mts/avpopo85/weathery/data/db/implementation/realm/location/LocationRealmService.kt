@@ -1,6 +1,8 @@
 package ru.mts.avpopo85.weathery.data.db.implementation.realm.location
 
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.core.content.edit
 import io.reactivex.Single
 import io.reactivex.SingleEmitter
 import io.realm.Realm
@@ -9,18 +11,22 @@ import io.realm.kotlin.delete
 import io.realm.kotlin.where
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
-import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasNoCurrentAddress
+import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasNoCurrentAddressException
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import javax.inject.Inject
 
 class LocationRealmService
-@Inject constructor(private val context: Context) : ILocationDbService<UserAddressType> {
+@Inject constructor(
+    private val context: Context,
+    private val sharedPreferences: SharedPreferences
+) : ILocationDbService {
 
     override fun saveCurrentAddress(address: UserAddressType): Single<UserAddressType> =
         Single.create { emitter ->
             Realm.getDefaultInstance().use {
                 it.executeTransaction { realmInstance ->
                     clearDB(realmInstance)
+                    clearSharedPreferences()
 
                     val proxyData: UserAddressType = realmInstance.copyToRealmOrUpdate(address)
 
@@ -75,6 +81,14 @@ class LocationRealmService
         realmInstance.delete<UserAddressType>()
     }
 
+    private fun clearSharedPreferences() {
+        val key = context.getString(R.string.pref_key_current_location)
+
+        sharedPreferences.edit(true) {
+            this.remove(key)
+        }
+    }
+
     private fun onDataExistsInDB(
         proxyData: RealmResults<UserAddressType>,
         realmInstance: Realm,
@@ -118,9 +132,9 @@ class LocationRealmService
     }
 
     private fun <T> Context.onDbHasNoCurrentAddress(emitter: SingleEmitter<T>) {
-        val message = getString(R.string.find_out_current_location)
+        val message = getString(R.string.find_out_your_current_location)
 
-        val error = DBHasNoCurrentAddress(message)
+        val error = DBHasNoCurrentAddressException(message)
 
         emitter.onError(error)
     }

@@ -21,6 +21,8 @@ class YWActivity : AbsBaseActivity() {
         initButtons()
     }
 
+    override fun changeTitle(title: String) = Unit
+
     private fun initButtons() {
 
         yw_current_weather_B.setOnClickListener {

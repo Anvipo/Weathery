@@ -24,7 +24,9 @@ interface BaseContract {
 
         fun showIndefiniteSnackbar(message: String, rootView: android.view.View? = null)
 
-        fun changeTitle(title: String) = Unit
+        fun changeTitle(title: String)
+
+        fun notifyAbout(error: Throwable)
 
     }
 

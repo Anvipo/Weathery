@@ -13,7 +13,7 @@ import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import kotlin.math.abs
 
 abstract class AbsWeatherRepository<T : IWeatherResponse>(
-    private val locationDbService: ILocationDbService<UserAddressType>,
+    private val locationDbService: ILocationDbService,
     private val context: Context,
     private val networkManager: NetworkManager
 ) {
@@ -28,7 +28,7 @@ abstract class AbsWeatherRepository<T : IWeatherResponse>(
         } catch (exception: Throwable) {
             val cause = exception.cause ?: exception
 
-            val message: String = if (cause is MyRealmException.DBHasNoCurrentAddress) {
+            val message: String = if (cause is MyRealmException.DBHasNoCurrentAddressException) {
                 cause.localizedMessage ?: cause.message ?: context.getString(R.string.unknown_error)
             } else {
                 val part1 = context.getString(R.string.previous_location_unknown)

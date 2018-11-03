@@ -74,6 +74,8 @@ class MapsActivity :
 
     override fun onMarkerDrag(marker: Marker?) = Unit
 
+    override fun changeTitle(title: String) = Unit
+
     private lateinit var map: GoogleMap
 
     private fun showConfirmation(coordinates: LatLng) {

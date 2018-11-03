@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import retrofit2.HttpException
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.utils.onHttpException
+import java.io.IOException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -83,6 +84,9 @@ fun Context.showAlertDialog(
     ).show()
 }
 
+data class SettingsInfo(val currentLocation: String, val chosenWeatherAPI: String)
+
+//todo
 fun Context.getFullApplicationInfo(): String = try {
     val sb = StringBuilder()
 
@@ -123,6 +127,8 @@ fun Context.parseError(error: Throwable): String =
         is UnknownHostException -> onUnknownHostException()
         is ConnectException -> onConnectException()
         is SocketTimeoutException -> onSocketTimeoutException()
+        //todo
+        is IOException -> getErrorMessageOrDefault(error)
         else -> getErrorMessageOrDefault(error)
     }
 

@@ -22,10 +22,10 @@ class YWForecastRepository
     private val apiService: IYWForecastApiService,
     networkManager: NetworkManager,
     forecastDbService: IForecastDbService<YWForecastResponseType>,
-    locationDbService: ILocationDbService<UserAddressType>,
+    locationDbService: ILocationDbService,
     private val context: Context
 ) :
-    AbsForecastRepository<YWForecastResponseType>(
+    AbsForecastRepository<YWForecastResponseType, YWForecastResponseType>(
         forecastDbService,
         networkManager,
         locationDbService,

@@ -38,6 +38,7 @@ abstract class AbsCurrentWeatherFragment<T : ICurrentWeather> :
     final override fun onStop() {
         super.onStop()
 
+        presenter.clearCompositeDisposable()
         hideLayout()
     }
 

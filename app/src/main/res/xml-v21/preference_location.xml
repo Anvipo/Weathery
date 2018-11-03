@@ -8,6 +8,6 @@
     <Preference
         android:icon="@drawable/ic_location_searching_24dp"
         android:key="@string/pref_key_get_location"
-        android:title="@string/find_out_current_location" />
+        android:title="@string/find_out_your_current_location" />
 
 </androidx.preference.PreferenceScreen>

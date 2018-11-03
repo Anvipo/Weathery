@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.openWeatherMap.view.fragment
+package ru.mts.avpopo85.weathery.presentation.weather.currentWeather.implementation.openWeatherMap
 
 import android.annotation.SuppressLint
 import android.os.Bundle

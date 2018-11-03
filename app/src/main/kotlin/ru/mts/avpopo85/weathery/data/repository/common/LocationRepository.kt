@@ -34,7 +34,7 @@ import javax.inject.Inject
 class LocationRepository
 @Inject constructor(
     private val context: Context,
-    private val dbService: ILocationDbService<UserAddressType>,
+    private val dbService: ILocationDbService,
     private val networkManager: NetworkManager,
     private val sharedPreferences: SharedPreferences
 ) : ILocationRepository {
@@ -225,14 +225,14 @@ class LocationRepository
 
     private fun onHaveNotSuccessAndDeviceIsConnectedToInternet(): Single<Location> {
         val message = context.getString(R.string.gps_is_required)
-        val error = HaveNotSuccessAndDeviceIsConnectedToInternet(message)
+        val error = HaveNotSuccessAndDeviceIsConnectedToInternetException(message)
 
         return Single.error(error)
     }
 
     private fun onHaveNotSuccessAndDeviceIsNotConnectedToInternet(): Single<Location> {
         val message = context.getString(R.string.internet_connection_and_GPS_required)
-        val error = HaveNotSuccessAndDeviceIsNotConnectedToInternet(message)
+        val error = HaveNotSuccessAndDeviceIsNotConnectedToInternetException(message)
 
         return Single.error(error)
     }

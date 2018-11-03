@@ -66,6 +66,8 @@ class OWMCurrentWeatherMapper
         in 500..599 -> PrecipitationType.RAIN
         in 600..699 -> PrecipitationType.SNOW
         in 700..799 -> PrecipitationType.ATMOSPHERE
+        800 -> PrecipitationType.CLEAR
+        in 801..899 -> PrecipitationType.CLOUDS
         else -> PrecipitationType.UNKNOWN
     }
 
