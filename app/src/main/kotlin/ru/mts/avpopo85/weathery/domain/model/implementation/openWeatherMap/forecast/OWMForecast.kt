@@ -31,6 +31,8 @@ data class OWMForecast(
 
     override val windSpeed: String,
 
-    override val windDirection: String
+    override val windDirection: String,
+
+    override val weatherDescription: String
 
 ) : IOWMForecast

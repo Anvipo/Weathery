@@ -8,7 +8,7 @@ import ru.mts.avpopo85.weathery.data.db.base.IForecastDbService
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.utils.onDbHasNoWeatherResponse
 import ru.mts.avpopo85.weathery.data.db.implementation.realm.weather.utils.onDbHasOutdatedWeatherResponse
 import ru.mts.avpopo85.weathery.data.model.base.common.IForecastRealmResponse
-import java.util.*
+import java.util.Date
 
 
 abstract class AbsForecastRealmService<T : IForecastRealmResponse>

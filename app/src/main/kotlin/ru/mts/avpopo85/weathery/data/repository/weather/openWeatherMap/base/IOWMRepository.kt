@@ -21,22 +21,4 @@ interface IOWMRepository<T : IBaseWeatherResponse> {
 
     fun make3ApiCalls(): TripleOfOWMApiCalls<T>
 
-//    fun makeApiCall(
-//        firstApiCall: Single<T>?,
-//        secondApiCall: Single<T>?,
-//        thirdApiCall: Single<T>?
-//    ): Single<T>
-
-//    fun onUnknownLocation(): Single<T>
-
-//    fun firstApiCallWithErrorCatching(
-//        first: Single<T>,
-//        second: Single<T>?,
-//        third: Single<T>?
-//    ): Single<T>
-//
-//    fun secondApiCallWithErrorCatching(second: Single<T>, third: Single<T>?): Single<T>
-//
-//    fun thirdApiCallWithErrorCatching(third: Single<T>): Single<T>
-
 }

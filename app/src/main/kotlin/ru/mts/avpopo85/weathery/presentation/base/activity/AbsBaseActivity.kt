@@ -68,6 +68,7 @@ abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
                 false
             }
 
+        @Suppress("LocalVariableName")
         val _isCritical =
             cause is PreviousLocationUnknownException || isCritical || internetConnectionRequired
 

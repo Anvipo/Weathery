@@ -129,6 +129,7 @@ class SettingsActivity : PreferenceActivity(), SettingsContract.View {
                 false
             }
 
+        @Suppress("LocalVariableName")
         val _isCritical =
             cause is PreviousLocationUnknownException || isCritical || internetConnectionRequired
 

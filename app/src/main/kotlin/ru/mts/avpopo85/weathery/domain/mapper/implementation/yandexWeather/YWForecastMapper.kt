@@ -45,7 +45,8 @@ class YWForecastMapper
                 hours = mapHoursResponse(it.hours),
                 isFresh = it.isFresh,
                 precipitationType = getPrecipitationType(it.hours.first()!!.precipitationType),
-                cloudiness = it.hours.first()!!.cloudiness.roundIfNeeded()
+                cloudiness = it.hours.first()!!.cloudiness.roundIfNeeded(),
+                weatherDescription = it.hours.first()!!.condition
             )
         }
 

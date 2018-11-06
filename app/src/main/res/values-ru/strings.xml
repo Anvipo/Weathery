@@ -227,5 +227,11 @@
     <string name="unknown_coordinates">Координаты неизвестны</string>
     <string name="check_network_connection">Проверьте соединение с интернетом</string>
     <string name="error_occurs">Произошла ошибка</string>
+    <string name="today_bad_weather_channel_name">Уведомления о плохой погоде на сегодня</string>
+    <string name="tomorrow_bad_weather_channel_name">Уведомления о плохой погоде на завтра</string>
+    <string name="tomorrow_bad_weather_expected">Завтра ожидается плохая погода</string>
+    <string name="today_bad_weather_expected">Сегодня ожидается плохая погода</string>
+    <string name="expected">ожидается</string>
+    <string name="at">В</string>
 
 </resources>

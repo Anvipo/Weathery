@@ -1,7 +1,10 @@
+@file:Suppress("unused")
+
 package ru.mts.avpopo85.weathery.domain.mapper.implementation.utils
 
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 fun Long.toTime(inSeconds: Boolean = true): String {
     val coefficient = if (inSeconds) 1000 else 1
@@ -46,7 +49,7 @@ fun Long.toFullDateTime(inSeconds: Boolean = true): String {
 
     val date = Date(this * coefficient)
 
-    val simpleDateFormat = SimpleDateFormat("HH:mm:ss dd MMM y", Locale.getDefault())
+    val simpleDateFormat = SimpleDateFormat("HH:mm dd MMMM y", Locale.getDefault())
 
     return simpleDateFormat.format(date)
 }

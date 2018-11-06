@@ -7,6 +7,8 @@ import ru.mts.avpopo85.weathery.utils.common.PrecipitationType
 /**This object contains information about the current weather.*/
 data class OWMCurrentWeather(
 
+    override val weatherDescription: String,
+
     override val precipitationType: PrecipitationType,
 
     override val isFresh: Boolean,

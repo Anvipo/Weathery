@@ -7,7 +7,7 @@ import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.AbsWeatherMa
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.common.utils.getDaytimeString
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.openWeatherMap.utils.getWindDirectionString
 import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.roundIfNeeded
-import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.toDateTime
+import ru.mts.avpopo85.weathery.domain.mapper.implementation.utils.toFullDateTime
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.common.OWMWeather
 import ru.mts.avpopo85.weathery.domain.model.implementation.openWeatherMap.forecast.OWMForecastMain
 import ru.mts.avpopo85.weathery.utils.common.PrecipitationType
@@ -32,7 +32,7 @@ class OWMForecastMapper
                 precipitationType = getPrecipitationType(weather.conditionCode),
                 cityName = forecastResponse.cityName,
                 dateInSeconds = forecastResponse.timeOfDataCalculationUnixUTCInSeconds,
-                date = forecastResponse.timeOfDataCalculationUnixUTCInSeconds.toDateTime(),
+                date = forecastResponse.timeOfDataCalculationUnixUTCInSeconds.toFullDateTime(),
                 cloudiness = forecastResponse.clouds!!.cloudiness.roundIfNeeded(),
                 windDirection = context.getWindDirectionString(wind.directionInDegrees),
                 windSpeed = wind.speedInUnits.roundIfNeeded(),
@@ -54,7 +54,8 @@ class OWMForecastMapper
                         atmosphericPressureOnTheSeaLevelInhPa = it.atmosphericPressureOnTheSeaLevelInhPa
                     )
                 },
-                isFresh = forecastResponse.isFresh
+                isFresh = forecastResponse.isFresh,
+                weatherDescription = weather.description
             )
         }
 

@@ -13,4 +13,6 @@ interface IWeather {
 
     val isFresh: Boolean
 
+    val weatherDescription: String
+
 }

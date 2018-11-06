@@ -35,6 +35,8 @@ data class YWForecast(
 
     override val parts: YWParts,
 
-    override val hours: List<YWHourInfo>?
+    override val hours: List<YWHourInfo>?,
+
+    override val weatherDescription: String
 
 ) : Parcelable, IYWForecast

@@ -26,7 +26,7 @@ import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
 import ru.mts.avpopo85.weathery.utils.common.GpsCallException.*
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import java.io.IOException
-import java.util.*
+import java.util.Date
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 

@@ -17,9 +17,6 @@ interface IYWCurrentWeather : ICurrentWeather {
     /**The url of the weather icon.*/
     val iconUrl: String
 
-    /**Weather description.*/
-    val weatherDescription: String
-
     /**Speed of wind gusts (meters per second).*/
     val windGustsSpeed: String
 

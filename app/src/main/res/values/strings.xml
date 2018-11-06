@@ -233,6 +233,14 @@
     <string name="unknown_coordinates">Unknown coordinates</string>
     <string name="check_network_connection">Check network connection</string>
     <string name="error_occurs">Error occurs</string>
+    <string name="today_bad_weather_channel_name">Notification about today bad weather</string>
+    <string name="tomorrow_bad_weather_channel_name">Notification about tomorrow bad weather</string>
+    <string name="tomorrow_bad_weather_expected">Tomorrow expected bad weather</string>
+    <string name="today_bad_weather_expected">Today expected bad weather</string>
+    <string name="expected">expected</string>
+    <string name="bad_tomorrow_weather_notification_was_shown" translatable="false">bad_tomorrow_weather_notification_was_shown</string>
+    <string name="at">At</string>
+    <string name="bad_today_weather_notification_was_shown" translatable="false">bad_today_weather_notification_was_shown</string>
 
     <string-array name="weather_API">
         <item>Open Weather Map</item>

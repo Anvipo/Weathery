@@ -5,7 +5,7 @@ import io.reactivex.SingleEmitter
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasNoWeatherResponseException
 import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasOutdatedWeatherDataException
-import java.util.*
+import java.util.Date
 
 fun Long.isFresh(cacheLifetimeInMs: Long): Boolean {
     val nowTime = Date().time

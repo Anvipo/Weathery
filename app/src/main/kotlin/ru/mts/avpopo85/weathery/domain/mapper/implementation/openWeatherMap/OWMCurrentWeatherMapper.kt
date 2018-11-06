@@ -54,7 +54,8 @@ class OWMCurrentWeatherMapper
                 },
                 cityName = response.cityName,
                 isFresh = response.isFresh,
-                precipitationType = getPrecipitationType(weather.conditionCode)
+                precipitationType = getPrecipitationType(weather.conditionCode),
+                weatherDescription = weather.description
             )
         }
 
