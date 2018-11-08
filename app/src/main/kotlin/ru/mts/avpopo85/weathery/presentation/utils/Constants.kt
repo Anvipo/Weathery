@@ -24,11 +24,17 @@ const val LOCALITY_TAG: String = "locality"
 
 const val WEATHER_API_TAG: String = "weather API"
 
-const val TOMORROW_BAD_WEATHER_IS_COMING_ID: Int = 666
+const val TOMORROW_BAD_WEATHER_IS_COMING_NOTIFICATION_ID: Int = 666
 
-const val TODAY_BAD_WEATHER_IS_COMING_ID: Int = 777
+const val CURRENT_WEATHER_NOTIFICATION_ID: Int = 700
+
+const val TODAY_BAD_WEATHER_IS_COMING_NOTIFICATION_ID: Int = 777
 
 const val WEATHER_NOTIFICATION_REQUEST_CODE: Int = 7000
+
+const val CURRENT_WEATHER_NOTIFICATION_REQUEST_CODE: Int = 7001
+
+const val CURRENT_WEATHER_CHANNEL_ID: String = "current_weather_channel"
 
 const val TOMORROW_BAD_WEATHER_CHANNEL_ID: String = "tomorrow_bad_weather_channel"
 

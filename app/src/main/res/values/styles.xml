@@ -16,6 +16,8 @@
     </style>
 
     <style name="MyAppTheme.Launcher" parent="MyAppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
@@ -101,6 +103,11 @@
     </style>
 
     <style name="MyMaterialBody1" parent="TextAppearance.MaterialComponents.Body1" tools:ignore="UnusedResources">
+        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="MyMaterialBody2" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="android:gravity">center</item>
     </style>

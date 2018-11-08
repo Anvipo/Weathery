@@ -9,23 +9,17 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_location">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/application_need_to_know_your_location_which_location_do_you_want_to_use"
-        android:textAppearance="@style/MyMaterialHeadline6" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/get_last_known_location_LA_B"
         style="@style/MyMaterialButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/last_known" />
+        android:text="@string/use_last_known_location" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -33,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/specify_current_location"
+            android:text="@string/find_out_your_current_location"
             android:textAppearance="@style/MyMaterialHeadline6" />
 
         <com.google.android.material.button.MaterialButton

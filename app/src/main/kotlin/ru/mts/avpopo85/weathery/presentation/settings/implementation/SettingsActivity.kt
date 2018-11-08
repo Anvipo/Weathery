@@ -22,9 +22,10 @@ import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.data.repository.weather.utils.PreviousLocationUnknownException
 import ru.mts.avpopo85.weathery.di.modules.common.SettingsModule
+import ru.mts.avpopo85.weathery.domain.model.implementation.settings.SettingsInfo
 import ru.mts.avpopo85.weathery.presentation.settings.base.SettingsContract
-import ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.LocationPreferenceFragment
 import ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.NetworkPreferenceFragment
+import ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.locationPreference.LocationPreferenceFragment
 import ru.mts.avpopo85.weathery.presentation.utils.LOCALITY_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_RESULT_OK
 import ru.mts.avpopo85.weathery.presentation.utils.WEATHER_API_TAG
@@ -116,11 +117,11 @@ class SettingsActivity : PreferenceActivity(), SettingsContract.View {
             error
         }
 
-        sendErrorLog(cause.toString())
+        error(cause.toString(), tr = error)
 
         val message = parseError(cause)
 
-        sendErrorLog(message)
+        error(message, tr = error)
 
         val internetConnectionRequired =
             if (cause is MyRealmException.DBHasNoWeatherResponseException) {

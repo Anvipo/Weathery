@@ -4,6 +4,8 @@ import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.domain.model.base.common.ICurrentWeather
 import ru.mts.avpopo85.weathery.presentation.weather.base.view.fragment.AbsWeatherFragment
 import ru.mts.avpopo85.weathery.presentation.weather.currentWeather.base.CurrentWeatherContract
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastNotificationHelper
+import kotlin.concurrent.thread
 
 abstract class AbsCurrentWeatherFragment<T : ICurrentWeather> :
     AbsWeatherFragment(),
@@ -11,6 +13,12 @@ abstract class AbsCurrentWeatherFragment<T : ICurrentWeather> :
 
     override fun showWeatherResponse(currentWeather: T) {
         showLayout()
+        thread(start = true) {
+            ForecastNotificationHelper.checkCurrentWeatherPrecipitations(
+                currentWeather = currentWeather,
+                context = context!!
+            )
+        }
     }
 
     final override val toolbarTitle: String by lazy { getString(R.string.current_weather) }

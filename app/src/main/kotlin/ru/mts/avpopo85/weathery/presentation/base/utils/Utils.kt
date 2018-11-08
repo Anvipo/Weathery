@@ -3,13 +3,22 @@ package ru.mts.avpopo85.weathery.presentation.base.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import java.io.Serializable
 
+fun Activity.finishThisActivity() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        finishAfterTransition()
+    } else {
+        finish()
+    }
+}
+
 fun startActivity(
     context: Context,
-    clazz: Class<out Activity>,
+    clazz: Class<out Context>,
     params: Array<out Pair<String, Any?>>
 ) {
     val intent = createIntent(context, clazz, params)
@@ -18,7 +27,7 @@ fun startActivity(
 
 fun startActivityForResult(
     activity: Activity,
-    clazz: Class<out Activity>,
+    clazz: Class<out Context>,
     requestCode: Int,
     params: Array<out Pair<String, Any?>>
 ) {
@@ -28,7 +37,7 @@ fun startActivityForResult(
 
 private fun createIntent(
     context: Context,
-    clazz: Class<out Activity>,
+    clazz: Class<out Context>,
     params: Array<out Pair<String, Any?>>
 ): Intent {
     val intent = Intent(context, clazz)

@@ -11,6 +11,7 @@ import androidx.multidex.MultiDex
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.di.global.*
 import ru.mts.avpopo85.weathery.di.global.DaggerAppComponent.builder
+import ru.mts.avpopo85.weathery.presentation.utils.CURRENT_WEATHER_CHANNEL_ID
 import ru.mts.avpopo85.weathery.presentation.utils.TODAY_BAD_WEATHER_CHANNEL_ID
 import ru.mts.avpopo85.weathery.presentation.utils.TOMORROW_BAD_WEATHER_CHANNEL_ID
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMConstants
@@ -32,9 +33,24 @@ class App : Application() {
 
     private fun createWeatherNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createCurrentWeatherChannel()
             createTodayBadWeatherChannel()
             createTomorrowBadWeatherChannel()
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createCurrentWeatherChannel() {
+        val name = getString(R.string.current_weather_channel_name)
+
+        val channel = NotificationChannel(
+            CURRENT_WEATHER_CHANNEL_ID,
+            name,
+            NotificationManager.IMPORTANCE_DEFAULT
+        )
+
+        val notificationManager: NotificationManager = getSystemService()!!
+        notificationManager.createNotificationChannel(channel)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -77,8 +93,6 @@ class App : Application() {
     }
 
     companion object {
-
-        val TAG: String = App::class.java.simpleName
 
         lateinit var appComponent: AppComponent
             private set

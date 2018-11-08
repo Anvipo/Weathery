@@ -1,7 +1,7 @@
 <preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
 
     <header
-        android:fragment="ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.LocationPreferenceFragment"
+        android:fragment="ru.mts.avpopo85.weathery.presentation.settings.implementation.fragments.locationPreference.LocationPreferenceFragment"
         android:title="@string/location" />
 
     <!--<header-->

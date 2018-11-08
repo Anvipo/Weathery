@@ -7,14 +7,17 @@ import android.provider.Settings
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import kotlinx.android.synthetic.main.activity_location.*
-import kotlinx.android.synthetic.main.appbar.*
-import kotlinx.android.synthetic.main.content_location.*
+import kotlinx.android.synthetic.main.activity_location.activity_location_CL
+import kotlinx.android.synthetic.main.appbar.toolbar
+import kotlinx.android.synthetic.main.content_location.get_current_location_by_GPS_LA_B
+import kotlinx.android.synthetic.main.content_location.get_current_location_by_map_LA_B
+import kotlinx.android.synthetic.main.content_location.get_last_known_location_LA_B
 import ru.mts.avpopo85.weathery.BuildConfig
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.di.modules.common.LocationModule
 import ru.mts.avpopo85.weathery.presentation.base.activity.withProgressBar.AbsProgressBarActivity
+import ru.mts.avpopo85.weathery.presentation.base.utils.finishThisActivity
 import ru.mts.avpopo85.weathery.presentation.location.base.LocationContract
 import ru.mts.avpopo85.weathery.presentation.map.google.MapsActivity
 import ru.mts.avpopo85.weathery.presentation.utils.*
@@ -125,7 +128,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         }
 
         setResult(LOCATION_RESULT_OK, data)
-        finish()
+        finishThisActivity()
     }
 
     override fun showCityDialog(address: UserAddressType) {

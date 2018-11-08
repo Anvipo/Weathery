@@ -3,14 +3,14 @@ package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.op
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.BaseRecyclerAdapter
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.adapter.base.IForecastAdapter
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 
 class OWMForecastAdapter(override val itemClickListener: (OWMForecastType) -> Unit) :
-    RecyclerView.Adapter<OWMForecastViewHolder>(),
+    BaseRecyclerAdapter<OWMForecastViewHolder>(),
     IForecastAdapter<OWMForecastType> {
 
     var data: OWMForecastListType
@@ -28,7 +28,7 @@ class OWMForecastAdapter(override val itemClickListener: (OWMForecastType) -> Un
         _data.clear()
         _data.addAll(newData)
 
-        diffResult.dispatchUpdatesTo(this)
+        diffResult.dispatchUpdatesTo(listUpdateCallback)
     }
 
     override fun getItemViewType(position: Int): Int {

@@ -49,6 +49,8 @@ constructor(private val context: Context) :
             }
         }
 
+    protected abstract val responseClassType: Class<T>
+
     private fun clearDB(realmInstance: Realm) {
         realmInstance.delete(responseClassType)
     }
@@ -81,7 +83,5 @@ constructor(private val context: Context) :
             context.onDbHasOutdatedWeatherResponse(emitter, isConnectedToInternet)
         }
     }
-
-    protected abstract val responseClassType: Class<T>
 
 }

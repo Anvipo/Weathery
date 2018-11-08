@@ -108,7 +108,4 @@ class OWMCurrentWeatherRepository
         return apiService.getCurrentWeatherByCityName(cityNameRequest)
     }
 
-//    override fun onUnknownLocation(): Single<OWMCurrentWeatherResponseType> =
-//        context.onUnknownCurrentLocation()
-
 }

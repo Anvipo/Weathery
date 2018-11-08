@@ -2,15 +2,20 @@
 
 package ru.mts.avpopo85.weathery.utils.common
 
+import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.annotation.IntDef
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.HttpException
 import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.presentation.base.utils.startActivity
+import ru.mts.avpopo85.weathery.presentation.base.utils.startActivityForResult
 import ru.mts.avpopo85.weathery.presentation.utils.onHttpException
 import java.io.IOException
 import java.net.ConnectException
@@ -18,34 +23,101 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 
+@IntDef(value = [Toast.LENGTH_SHORT, Toast.LENGTH_LONG])
+@Retention(AnnotationRetention.SOURCE)
+annotation class ToastDuration
+
+@IntDef(value = [Snackbar.LENGTH_SHORT, Snackbar.LENGTH_INDEFINITE, Snackbar.LENGTH_LONG])
+@Retention(AnnotationRetention.SOURCE)
+annotation class SnackbarDuration
+
+inline fun <reified T : Any> T.error(msg: Any?, tag: String? = null, tr: Throwable? = null) {
+    val tagStr = tag ?: this::class.java.simpleName
+
+    val message = msg?.toString()
+
+    Log.e(tagStr, message, tr)
+}
+
+inline fun <reified T : Any> T.debug(msg: Any?, tag: String? = null, tr: Throwable? = null) {
+    val tagStr = tag ?: this::class.java.simpleName
+
+    val message = msg?.toString()
+
+    Log.d(tagStr, message, tr)
+}
+
+inline fun <reified T : Context> Context.startActivity(vararg params: Pair<String, Any?>) {
+    startActivity(this, T::class.java, params)
+}
+
+inline fun <reified T : Activity> Activity.startActivityForResult(
+    requestCode: Int,
+    vararg params: Pair<String, Any?>
+) {
+    startActivityForResult(
+        this,
+        T::class.java,
+        requestCode,
+        params
+    )
+}
+
+//todo
+fun convert(value: Double, from: TemperatureUnit, target: TemperatureUnit): Double =
+    if (from == TemperatureUnit.CELSIUS && target == TemperatureUnit.KELVIN) {
+        value + 273.15
+    } else if (from == TemperatureUnit.KELVIN && target == TemperatureUnit.CELSIUS) {
+        value - 273.15
+    } else if (from == TemperatureUnit.FAHRENHEIT && target == TemperatureUnit.CELSIUS) {
+        (value - 32) / 1.8
+    } else if (from == TemperatureUnit.CELSIUS && target == TemperatureUnit.FAHRENHEIT) {
+        (value * 1.8) + 32
+    } else if (from == TemperatureUnit.FAHRENHEIT && target == TemperatureUnit.KELVIN) {
+        (value + 459.67) * (5 / 9)
+    } else if (from == TemperatureUnit.KELVIN && target == TemperatureUnit.FAHRENHEIT) {
+        (value * (5 / 9)) - 459.67
+    } else {
+        value
+    }
+
+enum class TemperatureUnit {
+    CELSIUS,
+    KELVIN,
+    FAHRENHEIT
+}
+
 fun Context.onUnexpectedApplicationBehavior(view: View) {
     val message = getString(R.string.unexpected_application_behavior)
 
-    view.showIndefiniteSnackbar(message)
+    view.showSnackbar(message, Snackbar.LENGTH_INDEFINITE)
 }
 
-fun sendErrorLog(message: String, tag: String? = null) {
-    if (tag != null) {
-        Log.e(tag, message)
-    } else {
-        Log.e("APP", message)
-    }
+fun Context.toast(message: CharSequence, @ToastDuration duration: Int = Toast.LENGTH_SHORT): Toast =
+    Toast.makeText(this, message, duration)
+
+fun Context.showToast(message: CharSequence, @ToastDuration duration: Int = Toast.LENGTH_LONG) {
+    toast(message, duration).show()
 }
 
-fun View.showShortSnackbar(message: CharSequence): Unit = shortSnackbar(message).show()
+fun View.snackbar(message: CharSequence, @SnackbarDuration duration: Int = Snackbar.LENGTH_LONG) =
+    Snackbar.make(this, message, duration)
 
-fun View.showLongSnackbar(message: CharSequence): Unit = longSnackbar(message).show()
+fun View.showSnackbar(message: CharSequence, @SnackbarDuration duration: Int = Snackbar.LENGTH_LONG) {
+    snackbar(message, duration).show()
+}
 
-fun View.showIndefiniteSnackbar(message: CharSequence): Unit = indefiniteSnackbar(message).show()
+fun View.showShortSnackbar(message: CharSequence) {
+    showSnackbar(message, Snackbar.LENGTH_SHORT)
+}
 
-fun View.shortSnackbar(message: CharSequence) = Snackbar
-    .make(this, message, Snackbar.LENGTH_SHORT)
+fun View.showLongSnackbar(message: CharSequence) {
+    showSnackbar(message, Snackbar.LENGTH_LONG)
+}
 
-fun View.longSnackbar(message: CharSequence) = Snackbar
-    .make(this, message, Snackbar.LENGTH_LONG)
-
-fun View.indefiniteSnackbar(message: CharSequence) = Snackbar
-    .make(this, message, Snackbar.LENGTH_INDEFINITE)
+fun View.showIndefiniteSnackbar(message: CharSequence) {
+    showSnackbar(message, Snackbar.LENGTH_INDEFINITE)
+}
 
 fun Context.alertDialog(
     message: String,
@@ -83,8 +155,6 @@ fun Context.showAlertDialog(
         title = title
     ).show()
 }
-
-data class SettingsInfo(val currentLocation: String, val chosenWeatherAPI: String)
 
 //todo
 fun Context.getFullApplicationInfo(): String = try {
@@ -127,10 +197,16 @@ fun Context.parseError(error: Throwable): String =
         is UnknownHostException -> onUnknownHostException()
         is ConnectException -> onConnectException()
         is SocketTimeoutException -> onSocketTimeoutException()
-        //todo
-        is IOException -> getErrorMessageOrDefault(error)
+        is IOException -> onIOException()
         else -> getErrorMessageOrDefault(error)
     }
+
+private fun Context.onIOException(): String {
+    val part1 = getString(R.string.internet_connection_error_occurs)
+    val part2 = getString(R.string.please_try_later)
+
+    return "$part1. $part2"
+}
 
 fun Context.getErrorMessageOrDefault(error: Throwable): String =
     error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)

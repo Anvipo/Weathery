@@ -1,14 +1,11 @@
 package ru.mts.avpopo85.weathery.presentation.base.activity
 
-import android.app.Activity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import io.reactivex.exceptions.CompositeException
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.repository.weather.utils.PreviousLocationUnknownException
 import ru.mts.avpopo85.weathery.presentation.base.common.BaseContract
-import ru.mts.avpopo85.weathery.presentation.base.utils.startActivity
-import ru.mts.avpopo85.weathery.presentation.base.utils.startActivityForResult
 import ru.mts.avpopo85.weathery.utils.common.*
 import java.net.SocketTimeoutException
 
@@ -55,11 +52,11 @@ abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
             error
         }
 
-        sendErrorLog(cause.toString())
+        error(cause.toString(), tr = error)
 
         val message = parseError(cause)
 
-        sendErrorLog(message)
+        error(message, tr = error)
 
         val internetConnectionRequired =
             if (cause is MyRealmException.DBHasNoWeatherResponseException) {
@@ -83,17 +80,6 @@ abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
         }
 
         showLongSnackbar(message)
-    }
-
-    protected inline fun <reified T : Activity> Activity.startActivity(vararg params: Pair<String, Any?>) {
-        startActivity(this, T::class.java, params)
-    }
-
-    protected inline fun <reified T : Activity> startActivityForResult(
-        requestCode: Int,
-        vararg params: Pair<String, Any?>
-    ) {
-        startActivityForResult(this, T::class.java, requestCode, params)
     }
 
     protected abstract val rootLayout: View

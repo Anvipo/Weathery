@@ -1,18 +1,15 @@
 package ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.adapter.implementation
 
 import android.os.Bundle
-import androidx.recyclerview.widget.DiffUtil
+import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.BaseDiff
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListType
+import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 
 
 class OWMForecastDiffCallback(
     private val newData: OWMForecastListType,
     private val oldData: OWMForecastListType
-) : DiffUtil.Callback() {
-
-    override fun getOldListSize(): Int = oldData.size
-
-    override fun getNewListSize(): Int = newData.size
+) : BaseDiff<OWMForecastType>(newData, oldData) {
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
         oldData[oldItemPosition].date == newData[newItemPosition].date

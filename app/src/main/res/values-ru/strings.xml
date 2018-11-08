@@ -169,7 +169,6 @@
     <string name="rain_volume_for_last_3_hours">Количество дождя, выпавшего за последние 3 часа</string>
     <string name="google_play_services_unavailable">Google Play Services недоступны</string>
     <string name="this_app_will_not_work">Приложение не будет работать</string>
-    <string name="last_known">Последнее известное</string>
     <string name="by_gps">С помощью GPS</string>
     <string name="the_forecast_is_outdated">Прогноз устарел</string>
     <string name="get_data_from_server">Получите данные с сервера</string>
@@ -196,13 +195,10 @@
     <string name="unknown">Неизвестно</string>
 
     <!--location-->
-    <string name="application_need_to_know_your_location_which_location_do_you_want_to_use">
-        Для работы приложения необходимо узнать Ваше местоположение. Какое местоположение Вы хотите использовать?</string>
     <string name="location">Местоположение</string>
     <string name="current_location">Текущее местоположение</string>
     <string name="is_your_current_location">Ваше текущее местоположение</string>
     <string name="find_out_your_current_location">Узнайте Ваше текущее местоположение</string>
-    <string name="specify_current_location">Указать текущее местоположение</string>
     <string name="select_current_location">Выбор текущего местоположения</string>
     <string name="your_location_has_changed">Ваше местоположение изменилось</string>
     <string name="specify_the_location_on_the_map_again">Указать местоположение на карте ещё раз</string>
@@ -218,8 +214,8 @@
     <string name="title_activity_tabbed_weather">Прогноз погоды</string>
     <string name="action_settings">Настройки</string>
     <string name="network" tools:ignore="UnusedResources">Сеть</string>
-    <string name="weather_api_dialog_title">Выберите, какой API погодного ресурса будет использован</string>
-    <string name="weather_resource_API">API погодного ресурса</string>
+    <string name="weather_api_dialog_title">Выберите поставщика информации о погоде</string>
+    <string name="weather_resource_API">Поставщик информации о погоде</string>
     <string name="pref_ringtone_silent">Без звука</string>
     <string name="sunrise_and_sunset_time">Время восхода и захода Солнца</string>
     <string name="wind_info">Информация о ветре</string>
@@ -233,5 +229,9 @@
     <string name="today_bad_weather_expected">Сегодня ожидается плохая погода</string>
     <string name="expected">ожидается</string>
     <string name="at">В</string>
+    <string name="current_weather_channel_name">Уведомление о текущей погоде</string>
+    <string name="wind">Ветер</string>
+    <string name="use_last_known_location">Использовать последнее известное местоположение</string>
+    <string name="internet_connection_error_occurs">Произошла ошибка интернет соединения</string>
 
 </resources>

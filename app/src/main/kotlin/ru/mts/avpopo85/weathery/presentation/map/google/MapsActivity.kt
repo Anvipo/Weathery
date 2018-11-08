@@ -9,9 +9,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.activity_maps.*
+import kotlinx.android.synthetic.main.activity_maps.map_fragment
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.activity.AbsBaseActivity
+import ru.mts.avpopo85.weathery.presentation.base.utils.finishThisActivity
 import ru.mts.avpopo85.weathery.presentation.utils.COORDINATES_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_BY_MAPS_RESULT_OK
 import ru.mts.avpopo85.weathery.utils.common.showAlertDialog
@@ -89,7 +90,7 @@ class MapsActivity :
                 }
 
                 setResult(LOCATION_BY_MAPS_RESULT_OK, data)
-                finish()
+                finishThisActivity()
             })
     }
 

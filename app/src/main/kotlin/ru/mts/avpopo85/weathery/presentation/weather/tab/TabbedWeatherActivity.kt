@@ -6,13 +6,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import kotlinx.android.synthetic.main.activity_tabbed_weather.*
-import kotlinx.android.synthetic.main.appbar.*
+import kotlinx.android.synthetic.main.activity_tabbed_weather.activity_tabbed_weather_CL
+import kotlinx.android.synthetic.main.activity_tabbed_weather.activity_tabbed_weather_VP
+import kotlinx.android.synthetic.main.appbar.toolbar
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.activity.withProgressBar.AbsProgressBarActivity
 import ru.mts.avpopo85.weathery.presentation.settings.implementation.SettingsActivity
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.view.activity.OWMForecastInfoActivity
 import ru.mts.avpopo85.weathery.presentation.weather.tab.adapter.SectionsPagerAdapter
+import ru.mts.avpopo85.weathery.utils.common.startActivity
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastType
 
 class TabbedWeatherActivity : AbsProgressBarActivity() {

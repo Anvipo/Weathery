@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.location.Address
 import android.location.Location
-import android.util.Log
 import androidx.core.content.edit
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.maps.model.LatLng
@@ -14,7 +13,6 @@ import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Single
 import ru.mts.avpopo85.weathery.R
-import ru.mts.avpopo85.weathery.application.App
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.model.implementation.common.GeographicCoordinates
 import ru.mts.avpopo85.weathery.data.model.implementation.common.UserAddress
@@ -25,6 +23,7 @@ import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
 import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
 import ru.mts.avpopo85.weathery.utils.common.GpsCallException.*
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
+import ru.mts.avpopo85.weathery.utils.common.debug
 import java.io.IOException
 import java.util.Date
 import java.util.concurrent.TimeUnit
@@ -102,16 +101,15 @@ class LocationRepository
             .setFastestInterval(5L * ONE_SECOND_IN_MILLIS)
     }
 
-    private fun getCurrentAddressByGPS(success: Boolean): Single<UserAddressType> =
-        makeGpsCall(success)
-            .flatMap(::makeAddressFromLocation)
+    private fun getCurrentAddressByGPS(hasPermission: Boolean): Single<UserAddressType> =
+        makeGpsCall(hasPermission).flatMap(::makeAddressFromLocation)
 
-    private fun makeGpsCall(success: Boolean): Single<Location> =
+    private fun makeGpsCall(hasPermission: Boolean): Single<Location> =
         when {
-            success && networkManager.isConnectedToInternet -> getCurrentLocation()
-            !success && networkManager.isConnectedToInternet -> onHaveNotSuccessAndDeviceIsConnectedToInternet()
-            success && !networkManager.isConnectedToInternet -> onHaveSuccessAndDeviceIsNotConnectedToInternet()
-            !success && !networkManager.isConnectedToInternet -> onHaveNotSuccessAndDeviceIsNotConnectedToInternet()
+            hasPermission && networkManager.isConnectedToInternet -> getCurrentLocation()
+            !hasPermission && networkManager.isConnectedToInternet -> onHaveNotSuccessAndDeviceIsConnectedToInternet()
+            hasPermission && !networkManager.isConnectedToInternet -> onHaveSuccessAndDeviceIsNotConnectedToInternet()
+            !hasPermission && !networkManager.isConnectedToInternet -> onHaveNotSuccessAndDeviceIsNotConnectedToInternet()
             else -> onUnknownError()
         }
 
@@ -168,7 +166,8 @@ class LocationRepository
         error: IOException
     ): Single<UserAddressType> {
         val message = "${error.message}\n$location"
-        Log.d(App.TAG, message, error)
+
+        debug(message, tr = error)
 
         return Single.error(error)
     }

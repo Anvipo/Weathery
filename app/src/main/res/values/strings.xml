@@ -172,7 +172,6 @@
     <string name="google_play_services_unavailable">Google Play Services unavailable</string>
     <string name="this_app_will_not_work">This app will not work</string>
 
-    <string name="last_known">Last known</string>
     <string name="by_gps">By GPS</string>
     <string name="the_forecast_is_outdated">The forecast is outdated</string>
     <string name="get_data_from_server">Get data from server</string>
@@ -204,8 +203,6 @@
     <string name="location">Location</string>
     <string name="current_location">Current location</string>
     <string name="find_out_your_current_location">Find out your current location</string>
-    <string name="application_need_to_know_your_location_which_location_do_you_want_to_use">
-        Application need to know your location. Which location do you want to use?</string>
     <string name="is_your_current_location">Is your current location</string>
     <string name="found_intended_location">Found intended location</string>
     <string name="could_not_find_your_location">Could not find your location</string>
@@ -214,7 +211,6 @@
     <string name="previous_location_unknown">Previous location unknown</string>
     <string name="is_this_your_location">Is this your location?</string>
     <string name="specify_the_location_on_the_map_again">Specify the location on the map again</string>
-    <string name="specify_current_location">Specify current location</string>
     <string name="unable_to_find_the_address_of_the_specified_location">Unable to find the address of the specified location</string>
     <string name="your_location_has_changed">your location has changed</string>
     <string name="select_current_location">Select current location</string>
@@ -224,8 +220,8 @@
     <string name="action_settings">Settings</string>
     <string name="detailed_information">Detailed information</string>
     <string name="network" tools:ignore="UnusedResources">Network</string>
-    <string name="weather_api_dialog_title">Select which weather resource API will be used</string>
-    <string name="weather_resource_API">Weather Resource API</string>
+    <string name="weather_api_dialog_title">Select weather info provider</string>
+    <string name="weather_resource_API">weather info provider</string>
     <string name="pref_ringtone_silent">Silent</string>
     <string name="sunrise_and_sunset_time">Sunrise and sunset time</string>
     <string name="wind_info">Wind info</string>
@@ -233,14 +229,18 @@
     <string name="unknown_coordinates">Unknown coordinates</string>
     <string name="check_network_connection">Check network connection</string>
     <string name="error_occurs">Error occurs</string>
-    <string name="today_bad_weather_channel_name">Notification about today bad weather</string>
-    <string name="tomorrow_bad_weather_channel_name">Notification about tomorrow bad weather</string>
+    <string name="today_bad_weather_channel_name">Notifications about today bad weather</string>
+    <string name="tomorrow_bad_weather_channel_name">Notifications about tomorrow bad weather</string>
     <string name="tomorrow_bad_weather_expected">Tomorrow expected bad weather</string>
     <string name="today_bad_weather_expected">Today expected bad weather</string>
     <string name="expected">expected</string>
     <string name="bad_tomorrow_weather_notification_was_shown" translatable="false">bad_tomorrow_weather_notification_was_shown</string>
     <string name="at">At</string>
     <string name="bad_today_weather_notification_was_shown" translatable="false">bad_today_weather_notification_was_shown</string>
+    <string name="current_weather_channel_name">Notification about current weather</string>
+    <string name="wind">Wind</string>
+    <string name="use_last_known_location">Use last known location</string>
+    <string name="internet_connection_error_occurs">Internet connection error occurs</string>
 
     <string-array name="weather_API">
         <item>Open Weather Map</item>

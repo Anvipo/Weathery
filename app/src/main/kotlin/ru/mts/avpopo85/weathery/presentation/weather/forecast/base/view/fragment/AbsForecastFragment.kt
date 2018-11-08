@@ -10,6 +10,7 @@ import ru.mts.avpopo85.weathery.presentation.weather.base.view.fragment.AbsWeath
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastContract
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.base.ForecastNotificationHelper
 import ru.mts.avpopo85.weathery.presentation.weather.forecast.implementation.openWeatherMap.adapter.base.IForecastAdapter
+import kotlin.concurrent.thread
 
 
 abstract class AbsForecastFragment<T : IForecast> :
@@ -29,7 +30,12 @@ abstract class AbsForecastFragment<T : IForecast> :
         if (forecast.isNotEmpty()) {
             updateRecyclerViewData(data = forecast)
             showLayout()
-            ForecastNotificationHelper.checkPrecipitations(forecast = forecast, context = context!!)
+            thread(start = true) {
+                ForecastNotificationHelper.checkPrecipitations(
+                    forecast = forecast,
+                    context = context!!
+                )
+            }
         } else
             hideLayout()
     }

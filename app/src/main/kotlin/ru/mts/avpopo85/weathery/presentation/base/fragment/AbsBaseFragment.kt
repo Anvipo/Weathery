@@ -55,11 +55,11 @@ abstract class AbsBaseFragment : Fragment(), BaseContract.View {
             error
         }
 
-        sendErrorLog(cause.toString())
+        error(cause.toString(), tr = error)
 
         val message = context!!.parseError(cause)
 
-        sendErrorLog(message)
+        error(message, tr = error)
 
         val internetConnectionRequired =
             if (cause is MyRealmException.DBHasNoWeatherResponseException) {

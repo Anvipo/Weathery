@@ -127,7 +127,4 @@ class OWMForecastRepository
         return apiService.getForecastByCityName(cityNameRequest)
     }
 
-//    override fun onUnknownLocation(): Single<OWMForecastResponseType> =
-//        context.onUnknownCurrentLocation()
-
 }

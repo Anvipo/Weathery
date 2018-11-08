@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_CW_N"
+    android:layout_width="match_parent"
+    android:layout_height="64dp">
+
+    <TextView
+        android:id="@+id/temperature_CW_N_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/temperature"
+        android:textAppearance="@style/MyMaterialHeadline4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/description_CW_N_TV"
+            style="@style/MyMaterialBody2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="@string/weather_description"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/cloudiness_CW_N_TV"
+            style="@style/MyMaterialBody2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:paddingBottom="5dp"
+            android:text="@string/cloudiness"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/wind_info_CW_N_TV"
+            style="@style/MyMaterialBody2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:paddingBottom="5dp"
+            android:text="@string/wind_info"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package ru.mts.avpopo85.weathery.data.repository.common
+package ru.mts.avpopo85.weathery.data.repository.settings
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,9 +7,9 @@ import io.reactivex.Single
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.data.db.base.ILocationDbService
 import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
+import ru.mts.avpopo85.weathery.domain.model.implementation.settings.SettingsInfo
 import ru.mts.avpopo85.weathery.domain.repository.ISettingsRepository
 import ru.mts.avpopo85.weathery.utils.common.MyRealmException.DBHasNoCurrentAddressException
-import ru.mts.avpopo85.weathery.utils.common.SettingsInfo
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
 import javax.inject.Inject
 

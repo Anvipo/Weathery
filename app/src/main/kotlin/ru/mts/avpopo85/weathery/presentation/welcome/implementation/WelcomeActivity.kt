@@ -1,13 +1,14 @@
 package ru.mts.avpopo85.weathery.presentation.welcome.implementation
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.preference.PreferenceManager
-import kotlinx.android.synthetic.main.activity_welcome.*
 import ru.mts.avpopo85.weathery.R
 import ru.mts.avpopo85.weathery.presentation.base.activity.withProgressBar.AbsProgressBarActivity
+import ru.mts.avpopo85.weathery.presentation.base.utils.finishThisActivity
 import ru.mts.avpopo85.weathery.presentation.settings.implementation.SettingsActivity
 import ru.mts.avpopo85.weathery.presentation.utils.ADDRESS_TAG
 import ru.mts.avpopo85.weathery.presentation.utils.LOCALITY_TAG
@@ -16,17 +17,20 @@ import ru.mts.avpopo85.weathery.presentation.utils.LOCATION_RESULT_OK
 import ru.mts.avpopo85.weathery.presentation.weather.tab.TabbedWeatherActivity
 import ru.mts.avpopo85.weathery.presentation.welcome.base.WelcomeContract
 import ru.mts.avpopo85.weathery.utils.common.UserAddressType
+import ru.mts.avpopo85.weathery.utils.common.startActivity
+import ru.mts.avpopo85.weathery.utils.common.startActivityForResult
 
 class WelcomeActivity : AbsProgressBarActivity(), WelcomeContract.View {
 
-    override val rootLayout: View by lazy { activity_welcome_CL }
+    override val rootLayout: View by lazy { TODO() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_welcome)
 
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)!!
+        routeToAppropriatePage()
+    }
 
+    private fun routeToAppropriatePage() {
         val currentLocationPrefKey = getString(R.string.pref_key_current_location)
 
         val currentLocation = sharedPreferences.getString(currentLocationPrefKey, null)
@@ -58,18 +62,22 @@ class WelcomeActivity : AbsProgressBarActivity(), WelcomeContract.View {
 
             routeToAppropriatePage(locality)
         } else {
-            onUnexpectedApplicationBehavior()
+            routeToAppropriatePage()
         }
     }
 
     override fun changeTitle(title: String) = Unit
+
+    private val sharedPreferences: SharedPreferences by lazy {
+        PreferenceManager.getDefaultSharedPreferences(this)!!
+    }
 
     private fun routeToAppropriatePage(locality: String?) {
         when (locality) {
             null -> startActivityForResult<SettingsActivity>(LOCATION_REQUEST)
             else -> {
                 startActivity<TabbedWeatherActivity>()
-                finish()
+                finishThisActivity()
             }
         }
     }

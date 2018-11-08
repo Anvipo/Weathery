@@ -15,15 +15,13 @@ import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWCurrentWe
 import ru.mts.avpopo85.weathery.data.network.retrofit.yandexWeather.IYWForecastApiService
 import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import ru.mts.avpopo85.weathery.data.repository.common.LocationRepository
-import ru.mts.avpopo85.weathery.data.repository.common.SettingsRepository
+import ru.mts.avpopo85.weathery.data.repository.settings.LocationPreferenceRepository
+import ru.mts.avpopo85.weathery.data.repository.settings.SettingsRepository
 import ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap.OWMCurrentWeatherRepository
 import ru.mts.avpopo85.weathery.data.repository.weather.openWeatherMap.OWMForecastRepository
 import ru.mts.avpopo85.weathery.data.repository.weather.yandexWeather.YWCurrentWeatherRepository
 import ru.mts.avpopo85.weathery.data.repository.weather.yandexWeather.YWForecastRepository
-import ru.mts.avpopo85.weathery.domain.repository.ICurrentWeatherRepository
-import ru.mts.avpopo85.weathery.domain.repository.IForecastRepository
-import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
-import ru.mts.avpopo85.weathery.domain.repository.ISettingsRepository
+import ru.mts.avpopo85.weathery.domain.repository.*
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMCurrentWeatherResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMForecastListResponseType
 import ru.mts.avpopo85.weathery.utils.openWeatherMap.OWMListItemResponseType
@@ -124,6 +122,25 @@ class AppModule(private val context: Context) {
         networkManager: NetworkManager,
         sharedPreferences: SharedPreferences
     ): ISettingsRepository =
-        SettingsRepository(context, locationDbService, networkManager, sharedPreferences)
+        SettingsRepository(
+            context,
+            locationDbService,
+            networkManager,
+            sharedPreferences
+        )
+
+    @Provides
+    @Singleton
+    fun provideLocationPreferenceRepository(
+        locationDbService: ILocationDbService,
+        networkManager: NetworkManager,
+        sharedPreferences: SharedPreferences
+    ): ILocationPreferenceRepository =
+        LocationPreferenceRepository(
+            context,
+            locationDbService,
+            networkManager,
+            sharedPreferences
+        )
 
 }
