@@ -57,9 +57,11 @@ abstract class AbsBaseFragment : Fragment(), BaseContract.View {
 
         error(cause.toString(), tr = error)
 
+        val my = "РАСПАРСЕННАЯ ОШИБКА\t"
+
         val message = context!!.parseError(cause)
 
-        error(message, tr = error)
+        error("$my$message", tr = error)
 
         val internetConnectionRequired =
             if (cause is MyRealmException.DBHasNoWeatherResponseException) {

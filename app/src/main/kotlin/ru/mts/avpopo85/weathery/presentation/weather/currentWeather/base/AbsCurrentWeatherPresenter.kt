@@ -40,7 +40,6 @@ abstract class AbsCurrentWeatherPresenter<T : ICurrentWeather>(
         }
 
         view?.showWeatherResponse(data)
-
     }
 
     protected open fun onErrorLoadingWeatherData(error: Throwable) {

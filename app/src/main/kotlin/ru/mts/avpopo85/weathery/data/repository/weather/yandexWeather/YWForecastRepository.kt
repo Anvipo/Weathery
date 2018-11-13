@@ -25,7 +25,7 @@ class YWForecastRepository
     locationDbService: ILocationDbService,
     private val context: Context
 ) :
-    AbsForecastRepository<YWForecastResponseType, YWForecastResponseType>(
+    AbsForecastRepository<YWForecastResponseType>(
         forecastDbService,
         networkManager,
         locationDbService,

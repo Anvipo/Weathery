@@ -183,7 +183,7 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
         is ExtractAddressException -> {
             getString(R.string.unable_to_find_the_address_of_the_specified_location)
         }
-        is GpsCallException.DeviceIsNotConnectedToInternetException -> {
+        is DeviceIsNotConnectedToInternetException -> {
             val defaultMessage =
                 getString(R.string.internet_connection_required)
 
@@ -236,14 +236,28 @@ class LocationActivity : AbsProgressBarActivity(), LocationContract.View {
 
         if (resultCode != ConnectionResult.SUCCESS) {
             if (apiAvailability.isUserResolvableError(resultCode)) {
-                apiAvailability.getErrorDialog(this, resultCode, 1).show()
+                val errorDialog = apiAvailability.getErrorDialog(this, resultCode, 1)
+
+                errorDialog.setOnDismissListener {
+                    disableAllButtons()
+                }
+
+                errorDialog.show()
             } else {
                 val message = "${getString(R.string.google_play_services_unavailable)}. " +
                         getString(R.string.this_app_will_not_work)
 
                 showError(message, true)
+
+                disableAllButtons()
             }
         }
+    }
+
+    private fun disableAllButtons() {
+        get_last_known_location_LA_B.isEnabled = false
+        get_current_location_by_GPS_LA_B.isEnabled = false
+        get_current_location_by_map_LA_B.isEnabled = false
     }
 
     private fun onLocationByMapsRequestCode(resultCode: Int, data: Intent?) {

@@ -54,9 +54,11 @@ abstract class AbsBaseActivity : AppCompatActivity(), BaseContract.View {
 
         error(cause.toString(), tr = error)
 
+        val my = "РАСПАРСЕННАЯ ОШИБКА\t"
+
         val message = parseError(cause)
 
-        error(message, tr = error)
+        error("$my$message", tr = error)
 
         val internetConnectionRequired =
             if (cause is MyRealmException.DBHasNoWeatherResponseException) {

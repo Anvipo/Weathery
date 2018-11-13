@@ -37,23 +37,21 @@ fun <T> Context.onDbHasOutdatedWeatherResponse(
     isConnectedToInternet: Boolean,
     isLocationChanged: Boolean = false
 ) {
+    @Suppress("LocalVariableName")
+    val part1 =
+        if (isLocationChanged) {
+            getString(R.string.your_location_has_changed)
+        } else {
+            getString(R.string.the_forecast_is_outdated)
+        }
+
     val part2 = if (isConnectedToInternet) {
         getString(R.string.get_data_from_server)
     } else {
         getString(R.string.internet_connection_required)
     }
 
-    @Suppress("LocalVariableName")
-    val part1_5 =
-        if (isLocationChanged) {
-            val cause = getString(R.string.your_location_has_changed)
-
-            " ($cause)"
-        } else {
-            ""
-        }
-
-    val message = "$part1_5. $part2"
+    val message = "$part1. $part2"
 
     val error = DBHasOutdatedWeatherDataException(message, isConnectedToInternet)
 

@@ -26,7 +26,7 @@ class OWMForecastRepository
     locationDbService: ILocationDbService,
     context: Context
 ) :
-    AbsForecastRepository<OWMListItemResponseType, OWMForecastResponseType>(
+    AbsForecastRepository<OWMListItemResponseType>(
         forecastDbService, networkManager, locationDbService, context
     ),
     IForecastRepository<OWMForecastListResponseType>,

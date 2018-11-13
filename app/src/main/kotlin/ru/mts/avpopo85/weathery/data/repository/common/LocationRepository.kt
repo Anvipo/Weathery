@@ -20,10 +20,8 @@ import ru.mts.avpopo85.weathery.data.model.implementation.common.UserLocale
 import ru.mts.avpopo85.weathery.data.network.utils.NetworkManager
 import ru.mts.avpopo85.weathery.data.repository.common.utils.ONE_SECOND_IN_MILLIS
 import ru.mts.avpopo85.weathery.domain.repository.ILocationRepository
-import ru.mts.avpopo85.weathery.utils.common.ExtractAddressException
+import ru.mts.avpopo85.weathery.utils.common.*
 import ru.mts.avpopo85.weathery.utils.common.GpsCallException.*
-import ru.mts.avpopo85.weathery.utils.common.UserAddressType
-import ru.mts.avpopo85.weathery.utils.common.debug
 import java.io.IOException
 import java.util.Date
 import java.util.concurrent.TimeUnit
@@ -117,7 +115,7 @@ class LocationRepository
     private fun getCurrentLocation(): Single<Location> =
         rxLocation.location()
             .updates(locationRequest)
-            .timeout(10, TimeUnit.SECONDS)
+            .timeout(1, TimeUnit.MINUTES)
             .firstOrError()
 
     private fun makeAddressFromLocation(location: Location): Single<UserAddressType> =

@@ -20,8 +20,6 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/yw_forecast_B"
             style="@style/MyMaterialButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/forecast"
             tools:ignore="UnusedIds" />
@@ -29,8 +27,6 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/yw_current_weather_B"
             style="@style/MyMaterialButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:gravity="center"
             android:text="@string/current_weather"

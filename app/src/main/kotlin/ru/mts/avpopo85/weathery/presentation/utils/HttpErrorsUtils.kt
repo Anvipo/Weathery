@@ -3,8 +3,11 @@ package ru.mts.avpopo85.weathery.presentation.utils
 import android.content.Context
 import retrofit2.HttpException
 import ru.mts.avpopo85.weathery.R
+import ru.mts.avpopo85.weathery.utils.common.getErrorMessageOrDefault
 
 fun Context.onHttpException(error: HttpException): String {
+    val msg = getErrorMessageOrDefault(error)
+
     val code = error.code()
 
     val res =

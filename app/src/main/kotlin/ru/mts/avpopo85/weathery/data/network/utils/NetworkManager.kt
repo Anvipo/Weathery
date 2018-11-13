@@ -3,7 +3,6 @@ package ru.mts.avpopo85.weathery.data.network.utils
 import android.content.Context
 import android.location.LocationManager
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import javax.inject.Inject
 
 class NetworkManager
@@ -14,9 +13,9 @@ class NetworkManager
 
     val isConnectedToInternet: Boolean
         get() {
-            val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
+            val networkInfo = connectivityManager.activeNetworkInfo ?: return false
 
-            return networkInfo != null && networkInfo.isConnected
+            return networkInfo.isConnected
         }
 
     val isNetworkProviderEnabled: Boolean

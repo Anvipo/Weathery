@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "UNUSED_VARIABLE")
 
 package ru.mts.avpopo85.weathery.utils.common
 
@@ -192,16 +192,18 @@ fun Context.getFullApplicationInfo(): String = try {
 
 fun Context.parseError(error: Throwable): String =
     when (error) {
-        is TimeoutException -> onTimeoutException()
+        is TimeoutException -> onTimeoutException(error)
         is HttpException -> onHttpException(error)
-        is UnknownHostException -> onUnknownHostException()
-        is ConnectException -> onConnectException()
-        is SocketTimeoutException -> onSocketTimeoutException()
-        is IOException -> onIOException()
+        is UnknownHostException -> onUnknownHostException(error)
+        is ConnectException -> onConnectException(error)
+        is SocketTimeoutException -> onSocketTimeoutException(error)
+        is IOException -> onIOException(error)
         else -> getErrorMessageOrDefault(error)
     }
 
-private fun Context.onIOException(): String {
+private fun Context.onIOException(error: IOException): String {
+    val msg = getErrorMessageOrDefault(error)
+
     val part1 = getString(R.string.internet_connection_error_occurs)
     val part2 = getString(R.string.please_try_later)
 
@@ -211,17 +213,29 @@ private fun Context.onIOException(): String {
 fun Context.getErrorMessageOrDefault(error: Throwable): String =
     error.localizedMessage ?: error.message ?: getString(R.string.unknown_error)
 
-private fun Context.onTimeoutException(): String {
+private fun Context.onTimeoutException(error: TimeoutException): String {
+    val msg = getErrorMessageOrDefault(error)
+
     val part1 = getString(R.string.request_timeout)
     val part2 = getString(R.string.please_try_later)
 
     return "$part1. $part2"
 }
 
-private fun Context.onUnknownHostException(): String =
-    "${getString(R.string.error_occurs)}. ${getString(R.string.please_try_later)}"
+private fun Context.onUnknownHostException(error: UnknownHostException): String {
+    val msg = getErrorMessageOrDefault(error)
 
-private fun Context.onConnectException(): String = getString(R.string.authorisation_error)
+    return "${getString(R.string.error_occurs)}. ${getString(R.string.please_try_later)}"
+}
 
-private fun Context.onSocketTimeoutException(): String =
-    "${getString(R.string.error_occurs)}. ${getString(R.string.check_network_connection)}"
+private fun Context.onConnectException(error: ConnectException): String {
+    val msg = getErrorMessageOrDefault(error)
+
+    return getString(R.string.authorisation_error)
+}
+
+private fun Context.onSocketTimeoutException(error: SocketTimeoutException): String {
+    val msg = getErrorMessageOrDefault(error)
+
+    return "${getString(R.string.error_occurs)}. ${getString(R.string.check_network_connection)}"
+}
